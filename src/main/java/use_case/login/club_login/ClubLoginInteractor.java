@@ -1,4 +1,4 @@
 package use_case.login.club_login;
 
-public class Placeholder1 {
+public class ClubLoginInteractor {
 }
