@@ -1,6 +1,5 @@
 package entities;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,7 +13,7 @@ public class Student implements User {
     private int studentID;
 
     // Student club information
-    private Map<Integer, User> joinedClubs = new HashMap<>();
+    private Map<Integer, User> joinedClubs;
 
     public Student(String username, String email, String password, Map<Integer, User> joinedClubs) {
         // Initialise student's personal information
