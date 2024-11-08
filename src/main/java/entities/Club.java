@@ -1,6 +1,5 @@
 package entities;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,8 +13,8 @@ public class Club implements User {
     private int clubID;
 
     // Club's members and Posts information
-    private Map<Integer, User> clubMembers = new HashMap<>();
-    private Map<Integer, Post> clubPosts = new HashMap<>();
+    private Map<Integer, User> clubMembers;
+    private Map<Integer, Post> clubPosts;
 
     public Club(String username, String email, String password, Map<Integer, User> clubMembers,
                 Map<Integer, Post> clubPosts) {
