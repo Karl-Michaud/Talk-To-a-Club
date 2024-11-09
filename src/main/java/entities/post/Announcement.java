@@ -1,4 +1,6 @@
-package entities;
+package entities.post;
+
+import entities.user.User;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
