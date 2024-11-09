@@ -1,4 +1,4 @@
-package entities;
+package entity;
 
 /**
  * Post interface. All posts must implement the following interface.
