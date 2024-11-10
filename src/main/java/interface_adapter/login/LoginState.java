@@ -1,44 +1,35 @@
 package interface_adapter.login;
 
 /**
- * The state for the Signup View Model.
+ * The state for the Login View Model.
  */
 public class LoginState {
-    private String email = "";
-    private String emailError;
+    private String username = "";
     private String password = "";
-    private String passwordError;
+    private String loginError;
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public String getEmailError() {
-        return emailError;
+    public String getLoginError() {
+        return loginError;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public String getPasswordError() {
-        return passwordError;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setEmailError(String emailError) {
-        this.emailError = emailError;
+    public void setLoginError(String usernameError) {
+        this.loginError = usernameError;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setPasswordError(String passwordError) {
-        this.passwordError = passwordError;
     }
 
 }
