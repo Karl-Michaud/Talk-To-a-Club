@@ -1,13 +1,12 @@
 package interface_adapter.login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.signup.club_signup.ClubSignupState;
-import interface_adapter.signup.club_signup.ClubSignupViewModel;
+import interface_adapter.signup.SignupState;
+import interface_adapter.signup.SignupViewModel;
 import interface_adapter.signup.student_signup.StudentSignupState;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInputData;
-import view.ClubSignupView;
 
 /**
  * The Controller for the Login Use Case
@@ -18,15 +17,15 @@ public class LoginController {
      */
     private final StudentSignupViewModel studentSignupViewModel;
     private final LoginInputBoundary loginUseCaseInteractor;
-    private final ClubSignupViewModel clubSignupViewModel;
+    private final SignupViewModel signupViewModel;
     private final ViewManagerModel viewManagerModel;    /**
      * The Constructor for the Login controller
      */
-    public LoginController(StudentSignupViewModel studentSignupViewModel, LoginInputBoundary loginUseCaseInteractor, ClubSignupViewModel clubSignupViewModel,
+    public LoginController(StudentSignupViewModel studentSignupViewModel, LoginInputBoundary loginUseCaseInteractor, SignupViewModel signupViewModel,
                            ViewManagerModel viewManagerModel){
         this.studentSignupViewModel = studentSignupViewModel;
         this.loginUseCaseInteractor = loginUseCaseInteractor;
-        this.clubSignupViewModel = clubSignupViewModel;
+        this.signupViewModel = signupViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
@@ -43,11 +42,11 @@ public class LoginController {
     }
 
     public void switchToClubSignupView() {
-        final ClubSignupState clubSignupState = clubSignupViewModel.getState();
-        this.clubSignupViewModel.setState(clubSignupState);
-        this.clubSignupViewModel.firePropertyChanged();
+        final SignupState signupState = signupViewModel.getState();
+        this.signupViewModel.setState(signupState);
+        this.signupViewModel.firePropertyChanged();
 
-        this.viewManagerModel.setState(clubSignupViewModel.getViewName());
+        this.viewManagerModel.setState(signupViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 

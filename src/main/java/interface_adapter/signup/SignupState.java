@@ -1,9 +1,9 @@
-package interface_adapter.signup.club_signup;
+package interface_adapter.signup;
 
 /**
  * The state for the Signup View Model.
  */
-public class ClubSignupState {
+public class SignupState {
     private String username = "";
     private String usernameError;
     private String email = "";
@@ -12,6 +12,7 @@ public class ClubSignupState {
     private String passwordError;
     private String repeatPassword = "";
     private String repeatPasswordError;
+    private boolean signupClub = false;
 
     public String getUsername() {
         return username;
@@ -76,6 +77,10 @@ public class ClubSignupState {
     public void setRepeatPasswordError(String repeatPasswordError) {
         this.repeatPasswordError = repeatPasswordError;
     }
+
+    public void setSignupClub(boolean signupClub) { this.signupClub = signupClub; }
+
+    public boolean getSignupClub() { return this.signupClub; }
 
     @Override
     public String toString() {

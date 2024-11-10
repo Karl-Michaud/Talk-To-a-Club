@@ -1,4 +1,4 @@
-package interface_adapter.signup.club_signup;
+package interface_adapter.signup;
 
 import use_case.signup.club_signup.ClubSignupInputBoundary;
 import use_case.signup.club_signup.ClubSignupInputData;
@@ -6,11 +6,11 @@ import use_case.signup.club_signup.ClubSignupInputData;
 /**
  * Controller for the Signup Use Case.
  */
-public class ClubSignupController {
+public class SignupController {
 
-    private final ClubSignupInputBoundary userSignupUseCaseInteractor;
+    private final SignupInputBoundary userSignupUseCaseInteractor;
 
-    public ClubSignupController(ClubSignupInputBoundary userSignupUseCaseInteractor) {
+    public SignupController(SignupInputBoundary userSignupUseCaseInteractor) {
         this.userSignupUseCaseInteractor = userSignupUseCaseInteractor;
     }
 
@@ -21,7 +21,7 @@ public class ClubSignupController {
      * @param password2 the password repeated
      */
     public void execute(String username, String email, String password1, String password2) {
-        final ClubSignupInputData signupInputData = new ClubSignupInputData(
+        final SignupInputData signupInputData = new SignupInputData(
                 username, email, password1, password2);
 
         userSignupUseCaseInteractor.execute(signupInputData);

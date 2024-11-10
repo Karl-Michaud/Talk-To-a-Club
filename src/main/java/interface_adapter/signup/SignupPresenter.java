@@ -1,4 +1,4 @@
-package interface_adapter.signup.club_signup;
+package interface_adapter.signup;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginState;
@@ -9,22 +9,22 @@ import use_case.signup.SignupOutputData;
 /**
  * The Presenter for the Signup Use Case.
  */
-public class ClubSignupPresenter implements ClubSignupOutputBoundary {
+public class SignupPresenter implements SignupOutputBoundary {
 
-    private final ClubSignupViewModel clubSignupViewModel;
+    private final SignupViewModel signupViewModel;
     private final LoginViewModel loginViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public ClubSignupPresenter(ViewManagerModel viewManagerModel,
-                               ClubSignupViewModel clubSignupViewModel,
-                               LoginViewModel loginViewModel) {
+    public SignupPresenter(ViewManagerModel viewManagerModel,
+                           SignupViewModel signupViewModel,
+                           LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.clubSignupViewModel = clubSignupViewModel;
+        this.signupViewModel = signupViewModel;
         this.loginViewModel = loginViewModel;
     }
 
     @Override
-    public void prepareSuccessView(ClubSignupOutputData response) {
+    public void prepareSuccessView(SignupOutputData response) {
         // On success, switch to the login view.
         final LoginState loginState = loginViewModel.getState();
         loginState.setEmail(response.getEmail());
@@ -37,9 +37,9 @@ public class ClubSignupPresenter implements ClubSignupOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-        final ClubSignupState clubSignupState = clubSignupViewModel.getState();
-        clubSignupState.setEmailError(error);
-        clubSignupViewModel.firePropertyChanged();
+        final SignupState signupState = signupViewModel.getState();
+        signupState.setEmailError(error);
+        signupViewModel.firePropertyChanged();
     }
 
     @Override
