@@ -6,8 +6,9 @@ import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class ClubSignupView extends JPanel implements ActionListener, propertyChangeListener {
+public class ClubSignupView extends JPanel implements ActionListener, PropertyChangeListener {
     private final String viewName = "club sign up";
 
     private JButton switchToLogInButton;
@@ -16,6 +17,7 @@ public class ClubSignupView extends JPanel implements ActionListener, propertyCh
     private JPasswordField passwordField;
     private JTextField clubEmailField;
     private JTextField clubNameField;
+    private JPanel panelClubSignup;
 
     private final ClubSignupViewModel clubSignupViewModel;
     private ClubSignupController signupController;
@@ -48,6 +50,9 @@ public class ClubSignupView extends JPanel implements ActionListener, propertyCh
                     }
                 }
         );
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(panelClubSignup);
 
         addClubNameListener();
         addEmailListener();
