@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class ClubSignupView extends JPanel implements ActionListener, PropertyChangeListener {
+public class ClubSignupView extends JPanel implements PropertyChangeListener {
     private final String viewName = "club sign up";
 
     private JButton switchToLogInButton;

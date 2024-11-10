@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class StudentSignupView extends JPanel implements ActionListener, PropertyChangeListener {
+public class StudentSignupView extends JPanel implements PropertyChangeListener {
     private final String viewName = "student sign up";
 
     private JButton switchToLogInButton;
