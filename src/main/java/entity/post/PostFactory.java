@@ -1,4 +1,4 @@
-package entities.post;
+package entity.post;
 
 /**
  * Post factory interface.

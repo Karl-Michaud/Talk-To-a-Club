@@ -1,4 +1,4 @@
-package entity;
+package entity.user;
 
 /**
  * User interface. All users must implement the following interface.

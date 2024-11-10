@@ -1,6 +1,8 @@
-package entity;
+package entity.user;
 
 import java.util.Map;
+
+import entity.post.Post;
 
 /**
  * This is the Club class which implements the User interface. A Club is a typer of User.
