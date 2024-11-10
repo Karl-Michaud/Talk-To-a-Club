@@ -1,5 +1,9 @@
 package view;
 
+import interface_adapter.signup.student_signup.StudentSignupController;
+import interface_adapter.signup.student_signup.StudentSignupState;
+import interface_adapter.signup.student_signup.StudentSignupViewModel;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -8,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class StudentSignupView extends JPanel implements ActionListener, PropertyChangeListener {
+public class StudentSignupView extends JPanel implements PropertyChangeListener {
     private final String viewName = "student sign up";
 
     private JButton switchToLogInButton;
@@ -37,10 +41,11 @@ public class StudentSignupView extends JPanel implements ActionListener, Propert
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(signUpButton)) {
-                            final SignupState currentState = studentSignupViewModel.getState();
+                            final StudentSignupState currentState = studentSignupViewModel.getState();
 
                             signupController.execute(
                                     currentState.getUsername(),
+                                    currentState.getEmail(),
                                     currentState.getPassword(),
                                     currentState.getRepeatPassword()
                             );
@@ -70,7 +75,7 @@ public class StudentSignupView extends JPanel implements ActionListener, Propert
         emailField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final SignupState currentState = studentSignupViewModel.getState();
+                final StudentSignupState currentState = studentSignupViewModel.getState();
                 currentState.setEmail(emailField.getText());
                 studentSignupViewModel.setState(currentState);
             }
@@ -96,7 +101,7 @@ public class StudentSignupView extends JPanel implements ActionListener, Propert
         usernameField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final SignupState currentState = studentSignupViewModel.getState();
+                final StudentSignupState currentState = studentSignupViewModel.getState();
                 currentState.setUsername(usernameField.getText());
                 studentSignupViewModel.setState(currentState);
             }
@@ -122,7 +127,7 @@ public class StudentSignupView extends JPanel implements ActionListener, Propert
         passwordField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final SignupState currentState = studentSignupViewModel.getState();
+                final StudentSignupState currentState = studentSignupViewModel.getState();
                 currentState.setPassword(new String(passwordField.getPassword()));
                 studentSignupViewModel.setState(currentState);
             }
@@ -148,7 +153,7 @@ public class StudentSignupView extends JPanel implements ActionListener, Propert
         repeatPasswordField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final SignupState currentState = studentSignupViewModel.getState();
+                final StudentSignupState currentState = studentSignupViewModel.getState();
                 currentState.setRepeatPassword(new String(repeatPasswordField.getPassword()));
                 studentSignupViewModel.setState(currentState);
             }
@@ -172,7 +177,7 @@ public class StudentSignupView extends JPanel implements ActionListener, Propert
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final SignupState state = (SignupState) evt.getNewValue();
+        final StudentSignupState state = (StudentSignupState) evt.getNewValue();
         if (state.getUsernameError() != null) {
             JOptionPane.showMessageDialog(this, state.getUsernameError());
         }
