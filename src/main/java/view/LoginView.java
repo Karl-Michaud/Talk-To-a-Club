@@ -17,11 +17,11 @@ public class LoginView extends JPanel implements PropertyChangeListener {
 
     private JButton buttonLogin;
     private JButton studentSignupButton;
-    private JTextField usernameField;
+    private JTextField emailField;
     private JPasswordField passwordField;
     private JPanel panelLogin;
     private JLabel labelPassword;
-    private JLabel labelUsername;
+    private JLabel labelEmail;
     private JLabel labelError;
     private JLabel labelLogo;
     private JButton clubSignupButton;
@@ -99,11 +99,11 @@ public class LoginView extends JPanel implements PropertyChangeListener {
     }
 
     private void addUsernameListener() {
-        usernameField.getDocument().addDocumentListener(new DocumentListener() {
+        emailField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
                 final LoginState currentState = loginViewModel.getState();
-                currentState.setUsername(usernameField.getText());
+                currentState.setEmail(emailField.getText());
                 loginViewModel.setState(currentState);
             }
 
@@ -132,7 +132,7 @@ public class LoginView extends JPanel implements PropertyChangeListener {
     }
 
     private void setFields(LoginState state) {
-        usernameField.setText(state.getUsername());
+        emailField.setText(state.getEmail());
         passwordField.setText(state.getPassword());
     }
 

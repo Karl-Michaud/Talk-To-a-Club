@@ -1,13 +1,10 @@
 package interface_adapter.login;
 
-import interface_adapter.ViewManagerModel;
-import interface_adapter.signup.club_signup.ClubSignupState;
-import interface_adapter.signup.club_signup.ClubSignupViewModel;
-import interface_adapter.signup.student_signup.StudentSignupState;
-import interface_adapter.signup.student_signup.StudentSignupViewModel;
+//import interface_adapter.ViewManagerModel;
+//import interface_adapter.signup.SignupState;
+//import interface_adapter.signup.SignupViewModel;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInputData;
-import view.ClubSignupView;
 
 /**
  * The Controller for the Login Use Case
@@ -16,18 +13,15 @@ public class LoginController {
     /**
      *
      */
-    private final StudentSignupViewModel studentSignupViewModel;
     private final LoginInputBoundary loginUseCaseInteractor;
-    private final ClubSignupViewModel clubSignupViewModel;
-    private final ViewManagerModel viewManagerModel;    /**
+//    private final SignupViewModel signupViewModel;
+//    private final ViewManagerModel viewManagerModel;
+
+    /**
      * The Constructor for the Login controller
      */
-    public LoginController(StudentSignupViewModel studentSignupViewModel, LoginInputBoundary loginUseCaseInteractor, ClubSignupViewModel clubSignupViewModel,
-                           ViewManagerModel viewManagerModel){
-        this.studentSignupViewModel = studentSignupViewModel;
+    public LoginController(LoginInputBoundary loginUseCaseInteractor){
         this.loginUseCaseInteractor = loginUseCaseInteractor;
-        this.clubSignupViewModel = clubSignupViewModel;
-        this.viewManagerModel = viewManagerModel;
     }
 
     /**
@@ -38,25 +32,32 @@ public class LoginController {
     public void execute(String email, String password){
         final LoginInputData loginInputData = new LoginInputData(email, password);
 
-
         loginUseCaseInteractor.execute(loginInputData);
     }
 
-    public void switchToClubSignupView() {
-        final ClubSignupState clubSignupState = clubSignupViewModel.getState();
-        this.clubSignupViewModel.setState(clubSignupState);
-        this.clubSignupViewModel.firePropertyChanged();
+//    public void switchToClubSignupView() {
+//        final SignupState signupState = signupViewModel.getState();
+//        this.signupViewModel.setState(signupState);
+//        this.signupViewModel.firePropertyChanged();
+//
+//        this.viewManagerModel.setState(signupViewModel.getViewName());
+//        this.viewManagerModel.firePropertyChanged();
+//    }
+//
+//    public void switchToStudentSignupView() {
+//        final StudentSignupState studentSignupState = studentSignupViewModel.getState();
+//        this.studentSignupViewModel.setState(studentSignupState);
+//        this.studentSignupViewModel.firePropertyChanged();
+//
+//        this.viewManagerModel.setState(studentSignupViewModel.getViewName());
+//        this.viewManagerModel.firePropertyChanged();
+//    }
 
-        this.viewManagerModel.setState(clubSignupViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
+    public void switchToClubSignupView() {
+        loginUseCaseInteractor.switchToClubSignupView();
     }
 
     public void switchToStudentSignupView() {
-        final StudentSignupState studentSignupState = studentSignupViewModel.getState();
-        this.studentSignupViewModel.setState(studentSignupState);
-        this.studentSignupViewModel.firePropertyChanged();
-
-        this.viewManagerModel.setState(studentSignupViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
+        loginUseCaseInteractor.switchToStudentSignupView();
     }
 }

@@ -1,8 +1,8 @@
 package view;
 
-import interface_adapter.signup.club_signup.ClubSignupController;
-import interface_adapter.signup.club_signup.ClubSignupState;
-import interface_adapter.signup.club_signup.ClubSignupViewModel;
+import interface_adapter.signup.SignupController;
+import interface_adapter.signup.SignupState;
+import interface_adapter.signup.SignupViewModel;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -14,6 +14,7 @@ import java.beans.PropertyChangeListener;
 
 public class ClubSignupView extends JPanel implements PropertyChangeListener {
     private final String viewName = "club sign up";
+    private final boolean signupClub = true;
 
     private JButton switchToLogInButton;
     private JButton signUpAsClubButton;
@@ -23,25 +24,29 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
     private JTextField clubNameField;
     private JPanel panelClubSignup;
 
-    private final ClubSignupViewModel clubSignupViewModel;
-    private ClubSignupController signupController;
+    private final SignupViewModel signupViewModel;
+    private SignupController signupController;
 
-    public ClubSignupView(ClubSignupViewModel clubSignupViewModel) {
-        this.clubSignupViewModel = clubSignupViewModel;
-        clubSignupViewModel.addPropertyChangeListener(this);
+    public ClubSignupView(SignupViewModel signupViewModel) {
+        this.signupViewModel = signupViewModel;
+        signupViewModel.addPropertyChangeListener(this);
 
         signUpAsClubButton.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(signUpAsClubButton)) {
-                            final ClubSignupState currentState = clubSignupViewModel.getState();
+                            // Sets the state to be signing up a club before executing the signup use case
+                            final SignupState currentState = signupViewModel.getState();
+                            currentState.setSignupClub(signupClub);
+                            signupViewModel.setState(currentState);
 
                             signupController.execute(
                                     currentState.getUsername(),
                                     currentState.getEmail(),
                                     currentState.getPassword(),
-                                    currentState.getRepeatPassword()
+                                    currentState.getRepeatPassword(),
+                                    currentState.getSignupClub()
                             );
                         }
                     }
@@ -69,9 +74,9 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
         clubEmailField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final ClubSignupState currentState = clubSignupViewModel.getState();
+                final SignupState currentState = signupViewModel.getState();
                 currentState.setEmail(clubEmailField.getText());
-                clubSignupViewModel.setState(currentState);
+                signupViewModel.setState(currentState);
             }
 
             @Override
@@ -95,9 +100,9 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
         clubNameField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final ClubSignupState currentState = clubSignupViewModel.getState();
+                final SignupState currentState = signupViewModel.getState();
                 currentState.setUsername(clubNameField.getText());
-                clubSignupViewModel.setState(currentState);
+                signupViewModel.setState(currentState);
             }
 
             @Override
@@ -121,9 +126,9 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
         passwordField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final ClubSignupState currentState = clubSignupViewModel.getState();
+                final SignupState currentState = signupViewModel.getState();
                 currentState.setPassword(new String(passwordField.getPassword()));
-                clubSignupViewModel.setState(currentState);
+                signupViewModel.setState(currentState);
             }
 
             @Override
@@ -147,9 +152,9 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
         repeatPasswordField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final ClubSignupState currentState = clubSignupViewModel.getState();
+                final SignupState currentState = signupViewModel.getState();
                 currentState.setRepeatPassword(new String(repeatPasswordField.getPassword()));
-                clubSignupViewModel.setState(currentState);
+                signupViewModel.setState(currentState);
             }
 
             @Override
@@ -171,9 +176,9 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final ClubSignupState state = (ClubSignupState) evt.getNewValue();
-        if (state.getUsernameError() != null) {
-            JOptionPane.showMessageDialog(this, state.getUsernameError());
+        final SignupState state = (SignupState) evt.getNewValue();
+        if (state.getSignupError() != null) {
+            JOptionPane.showMessageDialog(this, state.getSignupError());
         }
     }
 
@@ -181,7 +186,7 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
         return viewName;
     }
 
-    public void setSignupController(ClubSignupController controller) {
+    public void setSignupController(SignupController controller) {
         this.signupController = controller;
     }
 }

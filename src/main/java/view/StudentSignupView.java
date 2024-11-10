@@ -1,8 +1,8 @@
 package view;
 
-import interface_adapter.signup.student_signup.StudentSignupController;
-import interface_adapter.signup.student_signup.StudentSignupState;
-import interface_adapter.signup.student_signup.StudentSignupViewModel;
+import interface_adapter.signup.SignupController;
+import interface_adapter.signup.SignupState;
+import interface_adapter.signup.SignupViewModel;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -14,6 +14,7 @@ import java.beans.PropertyChangeListener;
 
 public class StudentSignupView extends JPanel implements PropertyChangeListener {
     private final String viewName = "student sign up";
+    private final boolean signupClub = false;
 
     private JButton switchToLogInButton;
     private JButton signUpButton;
@@ -29,25 +30,29 @@ public class StudentSignupView extends JPanel implements PropertyChangeListener 
     private JTextField usernameField;
     private JLabel labelUsername;
 
-    private final StudentSignupViewModel studentSignupViewModel;
-    private StudentSignupController signupController;
+    private final SignupViewModel signupViewModel;
+    private SignupController signupController;
 
-    public StudentSignupView(StudentSignupViewModel studentSignupViewModel) {
-        this.studentSignupViewModel = studentSignupViewModel;
-        studentSignupViewModel.addPropertyChangeListener(this);
+    public StudentSignupView(SignupViewModel signupViewModel) {
+        this.signupViewModel = signupViewModel;
+        signupViewModel.addPropertyChangeListener(this);
 
         signUpButton.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(signUpButton)) {
-                            final StudentSignupState currentState = studentSignupViewModel.getState();
+                            // Sets the state to not be signing up a club before executing the signup use case
+                            final SignupState currentState = signupViewModel.getState();
+                            currentState.setSignupClub(signupClub);
+                            signupViewModel.setState(currentState);
 
                             signupController.execute(
                                     currentState.getUsername(),
                                     currentState.getEmail(),
                                     currentState.getPassword(),
-                                    currentState.getRepeatPassword()
+                                    currentState.getRepeatPassword(),
+                                    currentState.getSignupClub()
                             );
                         }
                     }
@@ -75,9 +80,9 @@ public class StudentSignupView extends JPanel implements PropertyChangeListener 
         emailField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final StudentSignupState currentState = studentSignupViewModel.getState();
+                final SignupState currentState = signupViewModel.getState();
                 currentState.setEmail(emailField.getText());
-                studentSignupViewModel.setState(currentState);
+                signupViewModel.setState(currentState);
             }
 
             @Override
@@ -101,9 +106,9 @@ public class StudentSignupView extends JPanel implements PropertyChangeListener 
         usernameField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final StudentSignupState currentState = studentSignupViewModel.getState();
+                final SignupState currentState = signupViewModel.getState();
                 currentState.setUsername(usernameField.getText());
-                studentSignupViewModel.setState(currentState);
+                signupViewModel.setState(currentState);
             }
 
             @Override
@@ -127,9 +132,9 @@ public class StudentSignupView extends JPanel implements PropertyChangeListener 
         passwordField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final StudentSignupState currentState = studentSignupViewModel.getState();
+                final SignupState currentState = signupViewModel.getState();
                 currentState.setPassword(new String(passwordField.getPassword()));
-                studentSignupViewModel.setState(currentState);
+                signupViewModel.setState(currentState);
             }
 
             @Override
@@ -153,9 +158,9 @@ public class StudentSignupView extends JPanel implements PropertyChangeListener 
         repeatPasswordField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final StudentSignupState currentState = studentSignupViewModel.getState();
+                final SignupState currentState = signupViewModel.getState();
                 currentState.setRepeatPassword(new String(repeatPasswordField.getPassword()));
-                studentSignupViewModel.setState(currentState);
+                signupViewModel.setState(currentState);
             }
 
             @Override
@@ -177,9 +182,9 @@ public class StudentSignupView extends JPanel implements PropertyChangeListener 
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final StudentSignupState state = (StudentSignupState) evt.getNewValue();
-        if (state.getUsernameError() != null) {
-            JOptionPane.showMessageDialog(this, state.getUsernameError());
+        final SignupState state = (SignupState) evt.getNewValue();
+        if (state.getSignupError() != null) {
+            JOptionPane.showMessageDialog(this, state.getSignupError());
         }
     }
 
@@ -187,7 +192,7 @@ public class StudentSignupView extends JPanel implements PropertyChangeListener 
         return viewName;
     }
 
-    public void setSignupController(StudentSignupController controller) {
+    public void setSignupController(SignupController controller) {
         this.signupController = controller;
     }
 }
