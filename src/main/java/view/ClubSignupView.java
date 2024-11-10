@@ -36,7 +36,7 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(signUpAsClubButton)) {
-                            // Sets the state to be a club before executing the signup use case
+                            // Sets the state to be signing up a club before executing the signup use case
                             final SignupState currentState = signupViewModel.getState();
                             currentState.setSignupClub(signupClub);
                             signupViewModel.setState(currentState);
