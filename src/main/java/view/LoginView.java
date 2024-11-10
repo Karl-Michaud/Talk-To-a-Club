@@ -68,7 +68,7 @@ public class LoginView extends JPanel implements PropertyChangeListener {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(panelLogin);
 
-        addUsernameListener();
+        addEmailListener();
         addPasswordListener();
     }
 
@@ -98,7 +98,7 @@ public class LoginView extends JPanel implements PropertyChangeListener {
         });
     }
 
-    private void addUsernameListener() {
+    private void addEmailListener() {
         emailField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
