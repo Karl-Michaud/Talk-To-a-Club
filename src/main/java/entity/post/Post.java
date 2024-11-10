@@ -1,4 +1,6 @@
-package entity;
+package entity.post;
+
+import entity.user.User;
 
 /**
  * Post interface. All posts must implement the following interface.
