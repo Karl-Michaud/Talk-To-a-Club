@@ -41,7 +41,7 @@ public class LoginView extends JPanel implements PropertyChangeListener {
                             final LoginState currentState = loginViewModel.getState();
 
                             loginController.execute(
-                                    currentState.getUsername(),
+                                    currentState.getEmail(),
                                     currentState.getPassword()
                             );
                         }
