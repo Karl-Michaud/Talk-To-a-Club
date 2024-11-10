@@ -16,7 +16,7 @@ public class StudentSignupView extends JPanel implements ActionListener, Propert
     private JPasswordField passwordField;
     private JPasswordField repeatPasswordField;
     private JTextField emailField;
-    private JPanel panelSignup;
+    private JPanel panelStudentSignup;
     private JLabel labelIcon;
     private JLabel labelEmail;
     private JLabel labelPassword;
@@ -57,6 +57,8 @@ public class StudentSignupView extends JPanel implements ActionListener, Propert
                 }
         );
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(panelStudentSignup);
 
         addUsernameListener();
         addEmailListener();
