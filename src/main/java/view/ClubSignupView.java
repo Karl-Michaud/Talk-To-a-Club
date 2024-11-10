@@ -14,6 +14,7 @@ import java.beans.PropertyChangeListener;
 
 public class ClubSignupView extends JPanel implements PropertyChangeListener {
     private final String viewName = "club sign up";
+    private final boolean signupClub = true;
 
     private JButton switchToLogInButton;
     private JButton signUpAsClubButton;
@@ -35,13 +36,17 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(signUpAsClubButton)) {
+                            // Sets the state to be a club before executing the signup use case
                             final SignupState currentState = signupViewModel.getState();
+                            currentState.setSignupClub(signupClub);
+                            signupViewModel.setState(currentState);
 
                             signupController.execute(
                                     currentState.getUsername(),
                                     currentState.getEmail(),
                                     currentState.getPassword(),
-                                    currentState.getRepeatPassword()
+                                    currentState.getRepeatPassword(),
+                                    currentState.getSignupClub()
                             );
                         }
                     }
@@ -172,8 +177,8 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final SignupState state = (SignupState) evt.getNewValue();
-        if (state.getUsernameError() != null) {
-            JOptionPane.showMessageDialog(this, state.getUsernameError());
+        if (state.getSignupError() != null) {
+            JOptionPane.showMessageDialog(this, state.getSignupError());
         }
     }
 

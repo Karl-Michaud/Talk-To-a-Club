@@ -19,10 +19,11 @@ public class SignupController {
      * @param email the email to sign up
      * @param password1 the password
      * @param password2 the password repeated
+     * @param isClub true if the user to sign up is a club
      */
-    public void execute(String username, String email, String password1, String password2) {
+    public void execute(String username, String email, String password1, String password2, boolean isClub) {
         final SignupInputData signupInputData = new SignupInputData(
-                username, email, password1, password2);
+                username, email, password1, password2, isClub);
 
         userSignupUseCaseInteractor.execute(signupInputData);
     }
