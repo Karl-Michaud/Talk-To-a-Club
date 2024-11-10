@@ -8,7 +8,7 @@ public class SignupState {
     private String email = "";
     private String password = "";
     private String repeatPassword = "";
-    private String sinupError;
+    private String signupError;
     private boolean signupClub = false;
 
     public String getUsername() {
@@ -27,7 +27,7 @@ public class SignupState {
         return repeatPassword;
     }
 
-    public String getSignupError() { return this.sinupError; }
+    public String getSignupError() { return this.signupError; }
 
     public boolean getSignupClub() { return this.signupClub; }
 
@@ -47,7 +47,7 @@ public class SignupState {
         this.repeatPassword = repeatPassword;
     }
 
-    public void setSignupError(String error) { this.sinupError = error; }
+    public void setSignupError(String error) { this.signupError = error; }
 
     public void setSignupClub(boolean signupClub) { this.signupClub = signupClub; }
 
