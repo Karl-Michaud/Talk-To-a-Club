@@ -1,4 +1,4 @@
-package entities.post;
+package entity.post;
 
 /**
  * Factory for creating new Announcement posts.

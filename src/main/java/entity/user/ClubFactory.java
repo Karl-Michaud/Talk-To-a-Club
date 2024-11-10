@@ -1,8 +1,8 @@
-package entities.user;
+package entity.user;
 
 import java.util.Map;
 
-import entities.post.Post;
+import entity.post.Post;
 
 /**
  * Factory for creating Clubs.

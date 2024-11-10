@@ -1,4 +1,4 @@
-package entities.user;
+package entity.user;
 
 /**
  * Factory for creating users. All types of user factories must implement this interface.

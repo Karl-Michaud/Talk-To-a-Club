@@ -1,4 +1,4 @@
-package entities.user;
+package entity.user;
 
 import java.util.Map;
 
