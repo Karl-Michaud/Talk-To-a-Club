@@ -11,7 +11,7 @@ import entity.post.Post;
 public class ClubUserFactory implements ClubFactory {
     @Override
     public User create(String name, String email, String password) {
-        final Map<Integer, User> clubMembers = new HashMap<>();
+        final Map<Integer, Student> clubMembers = new HashMap<>();
         final Map<Integer, Post> clubPosts = new HashMap<>();
         return new Club(name, email, password, clubMembers, clubPosts);
     }
@@ -25,7 +25,7 @@ public class ClubUserFactory implements ClubFactory {
      * @param clubPosts the posts of the new club
      * @return the new club user
      */
-    public User create(String username, String email, String password, Map<Integer, User> clubMembers,
+    public User create(String username, String email, String password, Map<Integer, Student> clubMembers,
                 Map<Integer, Post> clubPosts) {
         return new Club(username, email, password, clubMembers, clubPosts);
     }

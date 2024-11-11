@@ -15,10 +15,10 @@ public class Club implements User {
     private int clubID;
 
     // Club's members and Posts information
-    private Map<Integer, User> clubMembers;
+    private Map<Integer, Student> clubMembers;
     private Map<Integer, Post> clubPosts;
 
-    public Club(String username, String email, String password, Map<Integer, User> clubMembers,
+    public Club(String username, String email, String password, Map<Integer, Student> clubMembers,
                 Map<Integer, Post> clubPosts) {
         // Initialise club personal information
         this.username = username;
@@ -53,7 +53,7 @@ public class Club implements User {
         this.clubID = userID;
     }
 
-    public Map<Integer, User> getClubMembers() {
+    public Map<Integer, Student> getClubMembers() {
         return clubMembers;
     }
 
@@ -65,7 +65,7 @@ public class Club implements User {
      * Adds a club member to the Club.
      * @param user particular user joining the club.
      */
-    public void addClubMember(User user) {
+    public void addClubMember(Student user) {
         clubMembers.put(user.getUserID(), user);
     }
 

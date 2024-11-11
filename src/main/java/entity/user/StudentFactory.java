@@ -18,5 +18,5 @@ public interface StudentFactory extends UserFactory {
      * @param joinedClubs the clubs the student has joined
      * @return the new student user
      */
-    User create(String name, String email, String password, Map<Integer, User> joinedClubs);
+    User create(String name, String email, String password, Map<Integer, Club> joinedClubs);
 }

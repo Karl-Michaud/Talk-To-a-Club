@@ -13,9 +13,9 @@ public class Student implements User {
     private int studentID;
 
     // Student club information
-    private Map<Integer, User> joinedClubs;
+    private Map<Integer, Club> joinedClubs;
 
-    public Student(String username, String email, String password, Map<Integer, User> joinedClubs) {
+    public Student(String username, String email, String password, Map<Integer, Club> joinedClubs) {
         // Initialise student's personal information
         this.username = username;
         this.email = email;
@@ -48,7 +48,7 @@ public class Student implements User {
         this.studentID = userID;
     }
 
-    public Map<Integer, User> getJoinedClubs() {
+    public Map<Integer, Club> getJoinedClubs() {
         return joinedClubs;
     }
 

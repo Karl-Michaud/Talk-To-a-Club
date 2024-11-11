@@ -1,7 +1,11 @@
 package use_case.login;
 
+import entity.post.Post;
+import entity.user.Club;
 import entity.user.Student;
 import entity.user.User;
+
+import java.util.Map;
 
 public class LoginInteractor implements LoginInputBoundary {
     private final LoginDataAccessInterface userDataAccessObject;
@@ -25,12 +29,13 @@ public class LoginInteractor implements LoginInputBoundary {
             } else {
                 final User user = userDataAccessObject.get(email);
                 if (user instanceof Student) {
-                    final LoginOutputData loginOutputData = new LoginOutputData(user.getUsername(), false);
+                    final LoginOutputData loginOutputData = new LoginOutputData(user.getUsername(),
+                            ((Student) user).getJoinedClubs(), false);
                     loginPresenter.prepareSuccessView(loginOutputData);
                 }
                 else {
                     final LoginOutputData loginOutputData = new LoginOutputData(user.getUsername(), user.getEmail(),
-                            false);
+                            ((Club) user).getClubPosts(), false);
                     loginPresenter.prepareSuccessView(loginOutputData);
                 }
             }
