@@ -26,15 +26,13 @@ public class LoginPresenter implements LoginOutputBoundary {
     @Override
     public void prepareSuccessView(LoginOutputData response) {
         //On success switch to the home view.
-//        final HomeState homeState = homeViewModel.getState();
-//        homeState.setusername(response.getUsername());
-//        homeState.setemail(response.geteEmail());
-//        this.homeViewModel.setState(homeState);
-//        this.homeViewModel.firePropertyChanged();
+        final HomeState homeState = homeViewModel.getState();
+        this.homeViewModel.setState(homeState);
+        this.homeViewModel.firePropertyChanged();
 //
-//        this.viewManagerModel.setState(homeViewModel.getViewName());
-//        this.viewManagerModel.firePropertyChanged();
-        //TEMP On success switch to the TempLoggedInView
+        this.viewManagerModel.setState(homeViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
+
 
     }
     @Override
