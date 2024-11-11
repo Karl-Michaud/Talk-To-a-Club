@@ -25,7 +25,7 @@ public class LoginInteractor implements LoginInputBoundary {
             } else {
                 final User user = userDataAccessObject.get(email);
                 if (user instanceof Student) {
-                    final LoginOutputData loginOutputData = new LoginOutputData(user.getPassword(), false);
+                    final LoginOutputData loginOutputData = new LoginOutputData(user.getUsername(), false);
                     loginPresenter.prepareSuccessView(loginOutputData);
                 }
                 else {
