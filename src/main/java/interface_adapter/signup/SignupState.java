@@ -27,9 +27,13 @@ public class SignupState {
         return repeatPassword;
     }
 
-    public String getSignupError() { return this.signupError; }
+    public String getSignupError() {
+        return this.signupError;
+    }
 
-    public boolean getSignupClub() { return this.signupClub; }
+    public boolean getSignupClub() {
+        return this.signupClub;
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -47,9 +51,13 @@ public class SignupState {
         this.repeatPassword = repeatPassword;
     }
 
-    public void setSignupError(String error) { this.signupError = error; }
+    public void setSignupError(String error) {
+        this.signupError = error;
+    }
 
-    public void setSignupClub(boolean signupClub) { this.signupClub = signupClub; }
+    public void setSignupClub(boolean signupClub) {
+        this.signupClub = signupClub;
+    }
 
     @Override
     public String toString() {
