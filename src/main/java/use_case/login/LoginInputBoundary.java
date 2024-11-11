@@ -12,9 +12,4 @@ public interface LoginInputBoundary {
      */
     void execute(LoginInputData loginInputData);
 
-    /**
-     * Executes the switch to signed up View.
-     */
-    void switchToSignedUpView();
-
 }
