@@ -1,30 +1,30 @@
-package interface_adapter.signup;
+package interface_adapter.signup.club_signup;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-import use_case.signup.SignupOutputBoundary;
-import use_case.signup.SignupOutputData;
+import use_case.signup.club_signup.SignupOutputBoundary;
+import use_case.signup.club_signup.SignupOutputData;
 
 /**
- * The Presenter for the Signup Use Case.
+ * The Presenter for the Club Signup Use Case.
  */
-public class SignupPresenter implements SignupOutputBoundary {
+public class ClubSignupPresenter implements ClubSignupOutputBoundary {
 
-    private final SignupViewModel signupViewModel;
+    private final ClubSignupViewModel clubSignupViewModel;
     private final LoginViewModel loginViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public SignupPresenter(ViewManagerModel viewManagerModel,
-                           SignupViewModel signupViewModel,
-                           LoginViewModel loginViewModel) {
+    public ClubSignupPresenter(ViewManagerModel viewManagerModel,
+                               ClubSignupViewModel clubSignupViewModel,
+                               LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.signupViewModel = signupViewModel;
+        this.clubSignupViewModel = clubSignupViewModel;
         this.loginViewModel = loginViewModel;
     }
 
     @Override
-    public void prepareSuccessView(SignupOutputData response) {
+    public void prepareSuccessView(ClubSignupOutputData response) {
         // On success, switch to the login view.
         final LoginState loginState = loginViewModel.getState();
         loginState.setEmail(response.getEmail());
@@ -37,7 +37,7 @@ public class SignupPresenter implements SignupOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-        final SignupState signupState = signupViewModel.getState();
+        final ClubSignupState signupState = clubSignupViewModel.getState();
         signupState.setSignupError(error);
         signupViewModel.firePropertyChanged();
     }
