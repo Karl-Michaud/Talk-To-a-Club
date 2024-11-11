@@ -1,3 +1,4 @@
+/*
 package data_access;
 
 import entity.User;
@@ -11,9 +12,11 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+*/
 /**
  * DAO for user data implemented using a File to persist the data.
- */
+ *//*
+
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
                                                  LoginUserDataAccessInterface,
                                                  ChangePasswordUserDataAccessInterface {
@@ -110,3 +113,4 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         save();
     }
 }
+*/
