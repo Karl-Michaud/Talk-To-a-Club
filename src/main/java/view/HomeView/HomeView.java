@@ -21,4 +21,8 @@ public class HomeView extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(panel1);
     }
+
+    public String getViewName() {
+        return viewName;
+    }
 }
