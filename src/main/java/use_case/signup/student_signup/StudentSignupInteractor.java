@@ -3,7 +3,6 @@ package use_case.signup.student_signup;
 import entity.user.StudentUserFactory;
 import entity.user.User;
 
-
 /**
  * The Student Signup Interactor.
  */
