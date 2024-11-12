@@ -1,7 +1,7 @@
 package interface_adapter.signup.student_signup;
 
-import use_case.signup.student_signup.ClubSignupInputBoundary;
-import use_case.signup.student_signup.ClubSignupInputData;
+import use_case.signup.student_signup.StudentSignupInputBoundary;
+import use_case.signup.student_signup.StudentSignupInputData;
 
 /**
  * Controller for the Club Signup Use Case.
@@ -10,7 +10,7 @@ public class StudentSignupController {
 
     private final StudentSignupInputBoundary userSignupUseCaseInteractor;
 
-    public ClubSignupController(StudentSignupInputBoundary userSignupUseCaseInteractor) {
+    public StudentSignupController(StudentSignupInputBoundary userSignupUseCaseInteractor) {
         this.userSignupUseCaseInteractor = userSignupUseCaseInteractor;
     }
 
