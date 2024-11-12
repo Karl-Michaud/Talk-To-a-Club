@@ -1,22 +1,24 @@
 package view;
 
-import interface_adapter.ViewManagerModel;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.CardLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.JPanel;
+
+import interface_adapter.ViewManagerModel;
+
+/**
+ * View Manager for the application. Switches to the current view when propertyChange is called
+ */
 public class ViewManager implements PropertyChangeListener {
     private final CardLayout cardLayout;
     private final JPanel views;
-    private final ViewManagerModel viewManagerModel;
 
     public ViewManager(CardLayout cardLayout, JPanel views, ViewManagerModel viewManagerModel) {
         this.cardLayout = cardLayout;
         this.views = views;
-        this.viewManagerModel = viewManagerModel;
-        this.viewManagerModel.addPropertyChangeListener(this);
+        viewManagerModel.addPropertyChangeListener(this);
     }
 
     @Override
