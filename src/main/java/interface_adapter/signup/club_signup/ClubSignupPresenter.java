@@ -3,8 +3,8 @@ package interface_adapter.signup.club_signup;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-import use_case.signup.club_signup.SignupOutputBoundary;
-import use_case.signup.club_signup.SignupOutputData;
+import use_case.signup.club_signup.ClubSignupOutputBoundary;
+import use_case.signup.club_signup.ClubSignupOutputData;
 
 /**
  * The Presenter for the Club Signup Use Case.
@@ -39,7 +39,7 @@ public class ClubSignupPresenter implements ClubSignupOutputBoundary {
     public void prepareFailView(String error) {
         final ClubSignupState signupState = clubSignupViewModel.getState();
         signupState.setSignupError(error);
-        signupViewModel.firePropertyChanged();
+        clubSignupViewModel.firePropertyChanged();
     }
 
     @Override

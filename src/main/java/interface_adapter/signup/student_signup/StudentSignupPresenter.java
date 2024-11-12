@@ -27,7 +27,7 @@ public class StudentSignupPresenter implements StudentSignupOutputBoundary {
     public void prepareSuccessView(StudentSignupOutputData response) {
         // On success, switch to the login view.
         final LoginState loginState = loginViewModel.getState();
-        loginState.setEmail(response.getEmail());
+        loginState.setEmail(response.getUsername());
         this.loginViewModel.setState(loginState);
         loginViewModel.firePropertyChanged();
 
@@ -38,7 +38,7 @@ public class StudentSignupPresenter implements StudentSignupOutputBoundary {
     @Override
     public void prepareFailView(String error) {
         final StudentSignupState studentSignupState = studentSignupViewModel.getState();
-        studentSignupState.setUsernameError(error);
+        studentSignupState.setSignupError(error);
         studentSignupViewModel.firePropertyChanged();
     }
 
