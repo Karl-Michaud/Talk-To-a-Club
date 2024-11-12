@@ -32,6 +32,10 @@ public class StudentLoginPresenter implements LoginOutputBoundary {
         this.viewManagerModel.firePropertyChanged();
     }
 
+    /**
+     *  Helper method to prepare the home page view after logging in.
+     * @param response the input data getting passed to the presenter
+     */
     private void setHomePageState(LoginOutputData response) {
         final HomeState homeState = homeViewModel.getState();
         homeState.setUsername(response.getUsername);
