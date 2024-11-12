@@ -1,13 +1,13 @@
-package use_case.login;
+package use_case.club_login;
 
 /**
- * The input Data for the Login Use Case.
+ * The input data for the login use case for clubs.
  */
-public class LoginInputData {
+public class ClubLoginInputData {
     private final String email;
     private final String password;
 
-    public LoginInputData(String email, String password) {
+    public ClubLoginInputData(String email, String password) {
         this.email = email;
         this.password = password;
     }
