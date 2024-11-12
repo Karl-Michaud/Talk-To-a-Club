@@ -1,6 +1,8 @@
 package interface_adapter.signup.club_signup;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.login.club_login.ClubLoginState;
+import interface_adapter.login.club_login.ClubLoginViewModel;
 import use_case.signup.club_signup.ClubSignupOutputBoundary;
 import use_case.signup.club_signup.ClubSignupOutputData;
 
@@ -10,12 +12,12 @@ import use_case.signup.club_signup.ClubSignupOutputData;
 public class ClubSignupPresenter implements ClubSignupOutputBoundary {
 
     private final ClubSignupViewModel clubSignupViewModel;
-    private final LoginViewModel loginViewModel;
+    private final ClubLoginViewModel loginViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public ClubSignupPresenter(ViewManagerModel viewManagerModel,
                                ClubSignupViewModel clubSignupViewModel,
-                               LoginViewModel loginViewModel) {
+                               ClubLoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.clubSignupViewModel = clubSignupViewModel;
         this.loginViewModel = loginViewModel;
@@ -24,7 +26,7 @@ public class ClubSignupPresenter implements ClubSignupOutputBoundary {
     @Override
     public void prepareSuccessView(ClubSignupOutputData response) {
         // On success, switch to the login view.
-        final LoginState loginState = loginViewModel.getState();
+        final ClubLoginState loginState = loginViewModel.getState();
         loginState.setEmail(response.getEmail());
         this.loginViewModel.setState(loginState);
         loginViewModel.firePropertyChanged();
