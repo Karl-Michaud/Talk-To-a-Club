@@ -18,5 +18,5 @@ public interface ClubLoginDataAccessInterface {
      * @param email of the club we are looking for
      * @return the Club with the given email
      */
-    Club get(String email);
+    Club getClub(String email);
 }

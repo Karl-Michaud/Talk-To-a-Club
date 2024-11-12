@@ -1,10 +1,13 @@
 package data_access;
 
+import entity.user.Club;
+import entity.user.Student;
 import entity.user.User;
 
-// import use_case.change_password.ChangePasswordUserDataAccessInterface;
-import use_case.login.LoginDataAccessInterface;
-// import use_case.logout.LogoutUserDataAccessInterface;
+import use_case.club_login.ClubLoginDataAccessInterface;
+import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
+import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
+import use_case.student_login.StudentLoginDataAccessInterface;
 
 import java.util.ArrayList;
 
@@ -12,12 +15,11 @@ import java.util.ArrayList;
  * In-memory implementation of the DAO for storing user data. This implementation does
  * NOT persist data between runs of the program.
  */
-public class UserDataAccessObject implements SignupUserDataAccessInterface, LoginDataAccessInterface {
+public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, StudentSignupUserDataAccessInterface,
+        ClubLoginDataAccessInterface, StudentLoginDataAccessInterface {
 
-    private final ArrayList<User> clubs = new ArrayList<>();
-    private final ArrayList<User> students = new ArrayList<>();
-
-    private String currentUsername;
+    private final ArrayList<Club> clubs = new ArrayList<>();
+    private final ArrayList<Student> students = new ArrayList<>();
 
     @Override
     public boolean existsByName(String identifier) {
@@ -50,37 +52,32 @@ public class UserDataAccessObject implements SignupUserDataAccessInterface, Logi
     }
 
     @Override
-    public void saveClub(User user) {
-        clubs.add(user);
+    public void saveClub(User club) {
+        clubs.add((Club) club);
     }
 
     @Override
-    public void saveStudent(User user) {
-        students.add(user);
+    public void saveStudent(User student) {
+        students.add((Student) student);
     }
 
     @Override
-    public User get(String email) { // TODO use a map or something else to search stuff easier
-        for (User club : clubs) {
+    public Club getClub(String email) { // TODO use a map or something else to search stuff easier
+        for (Club club : clubs) {
             if (club.getEmail().equals(email)) {
                 return club;
-            }
-        }
-        for (User student : students) {
-            if (student.getEmail().equals(email)) {
-                return student;
             }
         }
         return null;
     }
 
     @Override
-    public void setCurrentUser(String name) {
-        this.currentUsername = name;
-    }
-
-    @Override
-    public String getCurrentUser() {
-        return this.currentUsername;
+    public Student getStudent(String username) {
+        for (Student student : students) {
+            if (student.getUsername().equals(username)) {
+                return student;
+            }
+        }
+        return null;
     }
 }

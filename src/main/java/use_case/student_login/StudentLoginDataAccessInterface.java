@@ -19,5 +19,5 @@ public interface StudentLoginDataAccessInterface {
      * @param username of the student we are looking for
      * @return the student with the given username
      */
-    Student get(String username);
+    Student getStudent(String username);
 }

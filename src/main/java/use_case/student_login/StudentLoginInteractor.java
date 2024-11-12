@@ -26,12 +26,12 @@ public class StudentLoginInteractor implements StudentLoginInputBoundary {
             studentLoginPresenter.prepareFailView(username + ": Account does not exist.");
         }
         else {
-            final String pwd = studentDataAccessObject.get(username).getPassword();
+            final String pwd = studentDataAccessObject.getStudent(username).getPassword();
             if (!pwd.equals(password)) {
                 studentLoginPresenter.prepareFailView("Incorrect password for \"" + username + "\".");
             }
             else {
-                final Student student = studentDataAccessObject.get(username);
+                final Student student = studentDataAccessObject.getStudent(username);
                 final StudentLoginOutputData loginOutputData = new StudentLoginOutputData(student.getUsername(),
                         student.getJoinedClubs(), false);
                 studentLoginPresenter.prepareSuccessView(loginOutputData);

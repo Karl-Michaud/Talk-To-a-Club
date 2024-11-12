@@ -26,12 +26,12 @@ public class ClubLoginInteractor implements ClubLoginInputBoundary {
             clubLoginPresenter.prepareFailView(email + ": Account does not exist.");
         }
         else {
-            final String pwd = clubDataAccessObject.get(email).getPassword();
+            final String pwd = clubDataAccessObject.getClub(email).getPassword();
             if (!pwd.equals(password)) {
                 clubLoginPresenter.prepareFailView("Incorrect password for \"" + email + "\".");
             }
             else {
-                final Club club = clubDataAccessObject.get(email);
+                final Club club = clubDataAccessObject.getClub(email);
                 final ClubLoginOutputData loginOutputData = new ClubLoginOutputData(club.getEmail(),
                         club.getEmail(), club.getClubPosts(), false);
                 clubLoginPresenter.prepareSuccessView(loginOutputData);
