@@ -9,14 +9,14 @@ import entity.post.Post;
  */
 public class Club implements User {
     // Club's personal information
-    private String username;
-    private String email;
-    private String password;
+    private final String username;
+    private final String email;
+    private final String password;
     private int clubID;
 
     // Club's members and Posts information
-    private Map<Integer, Student> clubMembers;
-    private Map<Integer, Post> clubPosts;
+    private final Map<Integer, Student> clubMembers;
+    private final Map<Integer, Post> clubPosts;
 
     public Club(String username, String email, String password, Map<Integer, Student> clubMembers,
                 Map<Integer, Post> clubPosts) {
