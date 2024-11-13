@@ -33,6 +33,5 @@ public class ClubSignupController {
      */
     public void switchToLoginView() {
         userSignupUseCaseInteractor.switchToLoginView();
-        System.out.print('C');
     }
 }

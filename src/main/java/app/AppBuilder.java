@@ -57,7 +57,6 @@ public class AppBuilder {
     // thought question: is the hard dependency below a problem?
     private final UserDataAccessObject userDataAccessObject = new UserDataAccessObject();
 
-    // TODO Make methods for ALL of these instance variables :((((((
     private ClubSignupViewModel clubSignupViewModel;
     private ClubSignupView clubSignupView;
 
