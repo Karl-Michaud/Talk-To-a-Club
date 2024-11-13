@@ -28,7 +28,4 @@
   
 ### Kabir: 
 1) use case: student_login and club_login
-2) entity: implemented everything
-    1) Post package and related classes and interfaces
-    2) User package and related classes and interfaces
-3) working on Firestore Data access object
+2) working on Firestore Data access object
