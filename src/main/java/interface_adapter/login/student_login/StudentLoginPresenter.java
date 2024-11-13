@@ -38,7 +38,7 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
      */
     private void setHomePageState(StudentLoginOutputData response) {
         final StudentHomeState studentHomeState = studentHomeViewModel.getState();
-        studentHomeState.setUsername(response.getUsername);
+        studentHomeState.setUsername(response.getUsername());
         this.studentHomeViewModel.setState(studentHomeState);
         this.studentHomeViewModel.firePropertyChanged();
     }

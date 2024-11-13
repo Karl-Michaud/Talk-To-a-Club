@@ -38,7 +38,7 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
      */
     private void setHomePageState(ClubLoginOutputData response) {
         final ClubHomeState clubHomeState = homeViewModel.getState();
-        clubHomeState.setUsername(response.getUsername);
+        clubHomeState.setUsername(response.getUsername());
         this.homeViewModel.setState(clubHomeState);
         this.homeViewModel.firePropertyChanged();
     }

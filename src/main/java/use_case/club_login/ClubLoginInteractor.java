@@ -32,7 +32,7 @@ public class ClubLoginInteractor implements ClubLoginInputBoundary {
             }
             else {
                 final Club club = clubDataAccessObject.getClub(email);
-                final ClubLoginOutputData loginOutputData = new ClubLoginOutputData(club.getEmail(),
+                final ClubLoginOutputData loginOutputData = new ClubLoginOutputData(club.getUsername(),
                         club.getEmail(), club.getClubPosts(), false);
                 clubLoginPresenter.prepareSuccessView(loginOutputData);
             }
