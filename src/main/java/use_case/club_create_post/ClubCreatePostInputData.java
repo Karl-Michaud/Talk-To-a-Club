@@ -6,12 +6,12 @@ package use_case.club_create_post;
 public class ClubCreatePostInputData {
     private final String email;
     private final String title;
-    private final String description;
+    private final String content;
 
     public ClubCreatePostInputData(String email, String title, String description) {
         this.email = email;
         this.title = title;
-        this.description = description;
+        this.content = description;
     }
 
     public String getEmail() {
@@ -22,7 +22,7 @@ public class ClubCreatePostInputData {
         return title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 }
