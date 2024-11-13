@@ -5,6 +5,7 @@ import interface_adapter.club_home.ClubHomeState;
 import interface_adapter.club_home.ClubHomeViewModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.signup.club_signup.ClubSignupViewModel;
 import use_case.login.club_login.ClubLoginOutputBoundary;
 import use_case.login.club_login.ClubLoginOutputData;
 
@@ -15,13 +16,16 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
     private final LoginViewModel loginViewModel;
     private final ClubHomeViewModel clubHomeViewModel;
+    private final ClubSignupViewModel clubSignupViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public ClubLoginPresenter(ViewManagerModel viewManagerModel,
                               ClubHomeViewModel clubHomeViewModel,
+                              ClubSignupViewModel clubSignupViewModel,
                               LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.clubHomeViewModel = clubHomeViewModel;
+        this.clubSignupViewModel = clubSignupViewModel;
         this.loginViewModel = loginViewModel;
     }
 
@@ -55,6 +59,12 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
     @Override
     public void switchToClubHomeView() {
         viewManagerModel.setState(clubHomeViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToClubSignupView() {
+        viewManagerModel.setState(clubSignupViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 }

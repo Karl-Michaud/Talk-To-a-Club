@@ -10,7 +10,7 @@ public class StudentHomeView extends JPanel {
     private JLabel labelUsername;
     private JLabel labelIcon;
 
-    private final String viewName = "home";
+    private final String viewName = "student home";
     private final StudentHomeViewModel studentHomeViewModel;
     // private DataAccessController HomeController;
 

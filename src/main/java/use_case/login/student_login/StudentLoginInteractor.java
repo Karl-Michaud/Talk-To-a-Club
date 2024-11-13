@@ -43,4 +43,9 @@ public class StudentLoginInteractor implements StudentLoginInputBoundary {
     public void switchToStudentHomeView() {
         studentLoginPresenter.switchToStudentHomeView();
     }
+
+    @Override
+    public void switchToStudentSignupView() {
+        studentLoginPresenter.switchToStudentSignupView();
+    }
 }

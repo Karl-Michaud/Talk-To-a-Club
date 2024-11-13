@@ -14,4 +14,9 @@ public interface StudentLoginInputBoundary {
      * Switches to the Student Home View.
      */
     void switchToStudentHomeView();
+
+    /**
+     * Switches to the Student Signup View.
+     */
+    void switchToStudentSignupView();
 }

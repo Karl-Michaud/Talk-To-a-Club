@@ -3,6 +3,7 @@ package interface_adapter.login.student_login;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
 import use_case.login.student_login.StudentLoginOutputBoundary;
@@ -15,13 +16,16 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
 
     private final LoginViewModel loginViewModel;
     private final StudentHomeViewModel studentHomeViewModel;
+    private final StudentSignupViewModel studentSignupViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public StudentLoginPresenter(ViewManagerModel viewManagerModel,
                                  StudentHomeViewModel studentHomeViewModel,
+                                 StudentSignupViewModel studentSignupViewModel,
                                  LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.studentHomeViewModel = studentHomeViewModel;
+        this.studentSignupViewModel = studentSignupViewModel;
         this.loginViewModel = loginViewModel;
     }
 
@@ -55,6 +59,12 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
     @Override
     public void switchToStudentHomeView() {
         viewManagerModel.setState(studentHomeViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToStudentSignupView() {
+        viewManagerModel.setState(studentSignupViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 }
