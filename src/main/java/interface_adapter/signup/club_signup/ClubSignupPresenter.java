@@ -27,7 +27,7 @@ public class ClubSignupPresenter implements ClubSignupOutputBoundary {
     public void prepareSuccessView(ClubSignupOutputData response) {
         // On success, switch to the login view.
         final LoginState loginState = loginViewModel.getState();
-        loginState.setEmail(response.getEmail());
+        loginState.setIdentifier(response.getEmail());
         this.loginViewModel.setState(loginState);
         loginViewModel.firePropertyChanged();
 

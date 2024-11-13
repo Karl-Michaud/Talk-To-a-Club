@@ -1,5 +1,10 @@
 package view;
 
+import interface_adapter.login.LoginState;
+import interface_adapter.login.LoginViewModel;
+import interface_adapter.login.club_login.ClubLoginController;
+import interface_adapter.login.student_login.StudentLoginController;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -24,7 +29,8 @@ LoginView extends JPanel implements PropertyChangeListener {
     private JButton clubSignupButton;
 
     private final LoginViewModel loginViewModel;
-    private LoginController loginController;
+    private ClubLoginController clubLoginController;
+    private StudentLoginController studentLoginController;
 
     public LoginView(LoginViewModel loginViewModel) {
 
@@ -129,7 +135,7 @@ LoginView extends JPanel implements PropertyChangeListener {
     }
 
     private void setFields(LoginState state) {
-        emailField.setText(state.getEmail());
+        emailField.setText(state.getIdentifier());
         passwordField.setText(state.getPassword());
     }
 
