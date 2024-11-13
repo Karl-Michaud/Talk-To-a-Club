@@ -5,6 +5,7 @@ import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.club_home.ClubHomeViewModel;
+import interface_adapter.login.LoginViewModel;
 import interface_adapter.signup.club_signup.ClubSignupViewModel;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeViewModel;
@@ -39,13 +40,13 @@ public class AppBuilder {
     // thought question: is the hard dependency below a problem?
     private final UserDataAccessObject userDataAccessObject = new UserDataAccessObject();
 
+    // TODO Make methods for ALL of these instance variables :((((((
     private ClubSignupViewModel clubSignupViewModel;
     private ClubSignupView clubSignupView;
 
     private StudentSignupViewModel studentSignupViewModel;
     private StudentSignupView studentSignupView;
 
-    private interface_adapter.login.LoginViewModel loginViewModel;
     private LoginViewModel loginViewModel;
     private LoginView loginView;
 
