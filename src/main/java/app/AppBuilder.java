@@ -4,15 +4,17 @@ import data_access.UserDataAccessObject;
 import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.club_home.ClubHomeViewModel;
+import interface_adapter.login.club_login.ClubLoginViewModel;
+import interface_adapter.login.student_login.StudentLoginViewModel;
+import interface_adapter.signup.club_signup.ClubSignupViewModel;
+import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeViewModel;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
-import view.ClubSignupView;
-import view.StudentHomeView;
-import view.LoginView;
-import view.StudentSignupView;
-import view.ViewManager;
+import view.*;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -39,13 +41,21 @@ public class AppBuilder {
     // thought question: is the hard dependency below a problem?
     private final UserDataAccessObject userDataAccessObject = new UserDataAccessObject();
 
+    private ClubSignupViewModel clubSignupViewModel;
     private ClubSignupView clubSignupView;
+
+    private StudentSignupViewModel studentSignupViewModel;
     private StudentSignupView studentSignupView;
-    private SignupViewModel signupViewModel;
-    private LoginViewModel loginViewModel;
-    private StudentHomeViewModel homeViewModel;
-    private StudentHomeView homeView;
+
+    private ClubLoginViewModel clubLoginViewModel;
+    private StudentLoginViewModel studentLoginViewModel;
     private LoginView loginView;
+
+    private StudentHomeViewModel studentHomeViewModel;
+    private StudentHomeView studentHomeView;
+
+    private ClubHomeViewModel clubHomeViewModel;
+    private ClubHomeView clubHomeView;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -87,8 +97,8 @@ public class AppBuilder {
      */
     public AppBuilder addHomeView() {
         homeViewModel = new StudentHomeViewModel();
-        homeView = new StudentHomeView(homeViewModel);
-        cardPanel.add(homeView, homeView.getViewName());
+        studentHomeView = new StudentHomeView(homeViewModel);
+        cardPanel.add(studentHomeView, studentHomeView.getViewName());
         return this;
     }
 
