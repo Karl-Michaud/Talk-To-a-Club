@@ -8,10 +8,10 @@ public class ClubCreatePostInputData {
     private final String title;
     private final String content;
 
-    public ClubCreatePostInputData(String email, String title, String description) {
+    public ClubCreatePostInputData(String email, String title, String content) {
         this.email = email;
         this.title = title;
-        this.content = description;
+        this.content = content;
     }
 
     public String getEmail() {
