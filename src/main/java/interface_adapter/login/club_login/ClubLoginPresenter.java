@@ -1,8 +1,8 @@
 package interface_adapter.login.club_login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.data_access.HomeState;
-import interface_adapter.data_access.HomeViewModel;
+import interface_adapter.home.HomeState;
+import interface_adapter.home.HomeViewModel;
 import use_case.club_login.ClubLoginOutputBoundary;
 import use_case.club_login.ClubLoginOutputData;
 

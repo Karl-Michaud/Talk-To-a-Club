@@ -1,8 +1,6 @@
-package view.HomeView;
+package view;
 
-import interface_adapter.data_access.HomeViewModel;
-import interface_adapter.data_access.HomeState;
-import interface_adapter.data_access.DataAccessController;
+import interface_adapter.home.HomeViewModel;
 
 
 import javax.swing.*;
@@ -14,7 +12,7 @@ public class HomeView extends JPanel {
 
     private final String viewName = "home";
     private final HomeViewModel homeViewModel;
-    private DataAccessController dataAccessController;
+    // private DataAccessController HomeController;
 
     public HomeView(HomeViewModel homeViewModel) {
         this.homeViewModel = homeViewModel;
