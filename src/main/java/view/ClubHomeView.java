@@ -1,12 +1,14 @@
 package view;
 
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import interface_adapter.club_home.ClubHomeViewModel;
-import interface_adapter.login.LoginViewModel;
-import interface_adapter.student_home.StudentHomeViewModel;
 
-import javax.swing.*;
-import java.beans.PropertyChangeListener;
-
+/**
+ * Club Home View.
+ */
 public class ClubHomeView extends JPanel {
     private JPanel center;
     private JLabel idk;

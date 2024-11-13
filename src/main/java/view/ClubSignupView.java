@@ -4,7 +4,12 @@ import interface_adapter.signup.club_signup.ClubSignupController;
 import interface_adapter.signup.club_signup.ClubSignupState;
 import interface_adapter.signup.club_signup.ClubSignupViewModel;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.BoxLayout;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
