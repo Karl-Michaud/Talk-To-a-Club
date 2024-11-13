@@ -31,13 +31,6 @@ public class StudentLoginController {
     }
 
     /**
-     * Executes the "switch to StudentHomeView" Use Case.
-     */
-    public void switchToLoginView() {
-        loginUseCaseInteractor.switchToStudentHomeView();
-    }
-
-    /**
      * Executes the "switch to StudentSignupView" Use Case.
      */
     public void switchToStudentSignupView() {

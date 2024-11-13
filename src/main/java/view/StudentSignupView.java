@@ -34,7 +34,7 @@ public class StudentSignupView extends JPanel implements PropertyChangeListener 
 
     public StudentSignupView(StudentSignupViewModel signupViewModel) {
         this.signupViewModel = signupViewModel;
-        signupViewModel.addPropertyChangeListener(this);
+        this.signupViewModel.addPropertyChangeListener(this);
 
         signUpButton.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.

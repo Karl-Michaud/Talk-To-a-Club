@@ -11,11 +11,6 @@ public interface ClubLoginInputBoundary {
     void execute(ClubLoginInputData clubLoginInputData);
 
     /**
-     * Switches to the Club Home View.
-     */
-    void switchToClubHomeView();
-
-    /**
      * Switches to the Club Signup View.
      */
     void switchToClubSignupView();

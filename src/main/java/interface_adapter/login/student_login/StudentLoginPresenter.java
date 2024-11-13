@@ -57,12 +57,6 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
     }
 
     @Override
-    public void switchToStudentHomeView() {
-        viewManagerModel.setState(studentHomeViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
-    }
-
-    @Override
     public void switchToStudentSignupView() {
         viewManagerModel.setState(studentSignupViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

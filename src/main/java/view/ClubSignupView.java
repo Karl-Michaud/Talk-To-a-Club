@@ -28,7 +28,7 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
 
     public ClubSignupView(ClubSignupViewModel signupViewModel) {
         this.signupViewModel = signupViewModel;
-        signupViewModel.addPropertyChangeListener(this);
+        this.signupViewModel.addPropertyChangeListener(this);
 
         signUpAsClubButton.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.

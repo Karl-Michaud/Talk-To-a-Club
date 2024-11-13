@@ -40,11 +40,6 @@ public class ClubLoginInteractor implements ClubLoginInputBoundary {
     }
 
     @Override
-    public void switchToClubHomeView() {
-        clubLoginPresenter.switchToClubHomeView();
-    }
-
-    @Override
     public void switchToClubSignupView() {
         clubLoginPresenter.switchToClubSignupView();
     }

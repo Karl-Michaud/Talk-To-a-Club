@@ -31,13 +31,6 @@ public class ClubLoginController {
     }
 
     /**
-     * Executes the "switch to ClubHomeView" Use Case.
-     */
-    public void switchToLoginView() {
-        loginUseCaseInteractor.switchToClubHomeView();
-    }
-
-    /**
      * Executes the "switch to ClubSignupView" Use Case.
      */
     public void switchToClubSignupView() {
