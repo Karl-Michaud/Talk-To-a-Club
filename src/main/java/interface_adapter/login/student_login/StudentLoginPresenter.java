@@ -3,6 +3,8 @@ package interface_adapter.login.student_login;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.data_access.HomeState;
 import interface_adapter.data_access.HomeViewModel;
+import use_case.student_login.StudentLoginOutputBoundary;
+import use_case.student_login.StudentLoginOutputData;
 
 /**
  * The Presenter for the Student Login Use Case.
