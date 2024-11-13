@@ -1,9 +1,9 @@
-package interface_adapter.login;
+package interface_adapter.login.club_login;
 
 /**
- * The state for the Login View Model.
+ * The state for the Club Login View Model.
  */
-public class LoginState {
+public class ClubLoginState {
     private String email = "";
     private String password = "";
     private String loginError;
@@ -30,5 +30,13 @@ public class LoginState {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "ClubLoginState{"
+                + "email='" + email + '\''
+                + ", password='" + password + '\''
+                + '}';
     }
 }
