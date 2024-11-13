@@ -165,9 +165,11 @@ LoginView extends JPanel implements PropertyChangeListener {
         return viewName;
     }
 
-    public void setLoginControllers(ClubLoginController clubLoginController,
-                                    StudentLoginController studentLoginController) {
+    public void setClubLoginController(ClubLoginController clubLoginController) {
         this.clubLoginController = clubLoginController;
+    }
+
+    public void setStudentLoginController(StudentLoginController studentLoginController) {
         this.studentLoginController = studentLoginController;
     }
 }

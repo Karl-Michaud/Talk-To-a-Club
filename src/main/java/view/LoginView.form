@@ -3,11 +3,9 @@
   <grid id="27dc6" binding="panelLogin" layout-manager="GridLayoutManager" row-count="10" column-count="12" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="8" left="8" bottom="8" right="8"/>
     <constraints>
-      <xy x="819" y="141" width="1188" height="626"/>
+      <xy x="316" y="173" width="1188" height="626"/>
     </constraints>
-    <properties>
-      <background color="-13947600"/>
-    </properties>
+    <properties/>
     <border type="none"/>
     <children>
       <component id="d1d53" class="javax.swing.JButton" binding="buttonLogin">
@@ -72,7 +70,6 @@
               </grid>
             </constraints>
             <properties>
-              <background color="-13947600"/>
               <text value=""/>
               <toolTipText value="Username:"/>
             </properties>

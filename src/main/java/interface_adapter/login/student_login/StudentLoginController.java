@@ -42,5 +42,6 @@ public class StudentLoginController {
      */
     public void switchToStudentSignupView() {
         loginUseCaseInteractor.switchToStudentSignupView();
+        System.out.print('B');
     }
 }

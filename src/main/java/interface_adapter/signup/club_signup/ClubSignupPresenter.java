@@ -46,5 +46,6 @@ public class ClubSignupPresenter implements ClubSignupOutputBoundary {
     public void switchToLoginView() {
         viewManagerModel.setState(loginViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
+        System.out.print('C');
     }
 }

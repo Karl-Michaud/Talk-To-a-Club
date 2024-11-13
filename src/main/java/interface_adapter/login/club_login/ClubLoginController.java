@@ -42,5 +42,6 @@ public class ClubLoginController {
      */
     public void switchToClubSignupView() {
         loginUseCaseInteractor.switchToClubSignupView();
+        System.out.print('A');
     }
 }
