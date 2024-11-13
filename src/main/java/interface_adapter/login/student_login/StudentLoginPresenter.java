@@ -3,13 +3,11 @@ package interface_adapter.login.student_login;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.data_access.HomeState;
 import interface_adapter.data_access.HomeViewModel;
-import use_case.login.LoginOutputBoundary;
-import use_case.login.LoginOutputData;
 
 /**
  * The Presenter for the Student Login Use Case.
  */
-public class StudentLoginPresenter implements LoginOutputBoundary {
+public class StudentLoginPresenter implements StudentLoginOutputBoundary {
 
     private final StudentLoginViewModel studentLoginViewModel;
     private final HomeViewModel homeViewModel;
@@ -24,7 +22,7 @@ public class StudentLoginPresenter implements LoginOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(LoginOutputData response) {
+    public void prepareSuccessView(StudentLoginOutputData response) {
         //On success switch to the home view.
         setHomePageState(response);
 
@@ -36,7 +34,7 @@ public class StudentLoginPresenter implements LoginOutputBoundary {
      *  Helper method to prepare the home page view after logging in.
      * @param response the input data getting passed to the presenter
      */
-    private void setHomePageState(LoginOutputData response) {
+    private void setHomePageState(StudentLoginOutputData response) {
         final HomeState homeState = homeViewModel.getState();
         homeState.setUsername(response.getUsername);
         homeState.setIsClub(response.getIsClub);

@@ -1,7 +1,7 @@
 package interface_adapter.login.club_login;
 
-import use_case.login.LoginInputBoundary;
-import use_case.login.LoginInputData;
+import use_case.club_login.ClubLoginInputBoundary;
+import use_case.club_login.ClubLoginInputData;
 
 /**
  * The Controller for the Club Login Use Case
@@ -10,12 +10,12 @@ public class ClubLoginController {
     /**
      *
      */
-    private final LoginInputBoundary loginUseCaseInteractor;
+    private final ClubLoginInputBoundary loginUseCaseInteractor;
 
     /**
      * The Constructor for the Club Login controller
      */
-    public ClubLoginController(LoginInputBoundary loginUseCaseInteractor){
+    public ClubLoginController(ClubLoginInputBoundary loginUseCaseInteractor){
         this.loginUseCaseInteractor = loginUseCaseInteractor;
     }
 
