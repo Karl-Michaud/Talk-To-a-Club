@@ -36,7 +36,7 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
                     studentSignupInputData.getPassword());
             userDataAccessObject.saveStudent(user);
 
-            final StudentSignupOutputData studentSignupOutputData = new StudentSignupOutputData(user.getEmail(),
+            final StudentSignupOutputData studentSignupOutputData = new StudentSignupOutputData(user.getUsername(),
                     false);
             userPresenter.prepareSuccessView(studentSignupOutputData);
         }
