@@ -35,7 +35,11 @@ public class ClubCreatePostOutputData {
         return dateOfPosting;
     }
 
-    public boolean isUseCaseFailed() {
+    /**
+     * Returns a value that tells us if the use case failed or not.
+     * @return a boolean value true if the use case failed, else false
+     */
+    public boolean useCaseFailed() {
         return useCaseFailed;
     }
 }
