@@ -1,4 +1,4 @@
-package use_case.student_login;
+package use_case.login.student_login;
 
 import java.util.Map;
 

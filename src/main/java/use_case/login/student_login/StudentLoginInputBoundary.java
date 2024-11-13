@@ -1,4 +1,4 @@
-package use_case.student_login;
+package use_case.login.student_login;
 
 /**
  * Input boundary for the login use case for student users.
@@ -9,4 +9,9 @@ public interface StudentLoginInputBoundary {
      * @param studentLoginInputData the input data
      */
     void execute(StudentLoginInputData studentLoginInputData);
+
+    /**
+     * Switches to the Student Signup View.
+     */
+    void switchToStudentSignupView();
 }

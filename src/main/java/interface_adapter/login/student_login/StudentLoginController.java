@@ -1,6 +1,7 @@
 package interface_adapter.login.student_login;
 
-import use_case.login.LoginInputBoundary;
+import use_case.login.student_login.StudentLoginInputBoundary;
+import use_case.login.student_login.StudentLoginInputData;
 
 /**
  * The Controller for the Student Login Use Case
@@ -9,12 +10,12 @@ public class StudentLoginController {
     /**
      *
      */
-    private final LoginInputBoundary loginUseCaseInteractor;
+    private final StudentLoginInputBoundary loginUseCaseInteractor;
 
     /**
      * The Constructor for the Student Login controller
      */
-    public StudentLoginController(LoginInputBoundary loginUseCaseInteractor){
+    public StudentLoginController(StudentLoginInputBoundary loginUseCaseInteractor){
         this.loginUseCaseInteractor = loginUseCaseInteractor;
     }
 
@@ -24,15 +25,14 @@ public class StudentLoginController {
      * @param password the password of the user logging in
      */
     public void execute(String username, String password){
-        final ClubLoginInputData loginInputData = new ClubLoginInputData(username, password);
+        final StudentLoginInputData loginInputData = new StudentLoginInputData(username, password);
 
         loginUseCaseInteractor.execute(loginInputData);
     }
 
-    public void switchToClubSignupView() {
-        loginUseCaseInteractor.switchToClubSignupView();
-    }
-
+    /**
+     * Executes the "switch to StudentSignupView" Use Case.
+     */
     public void switchToStudentSignupView() {
         loginUseCaseInteractor.switchToStudentSignupView();
     }

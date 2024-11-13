@@ -1,4 +1,4 @@
-package use_case.club_login;
+package use_case.login.club_login;
 
 import entity.user.Club;
 

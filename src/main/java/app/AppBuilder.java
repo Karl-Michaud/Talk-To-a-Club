@@ -4,15 +4,33 @@ import data_access.UserDataAccessObject;
 import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.data_access.HomeViewModel;
-import use_case.login.LoginInputBoundary;
-import use_case.login.LoginInteractor;
-import use_case.login.LoginOutputBoundary;
-import view.ClubSignupView;
-import view.HomeView.HomeView;
-import view.LoginView;
-import view.StudentSignupView;
-import view.ViewManager;
+import interface_adapter.club_home.ClubHomeViewModel;
+import interface_adapter.login.LoginViewModel;
+import interface_adapter.login.club_login.ClubLoginController;
+import interface_adapter.login.club_login.ClubLoginPresenter;
+import interface_adapter.login.student_login.StudentLoginController;
+import interface_adapter.login.student_login.StudentLoginPresenter;
+import interface_adapter.signup.club_signup.ClubSignupController;
+import interface_adapter.signup.club_signup.ClubSignupPresenter;
+import interface_adapter.signup.club_signup.ClubSignupViewModel;
+import interface_adapter.signup.student_signup.StudentSignupController;
+import interface_adapter.signup.student_signup.StudentSignupPresenter;
+import interface_adapter.signup.student_signup.StudentSignupViewModel;
+import interface_adapter.student_home.StudentHomeViewModel;
+import use_case.login.club_login.ClubLoginInputBoundary;
+import use_case.login.club_login.ClubLoginInteractor;
+import use_case.login.club_login.ClubLoginOutputBoundary;
+import use_case.login.student_login.StudentLoginInputBoundary;
+import use_case.login.student_login.StudentLoginInteractor;
+import use_case.login.student_login.StudentLoginOutputBoundary;
+import use_case.signup.club_signup.ClubSignupInputBoundary;
+import use_case.signup.club_signup.ClubSignupInteractor;
+import use_case.signup.club_signup.ClubSignupOutputBoundary;
+import use_case.signup.student_signup.StudentSignupInputBoundary;
+import use_case.signup.student_signup.StudentSignupInteractor;
+import use_case.signup.student_signup.StudentSignupOutputBoundary;
+import view.*;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -39,33 +57,43 @@ public class AppBuilder {
     // thought question: is the hard dependency below a problem?
     private final UserDataAccessObject userDataAccessObject = new UserDataAccessObject();
 
+    private ClubSignupViewModel clubSignupViewModel;
     private ClubSignupView clubSignupView;
+
+    private StudentSignupViewModel studentSignupViewModel;
     private StudentSignupView studentSignupView;
-    private SignupViewModel signupViewModel;
+
     private LoginViewModel loginViewModel;
-    private HomeViewModel homeViewModel;
-    private HomeView homeView;
     private LoginView loginView;
+
+    private StudentHomeViewModel studentHomeViewModel;
+    private StudentHomeView studentHomeView;
+
+    private ClubHomeViewModel clubHomeViewModel;
+    private ClubHomeView clubHomeView;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
     }
 
     /**
-     * Adds the Signup View to the application.
+     * Adds the Club Signup View to the application.
      * @return this builder
      */
-
     public AppBuilder addClubSignupView() {
-        signupViewModel = new SignupViewModel();
-        clubSignupView = new ClubSignupView(signupViewModel);
+        clubSignupViewModel = new ClubSignupViewModel();
+        clubSignupView = new ClubSignupView(clubSignupViewModel);
         cardPanel.add(clubSignupView, clubSignupView.getViewName());
         return this;
     }
 
+    /**
+     * Adds the Student Signup View to the application.
+     * @return this builder
+     */
     public AppBuilder addStudentSignupView() {
-        signupViewModel = new SignupViewModel();
-        studentSignupView = new StudentSignupView(signupViewModel);
+        studentSignupViewModel = new StudentSignupViewModel();
+        studentSignupView = new StudentSignupView(studentSignupViewModel);
         cardPanel.add(studentSignupView, studentSignupView.getViewName());
         return this;
     }
@@ -75,48 +103,93 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addLoginView() {
-        loginViewModel = new LoginViewModel();
+        loginViewModel = new interface_adapter.login.LoginViewModel();
         loginView = new LoginView(loginViewModel);
         cardPanel.add(loginView, loginView.getViewName());
         return this;
     }
 
     /**
-     * Adds the LoggedIn View to the application.
+     * Adds the Club Home View to the application.
      * @return this builder
      */
-    public AppBuilder addHomeView() {
-        homeViewModel = new HomeViewModel();
-        homeView = new HomeView(homeViewModel);
-        cardPanel.add(homeView, homeView.getViewName());
+    public AppBuilder addClubHomeView() {
+        clubHomeViewModel = new ClubHomeViewModel();
+        clubHomeView = new ClubHomeView(clubHomeViewModel);
+        cardPanel.add(clubHomeView, clubHomeView.getViewName());
         return this;
     }
 
-    public AppBuilder addSignupUseCase() {
-        final SignupOutputBoundary signupOutputBoundary = new SignupPresenter(viewManagerModel,
-                signupViewModel, loginViewModel);
+    /**
+     * Adds the Student Home View to the application.
+     * @return this builder
+     */
+    public AppBuilder addStudentHomeView() {
+        studentHomeViewModel = new StudentHomeViewModel();
+        studentHomeView = new StudentHomeView(studentHomeViewModel);
+        cardPanel.add(studentHomeView, studentHomeView.getViewName());
+        return this;
+    }
 
-        final SignupInputBoundary userSignupInteractor = new SignupInteractor(userDataAccessObject, signupOutputBoundary,
-                clubFactory, studentFactory);
+    /**
+     * Adds the Club Signup Use Case to the application.
+     * @return this builder
+     */
+    public AppBuilder addClubSignupUseCase() {
+        final ClubSignupOutputBoundary signupOutputBoundary = new ClubSignupPresenter(viewManagerModel,
+                clubSignupViewModel, loginViewModel);
 
-        final SignupController controller = new SignupController(userSignupInteractor);
+        final ClubSignupInputBoundary userSignupInteractor = new ClubSignupInteractor(userDataAccessObject,
+                signupOutputBoundary, clubFactory);
+
+        final ClubSignupController controller = new ClubSignupController(userSignupInteractor);
         clubSignupView.setSignupController(controller);
+        return this;
+    }
+
+    /**
+     * Adds the Student Signup Use Case to the application.
+     * @return this builder
+     */
+    public AppBuilder addStudentSignupUseCase() {
+        final StudentSignupOutputBoundary signupOutputBoundary = new StudentSignupPresenter(viewManagerModel,
+                studentSignupViewModel, loginViewModel);
+
+        final StudentSignupInputBoundary userSignupInteractor = new StudentSignupInteractor(userDataAccessObject,
+                signupOutputBoundary, studentFactory);
+
+        final StudentSignupController controller = new StudentSignupController(userSignupInteractor);
         studentSignupView.setSignupController(controller);
         return this;
     }
 
     /**
-     * Adds the Login Use Case to the application.
+     * Adds the Club Login Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addLoginUseCase() {
-        final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel,
-                homeViewModel, loginViewModel);
-        final LoginInputBoundary loginInteractor = new LoginInteractor(
+    public AppBuilder addClubLoginUseCase() {
+        final ClubLoginOutputBoundary loginOutputBoundary = new ClubLoginPresenter(viewManagerModel,
+                clubHomeViewModel, clubSignupViewModel, loginViewModel);
+        final ClubLoginInputBoundary loginInteractor = new ClubLoginInteractor(
                 userDataAccessObject, loginOutputBoundary);
 
-        final LoginController loginController = new LoginController(loginInteractor);
-        loginView.setLoginController(loginController);
+        final ClubLoginController loginController = new ClubLoginController(loginInteractor);
+        loginView.setClubLoginController(loginController);
+        return this;
+    }
+
+    /**
+     * Adds the Student Login Use Case to the application.
+     * @return this builder
+     */
+    public AppBuilder addStudentLoginUseCase() {
+        final StudentLoginOutputBoundary loginOutputBoundary = new StudentLoginPresenter(viewManagerModel,
+                studentHomeViewModel, studentSignupViewModel, loginViewModel);
+        final StudentLoginInputBoundary loginInteractor = new StudentLoginInteractor(
+                userDataAccessObject, loginOutputBoundary);
+
+        final StudentLoginController loginController = new StudentLoginController(loginInteractor);
+        loginView.setStudentLoginController(loginController);
         return this;
     }
 

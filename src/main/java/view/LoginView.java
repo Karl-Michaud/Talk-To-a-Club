@@ -1,5 +1,10 @@
 package view;
 
+import interface_adapter.login.LoginState;
+import interface_adapter.login.LoginViewModel;
+import interface_adapter.login.club_login.ClubLoginController;
+import interface_adapter.login.student_login.StudentLoginController;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -14,22 +19,37 @@ LoginView extends JPanel implements PropertyChangeListener {
 
     private JButton buttonLogin;
     private JButton studentSignupButton;
-    private JTextField emailField;
+    private JTextField userIdentifierField;
     private JPasswordField passwordField;
     private JPanel panelLogin;
     private JLabel labelPassword;
-    private JLabel labelEmail;
+    private JLabel labelUserIdentifier;
     private JLabel labelError;
     private JLabel labelLogo;
     private JButton clubSignupButton;
+    private JCheckBox clubLoginCheckBox;
 
     private final LoginViewModel loginViewModel;
-    private LoginController loginController;
+    private ClubLoginController clubLoginController;
+    private StudentLoginController studentLoginController;
 
     public LoginView(LoginViewModel loginViewModel) {
 
         this.loginViewModel = loginViewModel;
         this.loginViewModel.addPropertyChangeListener(this);
+
+        clubLoginCheckBox.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(clubLoginCheckBox)) {
+                            final LoginState currentState = loginViewModel.getState();
+                            currentState.setIdentifier(currentState.getIdentifier());
+                            loginViewModel.setState(currentState);
+                        }
+                    }
+                }
+        );
 
         buttonLogin.addActionListener(
                 new ActionListener() {
@@ -37,10 +57,18 @@ LoginView extends JPanel implements PropertyChangeListener {
                         if (evt.getSource().equals(buttonLogin)) {
                             final LoginState currentState = loginViewModel.getState();
 
-                            loginController.execute(
-                                    currentState.getEmail(),
-                                    currentState.getPassword()
-                            );
+                            if (clubLoginCheckBox.isSelected()) {
+                                clubLoginController.execute(
+                                        currentState.getIdentifier(),
+                                        currentState.getPassword()
+                                );
+                            }
+                            else {
+                                studentLoginController.execute(
+                                        currentState.getIdentifier(),
+                                        currentState.getPassword()
+                                );
+                            }
                         }
                     }
                 }
@@ -49,7 +77,7 @@ LoginView extends JPanel implements PropertyChangeListener {
         studentSignupButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        loginController.switchToStudentSignupView();
+                        studentLoginController.switchToStudentSignupView();
                     }
                 }
         );
@@ -57,7 +85,7 @@ LoginView extends JPanel implements PropertyChangeListener {
         clubSignupButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        loginController.switchToClubSignupView();
+                        clubLoginController.switchToClubSignupView();
                     }
                 }
         );
@@ -96,11 +124,11 @@ LoginView extends JPanel implements PropertyChangeListener {
     }
 
     private void addEmailListener() {
-        emailField.getDocument().addDocumentListener(new DocumentListener() {
+        userIdentifierField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
                 final LoginState currentState = loginViewModel.getState();
-                currentState.setEmail(emailField.getText());
+                currentState.setIdentifier(userIdentifierField.getText());
                 loginViewModel.setState(currentState);
             }
 
@@ -129,7 +157,7 @@ LoginView extends JPanel implements PropertyChangeListener {
     }
 
     private void setFields(LoginState state) {
-        emailField.setText(state.getEmail());
+        userIdentifierField.setText(state.getIdentifier());
         passwordField.setText(state.getPassword());
     }
 
@@ -137,6 +165,11 @@ LoginView extends JPanel implements PropertyChangeListener {
         return viewName;
     }
 
-    public void setLoginController(LoginController loginController) {
-        this.loginController = loginController; }
+    public void setClubLoginController(ClubLoginController clubLoginController) {
+        this.clubLoginController = clubLoginController;
+    }
+
+    public void setStudentLoginController(StudentLoginController studentLoginController) {
+        this.studentLoginController = studentLoginController;
+    }
 }

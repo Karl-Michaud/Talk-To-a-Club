@@ -1,4 +1,4 @@
-package use_case.student_login;
+package use_case.login.student_login;
 
 import entity.user.Student;
 
@@ -37,5 +37,10 @@ public class StudentLoginInteractor implements StudentLoginInputBoundary {
                 studentLoginPresenter.prepareSuccessView(loginOutputData);
             }
         }
+    }
+
+    @Override
+    public void switchToStudentSignupView() {
+        studentLoginPresenter.switchToStudentSignupView();
     }
 }

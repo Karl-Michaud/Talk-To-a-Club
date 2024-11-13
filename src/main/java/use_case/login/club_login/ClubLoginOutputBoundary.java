@@ -1,4 +1,4 @@
-package use_case.club_login;
+package use_case.login.club_login;
 
 /**
  * Output boundary for the login use case for clubs.
@@ -15,4 +15,9 @@ public interface ClubLoginOutputBoundary {
      * @param errorMessage the explanation of the failure
      */
     void prepareFailView(String errorMessage);
+
+    /**
+     * Switches to the Club Signup View.
+     */
+    void switchToClubSignupView();
 }

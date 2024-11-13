@@ -1,34 +1,40 @@
 package interface_adapter.login.student_login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.data_access.HomeState;
-import interface_adapter.data_access.HomeViewModel;
-import use_case.login.LoginOutputBoundary;
-import use_case.login.LoginOutputData;
+import interface_adapter.login.LoginState;
+import interface_adapter.login.LoginViewModel;
+import interface_adapter.signup.student_signup.StudentSignupViewModel;
+import interface_adapter.student_home.StudentHomeState;
+import interface_adapter.student_home.StudentHomeViewModel;
+import use_case.login.student_login.StudentLoginOutputBoundary;
+import use_case.login.student_login.StudentLoginOutputData;
 
 /**
  * The Presenter for the Student Login Use Case.
  */
-public class StudentLoginPresenter implements LoginOutputBoundary {
+public class StudentLoginPresenter implements StudentLoginOutputBoundary {
 
-    private final StudentLoginViewModel studentLoginViewModel;
-    private final HomeViewModel homeViewModel;
+    private final LoginViewModel loginViewModel;
+    private final StudentHomeViewModel studentHomeViewModel;
+    private final StudentSignupViewModel studentSignupViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public StudentLoginPresenter(ViewManagerModel viewManagerModel,
-                                 HomeViewModel homeInViewModel,
-                                 StudentLoginViewModel studentLoginViewModel) {
+                                 StudentHomeViewModel studentHomeViewModel,
+                                 StudentSignupViewModel studentSignupViewModel,
+                                 LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.homeViewModel = homeInViewModel;
-        this.studentLoginViewModel = studentLoginViewModel;
+        this.studentHomeViewModel = studentHomeViewModel;
+        this.studentSignupViewModel = studentSignupViewModel;
+        this.loginViewModel = loginViewModel;
     }
 
     @Override
-    public void prepareSuccessView(LoginOutputData response) {
+    public void prepareSuccessView(StudentLoginOutputData response) {
         //On success switch to the home view.
         setHomePageState(response);
 
-        this.viewManagerModel.setState(homeViewModel.getViewName());
+        this.viewManagerModel.setState(studentHomeViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
@@ -36,18 +42,23 @@ public class StudentLoginPresenter implements LoginOutputBoundary {
      *  Helper method to prepare the home page view after logging in.
      * @param response the input data getting passed to the presenter
      */
-    private void setHomePageState(LoginOutputData response) {
-        final HomeState homeState = homeViewModel.getState();
-        homeState.setUsername(response.getUsername);
-        homeState.setIsClub(response.getIsClub);
-        this.homeViewModel.setState(homeState);
-        this.homeViewModel.firePropertyChanged();
+    private void setHomePageState(StudentLoginOutputData response) {
+        final StudentHomeState studentHomeState = studentHomeViewModel.getState();
+        studentHomeState.setUsername(response.getUsername());
+        this.studentHomeViewModel.setState(studentHomeState);
+        this.studentHomeViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-        final StudentLoginState studentLoginState = studentLoginViewModel.getState();
-        studentLoginState.setLoginError(error);
-        studentLoginViewModel.firePropertyChanged();
+        final LoginState loginState = loginViewModel.getState();
+        loginState.setLoginError(error);
+        loginViewModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToStudentSignupView() {
+        viewManagerModel.setState(studentSignupViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 }

@@ -17,9 +17,12 @@ public class Main {
                                             .addLoginView()
                                             .addClubSignupView()
                                             .addStudentSignupView()
-                                            .addHomeView()
-                                            .addSignupUseCase()
-                                            .addLoginUseCase()
+                                            .addClubHomeView()
+                                            .addStudentHomeView()
+                                            .addClubSignupUseCase()
+                                            .addStudentSignupUseCase()
+                                            .addClubLoginUseCase()
+                                            .addStudentLoginUseCase()
                                             .build();
 
         application.pack();

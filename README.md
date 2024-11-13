@@ -12,8 +12,8 @@
 
 ### Roy: 
 
-1) interface_adapter: signup 
-2) use_case: signup 
+1) interface_adapter: club_signup and student_signup
+2) use_case: club_signup and student_signup
 3) data_access: UserDataAccessObject (in memory for now)
    
 ### David: 
@@ -28,4 +28,3 @@
   
 ### Kabir: 
 1) use case: student_login and club_login
-2) working on Firestore Data access object

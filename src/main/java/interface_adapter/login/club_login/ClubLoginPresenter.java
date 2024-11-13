@@ -1,34 +1,40 @@
 package interface_adapter.login.club_login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.data_access.HomeState;
-import interface_adapter.data_access.HomeViewModel;
-import use_case.login.LoginOutputBoundary;
-import use_case.login.LoginOutputData;
+import interface_adapter.club_home.ClubHomeState;
+import interface_adapter.club_home.ClubHomeViewModel;
+import interface_adapter.login.LoginState;
+import interface_adapter.login.LoginViewModel;
+import interface_adapter.signup.club_signup.ClubSignupViewModel;
+import use_case.login.club_login.ClubLoginOutputBoundary;
+import use_case.login.club_login.ClubLoginOutputData;
 
 /**
  * The Presenter for the Club Login Use Case.
  */
-public class ClubLoginPresenter implements LoginOutputBoundary {
+public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
-    private final ClubLoginViewModel clubLoginViewModel;
-    private final HomeViewModel homeViewModel;
+    private final LoginViewModel loginViewModel;
+    private final ClubHomeViewModel clubHomeViewModel;
+    private final ClubSignupViewModel clubSignupViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public ClubLoginPresenter(ViewManagerModel viewManagerModel,
-                              HomeViewModel homeInViewModel,
-                              ClubLoginViewModel clubLoginViewModel) {
+                              ClubHomeViewModel clubHomeViewModel,
+                              ClubSignupViewModel clubSignupViewModel,
+                              LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.homeViewModel = homeInViewModel;
-        this.clubLoginViewModel = clubLoginViewModel;
+        this.clubHomeViewModel = clubHomeViewModel;
+        this.clubSignupViewModel = clubSignupViewModel;
+        this.loginViewModel = loginViewModel;
     }
 
     @Override
-    public void prepareSuccessView(LoginOutputData response) {
+    public void prepareSuccessView(ClubLoginOutputData response) {
         //On success switch to the home view.
         setHomePageState(response);
 
-        this.viewManagerModel.setState(homeViewModel.getViewName());
+        this.viewManagerModel.setState(clubHomeViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
@@ -36,18 +42,23 @@ public class ClubLoginPresenter implements LoginOutputBoundary {
      *  Helper method to prepare the home page view after logging in.
      * @param response the input data getting passed to the presenter
      */
-    private void setHomePageState(LoginOutputData response) {
-        final HomeState homeState = homeViewModel.getState();
-        homeState.setUsername(response.getUsername);
-        homeState.setIsClub(response.getIsClub);
-        this.homeViewModel.setState(homeState);
-        this.homeViewModel.firePropertyChanged();
+    private void setHomePageState(ClubLoginOutputData response) {
+        final ClubHomeState clubHomeState = clubHomeViewModel.getState();
+        clubHomeState.setUsername(response.getUsername());
+        this.clubHomeViewModel.setState(clubHomeState);
+        this.clubHomeViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-        final ClubLoginState clubLoginState = clubLoginViewModel.getState();
-        clubLoginState.setLoginError(error);
-        clubLoginViewModel.firePropertyChanged();
+        final LoginState loginState = loginViewModel.getState();
+        loginState.setLoginError(error);
+        loginViewModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToClubSignupView() {
+        viewManagerModel.setState(clubSignupViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 }

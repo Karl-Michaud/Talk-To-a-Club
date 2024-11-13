@@ -1,4 +1,4 @@
-package use_case.student_login;
+package use_case.login.student_login;
 
 /**
  * The output boundary for the student Login Use Case.
@@ -16,4 +16,8 @@ public interface StudentLoginOutputBoundary {
      */
     void prepareFailView(String errorMessage);
 
+    /**
+     * Switches to the Student Signup View.
+     */
+    void switchToStudentSignupView();
 }

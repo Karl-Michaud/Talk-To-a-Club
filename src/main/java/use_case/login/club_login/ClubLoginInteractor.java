@@ -1,4 +1,4 @@
-package use_case.club_login;
+package use_case.login.club_login;
 
 import entity.user.Club;
 
@@ -32,11 +32,15 @@ public class ClubLoginInteractor implements ClubLoginInputBoundary {
             }
             else {
                 final Club club = clubDataAccessObject.getClub(email);
-                final ClubLoginOutputData loginOutputData = new ClubLoginOutputData(club.getEmail(),
+                final ClubLoginOutputData loginOutputData = new ClubLoginOutputData(club.getUsername(),
                         club.getEmail(), club.getClubPosts(), false);
                 clubLoginPresenter.prepareSuccessView(loginOutputData);
             }
         }
     }
 
+    @Override
+    public void switchToClubSignupView() {
+        clubLoginPresenter.switchToClubSignupView();
+    }
 }

@@ -3,7 +3,6 @@ package use_case.signup.club_signup;
 import entity.user.ClubUserFactory;
 import entity.user.User;
 
-
 /**
  * The Club Signup Interactor.
  */
