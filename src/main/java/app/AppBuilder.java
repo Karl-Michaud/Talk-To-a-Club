@@ -4,12 +4,12 @@ import data_access.UserDataAccessObject;
 import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.home.HomeViewModel;
+import interface_adapter.student_home.StudentHomeViewModel;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
 import view.ClubSignupView;
-import view.HomeView;
+import view.StudentHomeView;
 import view.LoginView;
 import view.StudentSignupView;
 import view.ViewManager;
@@ -43,8 +43,8 @@ public class AppBuilder {
     private StudentSignupView studentSignupView;
     private SignupViewModel signupViewModel;
     private LoginViewModel loginViewModel;
-    private HomeViewModel homeViewModel;
-    private HomeView homeView;
+    private StudentHomeViewModel homeViewModel;
+    private StudentHomeView homeView;
     private LoginView loginView;
 
     public AppBuilder() {
@@ -86,8 +86,8 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addHomeView() {
-        homeViewModel = new HomeViewModel();
-        homeView = new HomeView(homeViewModel);
+        homeViewModel = new StudentHomeViewModel();
+        homeView = new StudentHomeView(homeViewModel);
         cardPanel.add(homeView, homeView.getViewName());
         return this;
     }

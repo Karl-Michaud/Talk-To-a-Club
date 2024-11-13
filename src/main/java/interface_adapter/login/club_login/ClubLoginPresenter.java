@@ -1,8 +1,8 @@
 package interface_adapter.login.club_login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.home.HomeState;
-import interface_adapter.home.HomeViewModel;
+import interface_adapter.club_home.ClubHomeState;
+import interface_adapter.club_home.ClubHomeViewModel;
 import use_case.club_login.ClubLoginOutputBoundary;
 import use_case.club_login.ClubLoginOutputData;
 
@@ -12,14 +12,14 @@ import use_case.club_login.ClubLoginOutputData;
 public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
     private final ClubLoginViewModel clubLoginViewModel;
-    private final HomeViewModel homeViewModel;
+    private final ClubHomeViewModel homeViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public ClubLoginPresenter(ViewManagerModel viewManagerModel,
-                              HomeViewModel homeInViewModel,
+                              ClubHomeViewModel clubHomeViewModel,
                               ClubLoginViewModel clubLoginViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.homeViewModel = homeInViewModel;
+        this.homeViewModel = clubHomeViewModel;
         this.clubLoginViewModel = clubLoginViewModel;
     }
 
@@ -37,10 +37,9 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
      * @param response the input data getting passed to the presenter
      */
     private void setHomePageState(ClubLoginOutputData response) {
-        final HomeState homeState = homeViewModel.getState();
-        homeState.setUsername(response.getUsername);
-        homeState.setIsClub(response.getIsClub);
-        this.homeViewModel.setState(homeState);
+        final ClubHomeState clubHomeState = homeViewModel.getState();
+        clubHomeState.setUsername(response.getUsername);
+        this.homeViewModel.setState(clubHomeState);
         this.homeViewModel.firePropertyChanged();
     }
 

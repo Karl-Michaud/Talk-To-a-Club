@@ -1,8 +1,8 @@
 package interface_adapter.login.student_login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.home.HomeState;
-import interface_adapter.home.HomeViewModel;
+import interface_adapter.student_home.StudentHomeState;
+import interface_adapter.student_home.StudentHomeViewModel;
 import use_case.student_login.StudentLoginOutputBoundary;
 import use_case.student_login.StudentLoginOutputData;
 
@@ -12,14 +12,14 @@ import use_case.student_login.StudentLoginOutputData;
 public class StudentLoginPresenter implements StudentLoginOutputBoundary {
 
     private final StudentLoginViewModel studentLoginViewModel;
-    private final HomeViewModel homeViewModel;
+    private final StudentHomeViewModel studentHomeViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public StudentLoginPresenter(ViewManagerModel viewManagerModel,
-                                 HomeViewModel homeInViewModel,
+                                 StudentHomeViewModel studentHomeViewModel,
                                  StudentLoginViewModel studentLoginViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.homeViewModel = homeInViewModel;
+        this.studentHomeViewModel = studentHomeViewModel;
         this.studentLoginViewModel = studentLoginViewModel;
     }
 
@@ -28,7 +28,7 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
         //On success switch to the home view.
         setHomePageState(response);
 
-        this.viewManagerModel.setState(homeViewModel.getViewName());
+        this.viewManagerModel.setState(studentHomeViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
@@ -37,11 +37,10 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
      * @param response the input data getting passed to the presenter
      */
     private void setHomePageState(StudentLoginOutputData response) {
-        final HomeState homeState = homeViewModel.getState();
-        homeState.setUsername(response.getUsername);
-        homeState.setIsClub(response.getIsClub);
-        this.homeViewModel.setState(homeState);
-        this.homeViewModel.firePropertyChanged();
+        final StudentHomeState studentHomeState = studentHomeViewModel.getState();
+        studentHomeState.setUsername(response.getUsername);
+        this.studentHomeViewModel.setState(studentHomeState);
+        this.studentHomeViewModel.firePropertyChanged();
     }
 
     @Override
