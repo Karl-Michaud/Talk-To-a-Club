@@ -9,4 +9,9 @@ public interface ClubLoginInputBoundary {
      * @param clubLoginInputData the input data
      */
     void execute(ClubLoginInputData clubLoginInputData);
+
+    /**
+     * Switches to the Club Home View.
+     */
+    void switchToClubHomeView();
 }

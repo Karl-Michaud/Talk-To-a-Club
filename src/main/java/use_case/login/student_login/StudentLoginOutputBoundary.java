@@ -16,4 +16,8 @@ public interface StudentLoginOutputBoundary {
      */
     void prepareFailView(String errorMessage);
 
+    /**
+     * Switches to the Student Home View.
+     */
+    void switchToStudentHomeView();
 }

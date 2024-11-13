@@ -9,4 +9,9 @@ public interface StudentLoginInputBoundary {
      * @param studentLoginInputData the input data
      */
     void execute(StudentLoginInputData studentLoginInputData);
+
+    /**
+     * Switches to the Student Home View.
+     */
+    void switchToStudentHomeView();
 }

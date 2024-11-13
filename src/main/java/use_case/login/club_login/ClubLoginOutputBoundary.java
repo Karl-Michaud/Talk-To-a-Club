@@ -15,4 +15,9 @@ public interface ClubLoginOutputBoundary {
      * @param errorMessage the explanation of the failure
      */
     void prepareFailView(String errorMessage);
+
+    /**
+     * Switches to the Club Home View.
+     */
+    void switchToClubHomeView();
 }
