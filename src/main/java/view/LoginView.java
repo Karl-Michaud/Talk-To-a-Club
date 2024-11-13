@@ -38,16 +38,37 @@ LoginView extends JPanel implements PropertyChangeListener {
         this.loginViewModel = loginViewModel;
         this.loginViewModel.addPropertyChangeListener(this);
 
+        clubLoginCheckBox.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(clubLoginCheckBox)) {
+                            final LoginState currentState = loginViewModel.getState();
+                            currentState.setIdentifier(currentState.getIdentifier());
+                            loginViewModel.setState(currentState);
+                        }
+                    }
+                }
+        );
+
         buttonLogin.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(buttonLogin)) {
                             final LoginState currentState = loginViewModel.getState();
 
-                            loginController.execute(
-                                    currentState.getEmail(),
-                                    currentState.getPassword()
-                            );
+                            if (clubLoginCheckBox.isSelected()) {
+                                clubLoginController.execute(
+                                        currentState.getIdentifier(),
+                                        currentState.getPassword()
+                                );
+                            }
+                            else {
+                                studentLoginController.execute(
+                                        currentState.getIdentifier(),
+                                        currentState.getPassword()
+                                );
+                            }
                         }
                     }
                 }

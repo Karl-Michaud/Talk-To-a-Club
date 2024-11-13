@@ -1,5 +1,9 @@
 package view;
 
+import interface_adapter.signup.club_signup.ClubSignupController;
+import interface_adapter.signup.club_signup.ClubSignupState;
+import interface_adapter.signup.club_signup.ClubSignupViewModel;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -10,7 +14,6 @@ import java.beans.PropertyChangeListener;
 
 public class ClubSignupView extends JPanel implements PropertyChangeListener {
     private final String viewName = "club sign up";
-    private final boolean signupClub = true;
 
     private JButton switchToLogInButton;
     private JButton signUpAsClubButton;
@@ -20,10 +23,10 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
     private JTextField clubNameField;
     private JPanel panelClubSignup;
 
-    private final SignupViewModel signupViewModel;
-    private SignupController signupController;
+    private final ClubSignupViewModel signupViewModel;
+    private ClubSignupController signupController;
 
-    public ClubSignupView(SignupViewModel signupViewModel) {
+    public ClubSignupView(ClubSignupViewModel signupViewModel) {
         this.signupViewModel = signupViewModel;
         signupViewModel.addPropertyChangeListener(this);
 
@@ -33,16 +36,13 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(signUpAsClubButton)) {
                             // Sets the state to be signing up a club before executing the signup use case
-                            final SignupState currentState = signupViewModel.getState();
-                            currentState.setSignupClub(signupClub);
-                            signupViewModel.setState(currentState);
+                            final ClubSignupState currentState = signupViewModel.getState();
 
                             signupController.execute(
                                     currentState.getUsername(),
                                     currentState.getEmail(),
                                     currentState.getPassword(),
-                                    currentState.getRepeatPassword(),
-                                    currentState.getSignupClub()
+                                    currentState.getRepeatPassword()
                             );
                         }
                     }
@@ -70,7 +70,7 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
         clubEmailField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final SignupState currentState = signupViewModel.getState();
+                final ClubSignupState currentState = signupViewModel.getState();
                 currentState.setEmail(clubEmailField.getText());
                 signupViewModel.setState(currentState);
             }
@@ -96,7 +96,7 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
         clubNameField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final SignupState currentState = signupViewModel.getState();
+                final ClubSignupState currentState = signupViewModel.getState();
                 currentState.setUsername(clubNameField.getText());
                 signupViewModel.setState(currentState);
             }
@@ -122,7 +122,7 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
         passwordField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final SignupState currentState = signupViewModel.getState();
+                final ClubSignupState currentState = signupViewModel.getState();
                 currentState.setPassword(new String(passwordField.getPassword()));
                 signupViewModel.setState(currentState);
             }
@@ -148,7 +148,7 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
         repeatPasswordField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final SignupState currentState = signupViewModel.getState();
+                final ClubSignupState currentState = signupViewModel.getState();
                 currentState.setRepeatPassword(new String(repeatPasswordField.getPassword()));
                 signupViewModel.setState(currentState);
             }
@@ -172,7 +172,7 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final SignupState state = (SignupState) evt.getNewValue();
+        final ClubSignupState state = (ClubSignupState) evt.getNewValue();
         if (state.getSignupError() != null) {
             JOptionPane.showMessageDialog(this, state.getSignupError());
         }
@@ -182,7 +182,7 @@ public class ClubSignupView extends JPanel implements PropertyChangeListener {
         return viewName;
     }
 
-    public void setSignupController(SignupController controller) {
+    public void setSignupController(ClubSignupController controller) {
         this.signupController = controller;
     }
 }
