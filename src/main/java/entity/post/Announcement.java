@@ -1,10 +1,10 @@
 package entity.post;
 
-import entity.user.User;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Map;
+
+import entity.user.User;
 
 /**
  * Announcement class that implements the Post interface. Announcement is a type of post.
