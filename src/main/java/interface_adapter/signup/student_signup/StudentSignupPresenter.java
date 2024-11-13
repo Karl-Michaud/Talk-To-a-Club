@@ -1,8 +1,6 @@
 package interface_adapter.signup.student_signup;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.login.student_login.StudentLoginState;
-import interface_adapter.login.student_login.StudentLoginViewModel;
 import use_case.signup.student_signup.StudentSignupOutputBoundary;
 import use_case.signup.student_signup.StudentSignupOutputData;
 
@@ -12,12 +10,12 @@ import use_case.signup.student_signup.StudentSignupOutputData;
 public class StudentSignupPresenter implements StudentSignupOutputBoundary {
 
     private final StudentSignupViewModel studentSignupViewModel;
-    private final StudentLoginViewModel loginViewModel;
+    private final LoginViewModel loginViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public StudentSignupPresenter(ViewManagerModel viewManagerModel,
                                   StudentSignupViewModel studentSignupViewModel,
-                                  StudentLoginViewModel loginViewModel) {
+                                  LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.studentSignupViewModel = studentSignupViewModel;
         this.loginViewModel = loginViewModel;
@@ -26,7 +24,7 @@ public class StudentSignupPresenter implements StudentSignupOutputBoundary {
     @Override
     public void prepareSuccessView(StudentSignupOutputData response) {
         // On success, switch to the login view.
-        final StudentLoginState loginState = loginViewModel.getState();
+        final LoginState loginState = loginViewModel.getState();
         loginState.setUsername(response.getUsername());
         this.loginViewModel.setState(loginState);
         loginViewModel.firePropertyChanged();

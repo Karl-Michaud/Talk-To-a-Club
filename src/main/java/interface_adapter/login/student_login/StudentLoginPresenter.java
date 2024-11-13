@@ -11,16 +11,16 @@ import use_case.student_login.StudentLoginOutputData;
  */
 public class StudentLoginPresenter implements StudentLoginOutputBoundary {
 
-    private final StudentLoginViewModel studentLoginViewModel;
+    private final LoginViewModel loginViewModel;
     private final StudentHomeViewModel studentHomeViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public StudentLoginPresenter(ViewManagerModel viewManagerModel,
                                  StudentHomeViewModel studentHomeViewModel,
-                                 StudentLoginViewModel studentLoginViewModel) {
+                                 LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.studentHomeViewModel = studentHomeViewModel;
-        this.studentLoginViewModel = studentLoginViewModel;
+        this.loginViewModel = loginViewModel;
     }
 
     @Override
@@ -45,8 +45,8 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-        final StudentLoginState studentLoginState = studentLoginViewModel.getState();
-        studentLoginState.setLoginError(error);
-        studentLoginViewModel.firePropertyChanged();
+        final LoginState loginState = loginViewModel.getState();
+        loginState.setLoginError(error);
+        loginViewModel.firePropertyChanged();
     }
 }

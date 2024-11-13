@@ -5,8 +5,6 @@ import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.club_home.ClubHomeViewModel;
-import interface_adapter.login.club_login.ClubLoginViewModel;
-import interface_adapter.login.student_login.StudentLoginViewModel;
 import interface_adapter.signup.club_signup.ClubSignupViewModel;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeViewModel;
@@ -47,8 +45,8 @@ public class AppBuilder {
     private StudentSignupViewModel studentSignupViewModel;
     private StudentSignupView studentSignupView;
 
-    private ClubLoginViewModel clubLoginViewModel;
-    private StudentLoginViewModel studentLoginViewModel;
+    private interface_adapter.login.LoginViewModel loginViewModel;
+    private LoginViewModel loginViewModel;
     private LoginView loginView;
 
     private StudentHomeViewModel studentHomeViewModel;
@@ -85,7 +83,7 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addLoginView() {
-        loginViewModel = new LoginViewModel();
+        loginViewModel = new interface_adapter.login.LoginViewModel();
         loginView = new LoginView(loginViewModel);
         cardPanel.add(loginView, loginView.getViewName());
         return this;

@@ -3,6 +3,8 @@ package interface_adapter.login.club_login;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.club_home.ClubHomeState;
 import interface_adapter.club_home.ClubHomeViewModel;
+import interface_adapter.login.LoginState;
+import interface_adapter.login.LoginViewModel;
 import use_case.club_login.ClubLoginOutputBoundary;
 import use_case.club_login.ClubLoginOutputData;
 
@@ -11,16 +13,16 @@ import use_case.club_login.ClubLoginOutputData;
  */
 public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
-    private final ClubLoginViewModel clubLoginViewModel;
+    private final LoginViewModel loginViewModel;
     private final ClubHomeViewModel homeViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public ClubLoginPresenter(ViewManagerModel viewManagerModel,
                               ClubHomeViewModel clubHomeViewModel,
-                              ClubLoginViewModel clubLoginViewModel) {
+                              LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.homeViewModel = clubHomeViewModel;
-        this.clubLoginViewModel = clubLoginViewModel;
+        this.loginViewModel = loginViewModel;
     }
 
     @Override
@@ -45,8 +47,8 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-        final ClubLoginState clubLoginState = clubLoginViewModel.getState();
-        clubLoginState.setLoginError(error);
-        clubLoginViewModel.firePropertyChanged();
+        final LoginState loginState = loginViewModel.getState();
+        loginState.setLoginError(error);
+        loginViewModel.firePropertyChanged();
     }
 }

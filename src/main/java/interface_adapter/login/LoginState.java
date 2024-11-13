@@ -1,15 +1,15 @@
-package interface_adapter.login.club_login;
+package interface_adapter.login;
 
 /**
- * The state for the Club Login View Model.
+ * The state for the Login View Model.
  */
-public class ClubLoginState {
-    private String email = "";
+public class LoginState {
+    private String identifier = "";
     private String password = "";
     private String loginError;
 
-    public String getEmail() {
-        return email;
+    public String getIdentifier() {
+        return identifier;
     }
 
     public String getLoginError() {
@@ -20,8 +20,8 @@ public class ClubLoginState {
         return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public void setLoginError(String usernameError) {
@@ -35,7 +35,7 @@ public class ClubLoginState {
     @Override
     public String toString() {
         return "ClubLoginState{"
-                + "email='" + email + '\''
+                + "identifier='" + identifier + '\''
                 + ", password='" + password + '\''
                 + '}';
     }
