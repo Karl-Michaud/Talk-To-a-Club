@@ -29,12 +29,4 @@ public class ClubLoginController {
 
         loginUseCaseInteractor.execute(loginInputData);
     }
-
-    public void switchToClubSignupView() {
-        loginUseCaseInteractor.switchToClubSignupView();
-    }
-
-    public void switchToStudentSignupView() {
-        loginUseCaseInteractor.switchToStudentSignupView();
-    }
 }
