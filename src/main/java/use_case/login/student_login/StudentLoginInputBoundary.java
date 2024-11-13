@@ -1,4 +1,4 @@
-package use_case.student_login;
+package use_case.login.student_login;
 
 /**
  * Input boundary for the login use case for student users.

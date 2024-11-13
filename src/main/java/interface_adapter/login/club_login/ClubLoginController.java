@@ -1,7 +1,7 @@
 package interface_adapter.login.club_login;
 
-import use_case.club_login.ClubLoginInputBoundary;
-import use_case.club_login.ClubLoginInputData;
+import use_case.login.club_login.ClubLoginInputBoundary;
+import use_case.login.club_login.ClubLoginInputData;
 
 /**
  * The Controller for the Club Login Use Case
@@ -28,5 +28,12 @@ public class ClubLoginController {
         final ClubLoginInputData loginInputData = new ClubLoginInputData(email, password);
 
         loginUseCaseInteractor.execute(loginInputData);
+    }
+
+    /**
+     * Executes the "switch to ClubHomeView" Use Case.
+     */
+    public void switchToLoginView() {
+        loginUseCaseInteractor.switchToClubHomeView();
     }
 }

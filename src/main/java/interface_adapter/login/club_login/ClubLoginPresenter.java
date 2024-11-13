@@ -5,8 +5,8 @@ import interface_adapter.club_home.ClubHomeState;
 import interface_adapter.club_home.ClubHomeViewModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-import use_case.club_login.ClubLoginOutputBoundary;
-import use_case.club_login.ClubLoginOutputData;
+import use_case.login.club_login.ClubLoginOutputBoundary;
+import use_case.login.club_login.ClubLoginOutputData;
 
 /**
  * The Presenter for the Club Login Use Case.
@@ -14,14 +14,14 @@ import use_case.club_login.ClubLoginOutputData;
 public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
     private final LoginViewModel loginViewModel;
-    private final ClubHomeViewModel homeViewModel;
+    private final ClubHomeViewModel clubHomeViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public ClubLoginPresenter(ViewManagerModel viewManagerModel,
                               ClubHomeViewModel clubHomeViewModel,
                               LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.homeViewModel = clubHomeViewModel;
+        this.clubHomeViewModel = clubHomeViewModel;
         this.loginViewModel = loginViewModel;
     }
 
@@ -30,7 +30,7 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
         //On success switch to the home view.
         setHomePageState(response);
 
-        this.viewManagerModel.setState(homeViewModel.getViewName());
+        this.viewManagerModel.setState(clubHomeViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
@@ -39,10 +39,10 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
      * @param response the input data getting passed to the presenter
      */
     private void setHomePageState(ClubLoginOutputData response) {
-        final ClubHomeState clubHomeState = homeViewModel.getState();
+        final ClubHomeState clubHomeState = clubHomeViewModel.getState();
         clubHomeState.setUsername(response.getUsername());
-        this.homeViewModel.setState(clubHomeState);
-        this.homeViewModel.firePropertyChanged();
+        this.clubHomeViewModel.setState(clubHomeState);
+        this.clubHomeViewModel.firePropertyChanged();
     }
 
     @Override
@@ -51,4 +51,9 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
         loginState.setLoginError(error);
         loginViewModel.firePropertyChanged();
     }
+
+    @Override
+    public void switchToClubHomeView() {
+        viewManagerModel.setState(clubHomeViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
 }

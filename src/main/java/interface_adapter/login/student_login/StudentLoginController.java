@@ -1,7 +1,7 @@
 package interface_adapter.login.student_login;
 
-import use_case.student_login.StudentLoginInputBoundary;
-import use_case.student_login.StudentLoginInputData;
+import use_case.login.student_login.StudentLoginInputBoundary;
+import use_case.login.student_login.StudentLoginInputData;
 
 /**
  * The Controller for the Student Login Use Case
@@ -28,5 +28,12 @@ public class StudentLoginController {
         final StudentLoginInputData loginInputData = new StudentLoginInputData(username, password);
 
         loginUseCaseInteractor.execute(loginInputData);
+    }
+
+    /**
+     * Executes the "switch to StudentHomeView" Use Case.
+     */
+    public void switchToLoginView() {
+        loginUseCaseInteractor.switchToStudentHomeView();
     }
 }

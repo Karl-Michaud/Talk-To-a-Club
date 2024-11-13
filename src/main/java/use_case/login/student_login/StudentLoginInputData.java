@@ -1,4 +1,4 @@
-package use_case.student_login;
+package use_case.login.student_login;
 
 /**
  * The input data for the login use case for students.

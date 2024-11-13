@@ -1,4 +1,4 @@
-package use_case.club_login;
+package use_case.login.club_login;
 
 /**
  * The input data for the login use case for clubs.

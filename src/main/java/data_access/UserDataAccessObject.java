@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import entity.user.Club;
 import entity.user.Student;
 import entity.user.User;
-import use_case.club_login.ClubLoginDataAccessInterface;
+import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
 import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
-import use_case.student_login.StudentLoginDataAccessInterface;
+import use_case.login.student_login.StudentLoginDataAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does

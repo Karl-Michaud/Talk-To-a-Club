@@ -5,8 +5,8 @@ import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
-import use_case.student_login.StudentLoginOutputBoundary;
-import use_case.student_login.StudentLoginOutputData;
+import use_case.login.student_login.StudentLoginOutputBoundary;
+import use_case.login.student_login.StudentLoginOutputData;
 
 /**
  * The Presenter for the Student Login Use Case.
@@ -50,5 +50,11 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
         final LoginState loginState = loginViewModel.getState();
         loginState.setLoginError(error);
         loginViewModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToStudentHomeView() {
+        viewManagerModel.setState(studentHomeViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 }
