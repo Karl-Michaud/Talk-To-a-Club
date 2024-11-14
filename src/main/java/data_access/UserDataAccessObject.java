@@ -20,15 +20,10 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
     private final ArrayList<Club> clubs = new ArrayList<>();
     private final ArrayList<Student> students = new ArrayList<>();
 
-    // TODO Can we ignore the checkstyle error: return count is 2 (max for non-void)
+    // TODO Can we ignore the checkstyle error: return count is 2 (max for non-void is 1)
     @Override
     public boolean existsByName(String identifier) {
         boolean found = false;
-        for (User club : clubs) {
-            if (club.getUsername().equals(identifier)) {
-                found = true;
-            }
-        }
         for (User student : students) {
             if (student.getUsername().equals(identifier)) {
                 found = true;
@@ -42,11 +37,6 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
         boolean found = false;
         for (User club : clubs) {
             if (club.getEmail().equals(identifier)) {
-                found = true;
-            }
-        }
-        for (User student : students) {
-            if (student.getEmail().equals(identifier)) {
                 found = true;
             }
         }

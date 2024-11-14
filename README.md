@@ -28,3 +28,13 @@
   
 ### Kabir: 
 1) use case: student_login and club_login
+
+
+## Week 2
+
+### Roy:
+
+1) interface_adapter: club_login and student_login revamp - separated into two controllers and presenters
+2) use_case: club_login and student_login bug fixes
+3) view: added checkbox inside LoginView for switching between club login and student login
+4) app: setup to be able to run the signup and login views
