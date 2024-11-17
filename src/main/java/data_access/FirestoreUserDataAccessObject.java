@@ -18,7 +18,6 @@ import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
@@ -29,13 +28,8 @@ import java.util.concurrent.ExecutionException;
 public class FirestoreUserDataAccessObject implements ClubLoginDataAccessInterface, ClubSignupUserDataAccessInterface,
 StudentSignupUserDataAccessInterface, StudentLoginDataAccessInterface {
     private final Firestore db;
-    private final ClubUserFactory clubUserFactory;
-    private final StudentUserFactory studentUserFactory;
 
     public FirestoreUserDataAccessObject(ClubUserFactory clubUserFactory) throws IOException {
-        this.clubUserFactory = clubUserFactory;
-        this.studentUserFactory = new StudentUserFactory();
-
         // TODO fix this to be environment variable
         FileInputStream serviceAccount =
                 new FileInputStream("/ServiceAccountKey.json");
