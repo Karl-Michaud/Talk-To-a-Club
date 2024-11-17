@@ -2,9 +2,12 @@ package data_access;
 
 import java.util.ArrayList;
 
+import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
 import entity.user.User;
+import use_case.club_create_post.ClubCreatePostOutputBoundary;
+import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
 import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
@@ -15,7 +18,7 @@ import use_case.login.student_login.StudentLoginDataAccessInterface;
  * NOT persist data between runs of the program.
  */
 public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, StudentSignupUserDataAccessInterface,
-        ClubLoginDataAccessInterface, StudentLoginDataAccessInterface {
+        ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface {
 
     private final ArrayList<Club> clubs = new ArrayList<>();
     private final ArrayList<Student> students = new ArrayList<>();
@@ -75,5 +78,10 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
             }
         }
         return foundStudent;
+    }
+
+    @Override
+    public void savePost(Post post, Club club) {
+        // TODO: Implement the body of this method
     }
 }
