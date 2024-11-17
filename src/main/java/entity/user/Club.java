@@ -81,7 +81,7 @@ public class Club implements User {
      * Removes a user from the club.
      * @param user particular user leaving the club.
      */
-    public void removeClubMember(User user) {
+    public void removeClubMember(Student user) {
         clubMembers.remove(user.getUserID());
     }
 
