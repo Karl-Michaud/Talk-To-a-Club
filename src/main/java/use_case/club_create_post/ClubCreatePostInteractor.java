@@ -33,6 +33,7 @@ public class ClubCreatePostInteractor implements ClubCreatePostInputBoundary {
                     post.getTitle(), post.getContent(), post.timeOfPosting(), post.dateOfPosting(), false);
             // Get club for save
             final Club club = createPostDataAccessObject.getClub(clubCreatePostInputData.getEmail());
+            club.addClubPost(post);
 
             // Save post to database
             createPostDataAccessObject.savePost(post, club);

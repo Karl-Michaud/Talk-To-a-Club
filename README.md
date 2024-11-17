@@ -38,3 +38,10 @@
 2) use_case: club_login and student_login bug fixes
 3) view: added checkbox inside LoginView for switching between club login and student login
 4) app: setup to be able to run the signup and login views
+
+### Karl-Alexandre
+
+1) use case: student_login, club_login, club_create_post, club_get_members and club_remove_member
+2) interface adapters: create_post
+3) bug/checkstyle fixes
+4) view: CreatePost View for clubs to create posts and added a LabelTextPanel class to avoid redundant code.

@@ -5,6 +5,9 @@ import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.club_home.ClubHomeViewModel;
+import interface_adapter.club_logged_in.create_post.CreatePostController;
+import interface_adapter.club_logged_in.create_post.CreatePostPresenter;
+import interface_adapter.club_logged_in.create_post.CreatePostViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.login.club_login.ClubLoginController;
 import interface_adapter.login.club_login.ClubLoginPresenter;
@@ -17,6 +20,9 @@ import interface_adapter.signup.student_signup.StudentSignupController;
 import interface_adapter.signup.student_signup.StudentSignupPresenter;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeViewModel;
+import use_case.club_create_post.ClubCreatePostInputBoundary;
+import use_case.club_create_post.ClubCreatePostInteractor;
+import use_case.club_create_post.ClubCreatePostOutputBoundary;
 import use_case.login.club_login.ClubLoginInputBoundary;
 import use_case.login.club_login.ClubLoginInteractor;
 import use_case.login.club_login.ClubLoginOutputBoundary;
@@ -71,6 +77,9 @@ public class AppBuilder {
 
     private ClubHomeViewModel clubHomeViewModel;
     private ClubHomeView clubHomeView;
+
+    private CreatePostViewModel createPostViewModel;
+    private CreatePostView createPostView;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -192,6 +201,20 @@ public class AppBuilder {
         loginView.setStudentLoginController(loginController);
         return this;
     }
+
+//    /**
+//     * Adds the Club Create Post use case to the application.
+//     * @return this builder
+//     */
+//    public AppBuilder addClubCreatePostUseCase() {
+//        final ClubCreatePostOutputBoundary clubCreatePostOutputBoundary = new CreatePostPresenter(createPostViewModel,
+//                viewManagerModel);
+//        final ClubCreatePostInputBoundary clubCreatePostInteractor = new ClubCreatePostInteractor(userDataAccessObject,
+//                clubCreatePostOutputBoundary);
+//        final CreatePostController createPostController = new CreatePostController(clubCreatePostInteractor);
+//        createPostView.setCreatePostController(createPostController);
+//        return this;
+//    }
 
     /**
      * Creates the JFrame for the application and initially sets the SignupView to be displayed.
