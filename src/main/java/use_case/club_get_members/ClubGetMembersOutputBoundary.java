@@ -11,7 +11,7 @@ public interface ClubGetMembersOutputBoundary {
     void prepareSuccessView(ClubGetMembersOutputData data);
 
     /**
-     * Prepares the failure view for the Login Use Case.
+     * Prepares the failure view for the get members use case.
      * @param errorMessage the explanation of the failure
      */
     void prepareFailView(String errorMessage);
