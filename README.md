@@ -45,3 +45,7 @@
 2) interface adapters: create_post
 3) bug/checkstyle fixes
 4) view: CreatePost View for clubs to create posts and added a LabelTextPanel class to avoid redundant code.
+
+### Kabir:
+1) data_access: FireStoreUserDataAccessObject implemented methods to persist data
+2) setup Google cloud firestore
