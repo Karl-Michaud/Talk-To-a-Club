@@ -34,14 +34,10 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
             final Student user = studentUserFactory.create(studentSignupInputData.getUsername(),
                     studentSignupInputData.getEmail(),
                     studentSignupInputData.getPassword());
-            // Create unique id for new user
-            final Integer id = userDataAccessObject.createId(user);
-            // Assign new id to user
-            user.setUserID(id);
             // Save user to database
             userDataAccessObject.saveStudent(user);
 
-            final StudentSignupOutputData studentSignupOutputData = new StudentSignupOutputData(user.getUsername(),
+            final StudentSignupOutputData studentSignupOutputData = new StudentSignupOutputData(user.getEmail(),
                     false);
             userPresenter.prepareSuccessView(studentSignupOutputData);
         }
