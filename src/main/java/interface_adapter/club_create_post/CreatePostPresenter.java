@@ -1,4 +1,4 @@
-package interface_adapter.club_logged_in.create_post;
+package interface_adapter.club_create_post;
 
 import interface_adapter.ViewManagerModel;
 import use_case.club_create_post.ClubCreatePostOutputBoundary;

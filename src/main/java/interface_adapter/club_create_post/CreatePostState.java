@@ -1,11 +1,11 @@
-package interface_adapter.club_logged_in.create_post;
+package interface_adapter.club_create_post;
 
-import interface_adapter.club_logged_in.ClubLoggedInState;
+import interface_adapter.club_home.ClubHomeState;
 
 /**
  * Create Post state.
  */
-public class CreatePostState extends ClubLoggedInState {
+public class CreatePostState extends ClubHomeState {
     private String title;
     private String content;
     private String timeOfPosting;
