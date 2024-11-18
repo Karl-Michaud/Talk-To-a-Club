@@ -6,7 +6,6 @@ import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
 import entity.user.User;
-import use_case.club_create_post.ClubCreatePostOutputBoundary;
 import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
@@ -83,5 +82,11 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
     @Override
     public void savePost(Post post, Club club) {
         // TODO: Implement the body of this method
+    }
+
+    @Override
+    public Integer createId() {
+        // TODO; Implement body
+        return 0;
     }
 }

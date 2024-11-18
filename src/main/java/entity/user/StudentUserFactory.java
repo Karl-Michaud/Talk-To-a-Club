@@ -9,7 +9,7 @@ import java.util.Map;
 public class StudentUserFactory implements StudentFactory {
 
     @Override
-    public User create(String name, String email, String password) {
+    public Student create(String name, String email, String password) {
         // new users that are part of no clubs.
         final Map<Integer, Club> joinedClubs = new HashMap<>();
         return new Student(name, email, password, joinedClubs);
@@ -23,7 +23,7 @@ public class StudentUserFactory implements StudentFactory {
      * @param joinedClubs the clubs the student has joined
      * @return the new student user
      */
-    public User create(String name, String email, String password, Map<Integer, Club> joinedClubs) {
+    public Student create(String name, String email, String password, Map<Integer, Club> joinedClubs) {
         return new Student(name, email, password, joinedClubs);
     }
 

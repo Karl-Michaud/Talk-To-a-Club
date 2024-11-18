@@ -121,4 +121,10 @@ StudentSignupUserDataAccessInterface, StudentLoginDataAccessInterface {
         }
         return null; // Return null if no club is found
     }
+
+    @Override
+    public Integer createId() {
+        // TODO: COMPLETE BODY
+        return 1;
+    }
 }
