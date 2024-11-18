@@ -53,7 +53,7 @@ public class Student implements User {
      * @param club particular club to be left.
      */
     public void leaveClub(Club club) {
-        joinedClubs.remove(club.getUserID());
+        joinedClubs.remove(club);
     }
 
 }

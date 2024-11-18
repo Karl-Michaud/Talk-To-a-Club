@@ -18,12 +18,12 @@ public class Club implements User {
 
     public Club(String username, String email, String password, ArrayList<Student> clubMembers,
                 ArrayList<Post> clubPosts) {
-        // Initialise club personal information
+        // Initialize club personal information
         this.username = username;
         this.email = email;
         this.password = password;
 
-        // Initialise club members and posts information
+        // Initialize club members and posts information
         this.clubMembers = clubMembers;
         this.clubPosts = clubPosts;
     }
@@ -77,7 +77,7 @@ public class Club implements User {
      * @param post particular post to be removed
      */
     public void removeClubPost(Post post) {
-        clubPosts.remove(post.getPostID());
+        clubPosts.remove(post);
     }
 
 }
