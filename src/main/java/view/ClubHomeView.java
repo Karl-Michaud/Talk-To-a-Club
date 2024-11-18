@@ -31,7 +31,8 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
         this.clubHomeViewModel = clubHomeViewModel;
         this.clubHomeViewModel.addPropertyChangeListener(this);
 
-        createPostButton.addActionListener(// This creates an anonymous subclass of ActionListener and instantiates it.
+        createPostButton.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(createPostButton)) {
