@@ -1,5 +1,6 @@
 package use_case.signup.club_signup;
 
+import entity.user.Club;
 import entity.user.ClubUserFactory;
 import entity.user.User;
 
@@ -31,9 +32,15 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
             userPresenter.prepareFailView("Passwords don't match.");
         }
         else {
-            final User user = clubUserFactory.create(clubSignupInputData.getUsername(),
+
+            final Club user = clubUserFactory.create(clubSignupInputData.getUsername(),
                     clubSignupInputData.getEmail(),
                     clubSignupInputData.getPassword());
+            // Create a unique ID
+            final Integer id = userDataAccessObject.createId();
+            // Give Unique ID to the user
+            user.setUserID(id);
+            // Save User in DB
             userDataAccessObject.saveClub(user);
 
             final ClubSignupOutputData clubSignupOutputData = new ClubSignupOutputData(user.getEmail(),

@@ -26,4 +26,10 @@ public interface ClubSignupUserDataAccessInterface {
      * @param user the club user to save
      */
     void saveClub(User user);
+
+    /**
+     * Creates a new unique identification number for a new user.
+     * @return the identification number
+     */
+    Integer createId();
 }
