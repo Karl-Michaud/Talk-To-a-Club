@@ -1,5 +1,6 @@
 package use_case.signup.student_signup;
 
+import entity.user.Student;
 import entity.user.StudentUserFactory;
 import entity.user.User;
 
@@ -31,9 +32,14 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
             userPresenter.prepareFailView("Passwords don't match.");
         }
         else {
-            final User user = studentUserFactory.create(studentSignupInputData.getUsername(),
+            final Student user = studentUserFactory.create(studentSignupInputData.getUsername(),
                     studentSignupInputData.getEmail(),
                     studentSignupInputData.getPassword());
+            // Create unique id for new user
+            final Integer id = userDataAccessObject.createId();
+            // Assign new id to user
+            user.setUserID(id);
+            // Save user to database
             userDataAccessObject.saveStudent(user);
 
             final StudentSignupOutputData studentSignupOutputData = new StudentSignupOutputData(user.getUsername(),

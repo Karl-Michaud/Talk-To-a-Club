@@ -25,7 +25,7 @@ public class ClubUserFactory implements ClubFactory {
      * @param clubPosts the posts of the new club
      * @return the new club user
      */
-    public User create(String username, String email, String password, Map<Integer, Student> clubMembers,
+    public Club create(String username, String email, String password, Map<Integer, Student> clubMembers,
                 Map<Integer, Post> clubPosts) {
         return new Club(username, email, password, clubMembers, clubPosts);
     }

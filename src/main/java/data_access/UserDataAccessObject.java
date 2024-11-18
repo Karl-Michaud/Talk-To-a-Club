@@ -84,4 +84,10 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
     public void savePost(Post post, Club club) {
         // TODO: Implement the body of this method
     }
+
+    @Override
+    public Integer createId() {
+        // TODO; Implement body
+        return 0;
+    }
 }

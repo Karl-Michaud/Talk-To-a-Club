@@ -26,4 +26,10 @@ public interface StudentSignupUserDataAccessInterface {
      * @param user the student user to save
      */
     void saveStudent(User user);
+
+    /**
+     * Creates a new unique identification number for a new user.
+     * @return the identification number
+     */
+    Integer createId();
 }
