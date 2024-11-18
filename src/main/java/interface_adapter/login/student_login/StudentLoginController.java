@@ -4,18 +4,16 @@ import use_case.login.student_login.StudentLoginInputBoundary;
 import use_case.login.student_login.StudentLoginInputData;
 
 /**
- * The Controller for the Student Login Use Case
+ * The Controller for the Student Login Use Case.
  */
 public class StudentLoginController {
-    /**
-     *
-     */
     private final StudentLoginInputBoundary loginUseCaseInteractor;
 
     /**
-     * The Constructor for the Student Login controller
+     * The Constructor for the Student Login controller.
+     * @param loginUseCaseInteractor the login interactor
      */
-    public StudentLoginController(StudentLoginInputBoundary loginUseCaseInteractor){
+    public StudentLoginController(StudentLoginInputBoundary loginUseCaseInteractor) {
         this.loginUseCaseInteractor = loginUseCaseInteractor;
     }
 
@@ -24,7 +22,7 @@ public class StudentLoginController {
      * @param username the username of the user logging in
      * @param password the password of the user logging in
      */
-    public void execute(String username, String password){
+    public void execute(String username, String password) {
         final StudentLoginInputData loginInputData = new StudentLoginInputData(username, password);
 
         loginUseCaseInteractor.execute(loginInputData);

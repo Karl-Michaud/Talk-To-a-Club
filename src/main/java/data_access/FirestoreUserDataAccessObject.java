@@ -121,10 +121,4 @@ StudentSignupUserDataAccessInterface, StudentLoginDataAccessInterface {
         }
         return null; // Return null if no club is found
     }
-
-    @Override
-    public Integer createId(User user) {
-        String combined = user.getUsername() + user.getEmail() + user.getPassword();
-        return combined.hashCode();
-    }
 }
