@@ -10,7 +10,7 @@ import entity.post.Post;
  */
 public class ClubUserFactory implements ClubFactory {
     @Override
-    public User create(String name, String email, String password) {
+    public Club create(String name, String email, String password) {
         final Map<Integer, Student> clubMembers = new HashMap<>();
         final Map<Integer, Post> clubPosts = new HashMap<>();
         return new Club(name, email, password, clubMembers, clubPosts);
