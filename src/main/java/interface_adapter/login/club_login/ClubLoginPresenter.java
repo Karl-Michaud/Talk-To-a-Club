@@ -31,7 +31,7 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
     @Override
     public void prepareSuccessView(ClubLoginOutputData response) {
-        //On success switch to the home view.
+        // On success switch to the home view.
         setHomePageState(response);
 
         this.viewManagerModel.setState(clubHomeViewModel.getViewName());

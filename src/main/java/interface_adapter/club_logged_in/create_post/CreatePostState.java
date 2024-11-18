@@ -1,5 +1,8 @@
 package interface_adapter.club_logged_in.create_post;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import interface_adapter.club_logged_in.ClubLoggedInState;
 
 /**
@@ -8,8 +11,8 @@ import interface_adapter.club_logged_in.ClubLoggedInState;
 public class CreatePostState extends ClubLoggedInState {
     private String title;
     private String content;
-    private String timeOfPosting;
-    private String dateOfPosting;
+    private LocalTime timeOfPosting;
+    private LocalDate dateOfPosting;
     private String createPostError;
 
     public String getTitle() {
@@ -28,19 +31,19 @@ public class CreatePostState extends ClubLoggedInState {
         this.content = content;
     }
 
-    public String getTimeOfPosting() {
+    public LocalTime getTimeOfPosting() {
         return timeOfPosting;
     }
 
-    public void setTimeOfPosting(String timeOfPosting) {
+    public void setTimeOfPosting(LocalTime timeOfPosting) {
         this.timeOfPosting = timeOfPosting;
     }
 
-    public String getDateOfPosting() {
+    public LocalDate getDateOfPosting() {
         return dateOfPosting;
     }
 
-    public void setDateOfPosting(String dateOfPosting) {
+    public void setDateOfPosting(LocalDate dateOfPosting) {
         this.dateOfPosting = dateOfPosting;
     }
 
