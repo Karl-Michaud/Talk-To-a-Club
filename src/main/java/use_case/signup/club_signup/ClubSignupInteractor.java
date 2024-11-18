@@ -32,7 +32,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
         }
         else {
 
-            final Club user = clubUserFactory.create(clubSignupInputData.getEmail(),
+            final Club user = clubUserFactory.create(clubSignupInputData.getUsername(),
                     clubSignupInputData.getEmail(),
                     clubSignupInputData.getPassword());
 
