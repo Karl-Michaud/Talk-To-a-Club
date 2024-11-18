@@ -29,7 +29,7 @@ public class FirestoreUserDataAccessObject implements ClubLoginDataAccessInterfa
 StudentSignupUserDataAccessInterface, StudentLoginDataAccessInterface {
     private final Firestore db;
 
-    public FirestoreUserDataAccessObject(ClubUserFactory clubUserFactory) throws IOException {
+    public FirestoreUserDataAccessObject() throws IOException {
         // TODO fix this to be environment variable
         FileInputStream serviceAccount =
                 new FileInputStream("/ServiceAccountKey.json");
@@ -123,8 +123,8 @@ StudentSignupUserDataAccessInterface, StudentLoginDataAccessInterface {
     }
 
     @Override
-    public Integer createId() {
-        // TODO: COMPLETE BODY
-        return 1;
+    public Integer createId(User user) {
+        String combined = user.getUsername() + user.getEmail() + user.getPassword();
+        return combined.hashCode();
     }
 }

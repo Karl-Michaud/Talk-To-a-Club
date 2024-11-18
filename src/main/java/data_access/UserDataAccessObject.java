@@ -85,7 +85,7 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
     }
 
     @Override
-    public Integer createId() {
+    public Integer createId(User user) {
         // TODO; Implement body
         return 0;
     }

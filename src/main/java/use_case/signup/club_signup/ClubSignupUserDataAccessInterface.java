@@ -31,5 +31,5 @@ public interface ClubSignupUserDataAccessInterface {
      * Creates a new unique identification number for a new user.
      * @return the identification number
      */
-    Integer createId();
+    Integer createId(User user);
 }
