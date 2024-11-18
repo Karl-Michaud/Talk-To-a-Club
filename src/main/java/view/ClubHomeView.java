@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import interface_adapter.club_home.ClubHomeController;
 import interface_adapter.club_home.ClubHomeViewModel;
 import interface_adapter.signup.club_signup.ClubSignupState;
 
@@ -24,8 +25,7 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
     private final String viewName = "club home";
     private final ClubHomeViewModel clubHomeViewModel;
 
-    private ChangePasswordController changePasswordController;
-    private ChangeUsernameController changeUsernameController;
+    private ClubHomeController clubHomeController;
 
     public ClubHomeView(ClubHomeViewModel clubHomeViewModel) {
         this.clubHomeViewModel = clubHomeViewModel;
@@ -71,17 +71,8 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
 
     }
 
-    public String getViewName() {
-        return viewName;
-    }
-
-    public void setChangePasswordController(ChangePasswordController changePasswordController) {
-        this.changePasswordController = changePasswordController;
-    }
-
-    public void setChangeUsernameController(ChangeUsernameController changeUsernameController) {
-        // TODO: save the logout controller in the instance variable.
-        this.changeUsernameController = changeUsernameController;
+    public void setClubHomeController(ClubHomeController clubHomeController) {
+        this.clubHomeController = clubHomeController;
     }
 
     public String getViewName() {
