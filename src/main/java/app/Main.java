@@ -19,11 +19,13 @@ public class Main {
                                             .addStudentSignupView()
                                             .addClubHomeView()
                                             .addStudentHomeView()
+                                            .addStudentProfileView()
                                             .addClubSignupUseCase()
                                             .addStudentSignupUseCase()
                                             .addClubLoginUseCase()
                                             .addStudentLoginUseCase()
                                             .addStudentHomeUseCase()
+                                            .addStudentProfileUseCase()
                                             .build();
 
         application.pack();

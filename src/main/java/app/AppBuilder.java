@@ -22,6 +22,9 @@ import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_home.StudentHomePresenter;
 import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_profile.StudentProfileController;
+import interface_adapter.student_profile.StudentProfilePresenter;
+import interface_adapter.student_profile.StudentProfileViewModel;
 import use_case.club_create_post.ClubCreatePostInputBoundary;
 import use_case.club_create_post.ClubCreatePostInteractor;
 import use_case.club_create_post.ClubCreatePostOutputBoundary;
@@ -40,6 +43,9 @@ import use_case.signup.student_signup.StudentSignupOutputBoundary;
 import use_case.student_homepage.StudentHomeInputBoundary;
 import use_case.student_homepage.StudentHomeInteractor;
 import use_case.student_homepage.StudentHomeOutputBoundary;
+import use_case.student_profile.StudentProfileInputBoundary;
+import use_case.student_profile.StudentProfileInteractor;
+import use_case.student_profile.StudentProfileOutputBoundary;
 import view.*;
 
 import javax.swing.*;
@@ -85,6 +91,9 @@ public class AppBuilder {
 
     private CreatePostViewModel createPostViewModel;
     private CreatePostView createPostView;
+
+    private StudentProfileViewModel studentProfileViewModel;
+    private StudentProfileView studentProfileView;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -142,6 +151,17 @@ public class AppBuilder {
         studentHomeViewModel = new StudentHomeViewModel();
         studentHomeView = new StudentHomeView(studentHomeViewModel);
         cardPanel.add(studentHomeView, studentHomeView.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the Student Profile View to the application.
+     * @return this builder
+     */
+    public AppBuilder addStudentProfileView() {
+        studentProfileViewModel = new StudentProfileViewModel();
+        studentProfileView = new StudentProfileView(studentProfileViewModel);
+        cardPanel.add(studentProfileView, studentProfileView.getViewName());
         return this;
     }
 
@@ -208,11 +228,25 @@ public class AppBuilder {
     }
 
     public AppBuilder addStudentHomeUseCase() {
-        final StudentHomeOutputBoundary studentHomeOutputBoundary = new StudentHomePresenter(studentHomeViewModel, viewManagerModel, loginViewModel);
+        final StudentHomeOutputBoundary studentHomeOutputBoundary = new StudentHomePresenter(studentHomeViewModel,
+                viewManagerModel, loginViewModel, studentProfileViewModel);
         final StudentHomeInputBoundary studentHomeInteractor = new StudentHomeInteractor(studentHomeOutputBoundary);
 
         final StudentHomeController studentHomeController = new StudentHomeController(studentHomeInteractor);
         studentHomeView.setStudentHomeController(studentHomeController);
+        return this;
+    }
+
+    public AppBuilder addStudentProfileUseCase() {
+        final StudentProfileOutputBoundary studentProfileOutputBoundary = new StudentProfilePresenter(viewManagerModel,
+                studentProfileViewModel, studentHomeViewModel);
+        final StudentProfileInputBoundary studentProfileInteractor = new StudentProfileInteractor(
+                studentProfileOutputBoundary
+        );
+        final StudentProfileController studentProfileController = new StudentProfileController(
+                studentProfileInteractor
+        );
+        studentProfileView.setStudentProfileController(studentProfileController);
         return this;
     }
 
