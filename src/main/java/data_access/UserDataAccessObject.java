@@ -8,9 +8,9 @@ import entity.user.Student;
 import entity.user.User;
 import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
+import use_case.login.student_login.StudentLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
 import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
-import use_case.login.student_login.StudentLoginDataAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
@@ -19,11 +19,15 @@ import use_case.login.student_login.StudentLoginDataAccessInterface;
 public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, StudentSignupUserDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface {
 
-//    private final ArrayList<Club> clubs = new ArrayList<>();
-//    private final ArrayList<Student> students = new ArrayList<>();
     private final ArrayList<User> userArrayList = new ArrayList<>();
 
     // TODO Can we ignore the checkstyle error: return count is 2 (max for non-void is 1)
+
+    /**
+     * Verifies if a user with given identifier username exists in the database.
+     * @param identifier the username to look for
+     * @return true if the user exists with given identifier username
+     */
     @Override
     public boolean existsByName(String identifier) {
         boolean found = false;
@@ -35,6 +39,11 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
         return found;
     }
 
+    /**
+     * Verifies if a user with given identifier email exists in the database.
+     * @param identifier the email to look for
+     * @return true if the user exists with given identifier email
+     */
     @Override
     public boolean existsByEmail(String identifier) {
         boolean found = false;
@@ -46,17 +55,29 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
         return found;
     }
 
+    /**
+     * Saves given club user to the database.
+     * @param club the club user to save
+     */
     @Override
     public void saveClub(User club) {
         userArrayList.add((Club) club);
     }
 
+    /**
+     * Save given student user to the database.
+     * @param student the student user to save
+     */
     @Override
     public void saveStudent(User student) {
         userArrayList.add((Student) student);
     }
 
-    // TODO use a map or something else to search stuff easier
+    /**
+     * Returns club user with corresponding email identifier.
+     * @param email of the club we are looking for
+     * @return club user with corresponding email identifier
+     */
     @Override
     public Club getClub(String email) {
         Club foundClub = null;
@@ -68,7 +89,11 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
         return foundClub;
     }
 
-    // TODO Checkstyle doesn't like early returns????
+    /**
+     * Returns student user with corresponding email identifier.
+     * @param email of the student we are looking for
+     * @return student user with corresponding email identifier
+     */
     @Override
     public Student getStudent(String email) {
         Student foundStudent = null;
@@ -80,8 +105,19 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
         return foundStudent;
     }
 
+    /**
+     * Save given post from a given club to the database.
+     * @param post the post that needs to be saved
+     * @param club the club that posted
+     */
     @Override
     public void savePost(Post post, Club club) {
-        // TODO: Implement the body of this method
+        for (User user : userArrayList) {
+            if (user.getEmail().equals(club.getEmail())) {
+                final Club isClub = (Club) user;
+                isClub.addClubPost(post);
+                break;
+            }
+        }
     }
 }
