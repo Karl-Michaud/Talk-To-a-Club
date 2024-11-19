@@ -23,6 +23,7 @@ public class Main {
                                             .addStudentSignupUseCase()
                                             .addClubLoginUseCase()
                                             .addStudentLoginUseCase()
+                                            .addStudentHomeUseCase()
                                             .build();
 
         application.pack();

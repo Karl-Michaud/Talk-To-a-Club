@@ -19,6 +19,8 @@ import interface_adapter.signup.club_signup.ClubSignupViewModel;
 import interface_adapter.signup.student_signup.StudentSignupController;
 import interface_adapter.signup.student_signup.StudentSignupPresenter;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
+import interface_adapter.student_home.StudentHomeController;
+import interface_adapter.student_home.StudentHomePresenter;
 import interface_adapter.student_home.StudentHomeViewModel;
 import use_case.club_create_post.ClubCreatePostInputBoundary;
 import use_case.club_create_post.ClubCreatePostInteractor;
@@ -35,6 +37,9 @@ import use_case.signup.club_signup.ClubSignupOutputBoundary;
 import use_case.signup.student_signup.StudentSignupInputBoundary;
 import use_case.signup.student_signup.StudentSignupInteractor;
 import use_case.signup.student_signup.StudentSignupOutputBoundary;
+import use_case.student_homepage.StudentHomeInputBoundary;
+import use_case.student_homepage.StudentHomeInteractor;
+import use_case.student_homepage.StudentHomeOutputBoundary;
 import view.*;
 
 import javax.swing.*;
@@ -199,6 +204,15 @@ public class AppBuilder {
 
         final StudentLoginController loginController = new StudentLoginController(loginInteractor);
         loginView.setStudentLoginController(loginController);
+        return this;
+    }
+
+    public AppBuilder addStudentHomeUseCase() {
+        final StudentHomeOutputBoundary studentHomeOutputBoundary = new StudentHomePresenter(studentHomeViewModel, viewManagerModel, loginViewModel);
+        final StudentHomeInputBoundary studentHomeInteractor = new StudentHomeInteractor(studentHomeOutputBoundary);
+
+        final StudentHomeController studentHomeController = new StudentHomeController(studentHomeInteractor);
+        studentHomeView.setStudentHomeController(studentHomeController);
         return this;
     }
 

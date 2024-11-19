@@ -47,7 +47,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         buttonProfile.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        studentHomeController.switchToLoginView();
+                        studentHomeController.switchToProfileView();
                     }
                 }
         );
@@ -59,7 +59,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
                             final StudentHomeState currentState = studentHomeViewModel.getState();
 
                             studentHomeController.execute(
-                                    currentState.getSearch()
+                                    currentState.getQuery()
                             );
                         }
                     }
@@ -75,7 +75,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
 
             private void documentListenerHelper() {
                 final StudentHomeState currentState = studentHomeViewModel.getState();
-                currentState.setSearch(textFieldClubSearch.getText());
+                currentState.setQuery(textFieldClubSearch.getText());
                 studentHomeViewModel.setState(currentState);
             }
 
