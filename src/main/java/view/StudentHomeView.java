@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -28,6 +29,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     private JButton buttonProfile;
     private JScrollPane scrollPaneEvents;
     private JButton buttonSearch;
+    private JScrollPane pageScrollPane;
     private JScrollPane scrollPaneJoinedClubs;
 
     private final String viewName = "student home";
@@ -63,8 +65,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         addSearchListener();
         this.add(panelStudentHomeView);
         final StudentHomeState state = studentHomeViewModel.getState();
-        this.scrollPaneJoinedClubs.setViewportView(new ClubsContainer(state));
-        this.scrollPaneJoinedClubs.setViewportView(new PostsContainer(state));
+        this.pageScrollPane.setViewportView(new PageView(new PostsContainer(state), new ClubsContainer(state)));
     }
 
     private void addSearchListener() {

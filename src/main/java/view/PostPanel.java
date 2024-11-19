@@ -8,15 +8,18 @@ import javax.swing.*;
  */
 public class PostPanel extends JPanel {
     private JLabel labelPostTitle;
-    private JTextArea textAreaPostContent;
     private JButton buttonLike;
     private JButton buttonDislike;
     private JPanel postPanel;
+    private JLabel labelPostContent;
+    private JLabel labelClub;
 
-    public PostPanel(String postTitle, String postContent) {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    public PostPanel(String postTitle, String postContent, String clubName) {
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(postPanel);
         this.labelPostTitle.setText(postTitle);
-        this.textAreaPostContent.setText(postContent);
+        this.labelPostContent.setText(postContent);
+        this.labelClub.setText(clubName);
+        this.setBorder(BorderFactory.createBevelBorder(1));
     }
 }
