@@ -22,16 +22,4 @@ public interface User {
      * @return a String password
      */
     String getPassword();
-
-    /**
-     * Returns the user's identification.
-     * @return an int type ID
-     */
-    int getUserID();
-
-    /**
-     * Sets the user's identification.
-     * @param id identification number for the user.
-     */
-    void setUserID(int id);
 }

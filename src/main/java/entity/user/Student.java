@@ -1,6 +1,6 @@
 package entity.user;
 
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * This is the Student class implements User. A Student is a type of user.
@@ -10,19 +10,15 @@ public class Student implements User {
     private String username;
     private String email;
     private String password;
-    private int studentID;
 
     // Student club information
-    private Map<Integer, Club> joinedClubs;
+    private ArrayList<Club> joinedClubs;
 
-    public Student(String username, String email, String password, Map<Integer, Club> joinedClubs) {
+    public Student(String username, String email, String password, ArrayList<Club> joinedClubs) {
         // Initialise student's personal information
         this.username = username;
         this.email = email;
         this.password = password;
-
-        // Temporarily sets the student's ID to -1. This means that the user is not in the database yet.
-        this.studentID = -1;
 
         // Initialise student's club information
         this.joinedClubs = joinedClubs;
@@ -40,15 +36,7 @@ public class Student implements User {
         return password;
     }
 
-    public int getUserID() {
-        return studentID;
-    }
-
-    public void setUserID(int userID) {
-        this.studentID = userID;
-    }
-
-    public Map<Integer, Club> getJoinedClubs() {
+    public ArrayList<Club> getJoinedClubs() {
         return joinedClubs;
     }
 
@@ -57,7 +45,7 @@ public class Student implements User {
      * @param club particular club to be joined.
      */
     public void joinClub(Club club) {
-        joinedClubs.put(club.getUserID(), club);
+        joinedClubs.add(club);
     }
 
     /**
@@ -65,7 +53,7 @@ public class Student implements User {
      * @param club particular club to be left.
      */
     public void leaveClub(Club club) {
-        joinedClubs.remove(club.getUserID());
+        joinedClubs.remove(club);
     }
 
 }

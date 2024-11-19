@@ -31,7 +31,7 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
 
     @Override
     public void prepareSuccessView(StudentLoginOutputData response) {
-        //On success switch to the home view.
+        // On success switch to the home view.
         setHomePageState(response);
 
         this.viewManagerModel.setState(studentHomeViewModel.getViewName());

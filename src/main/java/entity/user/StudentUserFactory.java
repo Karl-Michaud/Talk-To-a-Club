@@ -1,7 +1,6 @@
 package entity.user;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * Factory for creating Student user objects.
@@ -11,7 +10,7 @@ public class StudentUserFactory implements StudentFactory {
     @Override
     public Student create(String name, String email, String password) {
         // new users that are part of no clubs.
-        final Map<Integer, Club> joinedClubs = new HashMap<>();
+        final ArrayList<Club> joinedClubs = new ArrayList<>();
         return new Student(name, email, password, joinedClubs);
     }
 
@@ -23,7 +22,7 @@ public class StudentUserFactory implements StudentFactory {
      * @param joinedClubs the clubs the student has joined
      * @return the new student user
      */
-    public Student create(String name, String email, String password, Map<Integer, Club> joinedClubs) {
+    public Student create(String name, String email, String password, ArrayList<Club> joinedClubs) {
         return new Student(name, email, password, joinedClubs);
     }
 

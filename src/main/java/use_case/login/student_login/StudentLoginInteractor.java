@@ -20,25 +20,28 @@ public class StudentLoginInteractor implements StudentLoginInputBoundary {
      * @param studentLoginInputData the input data
      */
     public void execute(StudentLoginInputData studentLoginInputData) {
-        final String username = studentLoginInputData.getUsername();
+        final String studentEmail = studentLoginInputData.getStudentEmail();
         final String password = studentLoginInputData.getPassword();
-        if (!studentDataAccessObject.existsByName(username)) {
-            studentLoginPresenter.prepareFailView(username + ": Account does not exist.");
+        if (!studentDataAccessObject.existsByEmail(studentEmail)) {
+            studentLoginPresenter.prepareFailView(studentEmail + ": Account does not exist.");
         }
         else {
-            final String pwd = studentDataAccessObject.getStudent(username).getPassword();
+            final String pwd = studentDataAccessObject.getStudent(studentEmail).getPassword();
             if (!pwd.equals(password)) {
-                studentLoginPresenter.prepareFailView("Incorrect password for \"" + username + "\".");
+                studentLoginPresenter.prepareFailView("Incorrect password for \"" + studentEmail + "\".");
             }
             else {
-                final Student student = studentDataAccessObject.getStudent(username);
+                final Student student = studentDataAccessObject.getStudent(studentEmail);
                 final StudentLoginOutputData loginOutputData = new StudentLoginOutputData(student.getUsername(),
-                        student.getJoinedClubs(), false);
+                        student.getEmail(), student.getJoinedClubs(), false);
                 studentLoginPresenter.prepareSuccessView(loginOutputData);
             }
         }
     }
 
+    /**
+     * Switches to the Student Signup View.
+     */
     @Override
     public void switchToStudentSignupView() {
         studentLoginPresenter.switchToStudentSignupView();

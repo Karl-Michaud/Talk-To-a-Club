@@ -1,5 +1,8 @@
 package entity.post;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import entity.user.User;
 
 /**
@@ -17,18 +20,6 @@ public interface Post {
      * @return String content of the post
      */
     String getContent();
-
-    /**
-     * Returns the identification of the post.
-     * @return int post ID
-     */
-    int getPostID();
-
-    /**
-     * Sets the identification of the post.
-     * @param postId post's identification
-     */
-    void setPostID(int postId);
 
     /**
      * Returns the number of likes.
@@ -70,11 +61,11 @@ public interface Post {
      * Returns the date of publication of the post.
      * @return String the date of publication of the post
      */
-    String dateOfPosting();
+    LocalDate dateOfPosting();
 
     /**
      * Returns the time of publication of the post.
      * @return String the time of the publication of the post
      */
-    String timeOfPosting();
+    LocalTime timeOfPosting();
 }

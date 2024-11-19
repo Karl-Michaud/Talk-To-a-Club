@@ -1,18 +1,18 @@
 package use_case.club_get_members;
 
-import java.util.Map;
+import java.util.ArrayList;
 
-import entity.user.Student;;
+import entity.user.Student;
 
 /**
  * Output data for the get members use case.
  */
 public class ClubGetMembersOutputData {
     private final String email;
-    private final Map<Integer, Student> members;
+    private final ArrayList<Student> members;
     private final boolean useCaseFailed;
 
-    public ClubGetMembersOutputData(String email, Map<Integer, Student> members, boolean useCaseFailed) {
+    public ClubGetMembersOutputData(String email, ArrayList<Student> members, boolean useCaseFailed) {
         this.email = email;
         this.members = members;
         this.useCaseFailed = useCaseFailed;
@@ -22,7 +22,7 @@ public class ClubGetMembersOutputData {
         return email;
     }
 
-    public Map<Integer, Student> getMembers() {
+    public ArrayList<Student> getMembers() {
         return members;
     }
 

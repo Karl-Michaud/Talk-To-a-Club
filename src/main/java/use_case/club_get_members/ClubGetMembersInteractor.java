@@ -1,8 +1,7 @@
 package use_case.club_get_members;
 
-import java.util.Map;
+import java.util.ArrayList;
 
-import entity.user.Club;
 import entity.user.Student;
 
 /**
@@ -28,8 +27,7 @@ public class ClubGetMembersInteractor {
             getMembersPresenter.prepareFailView(email + ": Account does not exist.");
         }
         else {
-            final Club club = getMembersDataAccessObject.getClub(email);
-            final Map<Integer, Student> members = getMembersDataAccessObject.getMembers(club);
+            final ArrayList<Student> members = getMembersDataAccessObject.getClub(email).getClubMembers();
 
             final ClubGetMembersOutputData outputData = new ClubGetMembersOutputData(inputData.getEmail(), members,
                     false);

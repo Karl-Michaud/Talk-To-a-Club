@@ -1,6 +1,6 @@
 package entity.user;
 
-import java.util.Map;
+import java.util.ArrayList;
 
 import entity.post.Post;
 
@@ -20,6 +20,6 @@ public interface ClubFactory extends UserFactory {
      * @param clubPosts the posts of the new club
      * @return the new club user
      */
-    User create(String username, String email, String password, Map<Integer, Student> clubMembers,
-                Map<Integer, Post> clubPosts);
+    User create(String username, String email, String password, ArrayList<Student> clubMembers,
+                ArrayList<Post> clubPosts);
 }

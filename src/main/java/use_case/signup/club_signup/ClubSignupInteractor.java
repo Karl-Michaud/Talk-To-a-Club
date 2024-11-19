@@ -35,11 +35,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
             final Club user = clubUserFactory.create(clubSignupInputData.getUsername(),
                     clubSignupInputData.getEmail(),
                     clubSignupInputData.getPassword());
-            // Create a unique ID
-            final Integer id = userDataAccessObject.createId();
-            // Give Unique ID to the user
-            user.setUserID(id);
-            // Save User in DB
+
             userDataAccessObject.saveClub(user);
 
             final ClubSignupOutputData clubSignupOutputData = new ClubSignupOutputData(user.getEmail(),
