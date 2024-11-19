@@ -117,6 +117,7 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
                 final Club isClub = (Club) user;
                 isClub.addClubPost(post);
                 break;
+
             }
         }
     }
