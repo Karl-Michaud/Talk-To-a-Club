@@ -29,10 +29,6 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
         this.loginViewModel = loginViewModel;
     }
 
-    /**
-     * Prepares the success view for the Login Use Case for Clubs.
-     * @param response the output data
-     */
     @Override
     public void prepareSuccessView(ClubLoginOutputData response) {
         // On success switch to the home view.
@@ -53,10 +49,6 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
         this.clubHomeViewModel.firePropertyChanged();
     }
 
-    /**
-     * Prepares the failure view for the Login Use Case.
-     * @param error the explanation of the failure
-     */
     @Override
     public void prepareFailView(String error) {
         final LoginState loginState = loginViewModel.getState();
@@ -64,9 +56,6 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
         loginViewModel.firePropertyChanged();
     }
 
-    /**
-     * Switches to the Club Signup View.
-     */
     @Override
     public void switchToClubSignupView() {
         viewManagerModel.setState(clubSignupViewModel.getViewName());
