@@ -6,6 +6,9 @@ import interface_adapter.student_profile.StudentProfileViewModel;
 import use_case.student_homepage.StudentHomeOutputBoundary;
 import use_case.student_homepage.StudentHomeOutputData;
 
+/**
+ * The Presenter for the Student Home usecase.
+ */
 public class StudentHomePresenter implements StudentHomeOutputBoundary {
 
     private final StudentHomeViewModel studentHomeViewModel;
@@ -22,8 +25,10 @@ public class StudentHomePresenter implements StudentHomeOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(StudentHomeOutputData outputData) {
-
+    public void prepareClubPostContent(StudentHomeOutputData studentHomeOutputData) {
+        final StudentHomeState studentHomeState = studentHomeViewModel.getState();
+        studentHomeState.setFollowedClubs(studentHomeOutputData.getFollowedClubs());
+        studentHomeViewModel.firePropertyChanged();
     }
 
     @Override

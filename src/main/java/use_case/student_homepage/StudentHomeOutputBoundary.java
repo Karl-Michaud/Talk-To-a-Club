@@ -2,7 +2,7 @@ package use_case.student_homepage;
 
 public interface StudentHomeOutputBoundary {
 
-    void prepareSuccessView(StudentHomeOutputData outputData);
+    void prepareClubPostContent(StudentHomeOutputData studentHomeOutputData);
 
     void prepareFailView(String errorMessage);
 

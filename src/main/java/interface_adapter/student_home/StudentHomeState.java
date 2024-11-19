@@ -1,5 +1,9 @@
 package interface_adapter.student_home;
 
+import entity.user.Club;
+
+import java.util.ArrayList;
+
 /**
  * The state for the Student Home View Model.
  */
@@ -7,6 +11,7 @@ public class StudentHomeState {
     private String username = "";
     private String email = "";
     private String query = "";
+    private ArrayList<Club> followedClubs = new ArrayList<>();
     private String studentHomeError;
 
     public String getUsername() {
@@ -39,6 +44,14 @@ public class StudentHomeState {
 
     public void setStudentHomeError(String studentHomeError) {
         this.studentHomeError = studentHomeError;
+    }
+
+    public ArrayList<Club> getFollowedClubs() {
+        return this.followedClubs;
+    }
+
+    public void setFollowedClubs(ArrayList<Club> followedClubs) {
+        this.followedClubs = followedClubs;
     }
 
     @Override

@@ -230,7 +230,8 @@ public class AppBuilder {
     public AppBuilder addStudentHomeUseCase() {
         final StudentHomeOutputBoundary studentHomeOutputBoundary = new StudentHomePresenter(studentHomeViewModel,
                 viewManagerModel, loginViewModel, studentProfileViewModel);
-        final StudentHomeInputBoundary studentHomeInteractor = new StudentHomeInteractor(studentHomeOutputBoundary);
+        final StudentHomeInputBoundary studentHomeInteractor = new StudentHomeInteractor(userDataAccessObject,
+                studentHomeOutputBoundary);
 
         final StudentHomeController studentHomeController = new StudentHomeController(studentHomeInteractor);
         studentHomeView.setStudentHomeController(studentHomeController);

@@ -27,6 +27,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     private JButton buttonProfile;
     private JScrollPane scrollPaneEvents;
     private JButton buttonSearch;
+    private JScrollPane scrollPaneJoinedClubs;
 
     private final String viewName = "student home";
     private final StudentHomeViewModel studentHomeViewModel;
@@ -59,7 +60,8 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
                             final StudentHomeState currentState = studentHomeViewModel.getState();
 
                             studentHomeController.execute(
-                                    currentState.getQuery()
+                                    currentState.getQuery(),
+                                    currentState.getEmail()
                             );
                         }
                     }
