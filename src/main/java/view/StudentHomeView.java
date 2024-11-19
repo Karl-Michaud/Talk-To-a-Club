@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import entity.user.Club;
 import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
@@ -22,7 +24,6 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     private JTextField textFieldClubSearch;
     private JLabel labelSearch;
     private JLabel labelLogo;
-    private JPanel panelJoinedClubs;
     private JButton buttonLogout;
     private JButton buttonProfile;
     private JScrollPane scrollPaneEvents;
@@ -38,38 +39,32 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         this.studentHomeViewModel.addPropertyChangeListener(this);
 
         buttonLogout.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        studentHomeController.switchToLoginView();
-                    }
-                }
+                evt -> studentHomeController.switchToLoginView()
         );
 
         buttonProfile.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        studentHomeController.switchToProfileView();
-                    }
-                }
+                evt -> studentHomeController.switchToProfileView()
         );
 
         buttonSearch.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(buttonSearch)) {
-                            final StudentHomeState currentState = studentHomeViewModel.getState();
+                evt -> {
+                    if (evt.getSource().equals(buttonSearch)) {
+                        final StudentHomeState currentState = studentHomeViewModel.getState();
 
-                            studentHomeController.execute(
-                                    currentState.getQuery(),
-                                    currentState.getEmail()
-                            );
-                        }
+                        studentHomeController.execute(
+                                currentState.getQuery(),
+                                currentState.getEmail()
+                        );
                     }
                 }
         );
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        addSearchListener();
         this.add(panelStudentHomeView);
+        final StudentHomeState state = studentHomeViewModel.getState();
+        this.scrollPaneJoinedClubs.setViewportView(new ClubsContainer(state));
+        this.scrollPaneJoinedClubs.setViewportView(new PostsContainer(state));
     }
 
     private void addSearchListener() {
