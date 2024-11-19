@@ -17,10 +17,10 @@ public interface ClubRemoveMemberUserDataAccessInterface {
 
     /**
      * Checks if the student with given username exists.
-     * @param studentEmail the username of the student we want to check
+     * @param email the username of the student we want to check
      * @return a boolean. True if the student exists, false else.
      */
-    boolean existsByEmail(String studentEmail);
+    boolean existsByEmailStudent(String email);
 
     /**
      * Return student with given username. Make sure to check that the student exists.

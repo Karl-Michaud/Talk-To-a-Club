@@ -11,7 +11,7 @@ public interface ClubLoginDataAccessInterface {
      * @param email the email to look for
      * @return true if a Club with the given email exists in the database.
      */
-    boolean existsByEmail(String email);
+    boolean existsByEmailClub(String email);
 
     /**
      * Returns the club with the given email.

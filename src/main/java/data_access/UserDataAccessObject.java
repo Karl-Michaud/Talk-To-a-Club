@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
-import entity.user.User;
 import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
@@ -23,7 +22,7 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
     private final ArrayList<Club> clubArrayList = new ArrayList<>();
 
     @Override
-    public boolean existsByName(String identifier) {
+    public boolean existsByNameClub(String identifier) {
         boolean found = false;
         for (Club club : clubArrayList) {
             if (club.getUsername().equals(identifier)) {
@@ -31,19 +30,23 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
                 break;
             }
         }
-        if (!found) {
-            for (Student student : studentArrayList) {
-                if (student.getUsername().equals(identifier)) {
-                    found = true;
-                    break;
-                }
+        return found;
+    }
+
+    @Override
+    public boolean existsByNameStudent(String username) {
+        boolean found = false;
+        for (Student student : studentArrayList) {
+            if (student.getUsername().equals(username)) {
+                found = true;
+                break;
             }
         }
         return found;
     }
 
     @Override
-    public boolean existsByEmail(String identifier) {
+    public boolean existsByEmailClub(String identifier) {
         boolean found = false;
         for (Club club : clubArrayList) {
             if (club.getEmail().equals(identifier)) {
@@ -51,6 +54,12 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
                 break;
             }
         }
+        return found;
+    }
+
+    @Override
+    public boolean existsByEmailStudent(String identifier) {
+        boolean found = false;
         if (!found) {
             for (Student student : studentArrayList) {
                 if (student.getEmail().equals(identifier)) {
