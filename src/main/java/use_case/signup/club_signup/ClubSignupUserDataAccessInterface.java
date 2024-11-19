@@ -1,6 +1,6 @@
 package use_case.signup.club_signup;
 
-import entity.user.User;
+import entity.user.Club;
 
 /**
  * DAO for the Club Signup Use Case.
@@ -25,5 +25,5 @@ public interface ClubSignupUserDataAccessInterface {
      * Saves the club user.
      * @param user the club user to save
      */
-    void saveClub(User user);
+    void saveClub(Club user);
 }

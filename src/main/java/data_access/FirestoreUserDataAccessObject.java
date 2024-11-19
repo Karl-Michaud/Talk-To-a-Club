@@ -84,7 +84,7 @@ StudentSignupUserDataAccessInterface, StudentLoginDataAccessInterface {
     }
 
     @Override
-    public void saveStudent(User user) {
+    public void saveStudent(Student user) {
         DocumentReference docRef = db.collection("users").document(user.getUsername());
         ApiFuture<WriteResult> writeResult = docRef.set(user);
         try {
@@ -96,7 +96,7 @@ StudentSignupUserDataAccessInterface, StudentLoginDataAccessInterface {
     }
 
     @Override
-    public void saveClub(User user) {
+    public void saveClub(Club user) {
         DocumentReference docRef = db.collection("users").document(user.getUsername());
         ApiFuture<WriteResult> writeResult = docRef.set(user);
         try {

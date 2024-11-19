@@ -24,6 +24,7 @@ public interface ClubRemoveMemberUserDataAccessInterface {
 
     /**
      * Return student with given username. Make sure to check that the student exists.
+     * Precondition: The student must exist.
      * @param studentEmail student's username
      * @return the student with given username
      */

@@ -19,14 +19,24 @@ import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
 public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, StudentSignupUserDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface {
 
-    private final ArrayList<User> userArrayList = new ArrayList<>();
+    private final ArrayList<Student> studentArrayList = new ArrayList<>();
+    private final ArrayList<Club> clubArrayList = new ArrayList<>();
 
     @Override
     public boolean existsByName(String identifier) {
         boolean found = false;
-        for (User user : userArrayList) {
-            if (user.getUsername().equals(identifier)) {
+        for (Club club : clubArrayList) {
+            if (club.getUsername().equals(identifier)) {
                 found = true;
+                break;
+            }
+        }
+        if (!found) {
+            for (Student student : studentArrayList) {
+                if (student.getUsername().equals(identifier)) {
+                    found = true;
+                    break;
+                }
             }
         }
         return found;
@@ -35,54 +45,62 @@ public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, 
     @Override
     public boolean existsByEmail(String identifier) {
         boolean found = false;
-        for (User user: userArrayList) {
-            if (user.getEmail().equals(identifier)) {
+        for (Club club : clubArrayList) {
+            if (club.getEmail().equals(identifier)) {
                 found = true;
+                break;
+            }
+        }
+        if (!found) {
+            for (Student student : studentArrayList) {
+                if (student.getEmail().equals(identifier)) {
+                    found = true;
+                    break;
+                }
             }
         }
         return found;
     }
 
     @Override
-    public void saveClub(User club) {
-        userArrayList.add((Club) club);
+    public void saveClub(Club club) {
+        clubArrayList.add(club);
     }
 
     @Override
-    public void saveStudent(User student) {
-        userArrayList.add((Student) student);
+    public void saveStudent(Student student) {
+        studentArrayList.add(student);
     }
 
     @Override
     public Club getClub(String email) {
-        Club foundClub = null;
-        for (User user : userArrayList) {
-            if (user.getEmail().equals(email)) {
-                foundClub = (Club) user;
+        Club clubFound = null;
+        for (Club club : clubArrayList) {
+            if (club.getEmail().equals(email)) {
+                clubFound = club;
             }
         }
-        return foundClub;
+        // This should not be returned as null since the precondition states that the club must exist.
+        return clubFound;
     }
 
     @Override
     public Student getStudent(String email) {
         Student foundStudent = null;
-        for (User user : userArrayList) {
-            if (user.getEmail().equals(email)) {
-                foundStudent = (Student) user;
+        for (Student student : studentArrayList) {
+            if (student.getEmail().equals(email)) {
+                foundStudent = student;
             }
         }
+        // This should not be returned as null since the precondition states that the student must exist.
         return foundStudent;
     }
 
     @Override
     public void savePost(Post post, Club club) {
-        for (User user : userArrayList) {
-            if (user.getEmail().equals(club.getEmail())) {
-                final Club isClub = (Club) user;
-                isClub.addClubPost(post);
-                break;
-
+        for (Club current: clubArrayList) {
+            if (current.getUsername().equals(club.getUsername())) {
+                current.addClubPost(post);
             }
         }
     }

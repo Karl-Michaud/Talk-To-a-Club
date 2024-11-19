@@ -15,6 +15,7 @@ public interface ClubLoginDataAccessInterface {
 
     /**
      * Returns the club with the given email.
+     * Precondition: The club must exist.
      * @param email of the club we are looking for
      * @return the Club with the given email
      */

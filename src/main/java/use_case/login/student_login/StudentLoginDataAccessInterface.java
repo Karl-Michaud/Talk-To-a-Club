@@ -16,6 +16,7 @@ public interface StudentLoginDataAccessInterface {
 
     /**
      * Returns the student with the given email.
+     * Precondition: The student must exist.
      * @param studentEmail of the student we are looking for
      * @return the student with the given studentEmail
      */
