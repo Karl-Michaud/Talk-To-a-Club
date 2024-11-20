@@ -9,13 +9,14 @@ public interface StudentLoginDataAccessInterface {
 
     /**
     * Checks if the given student email exists in the database.
-    * @param studentEmail the student email to look for
+    * @param email the student email to look for
     * @return true if a Student with the given student email exists in the database.
      */
-    boolean existsByEmail(String studentEmail);
+    boolean existsByEmailStudent(String email);
 
     /**
      * Returns the student with the given email.
+     * Precondition: The student must exist.
      * @param studentEmail of the student we are looking for
      * @return the student with the given studentEmail
      */

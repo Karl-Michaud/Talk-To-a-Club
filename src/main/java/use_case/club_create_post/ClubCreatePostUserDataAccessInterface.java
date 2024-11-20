@@ -16,6 +16,7 @@ public interface ClubCreatePostUserDataAccessInterface {
 
     /**
      * Get the club with the given email.
+     * Precondition: The club must exist.
      * @param email the email of the club
      * @return the club with matching email
      */

@@ -22,7 +22,7 @@ public class ClubGetMembersInteractor {
      */
     public void execute(ClubGetMembersInputData inputData) {
         final String email = inputData.getEmail();
-        if (!getMembersDataAccessObject.existsByEmail(email)) {
+        if (!getMembersDataAccessObject.existsByEmailClub(email)) {
             getMembersPresenter.prepareFailView(email + ": Account does not exist.");
         }
         else {

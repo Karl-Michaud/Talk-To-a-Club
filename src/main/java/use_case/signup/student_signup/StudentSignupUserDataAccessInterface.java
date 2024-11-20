@@ -1,6 +1,6 @@
 package use_case.signup.student_signup;
 
-import entity.user.User;
+import entity.user.Student;
 
 /**
  * DAO for the Student Signup Use Case.
@@ -12,19 +12,19 @@ public interface StudentSignupUserDataAccessInterface {
      * @param username the username to look for
      * @return true if a user with the given username exists; false otherwise
      */
-    boolean existsByName(String username);
+    boolean existsByNameStudent(String username);
 
     /**
      * Checks if the given email exists.
      * @param email the email to look for
      * @return true if a user with the given email exists; false otherwise
      */
-    boolean existsByEmail(String email);
+    boolean existsByEmailStudent(String email);
 
     /**
      * Saves the student user.
      * @param user the student user to save
      */
-    void saveStudent(User user);
+    void saveStudent(Student user);
 
 }
