@@ -25,12 +25,13 @@ public class DataStoreArrays<T> implements DataStore<T> {
 
     @Override
     public T get(T element) {
+        T temp = null;
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).equals(element)) {
-                return data.get(i);
+                temp = data.get(i);
             }
         }
-        return null;
+        return temp;
     }
 
     /**
@@ -44,14 +45,14 @@ public class DataStoreArrays<T> implements DataStore<T> {
 
     @Override
     public T pop(T element) {
+        T temp = null;
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).equals(element)) {
-                final T temp = data.get(i);
+                temp = data.get(i);
                 data.remove(i);
-                return temp;
             }
         }
-        return null;
+        return temp;
     }
 
     @Override
