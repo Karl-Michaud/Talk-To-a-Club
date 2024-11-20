@@ -1,6 +1,7 @@
 package entity.user;
 
-import java.util.ArrayList;
+import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 
 /**
  * Factory for creating Student user objects.
@@ -10,7 +11,7 @@ public class StudentUserFactory implements StudentFactory {
     @Override
     public Student create(String name, String email, String password) {
         // new users that are part of no clubs.
-        final ArrayList<Club> joinedClubs = new ArrayList<>();
+        final DataStoreArrays<Club> joinedClubs = new DataStoreArrays<>();
         return new Student(name, email, password, joinedClubs);
     }
 
@@ -22,7 +23,7 @@ public class StudentUserFactory implements StudentFactory {
      * @param joinedClubs the clubs the student has joined
      * @return the new student user
      */
-    public Student create(String name, String email, String password, ArrayList<Club> joinedClubs) {
+    public Student create(String name, String email, String password, DataStore<Club> joinedClubs) {
         return new Student(name, email, password, joinedClubs);
     }
 
