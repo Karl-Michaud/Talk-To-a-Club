@@ -21,10 +21,10 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
 
     @Override
     public void execute(ClubSignupInputData clubSignupInputData) {
-        if (userDataAccessObject.existsByName(clubSignupInputData.getUsername())) {
+        if (userDataAccessObject.existsByNameClub(clubSignupInputData.getUsername())) {
             userPresenter.prepareFailView("Username already exists.");
         }
-        else if (userDataAccessObject.existsByEmail(clubSignupInputData.getEmail())) {
+        else if (userDataAccessObject.existsByEmailClub(clubSignupInputData.getEmail())) {
             userPresenter.prepareFailView("Email address already exists.");
         }
         else if (!clubSignupInputData.getPassword().equals(clubSignupInputData.getRepeatPassword())) {
