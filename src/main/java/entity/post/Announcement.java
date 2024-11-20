@@ -26,7 +26,8 @@ public class Announcement implements Post {
     public Announcement(String title, String content) {
         this.title = title;
         this.content = content;
-
+        this.likes = new ArrayList<>();
+        this.dislikes = new ArrayList<>();
         this.timeOfPosting = LocalTime.now();
         this.dateOfPosting = LocalDate.now();
     }
@@ -53,6 +54,16 @@ public class Announcement implements Post {
      */
     public LocalTime timeOfPosting() {
         return timeOfPosting;
+    }
+
+    @Override
+    public ArrayList<User> getLikes() {
+        return this.likes;
+    }
+
+    @Override
+    public ArrayList<User> getDislikes() {
+        return this.dislikes;
     }
 
     /**

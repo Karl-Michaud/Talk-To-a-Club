@@ -2,6 +2,9 @@ package use_case.student_homepage;
 
 import entity.user.Student;
 
+/**
+ * Interface for the student home usecase.
+ */
 public interface StudentHomeAccessInterface {
 
     /**

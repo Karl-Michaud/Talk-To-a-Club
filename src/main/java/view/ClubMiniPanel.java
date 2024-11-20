@@ -1,9 +1,15 @@
 package view;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import entity.user.Club;
 
-import javax.swing.*;
-
+/**
+ * A small Panel to populate the container for the joined clubs.
+ */
 public class ClubMiniPanel extends JPanel {
     private JLabel clubName;
     private JPanel clubMiniPanel;

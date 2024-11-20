@@ -1,7 +1,12 @@
 package view;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
+/**
+ * A small view that populates the whole scrollview. This holds the events and joined clubs.
+ */
 public class PageView extends JPanel {
     private JPanel pagePanel;
     private JLabel labelClubsJoined;

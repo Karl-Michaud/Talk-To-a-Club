@@ -22,7 +22,8 @@ public class StudentHomeInteractor implements StudentHomeInputBoundary {
         // so it must necessarily exist.
         final String email = studentHomeInputData.getEmail();
         final Student student = studentHomeAccessObject.getStudent(email);
-        final StudentHomeOutputData studentHomeOutputData = new StudentHomeOutputData(student.getJoinedClubs());
+        final StudentHomeOutputData studentHomeOutputData = new StudentHomeOutputData(student.getJoinedClubs(),
+                studentHomeAccessObject.getStudent(email));
         studentHomePresenter.prepareClubPostContent(studentHomeOutputData);
     }
 

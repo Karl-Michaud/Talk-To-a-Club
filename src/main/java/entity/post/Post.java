@@ -2,6 +2,7 @@ package entity.post;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import entity.user.User;
 
@@ -29,7 +30,7 @@ public interface Post {
 
     /**
      * User likes the post.
-     * @param user user that likes the post.
+     * @param user that likes the post.
      */
     void addLike(User user);
 
@@ -68,4 +69,17 @@ public interface Post {
      * @return String the time of the publication of the post
      */
     LocalTime timeOfPosting();
+
+    /**
+     * Return the list of Users that have liked this post.
+     * @return the list of users that have liked this post.
+     */
+    ArrayList<User> getLikes();
+
+    /**
+     * Return the list of Users that have disliked this post.
+     * @return the list of users that have disliked this post.
+     */
+    ArrayList<User> getDislikes();
+
 }

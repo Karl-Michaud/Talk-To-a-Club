@@ -1,13 +1,15 @@
 package interface_adapter.student_home;
 
-import entity.user.Club;
-
 import java.util.ArrayList;
+
+import entity.user.Club;
+import entity.user.User;
 
 /**
  * The state for the Student Home View Model.
  */
 public class StudentHomeState {
+    private User currentUser;
     private String username = "";
     private String email = "";
     private String query = "";
@@ -59,5 +61,13 @@ public class StudentHomeState {
         return "StudentHomeState{"
                 + "username='" + username + '\''
                 + '}';
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public User getCurrentUser() {
+        return this.currentUser;
     }
 }

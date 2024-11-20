@@ -1,17 +1,18 @@
 package view;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import entity.user.Club;
 import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
@@ -23,14 +24,12 @@ import interface_adapter.student_home.StudentHomeViewModel;
 public class StudentHomeView extends JPanel implements PropertyChangeListener {
     private JPanel panelStudentHomeView;
     private JTextField textFieldClubSearch;
-    private JLabel labelSearch;
-    private JLabel labelLogo;
     private JButton buttonLogout;
     private JButton buttonProfile;
-    private JScrollPane scrollPaneEvents;
     private JButton buttonSearch;
     private JScrollPane pageScrollPane;
-    private JScrollPane scrollPaneJoinedClubs;
+    private JLabel labelLogo;
+    private JLabel labelSearch;
 
     private final String viewName = "student home";
     private final StudentHomeViewModel studentHomeViewModel;
