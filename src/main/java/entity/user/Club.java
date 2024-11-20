@@ -1,7 +1,5 @@
 package entity.user;
 
-import java.util.ArrayList;
-
 import entity.data_structure.DataStore;
 import entity.post.Post;
 
