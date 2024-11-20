@@ -1,12 +1,13 @@
 package entity.data_structure;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Implementation of DataStore using arrays.
  * @param <T> item for data structure.
  */
-public class DataStoreArrays<T> implements DataStore<T> {
+public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
     private final ArrayList<T> data;
 
     public DataStoreArrays() {
@@ -63,5 +64,10 @@ public class DataStoreArrays<T> implements DataStore<T> {
     @Override
     public Integer size() {
         return this.data.size();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return data.iterator();
     }
 }
