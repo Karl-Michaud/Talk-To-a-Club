@@ -6,14 +6,7 @@ import entity.user.Student;
 /**
  * Data access interface for club remove member use case.
  */
-public interface ClubRemoveMemberUserDataAccessInterface {
-
-    /**
-     * Returns club with given email.
-     * @param clubEmail the club's email
-     * @return the club with given email.
-     */
-    Club getClub(String clubEmail);
+public interface ClubRemoveMemberStudentDataAccessInterface {
 
     /**
      * Checks if the student with given username exists.
@@ -31,9 +24,9 @@ public interface ClubRemoveMemberUserDataAccessInterface {
     Student getStudent(String studentEmail);
 
     /**
-     * Remove the student from the club in the database.
+     * Remove the club from the student in the database.
      * @param student the student that should be removed
      * @param club the club from which the student needs to be removed from
      */
-    void removeStudent(Student student, Club club);
+    void removeClubFromStudent(Student student, Club club);
 }
