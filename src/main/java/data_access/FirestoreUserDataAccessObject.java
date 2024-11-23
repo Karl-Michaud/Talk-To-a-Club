@@ -8,7 +8,6 @@
 //
 //import com.google.api.core.ApiFuture;
 //import com.google.firebase.cloud.FirestoreClient;
-//import com.google.firebase.cloud.StorageClient;
 //
 //
 //import entity.user.*;
@@ -26,15 +25,18 @@
 // * This implementation uses Firebase
 // */
 //public class FirestoreUserDataAccessObject implements ClubLoginDataAccessInterface, ClubSignupUserDataAccessInterface,
-//StudentSignupUserDataAccessInterface, StudentLoginDataAccessInterface {
+//    StudentSignupUserDataAccessInterface, StudentLoginDataAccessInterface {
 //    private final Firestore db;
+//    private final String students = "students";
+//    private final String clubs = "clubs";
+//    private final String emails = "email";
 //
 //    public FirestoreUserDataAccessObject() throws IOException {
 //        // TODO fix this to be environment variable
-//        FileInputStream serviceAccount =
+//        final FileInputStream serviceAccount =
 //                new FileInputStream("/ServiceAccountKey.json");
 //
-//        FirebaseOptions options = new FirebaseOptions.Builder()
+//        final FirebaseOptions options = new FirebaseOptions.Builder()
 //                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 //                .build();
 //
@@ -43,68 +45,20 @@
 //    }
 //
 //    @Override
-//    public boolean existsByName(String username) {
-//        DocumentReference docRef = db.collection("users").document(username);
-//        ApiFuture<DocumentSnapshot> future = docRef.get();
+//    public Student getStudent(String email) {
+//        final DocumentReference docRef = db.collection(students).document(email);
+//        final ApiFuture<DocumentSnapshot> future = docRef.get();
+//        Student returnValue = null;
 //        try {
-//            DocumentSnapshot document = future.get();
-//            return document.exists();
-//        } catch (InterruptedException | ExecutionException e) {
-//            // Handle exceptions appropriately
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
-//
-//    @Override
-//    public Student getStudent(String username) {
-//        DocumentReference docRef = db.collection("users").document(username);
-//        ApiFuture<DocumentSnapshot> future = docRef.get();
-//        try {
-//            DocumentSnapshot document = future.get();
+//            final DocumentSnapshot document = future.get();
 //            if (document.exists()) {
-//                return document.toObject(Student.class);
+//                returnValue = document.toObject(Student.class);
 //            }
-//        } catch (InterruptedException | ExecutionException e) {
+//        }
+//        catch (InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//        return null; // Return null if no student is found
-//    }
-//
-//    @Override
-//    public boolean existsByEmail(String email) {
-//        ApiFuture<QuerySnapshot> future = db.collection("users").whereEqualTo("email", email).get();
-//        try {
-//            return !future.get().isEmpty();
-//        } catch (InterruptedException | ExecutionException e) {
-//            // Handle exceptions appropriately
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
-//
-//    @Override
-//    public void saveStudent(Student user) {
-//        DocumentReference docRef = db.collection("users").document(user.getUsername());
-//        ApiFuture<WriteResult> writeResult = docRef.set(user);
-//        try {
-//            System.out.println("Update time : " + writeResult.get().getUpdateTime());
-//        } catch (InterruptedException | ExecutionException e) {
-//            // Handle exceptions appropriately
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Override
-//    public void saveClub(Club user) {
-//        DocumentReference docRef = db.collection("users").document(user.getUsername());
-//        ApiFuture<WriteResult> writeResult = docRef.set(user);
-//        try {
-//            System.out.println("Update time : " + writeResult.get().getUpdateTime());
-//        } catch (InterruptedException | ExecutionException e) {
-//            // Handle exceptions appropriately
-//            e.printStackTrace();
-//        }
+//        return returnValue;
 //    }
 //
 //    @Override
@@ -119,6 +73,96 @@
 //        } catch (InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//        return null; // Return null if no club is found
+//        return null;
 //    }
+//
+//    @Override
+//    public boolean existsByNameStudent(String username) {
+//        final DocumentReference docRef = db.collection(students).document(username);
+//        final ApiFuture<DocumentSnapshot> future = docRef.get();
+//        boolean returnValue;
+//        try {
+//            final DocumentSnapshot document = future.get();
+//            returnValue = document.exists();
+//        }
+//        catch (InterruptedException | ExecutionException e) {
+//            // Handle exceptions appropriately
+//            e.printStackTrace();
+//            returnValue = false;
+//        }
+//        return returnValue;
+//    }
+//
+//    @Override
+//    public boolean existsByNameClub(String username) {
+//        final DocumentReference docRef = db.collection(clubs).document(username);
+//        final ApiFuture<DocumentSnapshot> future = docRef.get();
+//        boolean returnValue;
+//        try {
+//            final DocumentSnapshot document = future.get();
+//            returnValue = document.exists();
+//        }
+//        catch (InterruptedException | ExecutionException e) {
+//            // Handle exceptions appropriately
+//            e.printStackTrace();
+//            returnValue = false;
+//        }
+//        return returnValue;
+//    }
+//
+//    @Override
+//    public boolean existsByEmailStudent(String email) {
+//        final ApiFuture<QuerySnapshot> future = db.collection(students).whereEqualTo(emails, email).get();
+//        boolean returnValue;
+//        try {
+//            returnValue = !future.get().isEmpty();
+//        }
+//        catch (InterruptedException | ExecutionException e) {
+//            // Handle exceptions appropriately
+//            e.printStackTrace();
+//            returnValue = false;
+//        }
+//        return returnValue;
+//    }
+//
+//    @Override
+//    public boolean existsByEmailClub(String email) {
+//        final ApiFuture<QuerySnapshot> future = db.collection(clubs).whereEqualTo(emails, email).get();
+//        boolean returnValue;
+//        try {
+//            returnValue = !future.get().isEmpty();
+//        }
+//        catch (InterruptedException | ExecutionException e) {
+//            // Handle exceptions appropriately
+//            e.printStackTrace();
+//            returnValue = false;
+//        }
+//        return returnValue;
+//    }
+//
+//    @Override
+//    public void saveStudent(Student user) {
+//        final DocumentReference docRef = db.collection(students).document(user.getEmail());
+//        final ApiFuture<WriteResult> writeResult = docRef.set(user);
+//        try {
+//            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+//        }
+//        catch (InterruptedException | ExecutionException ex) {
+//            // Handle exceptions appropriately
+//            ex.printStackTrace();
+//        }
+//    }
+//
+//    @Override
+//    public void saveClub(Club user) {
+//        final DocumentReference docRef = db.collection("users").document(user.getUsername());
+//        final ApiFuture<WriteResult> writeResult = docRef.set(user);
+//        try {
+//            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+//        } catch (InterruptedException | ExecutionException e) {
+//            // Handle exceptions appropriately
+//            e.printStackTrace();
+//        }
+//    }
+//
 //}

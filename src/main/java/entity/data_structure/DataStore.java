@@ -12,7 +12,7 @@ public interface DataStore<T> {
     void add(T element);
 
     /**
-     * Removes element from data structure.
+     * Removes element from data structure and returns its value.
      * @param element element to remove.
      * @return returns the element that was removed.
      */
