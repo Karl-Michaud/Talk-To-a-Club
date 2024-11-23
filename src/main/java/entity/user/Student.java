@@ -1,6 +1,6 @@
 package entity.user;
 
-import java.util.ArrayList;
+import entity.data_structure.DataStore;
 
 /**
  * This is the Student class implements User. A Student is a type of user.
@@ -12,9 +12,9 @@ public class Student implements User {
     private String password;
 
     // Student club information
-    private ArrayList<Club> joinedClubs;
+    private DataStore<Club> joinedClubs;
 
-    public Student(String username, String email, String password, ArrayList<Club> joinedClubs) {
+    public Student(String username, String email, String password, DataStore<Club> joinedClubs) {
         // Initialise student's personal information
         this.username = username;
         this.email = email;
@@ -36,7 +36,7 @@ public class Student implements User {
         return password;
     }
 
-    public ArrayList<Club> getJoinedClubs() {
+    public DataStore<Club> getJoinedClubs() {
         return joinedClubs;
     }
 

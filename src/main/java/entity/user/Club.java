@@ -1,7 +1,6 @@
 package entity.user;
 
-import java.util.ArrayList;
-
+import entity.data_structure.DataStore;
 import entity.post.Post;
 
 /**
@@ -13,11 +12,11 @@ public class Club implements User {
     private final String email;
     private final String password;
     // Club's members and Posts information
-    private final ArrayList<Student> clubMembers;
-    private final ArrayList<Post> clubPosts;
+    private final DataStore<Student> clubMembers;
+    private final DataStore<Post> clubPosts;
 
-    public Club(String username, String email, String password, ArrayList<Student> clubMembers,
-                ArrayList<Post> clubPosts) {
+    public Club(String username, String email, String password, DataStore<Student> clubMembers,
+                DataStore<Post> clubPosts) {
         // Initialize club personal information
         this.username = username;
         this.email = email;
@@ -40,11 +39,11 @@ public class Club implements User {
         return password;
     }
 
-    public ArrayList<Student> getClubMembers() {
+    public DataStore<Student> getClubMembers() {
         return clubMembers;
     }
 
-    public ArrayList<Post> getClubPosts() {
+    public DataStore<Post> getClubPosts() {
         return clubPosts;
     }
 

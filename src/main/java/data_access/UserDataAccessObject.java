@@ -1,7 +1,6 @@
 package data_access;
 
-import java.util.ArrayList;
-
+import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
@@ -18,8 +17,8 @@ import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
 public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, StudentSignupUserDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface {
 
-    private final ArrayList<Student> studentArrayList = new ArrayList<>();
-    private final ArrayList<Club> clubArrayList = new ArrayList<>();
+    private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
+    private final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
 
     @Override
     public boolean existsByNameClub(String identifier) {

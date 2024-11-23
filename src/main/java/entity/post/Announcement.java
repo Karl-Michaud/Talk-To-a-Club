@@ -2,8 +2,8 @@ package entity.post;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
+import entity.data_structure.DataStore;
 import entity.user.User;
 
 /**
@@ -20,8 +20,8 @@ public class Announcement implements Post {
     private LocalDate dateOfPosting;
 
     // Like/Dislike information of post
-    private ArrayList<User> likes;
-    private ArrayList<User> dislikes;
+    private DataStore<User> likes;
+    private DataStore<User> dislikes;
 
     public Announcement(String title, String content) {
         this.title = title;
