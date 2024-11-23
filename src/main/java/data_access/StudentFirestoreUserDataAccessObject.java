@@ -56,8 +56,8 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
                 returnValue = document.toObject(Student.class);
             }
         }
-        catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+        catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
         }
         return returnValue;
     }
@@ -69,9 +69,9 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
         try {
             returnValue = !future.get().isEmpty();
         }
-        catch (InterruptedException | ExecutionException e) {
+        catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately
-            e.printStackTrace();
+            ex.printStackTrace();
             returnValue = false;
         }
         return returnValue;
@@ -86,9 +86,9 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
             final DocumentSnapshot document = future.get();
             returnValue = document.exists();
         }
-        catch (InterruptedException | ExecutionException e) {
+        catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately
-            e.printStackTrace();
+            ex.printStackTrace();
             returnValue = false;
         }
         return returnValue;
@@ -102,8 +102,8 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
         try {
             System.out.println("Update time : " + writeResult.get().getUpdateTime());
         }
-        catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+        catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -118,9 +118,9 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
         try {
             System.out.println("Update time : " + writeResult.get().getUpdateTime());
         }
-        catch (InterruptedException | ExecutionException e) {
+        catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately
-            e.printStackTrace();
+            ex.printStackTrace();
         }
     }
 }
