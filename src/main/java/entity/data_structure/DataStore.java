@@ -12,10 +12,11 @@ public interface DataStore<T> {
     void add(T element);
 
     /**
-     * Removes element from data structure.
+     * Removes element from data structure and returns its value.
      * @param element element to remove.
+     * @return element that has been removed.
      */
-    void remove(T element);
+    T remove(T element);
 
     /**
      * Gets element from data structure.
@@ -23,13 +24,6 @@ public interface DataStore<T> {
      * @return returns the element.
      */
     T get(T element);
-
-    /**
-     * Removes and returns the element that has been removed.
-     * @param element element to pop.
-     * @return element that has been popped.
-     */
-    T pop(T element);
 
     /**
      * Returns boolean if an element exists in the data structure.

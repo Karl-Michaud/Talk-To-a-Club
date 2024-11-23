@@ -20,8 +20,9 @@ public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
     }
 
     @Override
-    public void remove(T element) {
+    public T remove(T element) {
         data.remove(element);
+        return element;
     }
 
     @Override
@@ -40,20 +41,18 @@ public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
      * @param index integer value of index.
      * @return value at index.
      */
-    public T get(int index) {
+    public T getByIndex(int index) {
         return data.get(index);
     }
 
-    @Override
-    public T pop(T element) {
-        T temp = null;
-        for (int i = 0; i < data.size(); i++) {
-            if (data.get(i).equals(element)) {
-                temp = data.get(i);
-                data.remove(i);
-            }
-        }
-        return temp;
+    /**
+     * Removes and returns the last element of the list.
+     * @return element that has been popped.
+     */
+    public T pop() {
+        final T last = data.get(data.size() - 1);
+        data.remove(data.size() - 1);
+        return last;
     }
 
     @Override
