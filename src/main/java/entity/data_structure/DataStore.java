@@ -14,7 +14,7 @@ public interface DataStore<T> {
     /**
      * Removes element from data structure and returns its value.
      * @param element element to remove.
-     * @return element that has been removed.
+     * @return returns the element that was removed.
      */
     T remove(T element);
 
