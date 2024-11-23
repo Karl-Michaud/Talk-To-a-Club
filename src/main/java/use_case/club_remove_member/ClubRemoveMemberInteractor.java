@@ -42,11 +42,11 @@ public class ClubRemoveMemberInteractor implements ClubRemoveMemberInputBoundary
             else {
                 // Remove student from club
                 student.leaveClub(club);
-                clubRemoveStudentDataAccessObject.removeClubFromStudent(student, club);
+                clubRemoveStudentDataAccessObject.updateStudentClubsJoined(student);
 
                 // Remove club from student
                 club.removeClubMember(student);
-                clubRemoveClubDataAccessObject.removeStudentFromClub(student, club);
+                clubRemoveClubDataAccessObject.updateClubMembers(club);
 
                 // Prepare success view
                 final ClubRemoveMemberOutputData outputData = new ClubRemoveMemberOutputData(student.getUsername(),

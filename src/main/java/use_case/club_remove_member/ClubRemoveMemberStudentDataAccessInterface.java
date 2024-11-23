@@ -1,6 +1,5 @@
 package use_case.club_remove_member;
 
-import entity.user.Club;
 import entity.user.Student;
 
 /**
@@ -25,8 +24,8 @@ public interface ClubRemoveMemberStudentDataAccessInterface {
 
     /**
      * Remove the club from the student in the database.
+     *
      * @param student the student that should be removed
-     * @param club the club from which the student needs to be removed from
      */
-    void removeClubFromStudent(Student student, Club club);
+    void updateStudentClubsJoined(Student student);
 }

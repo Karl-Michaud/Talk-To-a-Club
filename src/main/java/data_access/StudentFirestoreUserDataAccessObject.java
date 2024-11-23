@@ -6,12 +6,9 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
-import entity.user.Club;
 import entity.user.Student;
 import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
-import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
-import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
 import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
 import use_case.student_join_club.StudentJoinClubAccessInterface;
 import use_case.student_leave_club.StudentLeaveClubAccessInterface;
@@ -111,16 +108,15 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
     }
 
     @Override
-    public void removeClubFromStudent(Student student, Club club) {
+    public void updateStudentClubsJoined(Student student) {
+        // updates the student clubs joined
+        // very similar to saveStudent
         final String email = student.getEmail();
         final DocumentReference docRef = db.collection(students).document(email);
-        final ApiFuture<DocumentSnapshot> future = docRef.get();
+        final ApiFuture<WriteResult> writeResult = docRef.set(student);
 
         try {
-            final DocumentSnapshot document = future.get();
-            if (document.exists()) {
-                docRef.set(student);
-            }
+            System.out.println("Update time : " + writeResult.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException e) {
             // Handle exceptions appropriately
