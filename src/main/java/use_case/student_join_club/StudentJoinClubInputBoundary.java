@@ -1,7 +1,7 @@
 package use_case.student_join_club;
 
 /**
- * Boundary for the Join club use case.
+ * Input boundary for the Join club use case.
  */
 public interface StudentJoinClubInputBoundary {
     /**

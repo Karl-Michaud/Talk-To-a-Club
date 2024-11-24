@@ -1,12 +1,12 @@
-package use_case.student_join_club;
+package use_case.student_leave_club;
 
 import entity.user.Club;
 
 /**
- * Data access interface for the Student join club use case.
- * Handles the data for the club entity.
+ * Data access interface for leave club use case.
+ * Handles only the Club entity data accessing.
  */
-public interface ClubStudentJoinClubDataAccessInterface {
+public interface ClubStudentLeaveClubDataAccessInterface {
     /**
      * Returns club with given email.
      * @param clubEmail the club's email
@@ -22,8 +22,8 @@ public interface ClubStudentJoinClubDataAccessInterface {
     boolean existsByEmailClub(String email);
 
     /**
-     * Adds the student in the club in the database.
-     * @param club the club from which the student needs to be added into.
+     * Updates the clubs member list.
+     * @param club the club from which the student needs to be removed from.
      */
     void updateClubMembers(Club club);
 }

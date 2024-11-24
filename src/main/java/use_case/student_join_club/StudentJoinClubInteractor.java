@@ -24,12 +24,13 @@ public class StudentJoinClubInteractor implements StudentJoinClubInputBoundary {
         final String studentEmail = inputData.getStudentEmail();
         final String clubEmail = inputData.getClubEmail();
 
-        // Since we are logged in, the club must exist by precondition, so we do not have to check if the club exists.
+        // Since we are logged in, the student must exist by precondition,
+        // so we do not have to check if the student exists.
         final Club club = clubStudentJoinClubDataAccessInterface.getClub(clubEmail);
 
-        // Verify that the student even exists
-        if (!studentJoinClubDataAccessInterface.existsByEmailStudent(studentEmail)) {
-            joinClubPresenter.prepareFailView(studentEmail + ": Account does not exist.");
+        // Verify that the club even exists
+        if (!clubStudentJoinClubDataAccessInterface.existsByEmailClub(clubEmail)) {
+            joinClubPresenter.prepareFailView(studentEmail + ": Club does not exist.");
         }
         else {
             // Get student with same student email
