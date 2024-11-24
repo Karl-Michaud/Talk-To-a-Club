@@ -66,6 +66,30 @@ public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
     }
 
     @Override
+    public DataStore<T> intersection(DataStore<T> other) {
+        final DataStoreArrays<T> intersection = new DataStoreArrays<>();
+
+        for (T datum : data) {
+            if (other.contains(datum) && !intersection.contains(datum)) {
+                intersection.add(datum);
+            }
+        }
+        return intersection;
+    }
+
+    @Override
+    public DataStore<T> complement(DataStore<T> other) {
+        final DataStoreArrays<T> complement = new DataStoreArrays<>();
+
+        for (T datum : data) {
+            if (!other.contains(datum) && !complement.contains(datum)) {
+                complement.add(datum);
+            }
+        }
+        return complement;
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return data.iterator();
     }

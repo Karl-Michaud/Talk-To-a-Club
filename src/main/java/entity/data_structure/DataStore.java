@@ -37,4 +37,18 @@ public interface DataStore<T> {
      * @return integer size.
      */
     Integer size();
+
+    /**
+     * Returns the intersection between this DataStore and another.
+     * @param other the other DataStore data structure to intersect.
+     * @return the intersection.
+     */
+    DataStore<T> intersection(DataStore<T> other);
+
+    /**
+     * Returns the complement between this DataStore and another.
+     * @param other the other DataStore data structure to find complement.
+     * @return the complement.
+     */
+    DataStore<T> complement(DataStore<T> other);
 }

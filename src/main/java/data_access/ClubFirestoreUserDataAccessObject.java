@@ -2,23 +2,23 @@ package data_access;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
 import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
 import use_case.club_get_members.ClubGetMembersUserDataAccessInterface;
 import use_case.club_remove_member.ClubRemoveMemberClubDataAccessInterface;
+import use_case.explore_clubs.ClubExploreClubsDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
 import use_case.student_join_club.ClubStudentJoinClubDataAccessInterface;
@@ -32,7 +32,7 @@ import use_case.student_leave_club.ClubStudentLeaveClubDataAccessInterface;
 public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserDataAccessInterface,
         ClubGetMembersUserDataAccessInterface, ClubRemoveMemberClubDataAccessInterface, ClubLoginDataAccessInterface,
         ClubSignupUserDataAccessInterface, ClubStudentJoinClubDataAccessInterface,
-        ClubStudentLeaveClubDataAccessInterface {
+        ClubStudentLeaveClubDataAccessInterface, ClubExploreClubsDataAccessInterface {
     private final Firestore db;
     private final String clubs = "clubs";
     private final String usernames = "username";
@@ -141,5 +141,28 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
             // Handle exceptions appropriately
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public DataStore<Club> getAllClubs() {
+        final CollectionReference clubsRef = db.collection(clubs);
+        final DataStoreArrays<Club> allClubs = new DataStoreArrays<>();
+
+        try {
+            final ApiFuture<QuerySnapshot> query = clubsRef.get();
+            final QuerySnapshot querySnapshot = query.get();
+            final List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+
+            for (DocumentSnapshot document : documents) {
+                final Club club = document.toObject(Club.class);
+                allClubs.add(club);
+            }
+        }
+        catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+            // Handle exceptions appropriately
+        }
+
+        return allClubs;
     }
 }
