@@ -6,7 +6,7 @@ import entity.user.Student;
 /**
  * Interactor for the get members use case.
  */
-public class ClubGetMembersInteractor {
+public class ClubGetMembersInteractor implements ClubGetMembersInputBoundary {
     private final ClubGetMembersUserDataAccessInterface getMembersDataAccessObject;
     private final ClubGetMembersOutputBoundary getMembersPresenter;
 
@@ -20,6 +20,7 @@ public class ClubGetMembersInteractor {
      * Executes the get members use case.
      * @param inputData the input data.
      */
+    @Override
     public void execute(ClubGetMembersInputData inputData) {
         final String email = inputData.getEmail();
         if (!getMembersDataAccessObject.existsByEmailClub(email)) {

@@ -24,7 +24,6 @@ public interface ClubRemoveMemberStudentDataAccessInterface {
 
     /**
      * Remove the club from the student in the database.
-     *
      * @param student the student that should be removed
      */
     void updateStudentClubsJoined(Student student);
