@@ -37,5 +37,4 @@ public interface DataStore<T> {
      * @return integer size.
      */
     Integer size();
-
 }
