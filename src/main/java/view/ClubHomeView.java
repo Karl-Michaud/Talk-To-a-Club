@@ -31,6 +31,8 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
     private final ClubHomeViewModel clubHomeViewModel;
 
     private ClubHomeController clubHomeController;
+    private LogoutCon
+    private
 
     public ClubHomeView(ClubHomeViewModel clubHomeViewModel) {
         this.clubHomeViewModel = clubHomeViewModel;
