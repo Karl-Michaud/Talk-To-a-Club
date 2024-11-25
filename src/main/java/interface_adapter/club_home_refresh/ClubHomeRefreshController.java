@@ -1,8 +1,5 @@
 package interface_adapter.club_home_refresh;
 
-import use_case.signup.club_signup.ClubSignupInputBoundary;
-import use_case.signup.club_signup.ClubSignupInputData;
-
 /**
  * Controller for the Club Home Refresh Use Case.
  */
