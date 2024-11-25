@@ -1,16 +1,14 @@
 package data_access;
 
-import java.util.ArrayList;
-
+import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
-import entity.user.User;
 import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
+import use_case.login.student_login.StudentLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
 import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
-import use_case.login.student_login.StudentLoginDataAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
@@ -19,74 +17,99 @@ import use_case.login.student_login.StudentLoginDataAccessInterface;
 public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, StudentSignupUserDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface {
 
-    private final ArrayList<Club> clubs = new ArrayList<>();
-    private final ArrayList<Student> students = new ArrayList<>();
+    private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
+    private final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
 
-    // TODO Can we ignore the checkstyle error: return count is 2 (max for non-void is 1)
     @Override
-    public boolean existsByName(String identifier) {
+    public boolean existsByNameClub(String identifier) {
         boolean found = false;
-        for (User student : students) {
-            if (student.getUsername().equals(identifier)) {
+        for (Club club : clubArrayList) {
+            if (club.getUsername().equals(identifier)) {
                 found = true;
+                break;
             }
         }
         return found;
     }
 
     @Override
-    public boolean existsByEmail(String identifier) {
+    public boolean existsByNameStudent(String username) {
         boolean found = false;
-        for (User club : clubs) {
+        for (Student student : studentArrayList) {
+            if (student.getUsername().equals(username)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
+
+    @Override
+    public boolean existsByEmailClub(String identifier) {
+        boolean found = false;
+        for (Club club : clubArrayList) {
             if (club.getEmail().equals(identifier)) {
                 found = true;
+                break;
             }
         }
         return found;
     }
 
     @Override
-    public void saveClub(User club) {
-        clubs.add((Club) club);
-    }
-
-    @Override
-    public void saveStudent(User student) {
-        students.add((Student) student);
-    }
-
-    // TODO use a map or something else to search stuff easier
-    @Override
-    public Club getClub(String email) {
-        Club foundClub = null;
-        for (Club club : clubs) {
-            if (club.getEmail().equals(email)) {
-                foundClub = club;
+    public boolean existsByEmailStudent(String identifier) {
+        boolean found = false;
+        if (!found) {
+            for (Student student : studentArrayList) {
+                if (student.getEmail().equals(identifier)) {
+                    found = true;
+                    break;
+                }
             }
         }
-        return foundClub;
+        return found;
     }
 
-    // TODO Checkstyle doesn't like early returns????
     @Override
-    public Student getStudent(String username) {
+    public void saveClub(Club club) {
+        clubArrayList.add(club);
+    }
+
+    @Override
+    public void saveStudent(Student student) {
+        studentArrayList.add(student);
+    }
+
+    @Override
+    public Club getClub(String email) {
+        Club clubFound = null;
+        for (Club club : clubArrayList) {
+            if (club.getEmail().equals(email)) {
+                clubFound = club;
+            }
+        }
+        // This should not be returned as null since the precondition states that the club must exist.
+        return clubFound;
+    }
+
+    @Override
+    public Student getStudent(String email) {
         Student foundStudent = null;
-        for (Student student : students) {
-            if (student.getUsername().equals(username)) {
+        for (Student student : studentArrayList) {
+            if (student.getEmail().equals(email)) {
                 foundStudent = student;
             }
         }
+        // This should not be returned as null since the precondition states that the student must exist.
         return foundStudent;
     }
 
     @Override
     public void savePost(Post post, Club club) {
-        // TODO: Implement the body of this method
-    }
-
-    @Override
-    public Integer createId() {
-        // TODO; Implement body
-        return 0;
+        for (Club current: clubArrayList) {
+            if (current.getUsername().equals(club.getUsername())) {
+                current.addClubPost(post);
+            }
+        }
     }
 }

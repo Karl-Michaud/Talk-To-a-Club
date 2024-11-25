@@ -1,8 +1,7 @@
 package entity.user;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 
 /**
@@ -11,8 +10,8 @@ import entity.post.Post;
 public class ClubUserFactory implements ClubFactory {
     @Override
     public Club create(String name, String email, String password) {
-        final Map<Integer, Student> clubMembers = new HashMap<>();
-        final Map<Integer, Post> clubPosts = new HashMap<>();
+        final DataStoreArrays<Student> clubMembers = new DataStoreArrays<>();
+        final DataStoreArrays<Post> clubPosts = new DataStoreArrays<>();
         return new Club(name, email, password, clubMembers, clubPosts);
     }
 
@@ -25,8 +24,8 @@ public class ClubUserFactory implements ClubFactory {
      * @param clubPosts the posts of the new club
      * @return the new club user
      */
-    public Club create(String username, String email, String password, Map<Integer, Student> clubMembers,
-                Map<Integer, Post> clubPosts) {
+    public Club create(String username, String email, String password, DataStore<Student> clubMembers,
+                DataStore<Post> clubPosts) {
         return new Club(username, email, password, clubMembers, clubPosts);
     }
 }

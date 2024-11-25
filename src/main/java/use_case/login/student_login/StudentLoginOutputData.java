@@ -1,7 +1,6 @@
 package use_case.login.student_login;
 
-import java.util.Map;
-
+import entity.data_structure.DataStore;
 import entity.user.Club;
 
 /**
@@ -9,11 +8,13 @@ import entity.user.Club;
  */
 public class StudentLoginOutputData {
     private final String username;
-    private final Map<Integer, Club> joinedClubs;
+    private final String email;
+    private final DataStore<Club> joinedClubs;
     private final boolean useCaseFailed;
 
-    public StudentLoginOutputData(String username, Map<Integer, Club> joinedClubs, boolean useCaseFailed) {
+    public StudentLoginOutputData(String username, String email, DataStore<Club> joinedClubs, boolean useCaseFailed) {
         this.username = username;
+        this.email = email;
         this.joinedClubs = joinedClubs;
         this.useCaseFailed = useCaseFailed;
     }
@@ -22,7 +23,11 @@ public class StudentLoginOutputData {
         return username;
     }
 
-    public Map<Integer, Club> getJoinedClubs() {
+    public String getEmail() {
+        return email;
+    }
+
+    public DataStore<Club> getJoinedClubs() {
         return joinedClubs;
     }
 

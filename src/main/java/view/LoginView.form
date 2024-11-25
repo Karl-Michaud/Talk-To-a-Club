@@ -60,7 +60,7 @@
             </constraints>
             <properties>
               <font size="16" style="1"/>
-              <text value="Club E-Mail or Student Username:"/>
+              <text value="User E-Mail"/>
             </properties>
           </component>
           <component id="3a7c1" class="javax.swing.JTextField" binding="userIdentifierField">

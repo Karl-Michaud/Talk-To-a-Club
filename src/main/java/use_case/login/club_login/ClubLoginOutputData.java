@@ -1,7 +1,6 @@
 package use_case.login.club_login;
 
-import java.util.Map;
-
+import entity.data_structure.DataStore;
 import entity.post.Post;
 
 /**
@@ -10,10 +9,10 @@ import entity.post.Post;
 public class ClubLoginOutputData {
     private final String username;
     private final String email;
-    private final Map<Integer, Post> posts;
+    private final DataStore<Post> posts;
     private final boolean useCaseFailed;
 
-    public ClubLoginOutputData(String username, String email, Map<Integer, Post> posts, boolean useCaseFailed) {
+    public ClubLoginOutputData(String username, String email, DataStore<Post> posts, boolean useCaseFailed) {
         this.username = username;
         this.email = email;
         this.posts = posts;
@@ -28,7 +27,7 @@ public class ClubLoginOutputData {
         return email;
     }
 
-    public Map<Integer, Post> getPosts() {
+    public DataStore<Post> getPosts() {
         return posts;
     }
 

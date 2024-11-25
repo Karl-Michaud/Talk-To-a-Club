@@ -1,6 +1,6 @@
 package entity.user;
 
-import java.util.Map;
+import entity.data_structure.DataStore;
 
 /**
  * Factory for creating Students.
@@ -18,5 +18,5 @@ public interface StudentFactory extends UserFactory {
      * @param joinedClubs the clubs the student has joined
      * @return the new student user
      */
-    User create(String name, String email, String password, Map<Integer, Club> joinedClubs);
+    User create(String name, String email, String password, DataStore<Club> joinedClubs);
 }

@@ -5,17 +5,17 @@ package use_case.signup.student_signup;
  */
 public class StudentSignupOutputData {
 
-    private final String username;
+    private final String email;
 
     private final boolean useCaseFailed;
 
-    public StudentSignupOutputData(String username, boolean useCaseFailed) {
-        this.username = username;
+    public StudentSignupOutputData(String email, boolean useCaseFailed) {
+        this.email = email;
         this.useCaseFailed = useCaseFailed;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
     public boolean isUseCaseFailed() {

@@ -8,16 +8,17 @@ import entity.user.Student;
 public interface StudentLoginDataAccessInterface {
 
     /**
-    * Checks if the given username exists in the database.
-    * @param username the username to look for
-    * @return true if a Student with the given username exists in the database.
+    * Checks if the given student email exists in the database.
+    * @param email the student email to look for
+    * @return true if a Student with the given student email exists in the database.
      */
-    boolean existsByName(String username);
+    boolean existsByEmailStudent(String email);
 
     /**
-     * Returns the student with the given username.
-     * @param username of the student we are looking for
-     * @return the student with the given username
+     * Returns the student with the given email.
+     * Precondition: The student must exist.
+     * @param studentEmail of the student we are looking for
+     * @return the student with the given studentEmail
      */
-    Student getStudent(String username);
+    Student getStudent(String studentEmail);
 }

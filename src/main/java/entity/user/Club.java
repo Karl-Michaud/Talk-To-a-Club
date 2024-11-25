@@ -1,7 +1,6 @@
 package entity.user;
 
-import java.util.Map;
-
+import entity.data_structure.DataStore;
 import entity.post.Post;
 
 /**
@@ -12,23 +11,18 @@ public class Club implements User {
     private final String username;
     private final String email;
     private final String password;
-    private int clubID;
-
     // Club's members and Posts information
-    private final Map<Integer, Student> clubMembers;
-    private final Map<Integer, Post> clubPosts;
+    private final DataStore<Student> clubMembers;
+    private final DataStore<Post> clubPosts;
 
-    public Club(String username, String email, String password, Map<Integer, Student> clubMembers,
-                Map<Integer, Post> clubPosts) {
-        // Initialise club personal information
+    public Club(String username, String email, String password, DataStore<Student> clubMembers,
+                DataStore<Post> clubPosts) {
+        // Initialize club personal information
         this.username = username;
         this.email = email;
         this.password = password;
 
-        // Temporarily sets the club's ID to -1. This means that the user is not in the database yet.
-        this.clubID = -1;
-
-        // Initialise club members and posts information
+        // Initialize club members and posts information
         this.clubMembers = clubMembers;
         this.clubPosts = clubPosts;
     }
@@ -45,19 +39,11 @@ public class Club implements User {
         return password;
     }
 
-    public int getUserID() {
-        return clubID;
-    }
-
-    public void setUserID(int userID) {
-        this.clubID = userID;
-    }
-
-    public Map<Integer, Student> getClubMembers() {
+    public DataStore<Student> getClubMembers() {
         return clubMembers;
     }
 
-    public Map<Integer, Post> getClubPosts() {
+    public DataStore<Post> getClubPosts() {
         return clubPosts;
     }
 
@@ -66,7 +52,7 @@ public class Club implements User {
      * @param user particular user joining the club.
      */
     public void addClubMember(Student user) {
-        clubMembers.put(user.getUserID(), user);
+        clubMembers.add(user);
     }
 
     /**
@@ -74,7 +60,7 @@ public class Club implements User {
      * @param post particular post to add.
      */
     public void addClubPost(Post post) {
-        clubPosts.put(post.getPostID(), post);
+        clubPosts.add(post);
     }
 
     /**
@@ -82,7 +68,7 @@ public class Club implements User {
      * @param user particular user leaving the club.
      */
     public void removeClubMember(Student user) {
-        clubMembers.remove(user.getUserID());
+        clubMembers.remove(user);
     }
 
     /**
@@ -90,7 +76,7 @@ public class Club implements User {
      * @param post particular post to be removed
      */
     public void removeClubPost(Post post) {
-        clubPosts.remove(post.getPostID());
+        clubPosts.remove(post);
     }
 
 }

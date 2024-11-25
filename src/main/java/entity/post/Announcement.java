@@ -2,8 +2,8 @@ package entity.post;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Map;
 
+import entity.data_structure.DataStore;
 import entity.user.User;
 
 /**
@@ -20,11 +20,8 @@ public class Announcement implements Post {
     private LocalDate dateOfPosting;
 
     // Like/Dislike information of post
-    private Map<Integer, User> likes;
-    private Map<Integer, User> dislikes;
-
-    // Post Identification
-    private int postID;
+    private DataStore<User> likes;
+    private DataStore<User> dislikes;
 
     public Announcement(String title, String content) {
         this.title = title;
@@ -32,8 +29,6 @@ public class Announcement implements Post {
 
         this.timeOfPosting = LocalTime.now();
         this.dateOfPosting = LocalDate.now();
-
-        this.postID = -1;
     }
 
     public String getTitle() {
@@ -48,24 +43,16 @@ public class Announcement implements Post {
      * Returns the date of publication of the post.
      * @return String the date of publication of the post
      */
-    public String dateOfPosting() {
-        return dateOfPosting.toString();
+    public LocalDate dateOfPosting() {
+        return dateOfPosting;
     }
 
     /**
      * Returns the time of publication of the post.
      * @return String the time of the publication of the post
      */
-    public String timeOfPosting() {
-        return timeOfPosting.toString();
-    }
-
-    public int getPostID() {
-        return postID;
-    }
-
-    public void setPostID(int postID) {
-        this.postID = postID;
+    public LocalTime timeOfPosting() {
+        return timeOfPosting;
     }
 
     /**
@@ -89,7 +76,7 @@ public class Announcement implements Post {
      * @param user user that likes the post.
      */
     public void addLike(User user) {
-        likes.put(user.getUserID(), user);
+        likes.add(user);
     }
 
     /**
@@ -97,7 +84,7 @@ public class Announcement implements Post {
      * @param user that unlikes the post
      */
     public void removeLike(User user) {
-        likes.remove(user.getUserID());
+        likes.remove(user);
     }
 
     /**
@@ -105,7 +92,7 @@ public class Announcement implements Post {
      * @param user that dislikes the post
      */
     public void addDislike(User user) {
-        dislikes.put(user.getUserID(), user);
+        dislikes.add(user);
     }
 
     /**
@@ -113,7 +100,7 @@ public class Announcement implements Post {
      * @param user that wants to remove dislike
      */
     public void removeDislike(User user) {
-        dislikes.remove(user.getUserID());
+        dislikes.remove(user);
     }
 
 }

@@ -21,10 +21,10 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
 
     @Override
     public void execute(StudentSignupInputData studentSignupInputData) {
-        if (userDataAccessObject.existsByName(studentSignupInputData.getUsername())) {
+        if (userDataAccessObject.existsByNameStudent(studentSignupInputData.getUsername())) {
             userPresenter.prepareFailView("Username already exists.");
         }
-        else if (userDataAccessObject.existsByEmail(studentSignupInputData.getEmail())) {
+        else if (userDataAccessObject.existsByEmailStudent(studentSignupInputData.getEmail())) {
             userPresenter.prepareFailView("Email address already exists.");
         }
         else if (!studentSignupInputData.getPassword().equals(studentSignupInputData.getRepeatPassword())) {
@@ -34,14 +34,10 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
             final Student user = studentUserFactory.create(studentSignupInputData.getUsername(),
                     studentSignupInputData.getEmail(),
                     studentSignupInputData.getPassword());
-            // Create unique id for new user
-            final Integer id = userDataAccessObject.createId();
-            // Assign new id to user
-            user.setUserID(id);
             // Save user to database
             userDataAccessObject.saveStudent(user);
 
-            final StudentSignupOutputData studentSignupOutputData = new StudentSignupOutputData(user.getUsername(),
+            final StudentSignupOutputData studentSignupOutputData = new StudentSignupOutputData(user.getEmail(),
                     false);
             userPresenter.prepareSuccessView(studentSignupOutputData);
         }

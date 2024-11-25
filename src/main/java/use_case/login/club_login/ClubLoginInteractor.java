@@ -16,13 +16,13 @@ public class ClubLoginInteractor implements ClubLoginInputBoundary {
     }
 
     /**
-     * Executes the login use case for the student user.
+     * Executes the login use case for the club user.
      * @param clubLoginInputData the input data
      */
     public void execute(ClubLoginInputData clubLoginInputData) {
         final String email = clubLoginInputData.getEmail();
         final String password = clubLoginInputData.getPassword();
-        if (!clubDataAccessObject.existsByEmail(email)) {
+        if (!clubDataAccessObject.existsByEmailClub(email)) {
             clubLoginPresenter.prepareFailView(email + ": Account does not exist.");
         }
         else {

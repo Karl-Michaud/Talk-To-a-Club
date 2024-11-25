@@ -21,10 +21,10 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
 
     @Override
     public void execute(ClubSignupInputData clubSignupInputData) {
-        if (userDataAccessObject.existsByName(clubSignupInputData.getUsername())) {
+        if (userDataAccessObject.existsByNameClub(clubSignupInputData.getUsername())) {
             userPresenter.prepareFailView("Username already exists.");
         }
-        else if (userDataAccessObject.existsByEmail(clubSignupInputData.getEmail())) {
+        else if (userDataAccessObject.existsByEmailClub(clubSignupInputData.getEmail())) {
             userPresenter.prepareFailView("Email address already exists.");
         }
         else if (!clubSignupInputData.getPassword().equals(clubSignupInputData.getRepeatPassword())) {
@@ -35,11 +35,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
             final Club user = clubUserFactory.create(clubSignupInputData.getUsername(),
                     clubSignupInputData.getEmail(),
                     clubSignupInputData.getPassword());
-            // Create a unique ID
-            final Integer id = userDataAccessObject.createId();
-            // Give Unique ID to the user
-            user.setUserID(id);
-            // Save User in DB
+
             userDataAccessObject.saveClub(user);
 
             final ClubSignupOutputData clubSignupOutputData = new ClubSignupOutputData(user.getEmail(),
