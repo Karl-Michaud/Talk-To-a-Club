@@ -17,15 +17,16 @@ import java.beans.PropertyChangeListener;
 public class ClubHomeView extends JPanel implements PropertyChangeListener {
     private JPanel panelClubHome;
     private JButton createPostButton;
+    private JPanel membersPanel;
+    private JPanel postsPanel;
+    private JPanel descriptionPanel;
     private JButton updateDescriptionButton;
     private JTextArea descriptionTextArea;
-    private JLabel logoLabel;
-    private JPanel membersPanel;
-    private JPanel descriptionPanel;
     private JPanel optionsPanel;
-    private JPanel postsPanel;
     private JButton logoutButton;
     private JButton refreshButton;
+    private JPanel logoPanel;
+    private JLabel logoLabel;
 
     private final String viewName = "club home";
     private final ClubHomeViewModel clubHomeViewModel;
