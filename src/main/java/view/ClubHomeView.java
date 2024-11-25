@@ -1,14 +1,11 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import interface_adapter.club_home.ClubHomeController;
 import interface_adapter.club_home.ClubHomeViewModel;
 import interface_adapter.signup.club_signup.ClubSignupState;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -19,8 +16,16 @@ import java.beans.PropertyChangeListener;
  */
 public class ClubHomeView extends JPanel implements PropertyChangeListener {
     private JPanel panelClubHome;
-    private JLabel idk;
     private JButton createPostButton;
+    private JButton updateDescriptionButton;
+    private JTextArea descriptionTextArea;
+    private JLabel logoLabel;
+    private JPanel membersPanel;
+    private JPanel descriptionPanel;
+    private JPanel optionsPanel;
+    private JPanel postsPanel;
+    private JButton logoutButton;
+    private JButton refreshButton;
 
     private final String viewName = "club home";
     private final ClubHomeViewModel clubHomeViewModel;
@@ -79,9 +84,4 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
     public String getViewName() {
         return viewName;
     }
-
-
-
-
-
 }
