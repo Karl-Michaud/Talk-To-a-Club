@@ -1,5 +1,7 @@
 package interface_adapter.club_logged_in;
 
+import entity.data_structure.DataStore;
+
 /**
  * Club Logged In state.
  */
