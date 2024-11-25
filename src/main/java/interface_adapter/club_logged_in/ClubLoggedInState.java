@@ -1,5 +1,8 @@
 package interface_adapter.club_logged_in;
 
+import entity.data_structure.DataStore;
+import entity.post.Post;
+
 /**
  * Club Logged In state.
  */
@@ -11,6 +14,8 @@ public class ClubLoggedInState {
 
     private String password = "";
     private String passwordError;
+
+    private DataStore<Post> posts;
 
     public ClubLoggedInState(ClubLoggedInState copy) {
         this.clubName = copy.clubName;
@@ -64,5 +69,13 @@ public class ClubLoggedInState {
 
     public void setPasswordError(String passwordError) {
         this.passwordError = passwordError;
+    }
+
+    public DataStore<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(DataStore<Post> posts) {
+        this.posts = posts;
     }
 }
