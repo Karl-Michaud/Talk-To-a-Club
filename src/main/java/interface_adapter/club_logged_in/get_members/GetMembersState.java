@@ -9,7 +9,7 @@ import entity.user.Student;
 public class GetMembersState {
     private String clubEmail;
     private DataStore<Student> members;
-    private boolean errorMessage;
+    private String errorMessage;
 
     public String getClubEmail() {
         return clubEmail;
@@ -27,11 +27,11 @@ public class GetMembersState {
         this.members = members;
     }
 
-    public boolean getErrorMessage() {
+    public String getErrorMessage() {
         return errorMessage;
     }
 
-    public void setErrorMessage(boolean errorMessage) {
+    public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 }
