@@ -57,4 +57,4 @@
 
 1) Logout interface adapters and use cases.
 2) Club Home view
-3) get posts, 
+3) get posts, logout, ClubUpdateDescription use cases and interface adapters
