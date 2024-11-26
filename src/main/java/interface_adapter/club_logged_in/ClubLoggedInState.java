@@ -2,6 +2,7 @@ package interface_adapter.club_logged_in;
 
 import entity.data_structure.DataStore;
 import entity.post.Post;
+import entity.user.Student;
 
 /**
  * Club Logged In state.
@@ -16,16 +17,7 @@ public class ClubLoggedInState {
     private String passwordError;
 
     private DataStore<Post> posts;
-
-    public ClubLoggedInState(ClubLoggedInState copy) {
-        this.clubName = copy.clubName;
-
-        this.email = copy.email;
-        this.emailError = copy.emailError;
-
-        this.password = copy.password;
-        this.passwordError = copy.passwordError;
-    }
+    private DataStore<Student> members;
 
     public ClubLoggedInState() {
         // empty body since we have a constructor already and so no default constructor anymore.
@@ -77,5 +69,13 @@ public class ClubLoggedInState {
 
     public void setPosts(DataStore<Post> posts) {
         this.posts = posts;
+    }
+
+    public DataStore<Student> getMembers() {
+        return members;
+    }
+
+    public void setMembers(DataStore<Student> members) {
+        this.members = members;
     }
 }

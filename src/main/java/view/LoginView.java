@@ -61,6 +61,7 @@ public class LoginView extends JPanel implements PropertyChangeListener {
                                         currentState.getIdentifier(),
                                         currentState.getPassword()
                                 );
+                                System.out.println("Success");
                             }
                             else {
                                 studentLoginController.execute(
