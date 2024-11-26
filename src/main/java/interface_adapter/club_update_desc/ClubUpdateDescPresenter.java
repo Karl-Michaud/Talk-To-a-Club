@@ -19,12 +19,26 @@ public class ClubUpdateDescPresenter implements ClubUpdateDescOutputBoundary {
     }
 
     @Override
-    public void prepareMessage(ClubUpdateDescOutputData outputData) {
+    public void prepareNewDescMessage(ClubUpdateDescOutputData outputData) {
+        // Get the state of the current ClubLoggedInViewModel and set the message and description to the new one
+        final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
+        clubLoggedInState.setMessage(outputData.getMessage());
+        clubLoggedInState.setDescription(outputData.getNewDesc());
+        clubLoggedInViewModel.setState(clubLoggedInState);
+        clubLoggedInViewModel.firePropertyChanged("reload description");
+        clubLoggedInViewModel.firePropertyChanged("reload message");
+
+        // Fires property change to the viewManagerModel
+        viewManagerModel.setState(clubLoggedInViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void prepareFailMessage(ClubUpdateDescOutputData outputData) {
         // Get the state of the current ClubLoggedInViewModel and set the message to the new one
         final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
         clubLoggedInState.setMessage(outputData.getMessage());
         clubLoggedInViewModel.setState(clubLoggedInState);
-        clubLoggedInViewModel.firePropertyChanged("reload description");
         clubLoggedInViewModel.firePropertyChanged("reload message");
 
         // Fires property change to the viewManagerModel

@@ -22,7 +22,7 @@ public class ClubUpdateDescInteractor implements ClubUpdateDescInputBoundary {
             // results in a failed message if the club doesn't exist
             String message = "Failure in changing description: Club not Found";
             ClubUpdateDescOutputData outputData = new ClubUpdateDescOutputData(message, null);
-            updateDescPresenter.prepareMessage(outputData);
+            updateDescPresenter.prepareFailMessage(outputData);
         } else {
             // Gets the current club entity and changes its description to the new one
             Club currentClub = updateDescDataAccessObject.getClub(descUpdateInputData.getClubEmail());
@@ -31,7 +31,7 @@ public class ClubUpdateDescInteractor implements ClubUpdateDescInputBoundary {
             currentClub.setClubDescription(newDescription);
             String message = "Success in changing description.";
             ClubUpdateDescOutputData outputData = new ClubUpdateDescOutputData(message, newDescription);
-            updateDescPresenter.prepareMessage(outputData);
+            updateDescPresenter.prepareNewDescMessage(outputData);
         }
     }
 }
