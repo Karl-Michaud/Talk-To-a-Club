@@ -120,10 +120,12 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
         else if (evt.getPropertyName().equals("create post")) {
             final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
             clubGetPostsController.execute(state.getEmail());
+            // TODO add panels into the postsScrollPane of each post
         }
         else if (evt.getPropertyName().equals("get members")) {
             final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
             clubGetMembersController.execute(state.getEmail());
+            // TODO add panels into the membersScrollPane of each student
         }
         else if (evt.getPropertyName().equals("reload message")) {
             final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
