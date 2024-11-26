@@ -71,7 +71,7 @@ public class AppBuilder {
     private StudentHomeView studentHomeView;
 
     private ClubLoggedInViewModel clubLoggedInViewModel;
-    private ClubHomeView clubHomeView;
+    private ClubLoggedInView clubLoggedInView;
 
     private CreatePostViewModel createPostViewModel;
     private CreatePostView createPostView;
@@ -119,8 +119,8 @@ public class AppBuilder {
      */
     public AppBuilder addClubHomeView() {
         clubLoggedInViewModel = new ClubLoggedInViewModel();
-        clubHomeView = new ClubHomeView(clubLoggedInViewModel);
-        cardPanel.add(clubHomeView, clubHomeView.getViewName());
+        clubLoggedInView = new ClubLoggedInView(clubLoggedInViewModel);
+        cardPanel.add(clubLoggedInView, clubLoggedInView.getViewName());
         return this;
     }
 

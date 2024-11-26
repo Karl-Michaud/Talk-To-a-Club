@@ -18,9 +18,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /**
- * Club Home View.
+ * The Club Logged View.
  */
-public class ClubHomeView extends JPanel implements PropertyChangeListener {
+public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
     private JPanel panelClubHome;
     private JButton createPostButton;
     private JPanel membersPanel;
@@ -47,7 +47,7 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
     private ClubGetMembersController clubGetMembersController;
     private ClubUpdateDescController clubUpdateDescController;
 
-    public ClubHomeView(ClubLoggedInViewModel clubLoggedInViewModel) {
+    public ClubLoggedInView(ClubLoggedInViewModel clubLoggedInViewModel) {
         this.clubLoggedInViewModel = clubLoggedInViewModel;
         this.clubLoggedInViewModel.addPropertyChangeListener(this);
 
