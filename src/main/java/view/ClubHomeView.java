@@ -60,7 +60,7 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(createPostButton)) {
-                            createPostController.switchToCreatePost(); // TODO
+                            // createPostController.switchToCreatePost(); // TODO By Karl
                         }
                     }
                 }
@@ -107,39 +107,40 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
                     }
                 }
         );
+
+        addDescriptionTextAreaListener();
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
-            final LoggedInState state = (LoggedInState) evt.getNewValue();
-
-            // TODO call the controllers for getmembers and getposts
+            final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
+            clubGetMembersController.execute(state.getEmail());
+            clubGetPostsController.execute(state.getEmail());
         }
         else if (evt.getPropertyName().equals("create post")) {
-            final LoggedInState state = (LoggedInState) evt.getNewValue();
-            // TODO call the controller for getposts
+            final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
+            clubGetPostsController.execute(state.getEmail());
         }
-        else if (evt.getPropertyName().equals("")) {
-            final LoggedInState state = (LoggedInState) evt.getNewValue();
-            // TODO call the controller for getmembers and fill in the .equals call
+        else if (evt.getPropertyName().equals("get members")) {
+            final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
+            clubGetMembersController.execute(state.getEmail());
         }
         else if (evt.getPropertyName().equals("reload message")) {
-            final LoggedInState state = (LoggedInState) evt.getNewValue();
-            // make this.message into the one in loggedinstate
+            final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
+            message.setText(state.getMessage());
         }
-
     }
 
     /**
-     * Adds a listener to the descriptionTextArea to update the club logged in state. TODO
+     * Adds a listener to the descriptionTextArea to update the club logged in state.
      */
     private void addDescriptionTextAreaListener() {
         descriptionTextArea.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
-                final ClubSignupState currentState = clubLoggedInViewModel.getState();
-                currentState.setEmail(descriptionTextArea.getText());
+                final ClubLoggedInState currentState = clubLoggedInViewModel.getState();
+                currentState.setDescriptionTextArea(descriptionTextArea.getText());
                 clubLoggedInViewModel.setState(currentState);
             }
 
