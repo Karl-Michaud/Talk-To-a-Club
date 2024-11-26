@@ -8,6 +8,8 @@ import interface_adapter.club_create_post.CreatePostController;
 import interface_adapter.club_get_posts.ClubGetPostsController;
 import interface_adapter.club_home.ClubHomeController;
 import interface_adapter.club_home.ClubLoggedInViewModel;
+import interface_adapter.club_logged_in.ClubLoggedInViewModel;
+import interface_adapter.club_logged_in.get_members.GetMembersController;
 import interface_adapter.club_update_desc.ClubUpdateDescController;
 import interface_adapter.logout.LogoutController;
 import interface_adapter.signup.club_signup.ClubSignupState;
@@ -38,14 +40,14 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
     private JScrollPane descScrollPane;
     private JScrollPane postsScrollPane;
 
-    private final String viewName = "club home";
+    private final String viewName = "club logged in";
     private final ClubLoggedInViewModel clubLoggedInViewModel;
 
     private ClubHomeController clubHomeController;
     private CreatePostController createPostController;  // TODO might change to one to swap to the view first
     private LogoutController logoutController;
     private ClubGetPostsController clubGetPostsController;
-    private ClubGetMembersController clubGetMembersController;
+    private GetMembersController getMembersController;
     private ClubUpdateDescController clubUpdateDescController;
 
     public ClubHomeView(ClubLoggedInViewModel clubLoggedInViewModel) {
@@ -84,7 +86,7 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
                             // Executes the Logout use case.
                             final ClubLoggedInState currentState = clubLoggedInViewModel.getState();
                             clubGetPostsController.execute(currentState.getClubEmail);
-                            clubGetMembersController.execute(currentState.getClubEmail);
+                            getMembersController.execute(currentState.getClubEmail);
                         }
                     }
                 }
@@ -167,8 +169,8 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
         this.clubGetPostsController = clubGetPostsController;
     }
 
-    public void setClubGetMembersController(ClubGetMembersController clubGetMembersController) {
-        this.clubGetMembersController = clubGetMembersController;
+    public void setGetMembersController(GetMembersController getMembersController) {
+        this.getMembersController = getMembersController;
     }
 
     public void setClubUpdateDescController(ClubUpdateDescController clubUpdateDescController) {
