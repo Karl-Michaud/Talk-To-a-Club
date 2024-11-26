@@ -31,7 +31,7 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
     @Override
     public void prepareSuccessView(ClubLoginOutputData response) {
-        // On success switch to the home view.
+        // On success switch to the club logged in view.
         setHomePageState(response);
 
         this.viewManagerModel.setState(clubLoggedInViewModel.getViewName());
@@ -43,15 +43,11 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
      * @param response the input data getting passed to the presenter
      */
     private void setHomePageState(ClubLoginOutputData response) {
-        final ClubLoggedInState clubHomeState = clubLoggedInViewModel.getState();
-        clubHomeState.setClubName(response.getUsername());
-        clubHomeState.setEmail(response.getEmail());
-
-        // IMPORTANT!!!
-        // Since we are changing the code to have a get posts use case, we don't need to assign it to the
-        // ClubLoggedInState. Therefore, this logic will be taking place in the get posts use case.
-
-        this.clubLoggedInViewModel.setState(clubHomeState);
+        final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
+        clubLoggedInState.setClubName(response.getUsername());
+        clubLoggedInState.setEmail(response.getEmail());
+        clubLoggedInState.setDescriptionTextArea(response.getDescription());
+        this.clubLoggedInViewModel.setState(clubLoggedInState);
         this.clubLoggedInViewModel.firePropertyChanged();
     }
 
