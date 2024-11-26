@@ -49,3 +49,12 @@
 ### Kabir:
 1) data_access: FireStoreUserDataAccessObject implemented methods to persist data
 2) setup Google cloud firestore
+
+
+## Week 4:
+
+### Roy:
+
+1) Logout interface adapters and use cases.
+2) Club Home view
+3) get posts, 
