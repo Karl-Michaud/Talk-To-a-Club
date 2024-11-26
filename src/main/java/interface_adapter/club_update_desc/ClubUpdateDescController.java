@@ -12,7 +12,6 @@ public class ClubUpdateDescController {
 
     public ClubUpdateDescController(ClubUpdateDescInputBoundary descUpdateInteractor) {
         this.descUpdateInteractor = descUpdateInteractor;
-
     }
 
     /**
@@ -24,5 +23,6 @@ public class ClubUpdateDescController {
         final ClubUpdateDescInputData descUpdateInputData = new ClubUpdateDescInputData(clubEmail, newDescription);
 
         descUpdateInteractor.execute(descUpdateInputData);
+
     }
 }

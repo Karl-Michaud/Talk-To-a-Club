@@ -13,4 +13,11 @@ public interface ClubUpdateDescDataAccessInterface {
      * @return the club with given email.
      */
     Club getClub(String clubEmail);
+
+    /**
+     * Checks if the given email exists in the database.
+     * @param email the email to look for
+     * @return true if a Club with the given email exists in the database.
+     */
+    boolean existsByEmailClub(String email);
 }

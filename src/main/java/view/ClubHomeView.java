@@ -27,6 +27,7 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
     private JButton refreshButton;
     private JPanel logoPanel;
     private JLabel logoLabel;
+    private JLabel message;
 
     private final String viewName = "club home";
     private final ClubHomeViewModel clubHomeViewModel;
