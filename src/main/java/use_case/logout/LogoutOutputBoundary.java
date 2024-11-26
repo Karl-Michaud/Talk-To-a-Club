@@ -6,7 +6,7 @@ package use_case.logout;
 public interface LogoutOutputBoundary {
 
     /**
-     * Switches to the Login View.
+     * Switches to the Login View with an empty login state.
      */
     void switchToLoginView();
 }

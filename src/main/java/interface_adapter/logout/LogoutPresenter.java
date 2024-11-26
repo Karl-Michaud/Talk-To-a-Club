@@ -20,10 +20,11 @@ public class LogoutPresenter implements LogoutOutputBoundary {
 
     @Override
     public void switchToLoginView() {
-        // creates a new empty login state and sets it to the login view model
+        // Empties the login state and sets it to the login view model
         final LoginState loginState = loginViewModel.getState();
         loginState.setIdentifier("");
         loginState.setPassword("");
+        loginState.setLoginError(null);
         this.loginViewModel.setState(loginState);
         loginViewModel.firePropertyChanged();
 
