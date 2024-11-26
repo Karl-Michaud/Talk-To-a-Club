@@ -11,7 +11,6 @@ import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
 import interface_adapter.club_update_desc.ClubUpdateDescController;
 import interface_adapter.logout.LogoutController;
-import interface_adapter.signup.club_signup.ClubSignupState;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
