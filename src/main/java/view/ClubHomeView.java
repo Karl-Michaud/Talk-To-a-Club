@@ -34,6 +34,9 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
     private JPanel logoPanel;
     private JLabel logoLabel;
     private JLabel message;
+    private JScrollPane membersScrollPane;
+    private JScrollPane descScrollPane;
+    private JScrollPane postsScrollPane;
 
     private final String viewName = "club home";
     private final ClubLoggedInViewModel clubLoggedInViewModel;
@@ -57,7 +60,7 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
                             // Sets the state to be signing up a club before executing the signup use case
                             final ClubSignupState currentState = signupViewModel.getState();
 
-                            signupController.execute(
+                            signupController.execute( // TODO
                                     currentState.getUsername(),
                                     currentState.getEmail(),
                                     currentState.getPassword(),
