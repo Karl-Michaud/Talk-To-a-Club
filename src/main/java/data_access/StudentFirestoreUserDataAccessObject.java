@@ -16,6 +16,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import entity.user.Student;
 import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
+import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
 import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
 import use_case.student_join_club.StudentJoinClubDataAccessInterface;
@@ -30,7 +31,7 @@ import use_case.student_search_club.StudentSearchClubAccessInterface;
 public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAccessInterface,
         StudentSignupUserDataAccessInterface, StudentJoinClubDataAccessInterface,
         StudentLeaveClubDataAccessInterface, StudentSearchClubAccessInterface,
-        ClubRemoveMemberStudentDataAccessInterface {
+        ClubRemoveMemberStudentDataAccessInterface, StudentExploreClubsDataAccessInterface {
     private final Firestore db;
     private final String students = "students";
     private final String usernames = "username";

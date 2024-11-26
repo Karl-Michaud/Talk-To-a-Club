@@ -28,6 +28,7 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
         final ExploreClubsState state = exploreClubsViewModel.getState();
         state.setClubs(data.getNotJoinedClubs());
         state.setCurrentStudent(data.getStudent());
+        state.setSelectedClub(null);
         state.setError(null);
 
         exploreClubsViewModel.setState(state);
@@ -65,6 +66,13 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
     @Override
     public void switchToHomeView() {
         // Transition the ViewManager to the Home view
+        final ExploreClubsState state = exploreClubsViewModel.getState();
+        state.setClubs(null);
+        state.setCurrentStudent(null);
+        state.setSelectedClub(null);
+        // set and fire the states
+        exploreClubsViewModel.setState(state);
+        exploreClubsViewModel.firePropertyChanged();
         viewManagerModel.setState(studentHomeViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

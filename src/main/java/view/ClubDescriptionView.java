@@ -10,6 +10,9 @@ import interface_adapter.student_logged_in.explore_clubs.ExploreClubsPresenter;
 import interface_adapter.student_logged_in.join_club.JoinClubController;
 import interface_adapter.student_logged_in.leave_club.LeaveClubController;
 
+/**
+ * Club description view.
+ */
 public class ClubDescriptionView extends JPanel {
     private JPanel contentPane;
     private JButton joinLeave;
@@ -17,6 +20,8 @@ public class ClubDescriptionView extends JPanel {
     private JLabel clubDescription;
     private JLabel clubEmail;
     private JButton backToExplore;
+
+    private final String viewName = "ClubDescriptionView";
 
     public ClubDescriptionView(ExploreClubsState exploreClubsState, ExploreClubsPresenter exploreClubsPresenter,
                                JoinClubController joinController, LeaveClubController leaveController) {
@@ -67,5 +72,9 @@ public class ClubDescriptionView extends JPanel {
                 }
             }
         });
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 }
