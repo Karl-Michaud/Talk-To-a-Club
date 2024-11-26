@@ -1,8 +1,8 @@
 package interface_adapter.login.club_login;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.club_home.ClubHomeState;
-import interface_adapter.club_home.ClubLoggedInViewModel;
+import interface_adapter.club_logged_in.ClubLoggedInState;
+import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.signup.club_signup.ClubSignupViewModel;
@@ -43,8 +43,14 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
      * @param response the input data getting passed to the presenter
      */
     private void setHomePageState(ClubLoginOutputData response) {
-        final ClubHomeState clubHomeState = clubLoggedInViewModel.getState();
-        clubHomeState.setUsername(response.getUsername());
+        final ClubLoggedInState clubHomeState = clubLoggedInViewModel.getState();
+        clubHomeState.setClubName(response.getUsername());
+        clubHomeState.setEmail(response.getEmail());
+
+        // IMPORTANT!!!
+        // Since we are changing the code to have a get posts use case, we don't need to assign it to the
+        // ClubLoggedInState. Therefore, this logic will be taking place in the get posts use case.
+
         this.clubLoggedInViewModel.setState(clubHomeState);
         this.clubLoggedInViewModel.firePropertyChanged();
     }
