@@ -2,6 +2,7 @@ package use_case.explore_clubs;
 
 import entity.data_structure.DataStore;
 import entity.user.Club;
+import entity.user.Student;
 
 /**
  * Interactor for the get clubs use case.
@@ -31,8 +32,8 @@ public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
         }
         else {
             // gets the joined clubs by retrieving user from database and getting joined clubs.
-            final DataStore<Club> joinedClubs = studentExploreClubsDataAccessInterface
-                    .getStudent(email).getJoinedClubs();
+            final Student student = studentExploreClubsDataAccessInterface.getStudent(email);
+            final DataStore<Club> joinedClubs = student.getJoinedClubs();
 
             // gets all the clubs from the database.
             final DataStore<Club> allClubs = clubExploreClubsDataAccessInterface.getAllClubs();
@@ -41,8 +42,18 @@ public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
             final DataStore<Club> complement = allClubs.complement(joinedClubs);
 
             final ExploreClubsOutputData outputData = new ExploreClubsOutputData(inputData.getEmail(),
-                    complement, false);
+                    complement, false, student);
             getClubsPresenter.prepareSuccessView(outputData);
         }
+    }
+
+    @Override
+    public void switchToClubView(Club club) {
+        getClubsPresenter.switchToClubView(club);
+    }
+
+    @Override
+    public void switchToHomeView() {
+        getClubsPresenter.switchToHomeView();
     }
 }

@@ -1,10 +1,9 @@
 package interface_adapter.student_home;
 
-
 import interface_adapter.ViewModel;
 
 /**
- * The ViewModel for the Club Home View
+ * The ViewModel for the Club Home View.
  */
 public class StudentHomeViewModel extends ViewModel<StudentHomeState> {
 
@@ -12,7 +11,5 @@ public class StudentHomeViewModel extends ViewModel<StudentHomeState> {
         super("student home");
         setState(new StudentHomeState());
     }
-
-
 
 }
