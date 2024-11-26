@@ -45,10 +45,7 @@ public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
         return data.get(index);
     }
 
-    /**
-     * Removes and returns the last element of the list.
-     * @return element that has been popped.
-     */
+    @Override
     public T pop() {
         final T last = data.get(data.size() - 1);
         data.remove(data.size() - 1);
