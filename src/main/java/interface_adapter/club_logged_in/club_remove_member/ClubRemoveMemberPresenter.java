@@ -26,7 +26,7 @@ public class ClubRemoveMemberPresenter implements ClubRemoveMemberOutputBoundary
     @Override
     public void prepareFailView(String errorMessage) {
         final ClubLoggedInState removeMemberState = clubLoggedInViewModel.getState();
-        removeMemberState.setErrorMessage(errorMessage);
+        removeMemberState.setMessage(errorMessage);
         clubLoggedInViewModel.setState(removeMemberState);
         clubLoggedInViewModel.firePropertyChanged();
     }

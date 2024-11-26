@@ -1,7 +1,8 @@
 package interface_adapter.club_get_posts;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.club_home.ClubLoggedInViewModel;
+import interface_adapter.club_logged_in.ClubLoggedInState;
+import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import use_case.club_get_posts.ClubGetPostsOutputBoundary;
 import use_case.club_get_posts.ClubGetPostsOutputData;
 
@@ -23,7 +24,7 @@ public class ClubGetPostsPresenter implements ClubGetPostsOutputBoundary {
         // Get the state of the current ClubLoggedInViewModel and set the message and clubPosts to the new ones
         final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
         clubLoggedInState.setMessage(outputData.getMessage());
-        clubLoggedInState.setClubPosts(outputData.getClubPosts());
+        clubLoggedInState.setPosts(outputData.getClubPosts());
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("reload posts");
         clubLoggedInViewModel.firePropertyChanged("reload message");

@@ -44,6 +44,6 @@ public class ClubGetMembersPresenter implements ClubGetMembersOutputBoundary {
     @Override
     public void prepareFailView(String errorMessage) {
         final ClubLoggedInState currentState = clubLoggedInViewModel.getState();
-        currentState.setErrorMessage(errorMessage);
+        currentState.setMessage(errorMessage);
     }
 }

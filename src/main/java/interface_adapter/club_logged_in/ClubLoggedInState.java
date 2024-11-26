@@ -13,7 +13,9 @@ public class ClubLoggedInState {
     private String email = "";
 
     private String password = "";
-    private String errorMessage;
+    private String message;
+
+    private String descriptionTextArea = "";
 
     private DataStore<Post> posts;
     private DataStore<Student> members;
@@ -46,12 +48,20 @@ public class ClubLoggedInState {
         this.password = password;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getDescriptionTextArea() {
+        return descriptionTextArea;
+    }
+
+    public void setDescriptionTextArea(String descriptionTextArea) {
+        this.descriptionTextArea = descriptionTextArea;
     }
 
     public DataStore<Post> getPosts() {

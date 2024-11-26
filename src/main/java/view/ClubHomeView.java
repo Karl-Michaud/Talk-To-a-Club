@@ -42,7 +42,7 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
     private final String viewName = "club logged in";
     private final ClubLoggedInViewModel clubLoggedInViewModel;
 
-    private CreatePostController createPostController;  // TODO might change to one to swap to the view first
+    private CreatePostController createPostController;
     private LogoutController logoutController;
     private ClubGetPostsController clubGetPostsController;
     private ClubGetMembersController clubGetMembersController;
@@ -87,6 +87,22 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
                             final ClubLoggedInState currentState = clubLoggedInViewModel.getState();
                             clubGetPostsController.execute(currentState.getEmail());
                             clubGetMembersController.execute(currentState.getEmail());
+                        }
+                    }
+                }
+        );
+
+        updateDescriptionButton.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(updateDescriptionButton)) {
+                            // Gets the current view state containing the new description in the TextArea
+                            final ClubLoggedInState currentState = clubLoggedInViewModel.getState();
+
+                            // Executes the update description usecase
+                            clubUpdateDescController.execute(currentState.getEmail(),
+                                    currentState.getDescriptionTextArea());
                         }
                     }
                 }
