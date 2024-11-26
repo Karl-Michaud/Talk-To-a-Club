@@ -55,15 +55,6 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="6464b" class="javax.swing.JButton" binding="updateDescriptionButton">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font size="16" style="1"/>
-              <text value="Update Description"/>
-            </properties>
-          </component>
           <scrollpane id="95630">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -81,6 +72,15 @@
               </component>
             </children>
           </scrollpane>
+          <component id="6464b" class="javax.swing.JButton" binding="updateDescriptionButton">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="16" style="1"/>
+              <text value="Update Description"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="87812" binding="optionsPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
