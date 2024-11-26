@@ -57,15 +57,8 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(createPostButton)) {
-                            // Sets the state to be signing up a club before executing the signup use case
-                            final ClubSignupState currentState = signupViewModel.getState();
 
-                            signupController.execute( // TODO
-                                    currentState.getUsername(),
-                                    currentState.getEmail(),
-                                    currentState.getPassword(),
-                                    currentState.getRepeatPassword()
-                            );
+                            createPostController.switchToCreatePost(); // TODO
                         }
                     }
                 }
