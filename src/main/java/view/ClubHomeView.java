@@ -8,7 +8,7 @@ import interface_adapter.club_create_post.CreatePostController;
 import interface_adapter.club_get_posts.ClubGetPostsController;
 import interface_adapter.club_logged_in.ClubLoggedInState;
 import interface_adapter.club_logged_in.ClubLoggedInViewModel;
-import interface_adapter.club_logged_in.get_members.GetMembersController;
+import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
 import interface_adapter.club_update_desc.ClubUpdateDescController;
 import interface_adapter.logout.LogoutController;
 import interface_adapter.signup.club_signup.ClubSignupState;
@@ -45,7 +45,7 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
     private CreatePostController createPostController;  // TODO might change to one to swap to the view first
     private LogoutController logoutController;
     private ClubGetPostsController clubGetPostsController;
-    private GetMembersController getMembersController;
+    private ClubGetMembersController clubGetMembersController;
     private ClubUpdateDescController clubUpdateDescController;
 
     public ClubHomeView(ClubLoggedInViewModel clubLoggedInViewModel) {
@@ -86,7 +86,7 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
                             // Executes both the Get Posts and Get Members usecase to get an updated version of them
                             final ClubLoggedInState currentState = clubLoggedInViewModel.getState();
                             clubGetPostsController.execute(currentState.getEmail());
-                            getMembersController.execute(currentState.getEmail());
+                            clubGetMembersController.execute(currentState.getEmail());
                         }
                     }
                 }
@@ -156,8 +156,8 @@ public class ClubHomeView extends JPanel implements PropertyChangeListener {
         this.clubGetPostsController = clubGetPostsController;
     }
 
-    public void setGetMembersController(GetMembersController getMembersController) {
-        this.getMembersController = getMembersController;
+    public void setGetMembersController(ClubGetMembersController clubGetMembersController) {
+        this.clubGetMembersController = clubGetMembersController;
     }
 
     public void setClubUpdateDescController(ClubUpdateDescController clubUpdateDescController) {

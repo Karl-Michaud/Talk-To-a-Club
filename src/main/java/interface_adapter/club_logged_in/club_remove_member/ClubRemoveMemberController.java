@@ -1,4 +1,4 @@
-package interface_adapter.club_logged_in.remove_member;
+package interface_adapter.club_logged_in.club_remove_member;
 
 import use_case.club_remove_member.ClubRemoveMemberInputBoundary;
 import use_case.club_remove_member.ClubRemoveMemberInputData;
@@ -6,10 +6,10 @@ import use_case.club_remove_member.ClubRemoveMemberInputData;
 /**
  * The controller for the remove member from club use case.
  */
-public class RemoveMemberController {
+public class ClubRemoveMemberController {
     private final ClubRemoveMemberInputBoundary removeMemberInteractor;
 
-    public RemoveMemberController(ClubRemoveMemberInputBoundary removeMemberInteractor) {
+    public ClubRemoveMemberController(ClubRemoveMemberInputBoundary removeMemberInteractor) {
         this.removeMemberInteractor = removeMemberInteractor;
     }
 

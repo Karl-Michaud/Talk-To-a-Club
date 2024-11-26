@@ -1,4 +1,4 @@
-package interface_adapter.club_logged_in.remove_member;
+package interface_adapter.club_logged_in.club_remove_member;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.club_logged_in.ClubLoggedInState;
@@ -9,11 +9,11 @@ import use_case.club_remove_member.ClubRemoveMemberOutputData;
 /**
  * The presenter for the remove member from club use case.
  */
-public class RemoveMemberPresenter implements ClubRemoveMemberOutputBoundary {
+public class ClubRemoveMemberPresenter implements ClubRemoveMemberOutputBoundary {
     private final ClubLoggedInViewModel clubLoggedInViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public RemoveMemberPresenter(ClubLoggedInViewModel removeMemberViewModel, ViewManagerModel viewManagerModel) {
+    public ClubRemoveMemberPresenter(ClubLoggedInViewModel removeMemberViewModel, ViewManagerModel viewManagerModel) {
         this.clubLoggedInViewModel = removeMemberViewModel;
         this.viewManagerModel = viewManagerModel;
     }

@@ -1,4 +1,4 @@
-package interface_adapter.club_logged_in.get_members;
+package interface_adapter.club_logged_in.club_get_members;
 
 import entity.data_structure.DataStore;
 import entity.user.Student;
@@ -11,12 +11,12 @@ import use_case.club_get_members.ClubGetMembersOutputData;
 /**
  * The presenter for the get members use case for clubs.
  */
-public class GetMembersPresenter implements ClubGetMembersOutputBoundary {
+public class ClubGetMembersPresenter implements ClubGetMembersOutputBoundary {
     private final ClubLoggedInViewModel clubLoggedInViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public GetMembersPresenter(ClubLoggedInViewModel getMembersViewModel,
-                               ViewManagerModel viewManagerModel) {
+    public ClubGetMembersPresenter(ClubLoggedInViewModel getMembersViewModel,
+                                   ViewManagerModel viewManagerModel) {
         this.clubLoggedInViewModel = getMembersViewModel;
         this.viewManagerModel = viewManagerModel;
     }
