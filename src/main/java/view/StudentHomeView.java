@@ -16,6 +16,7 @@ import javax.swing.event.DocumentListener;
 import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_home.like.StudentLikeController;
 import interface_adapter.student_home.show_posts.ShowPostsController;
 import interface_adapter.student_home.show_posts.ShowPostsState;
 import interface_adapter.student_home.show_posts.ShowPostsViewModel;
@@ -39,6 +40,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     private final ShowPostsViewModel showPostsViewModel;
     private StudentHomeController studentHomeController;
     private ShowPostsController showPostsController;
+    private StudentLikeController studentLikeController;
 
     public StudentHomeView(StudentHomeViewModel studentHomeViewModel, ShowPostsViewModel showPostsViewModel) {
         this.studentHomeViewModel = studentHomeViewModel;
@@ -72,8 +74,8 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         this.add(panelStudentHomeView);
         final StudentHomeState state = studentHomeViewModel.getState();
         final ShowPostsState showPostsState = showPostsViewModel.getState();
-        this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState),
-                new ClubsContainer(state)));
+        this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState.getPosts(),
+                studentLikeController), new ClubsContainer(state)));
     }
 
     private void addSearchListener() {
@@ -106,8 +108,8 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         final StudentHomeState state = (StudentHomeState) evt.getNewValue();
         final ShowPostsState showPostsState = showPostsViewModel.getState();
-        this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState),
-                new ClubsContainer(state)));
+        this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState.getPosts(),
+                studentLikeController), new ClubsContainer(state)));
         if (state.getStudentHomeError() != null) {
             JOptionPane.showMessageDialog(this, state.getStudentHomeError());
         }
@@ -123,5 +125,9 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
 
     public void setShowPostsController(ShowPostsController showPostsController) {
         this.showPostsController = showPostsController;
+    }
+
+    public void setStudentLikeController(StudentLikeController studentLikeController) {
+        this.studentLikeController = studentLikeController;
     }
 }

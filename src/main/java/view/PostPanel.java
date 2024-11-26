@@ -2,6 +2,7 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -11,8 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import entity.post.Post;
-import entity.user.User;
+import interface_adapter.student_home.like.StudentLikeController;
 
 /**
  * A panel which will hold the data for a single post. A list of these in the student home view will be contained
@@ -25,45 +25,36 @@ public class PostPanel extends JPanel {
     private JPanel postPanel;
     private JLabel labelPostContent;
     private JLabel labelClub;
+    private JLabel labelLikes;
+    private JLabel labelDislikes;
+    private final Icon likeEmptyIcon = new ImageIcon("src/main/resources/like.png");
+    private final Icon likeFilledIcon = new ImageIcon("src/main/resources/like_filled.png");
+    private final Icon dislikeEmptyIcon = new ImageIcon("src/main/resources/dislike.png");
+    private final Icon dislikeFilledIcon = new ImageIcon("src/main/resources/dislike_filled.png");
 
-    public PostPanel(Post post, String clubName, User currUser) {
+    private StudentLikeController likeController;
+
+    public PostPanel(Map<String, Object> post, String clubName, StudentLikeController likeController) {
+        this.likeController = likeController;
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(postPanel);
-        this.labelPostTitle.setText(post.getTitle());
-        this.labelPostContent.setText(post.getContent());
+        this.labelPostTitle.setText(post.get("title").toString());
+        this.labelPostContent.setText(post.get("content").toString());
         this.labelClub.setText(clubName);
+        this.labelLikes.setText(String.valueOf(post.get("likes")));
+        this.labelDislikes.setText(String.valueOf(post.get("dislikes")));
         this.setBorder(BorderFactory.createBevelBorder(1));
 
         buttonLike.addActionListener(new ActionListener() {
-            private final Icon likeEmptyIcon = new ImageIcon("src/main/resources/like.png");
-            private final Icon likeFilledIcon = new ImageIcon("src/main/resources/like_filled.png");
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                if (post.getLikes().contains(currUser)) {
-                    post.removeLike(currUser);
-                    buttonLike.setIcon(likeEmptyIcon);
-                }
-                else {
-                    post.addLike(currUser);
-                    buttonLike.setIcon(likeFilledIcon);
-                }
             }
         });
 
         buttonDislike.addActionListener(new ActionListener() {
-            private final Icon dislikeEmptyIcon = new ImageIcon("src/main/resources/dislike.png");
-            private final Icon dislikeFilledIcon = new ImageIcon("src/main/resources/dislike_filled.png");
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (post.getDislikes().contains(currUser)) {
-                    post.removeDislike(currUser);
-                    buttonDislike.setIcon(dislikeEmptyIcon);
-                }
-                else {
-                    post.addDislike(currUser);
-                    buttonDislike.setIcon(dislikeFilledIcon);
-                }
             }
         });
     }

@@ -12,4 +12,5 @@ public interface ShowPostsAccessInterface {
      * @param currentUser The current student that is logged in.
      */
     Student getStudent(String currentUser);
+
 }

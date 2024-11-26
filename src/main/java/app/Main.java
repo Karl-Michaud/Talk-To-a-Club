@@ -26,6 +26,7 @@ public class Main {
                                             .addStudentLoginUseCase()
                                             .addStudentHomeUseCase()
                                             .addStudentProfileUseCase()
+                                            .addShowPostsUseCase()
                                             .build();
 
         application.pack();

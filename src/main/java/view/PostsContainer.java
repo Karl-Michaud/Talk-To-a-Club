@@ -1,19 +1,18 @@
 package view;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import entity.data_structure.DataStoreArrays;
-import entity.post.Post;
-import entity.user.Club;
-import interface_adapter.student_home.StudentHomeState;
-import interface_adapter.student_home.show_posts.ShowPostsState;
+import interface_adapter.student_home.like.StudentLikeController;
 
 /**
  * Container for the list of posts on the student home view.
  */
 public class PostsContainer extends JPanel {
-    public PostsContainer(ShowPostsState state) {
+    public PostsContainer(Map<String, List<Map<String, Object>>> posts, StudentLikeController likeController) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         // Creates sample posts and populates the view as a visual example.
         // final Post examplePost = new Announcement("Example post.", "This is an example post to "
@@ -23,9 +22,9 @@ public class PostsContainer extends JPanel {
         //     final PostPanel samplePostPanel = new PostPanel(examplePost, "Sample Club", state.getCurrentUser());
         //     this.add(samplePostPanel);
         // }
-        for (String club : state.getPosts().keySet()) {
-            for (Post post : state.getPosts().get(club)) {
-                this.add(new PostPanel(post, club, likeState, dislikeState));
+        for (String club : posts.keySet()) {
+            for (Map<String, Object> post : posts.get(club)) {
+                this.add(new PostPanel(post, club, likeController));
             }
         }
     }

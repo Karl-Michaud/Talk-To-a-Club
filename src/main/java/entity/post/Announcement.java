@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 import entity.user.User;
 
 /**
@@ -26,6 +27,8 @@ public class Announcement implements Post {
     public Announcement(String title, String content) {
         this.title = title;
         this.content = content;
+        this.likes = new DataStoreArrays<User>();
+        this.dislikes = new DataStoreArrays<User>();
         this.timeOfPosting = LocalTime.now();
         this.dateOfPosting = LocalDate.now();
     }
@@ -68,6 +71,16 @@ public class Announcement implements Post {
      */
     public int numberOfDislikes() {
         return dislikes.size();
+    }
+
+    @Override
+    public DataStore<User> getLikes() {
+        return this.likes;
+    }
+
+    @Override
+    public DataStore<User> getDislikes() {
+        return null;
     }
 
     /**

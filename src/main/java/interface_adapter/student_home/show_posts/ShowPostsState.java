@@ -1,22 +1,20 @@
 package interface_adapter.student_home.show_posts;
 
-import entity.data_structure.DataStoreArrays;
-import entity.post.Post;
-
+import java.util.List;
 import java.util.Map;
 
 /**
  * The state for the posts panel.
  */
 public class ShowPostsState {
-    private Map<String, DataStoreArrays<Post>> posts;
+    private Map<String, List<Map<String, Object>>> posts;
     private String showPostsError;
 
-    public void setPosts(Map<String, DataStoreArrays<Post>> posts) {
+    public void setPosts(Map<String, List<Map<String, Object>>> posts) {
         this.posts = posts;
     }
 
-    public Map<String, DataStoreArrays<Post>> getPosts() {
+    public Map<String, List<Map<String, Object>>> getPosts() {
         return posts;
     }
 

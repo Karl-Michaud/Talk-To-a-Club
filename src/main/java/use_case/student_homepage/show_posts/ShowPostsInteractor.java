@@ -5,7 +5,9 @@ import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,9 +28,19 @@ public class ShowPostsInteractor implements ShowPostsInputBoundary {
         final String currUser = inputData.getUser();
         final Student currStudent = showPostsAccessInterface.getStudent(currUser);
         final DataStoreArrays<Club> joinedClubs = (DataStoreArrays<Club>) currStudent.getJoinedClubs();
-        final Map<String, DataStoreArrays<Post>> posts = new HashMap<String, DataStoreArrays<Post>>();
+        final Map<String, List<Map<String, Object>>> posts = new HashMap<>();
         for (Club club : joinedClubs) {
-            posts.put(club.getUsername(), (DataStoreArrays<Post>) club.getClubPosts());
+            final List<Map<String, Object>> postsList = new ArrayList<>();
+            for (Post post: (DataStoreArrays<Post>) club.getClubPosts()) {
+                final Map<String, Object> postAttributes = new HashMap<>();
+                postAttributes.put("Title", post.getTitle());
+                postAttributes.put("Content", post.getContent());
+                postAttributes.put("Likes", post.numberOfLikes());
+                postAttributes.put("Dislikes", post.numberOfDislikes());
+                postAttributes.put("TimeOfPosting", post.timeOfPosting());
+                postsList.add(postAttributes);
+            }
+            posts.put(club.getUsername(), postsList);
         }
         final ShowPostsOutputData showPostsOutputData = new ShowPostsOutputData(posts);
         showClubsPresenter.preparePostContent(showPostsOutputData);

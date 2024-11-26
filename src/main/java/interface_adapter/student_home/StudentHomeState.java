@@ -1,18 +1,13 @@
 package interface_adapter.student_home;
 
-import entity.data_structure.DataStore;
-import entity.user.Club;
-import entity.user.User;
-
 /**
  * The state for the Student Home View Model.
  */
 public class StudentHomeState {
-    private User currentUser;
+    private String currentUserEmail;
     private String username = "";
     private String email = "";
     private String query = "";
-    private DataStore<Club> followedClubs;
     private String studentHomeError;
 
     public String getUsername() {
@@ -47,14 +42,6 @@ public class StudentHomeState {
         this.studentHomeError = studentHomeError;
     }
 
-    public void setFollowedClubs(DataStore<Club> followedClubs) {
-        this.followedClubs = followedClubs;
-    }
-
-    public DataStore<Club> getFollowedClubs() {
-        return this.followedClubs;
-    }
-
     @Override
     public String toString() {
         return "StudentHomeState{"
@@ -62,11 +49,11 @@ public class StudentHomeState {
                 + '}';
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public void setCurrentUser(String currUserEmail) {
+        this.currentUserEmail = currUserEmail;
     }
 
-    public User getCurrentUser() {
-        return this.currentUser;
+    public String getCurrentUser() {
+        return this.currentUserEmail;
     }
 }
