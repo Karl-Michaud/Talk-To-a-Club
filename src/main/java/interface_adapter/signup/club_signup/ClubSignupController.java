@@ -15,7 +15,7 @@ public class ClubSignupController {
     }
 
     /**
-     * Executes the Signup Use Case.
+     * Executes the Club Signup Use Case.
      * @param username the username to sign up
      * @param email the email to sign up
      * @param password1 the password

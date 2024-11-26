@@ -15,7 +15,7 @@ public class StudentSignupController {
     }
 
     /**
-     * Executes the Signup Use Case.
+     * Executes the Student Signup Use Case.
      * @param username the username to sign up
      * @param email the email to sign up
      * @param password1 the password
