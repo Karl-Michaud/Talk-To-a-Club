@@ -1,7 +1,6 @@
 package use_case.club_get_posts;
 
-import entity.data_structure.DataStore;
-import entity.post.Post;
+import java.util.Map;
 
 /**
  * The output data for the Club Get Posts use case.
@@ -9,18 +8,18 @@ import entity.post.Post;
 public class ClubGetPostsOutputData {
 
     private final String message;
-    private final DataStore<Post> clubPosts;
+    private final Map<String, String> posts;
 
-    public ClubGetPostsOutputData(String message, DataStore<Post> clubPosts) {
+    public ClubGetPostsOutputData(String message, Map<String, String> posts) {
         this.message = message;
-        this.clubPosts = clubPosts;
+        this.posts = posts;
     }
 
     public String getMessage() {
         return this.message;
     }
 
-    public DataStore<Post> getClubPosts() {
-        return this.clubPosts;
+    public Map<String, String> getPosts() {
+        return this.posts;
     }
 }

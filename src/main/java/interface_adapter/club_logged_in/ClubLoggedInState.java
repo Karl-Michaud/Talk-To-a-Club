@@ -4,6 +4,8 @@ import entity.data_structure.DataStore;
 import entity.post.Post;
 import entity.user.Student;
 
+import java.util.Map;
+
 /**
  * Club Logged In state.
  */
@@ -17,7 +19,7 @@ public class ClubLoggedInState {
 
     private String descriptionTextArea = "";
 
-    private DataStore<Post> posts;
+    private Map<String, String> posts;
     private DataStore<Student> members;
 
     public ClubLoggedInState() {
@@ -64,11 +66,11 @@ public class ClubLoggedInState {
         this.descriptionTextArea = descriptionTextArea;
     }
 
-    public DataStore<Post> getPosts() {
+    public Map<String, String> getPosts() {
         return posts;
     }
 
-    public void setPosts(DataStore<Post> posts) {
+    public void setPosts(Map<String, String> posts) {
         this.posts = posts;
     }
 
