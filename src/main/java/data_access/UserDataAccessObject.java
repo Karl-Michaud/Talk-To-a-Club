@@ -1,15 +1,18 @@
 package data_access;
 
+import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
+import entity.user.User;
 import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
 import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
 import use_case.student_homepage.StudentHomeAccessInterface;
+import use_case.student_homepage.show_posts.ShowPostsAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
@@ -17,7 +20,7 @@ import use_case.student_homepage.StudentHomeAccessInterface;
  */
 public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, StudentSignupUserDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface,
-        StudentHomeAccessInterface {
+        StudentHomeAccessInterface, ShowPostsAccessInterface {
 
     private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
     private final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();

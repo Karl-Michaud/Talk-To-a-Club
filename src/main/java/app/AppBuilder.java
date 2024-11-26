@@ -5,8 +5,6 @@ import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.club_home.ClubHomeViewModel;
-import interface_adapter.club_logged_in.create_post.CreatePostController;
-import interface_adapter.club_logged_in.create_post.CreatePostPresenter;
 import interface_adapter.club_logged_in.create_post.CreatePostViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.login.club_login.ClubLoginController;
@@ -22,12 +20,12 @@ import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_home.StudentHomePresenter;
 import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_home.show_posts.ShowPostsController;
+import interface_adapter.student_home.show_posts.ShowPostsViewModel;
+import interface_adapter.student_home.show_posts.StudentShowPostsPresenter;
 import interface_adapter.student_profile.StudentProfileController;
 import interface_adapter.student_profile.StudentProfilePresenter;
 import interface_adapter.student_profile.StudentProfileViewModel;
-import use_case.club_create_post.ClubCreatePostInputBoundary;
-import use_case.club_create_post.ClubCreatePostInteractor;
-import use_case.club_create_post.ClubCreatePostOutputBoundary;
 import use_case.login.club_login.ClubLoginInputBoundary;
 import use_case.login.club_login.ClubLoginInteractor;
 import use_case.login.club_login.ClubLoginOutputBoundary;
@@ -43,6 +41,9 @@ import use_case.signup.student_signup.StudentSignupOutputBoundary;
 import use_case.student_homepage.StudentHomeInputBoundary;
 import use_case.student_homepage.StudentHomeInteractor;
 import use_case.student_homepage.StudentHomeOutputBoundary;
+import use_case.student_homepage.show_posts.ShowPostsInputBoundary;
+import use_case.student_homepage.show_posts.ShowPostsInteractor;
+import use_case.student_homepage.show_posts.ShowPostsOutputBoundary;
 import use_case.student_profile.StudentProfileInputBoundary;
 import use_case.student_profile.StudentProfileInteractor;
 import use_case.student_profile.StudentProfileOutputBoundary;
@@ -85,6 +86,7 @@ public class AppBuilder {
 
     private StudentHomeViewModel studentHomeViewModel;
     private StudentHomeView studentHomeView;
+    private ShowPostsViewModel showPostsViewModel;
 
     private ClubHomeViewModel clubHomeViewModel;
     private ClubHomeView clubHomeView;
@@ -149,7 +151,8 @@ public class AppBuilder {
      */
     public AppBuilder addStudentHomeView() {
         studentHomeViewModel = new StudentHomeViewModel();
-        studentHomeView = new StudentHomeView(studentHomeViewModel);
+        studentHomeView = new StudentHomeView(studentHomeViewModel, showPostsViewModel);
+        showPostsViewModel = new ShowPostsViewModel();
         cardPanel.add(studentHomeView, studentHomeView.getViewName());
         return this;
     }
@@ -230,11 +233,19 @@ public class AppBuilder {
     public AppBuilder addStudentHomeUseCase() {
         final StudentHomeOutputBoundary studentHomeOutputBoundary = new StudentHomePresenter(studentHomeViewModel,
                 viewManagerModel, loginViewModel, studentProfileViewModel);
-        final StudentHomeInputBoundary studentHomeInteractor = new StudentHomeInteractor(userDataAccessObject,
-                studentHomeOutputBoundary);
+        final StudentHomeInputBoundary studentHomeInteractor = new StudentHomeInteractor(studentHomeOutputBoundary);
 
         final StudentHomeController studentHomeController = new StudentHomeController(studentHomeInteractor);
         studentHomeView.setStudentHomeController(studentHomeController);
+        return this;
+    }
+
+    public AppBuilder addShowPostsUseCase() {
+        final ShowPostsOutputBoundary showPostsOutputBoundary = new StudentShowPostsPresenter(showPostsViewModel);
+        final ShowPostsInputBoundary showPostsInteractor = new ShowPostsInteractor(userDataAccessObject,
+                showPostsOutputBoundary);
+        final ShowPostsController showPostsController = new ShowPostsController(showPostsInteractor);
+        studentHomeView.setShowPostsController(showPostsController);
         return this;
     }
 

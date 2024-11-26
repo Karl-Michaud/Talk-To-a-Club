@@ -5,12 +5,6 @@ package use_case.student_homepage;
  */
 public interface StudentHomeInputBoundary {
     /**
-     * Executes the StudentHome InputData.
-     * @param student the current student using the application.
-     */
-    void execute(StudentHomeInputData student);
-
-    /**
      * Switches to LoginView.
      */
     void switchToLoginView();

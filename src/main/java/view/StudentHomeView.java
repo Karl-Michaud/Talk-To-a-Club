@@ -16,6 +16,9 @@ import javax.swing.event.DocumentListener;
 import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_home.show_posts.ShowPostsController;
+import interface_adapter.student_home.show_posts.ShowPostsState;
+import interface_adapter.student_home.show_posts.ShowPostsViewModel;
 
 /**
  * This is the view for the homepage that the student will be greated with upon logging in. This will show all the clubs
@@ -33,11 +36,15 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
 
     private final String viewName = "student home";
     private final StudentHomeViewModel studentHomeViewModel;
+    private final ShowPostsViewModel showPostsViewModel;
     private StudentHomeController studentHomeController;
+    private ShowPostsController showPostsController;
 
-    public StudentHomeView(StudentHomeViewModel studentHomeViewModel) {
+    public StudentHomeView(StudentHomeViewModel studentHomeViewModel, ShowPostsViewModel showPostsViewModel) {
         this.studentHomeViewModel = studentHomeViewModel;
+        this.showPostsViewModel = new ShowPostsViewModel();
         this.studentHomeViewModel.addPropertyChangeListener(this);
+        this.showPostsViewModel.addPropertyChangeListener(this);
 
         buttonLogout.addActionListener(
                 evt -> studentHomeController.switchToLoginView()
@@ -64,7 +71,9 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         addSearchListener();
         this.add(panelStudentHomeView);
         final StudentHomeState state = studentHomeViewModel.getState();
-        this.pageScrollPane.setViewportView(new PageView(new PostsContainer(state), new ClubsContainer(state)));
+        final ShowPostsState showPostsState = showPostsViewModel.getState();
+        this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState),
+                new ClubsContainer(state)));
     }
 
     private void addSearchListener() {
@@ -96,6 +105,9 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final StudentHomeState state = (StudentHomeState) evt.getNewValue();
+        final ShowPostsState showPostsState = showPostsViewModel.getState();
+        this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState),
+                new ClubsContainer(state)));
         if (state.getStudentHomeError() != null) {
             JOptionPane.showMessageDialog(this, state.getStudentHomeError());
         }
@@ -107,5 +119,9 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
 
     public void setStudentHomeController(StudentHomeController studentHomeController) {
         this.studentHomeController = studentHomeController;
+    }
+
+    public void setShowPostsController(ShowPostsController showPostsController) {
+        this.showPostsController = showPostsController;
     }
 }

@@ -1,7 +1,6 @@
 package interface_adapter.student_home;
 
-import java.util.ArrayList;
-
+import entity.data_structure.DataStore;
 import entity.user.Club;
 import entity.user.User;
 
@@ -13,7 +12,7 @@ public class StudentHomeState {
     private String username = "";
     private String email = "";
     private String query = "";
-    private ArrayList<Club> followedClubs = new ArrayList<>();
+    private DataStore<Club> followedClubs;
     private String studentHomeError;
 
     public String getUsername() {
@@ -48,12 +47,12 @@ public class StudentHomeState {
         this.studentHomeError = studentHomeError;
     }
 
-    public ArrayList<Club> getFollowedClubs() {
-        return this.followedClubs;
+    public void setFollowedClubs(DataStore<Club> followedClubs) {
+        this.followedClubs = followedClubs;
     }
 
-    public void setFollowedClubs(ArrayList<Club> followedClubs) {
-        this.followedClubs = followedClubs;
+    public DataStore<Club> getFollowedClubs() {
+        return this.followedClubs;
     }
 
     @Override

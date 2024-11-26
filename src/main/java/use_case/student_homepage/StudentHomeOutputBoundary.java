@@ -6,12 +6,6 @@ package use_case.student_homepage;
 public interface StudentHomeOutputBoundary {
 
     /**
-     * Gathers necessary content to prepare the content on the HomeView.
-     * @param studentHomeOutputData data needed for the view.
-     */
-    void prepareClubPostContent(StudentHomeOutputData studentHomeOutputData);
-
-    /**
      * Prepares a failed view incase something goes wrong.
      * @param errorMessage the error message relating to the issue.
      */

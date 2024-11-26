@@ -21,9 +21,6 @@ public class StudentHomeController {
      */
     public void execute(String query, String email) {
 
-        final StudentHomeInputData studentHomeInputData = new StudentHomeInputData(query, email);
-
-        studentHomeUseCaseInteractor.execute(studentHomeInputData);
     }
 
     /**
