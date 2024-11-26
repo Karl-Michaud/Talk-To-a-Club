@@ -1,7 +1,6 @@
 package use_case.login.student_login;
 
-import java.util.ArrayList;
-
+import entity.data_structure.DataStore;
 import entity.user.Club;
 
 /**
@@ -10,10 +9,10 @@ import entity.user.Club;
 public class StudentLoginOutputData {
     private final String username;
     private final String email;
-    private final ArrayList<Club> joinedClubs;
+    private final DataStore<Club> joinedClubs;
     private final boolean useCaseFailed;
 
-    public StudentLoginOutputData(String username, String email, ArrayList<Club> joinedClubs, boolean useCaseFailed) {
+    public StudentLoginOutputData(String username, String email, DataStore<Club> joinedClubs, boolean useCaseFailed) {
         this.username = username;
         this.email = email;
         this.joinedClubs = joinedClubs;
@@ -28,7 +27,7 @@ public class StudentLoginOutputData {
         return email;
     }
 
-    public ArrayList<Club> getJoinedClubs() {
+    public DataStore<Club> getJoinedClubs() {
         return joinedClubs;
     }
 

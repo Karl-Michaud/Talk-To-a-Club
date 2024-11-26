@@ -1,7 +1,6 @@
 package use_case.club_get_members;
 
-import java.util.ArrayList;
-
+import entity.data_structure.DataStore;
 import entity.user.Student;
 
 /**
@@ -23,11 +22,11 @@ public class ClubGetMembersInteractor {
      */
     public void execute(ClubGetMembersInputData inputData) {
         final String email = inputData.getEmail();
-        if (!getMembersDataAccessObject.existsByEmail(email)) {
+        if (!getMembersDataAccessObject.existsByEmailClub(email)) {
             getMembersPresenter.prepareFailView(email + ": Account does not exist.");
         }
         else {
-            final ArrayList<Student> members = getMembersDataAccessObject.getClub(email).getClubMembers();
+            final DataStore<Student> members = getMembersDataAccessObject.getClub(email).getClubMembers();
 
             final ClubGetMembersOutputData outputData = new ClubGetMembersOutputData(inputData.getEmail(), members,
                     false);

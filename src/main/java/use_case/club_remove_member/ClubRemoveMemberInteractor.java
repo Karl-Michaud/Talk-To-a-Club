@@ -7,12 +7,15 @@ import entity.user.Student;
  * Interactor for the club remove member use case.
  */
 public class ClubRemoveMemberInteractor implements ClubRemoveMemberInputBoundary {
-    private final ClubRemoveMemberUserDataAccessInterface clubRemoveDataAccessObject;
+    private final ClubRemoveMemberStudentDataAccessInterface clubRemoveStudentDataAccessObject;
+    private final ClubRemoveMemberClubDataAccessInterface clubRemoveClubDataAccessObject;
     private final ClubRemoveMemberOutputBoundary clubRemovePresenter;
 
-    public ClubRemoveMemberInteractor(ClubRemoveMemberUserDataAccessInterface clubRemoveDataAccessObject,
+    public ClubRemoveMemberInteractor(ClubRemoveMemberStudentDataAccessInterface clubRemoveStudentDataAccessObject,
+                                      ClubRemoveMemberClubDataAccessInterface clubRemoveClubDataAccessObject,
                                       ClubRemoveMemberOutputBoundary clubRemovePresenter) {
-        this.clubRemoveDataAccessObject = clubRemoveDataAccessObject;
+        this.clubRemoveStudentDataAccessObject = clubRemoveStudentDataAccessObject;
+        this.clubRemoveClubDataAccessObject = clubRemoveClubDataAccessObject;
         this.clubRemovePresenter = clubRemovePresenter;
     }
 
@@ -22,15 +25,15 @@ public class ClubRemoveMemberInteractor implements ClubRemoveMemberInputBoundary
         final String clubEmail = inputData.getClubEmail();
 
         // Since we are logged in, the club must exist by precondition, so we do not have to check if the club exists.
-        final Club club = clubRemoveDataAccessObject.getClub(clubEmail);
+        final Club club = clubRemoveClubDataAccessObject.getClub(clubEmail);
 
         // Verify that the student even exists
-        if (!clubRemoveDataAccessObject.existsByEmail(studentEmail)) {
+        if (!clubRemoveStudentDataAccessObject.existsByEmailStudent(studentEmail)) {
             clubRemovePresenter.prepareFailView(studentEmail + ": Account does not exist.");
         }
         else {
             // Get student with same student email
-            final Student student = clubRemoveDataAccessObject.getStudent(studentEmail);
+            final Student student = clubRemoveStudentDataAccessObject.getStudent(studentEmail);
 
             // Verify that student is in club
             if (!club.getClubMembers().contains(student)) {
@@ -38,8 +41,12 @@ public class ClubRemoveMemberInteractor implements ClubRemoveMemberInputBoundary
             }
             else {
                 // Remove student from club
-                clubRemoveDataAccessObject.removeStudent(student, club);
+                student.leaveClub(club);
+                clubRemoveStudentDataAccessObject.updateStudentClubsJoined(student);
+
+                // Remove club from student
                 club.removeClubMember(student);
+                clubRemoveClubDataAccessObject.updateClubMembers(club);
 
                 // Prepare success view
                 final ClubRemoveMemberOutputData outputData = new ClubRemoveMemberOutputData(student.getUsername(),

@@ -12,10 +12,11 @@ public interface ClubGetMembersUserDataAccessInterface {
      * @param email of the potential club
      * @return true if the club exists with given email
      */
-    boolean existsByEmail(String email);
+    boolean existsByEmailClub(String email);
 
     /**
      * Returns the Clubs with given email.
+     * Precondition: The club must exist.
      * @param email of the club
      * @return the club with matching email
      */

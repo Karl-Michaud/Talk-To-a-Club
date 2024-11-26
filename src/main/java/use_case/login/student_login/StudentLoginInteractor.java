@@ -22,9 +22,7 @@ public class StudentLoginInteractor implements StudentLoginInputBoundary {
     public void execute(StudentLoginInputData studentLoginInputData) {
         final String studentEmail = studentLoginInputData.getStudentEmail();
         final String password = studentLoginInputData.getPassword();
-        if (!studentDataAccessObject.existsByEmail(studentEmail)) {
-            System.out.println(studentEmail);
-            System.out.println(studentDataAccessObject.existsByEmail(studentEmail));
+        if (!studentDataAccessObject.existsByEmailStudent(studentEmail)) {
             studentLoginPresenter.prepareFailView(studentEmail + ": Account does not exist.");
         }
         else {
