@@ -59,4 +59,10 @@ public interface DataStore<T> {
      * @return the complement.
      */
     DataStore<T> complement(DataStore<T> other);
+
+    /**
+     * Returns an iterable of all the elements of this data structure.
+     * @return
+     */
+    Iterable<T> getAll();
 }

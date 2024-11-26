@@ -87,6 +87,11 @@ public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
     }
 
     @Override
+    public Iterable<T> getAll() {
+        return data;
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return data.iterator();
     }

@@ -1,6 +1,7 @@
 package use_case.explore_clubs;
 
 import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
 import entity.user.Student;
 

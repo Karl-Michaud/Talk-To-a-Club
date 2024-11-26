@@ -1,11 +1,20 @@
 package view;
 
-import entity.user.Club;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import entity.user.Club;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsPresenter;
+
+/**
+ * View for the club panel.
+ */
 public class ClubMiniPanel extends JPanel {
     private JPanel clubMiniPanel;
     private JLabel clubName;
@@ -14,7 +23,7 @@ public class ClubMiniPanel extends JPanel {
 
     private final int descriptionLength = 50;
 
-    public ClubMiniPanel(Club club) {
+    public ClubMiniPanel(Club club, ExploreClubsPresenter presenter) {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(clubMiniPanel);
         this.clubName.setText(club.getUsername());
@@ -25,7 +34,9 @@ public class ClubMiniPanel extends JPanel {
         this.setBorder(BorderFactory.createBevelBorder(1));
 
         viewMore.addActionListener(new ActionListener() {
-            
+            public void actionPerformed(ActionEvent evt) {
+                presenter.switchToClubView(club);
+            }
         });
     }
 }
