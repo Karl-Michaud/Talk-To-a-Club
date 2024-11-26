@@ -5,9 +5,9 @@ import interface_adapter.ViewModel;
 /**
  * The ViewModel for the Club Home View.
  */
-public class ClubHomeViewModel extends ViewModel<ClubHomeState> {
+public class ClubLoggedInViewModel extends ViewModel<ClubHomeState> {
 
-    public ClubHomeViewModel() {
+    public ClubLoggedInViewModel() {
         super("club home");
         setState(new ClubHomeState());
     }

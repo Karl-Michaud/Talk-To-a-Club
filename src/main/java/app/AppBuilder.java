@@ -4,7 +4,7 @@ import data_access.UserDataAccessObject;
 import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.club_home.ClubHomeViewModel;
+import interface_adapter.club_home.ClubLoggedInViewModel;
 import interface_adapter.club_create_post.CreatePostViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.login.club_login.ClubLoginController;
@@ -70,7 +70,7 @@ public class AppBuilder {
     private StudentHomeViewModel studentHomeViewModel;
     private StudentHomeView studentHomeView;
 
-    private ClubHomeViewModel clubHomeViewModel;
+    private ClubLoggedInViewModel clubLoggedInViewModel;
     private ClubHomeView clubHomeView;
 
     private CreatePostViewModel createPostViewModel;
@@ -118,8 +118,8 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addClubHomeView() {
-        clubHomeViewModel = new ClubHomeViewModel();
-        clubHomeView = new ClubHomeView(clubHomeViewModel);
+        clubLoggedInViewModel = new ClubLoggedInViewModel();
+        clubHomeView = new ClubHomeView(clubLoggedInViewModel);
         cardPanel.add(clubHomeView, clubHomeView.getViewName());
         return this;
     }
@@ -173,7 +173,7 @@ public class AppBuilder {
      */
     public AppBuilder addClubLoginUseCase() {
         final ClubLoginOutputBoundary loginOutputBoundary = new ClubLoginPresenter(viewManagerModel,
-                clubHomeViewModel, clubSignupViewModel, loginViewModel);
+                clubLoggedInViewModel, clubSignupViewModel, loginViewModel);
         final ClubLoginInputBoundary loginInteractor = new ClubLoginInteractor(
                 userDataAccessObject, loginOutputBoundary);
 
