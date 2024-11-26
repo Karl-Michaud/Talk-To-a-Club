@@ -13,7 +13,7 @@ public class ClubHomeView extends JPanel {
     private JPanel center;
     private JLabel idk;
 
-    private final String viewName = "club home";
+    private final String viewName = "logged in";
     private final ClubLoggedInViewModel clubHomeViewModel;
     // private DataAccessController clubHomeController;
 

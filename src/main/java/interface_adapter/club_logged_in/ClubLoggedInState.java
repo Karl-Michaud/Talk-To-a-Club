@@ -11,10 +11,9 @@ public class ClubLoggedInState {
     private String clubName = "";
 
     private String email = "";
-    private String emailError;
 
     private String password = "";
-    private String passwordError;
+    private String errorMessage;
 
     private DataStore<Post> posts;
     private DataStore<Student> members;
@@ -39,14 +38,6 @@ public class ClubLoggedInState {
         this.email = email;
     }
 
-    public String getEmailError() {
-        return emailError;
-    }
-
-    public void setEmailError(String emailError) {
-        this.emailError = emailError;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -55,12 +46,12 @@ public class ClubLoggedInState {
         this.password = password;
     }
 
-    public String getPasswordError() {
-        return passwordError;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setPasswordError(String passwordError) {
-        this.passwordError = passwordError;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public DataStore<Post> getPosts() {
