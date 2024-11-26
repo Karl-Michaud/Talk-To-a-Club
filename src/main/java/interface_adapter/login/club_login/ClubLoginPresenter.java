@@ -49,7 +49,7 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
         // IMPORTANT!!!
         // Since we are changing the code to have a get posts use case, we don't need to assign it to the
-        // ClubLoggedInState. Therefore, this logic will be taking place in the View code.
+        // ClubLoggedInState. Therefore, this logic will be taking place in the get posts use case.
 
         this.clubLoggedInViewModel.setState(clubHomeState);
         this.clubLoggedInViewModel.firePropertyChanged();

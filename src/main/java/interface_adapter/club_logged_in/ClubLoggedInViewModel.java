@@ -7,7 +7,7 @@ import interface_adapter.ViewModel;
  */
 public class ClubLoggedInViewModel extends ViewModel<ClubLoggedInState> {
     public ClubLoggedInViewModel() {
-        super("logged in");
+        super("club logged in");
         this.setState(new ClubLoggedInState());
     }
 }
