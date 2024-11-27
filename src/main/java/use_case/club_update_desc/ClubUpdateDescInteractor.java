@@ -25,11 +25,13 @@ public class ClubUpdateDescInteractor implements ClubUpdateDescInputBoundary {
             updateDescPresenter.prepareFailMessage(outputData);
         }
         else {
-            // Gets the current club entity and changes its description to the new one
+            // Gets the current club entity and changes its description to the new one, then sends it to the DAO
             final Club currentClub = updateDescDataAccessObject.getClub(descUpdateInputData.getClubEmail());
-
             final String newDescription = descUpdateInputData.getNewDescription();
             currentClub.setClubDescription(newDescription);
+            updateDescDataAccessObject.updateClubDescription(currentClub);
+
+            // Creates an output data with the success message and new description
             final String message = "Success in changing description.";
             final ClubUpdateDescOutputData outputData = new ClubUpdateDescOutputData(message, newDescription);
             updateDescPresenter.prepareSuccessMessage(outputData);

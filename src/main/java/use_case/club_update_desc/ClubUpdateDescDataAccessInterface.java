@@ -20,4 +20,10 @@ public interface ClubUpdateDescDataAccessInterface {
      * @return true if a Club with the given email exists in the database.
      */
     boolean existsByEmailClub(String email);
+
+    /**
+     * Updates the given club's description in the database.
+     * @param club the club object with the updated description
+     */
+    void updateClubDescription(Club club);
 }
