@@ -26,7 +26,8 @@ public class ClubGetPostsInteractor implements ClubGetPostsInputBoundary {
         if (!clubGetPostsDataAccessObject.existsByEmailClub(clubGetPostsInputData.getClubEmail())) {
             // results in a failed message if the club doesn't exist
             final String message = "Failure Getting Club Posts: Club not Found";
-            final ClubGetPostsOutputData clubGetPostsOutputData = new ClubGetPostsOutputData(message, null);
+            final ClubGetPostsOutputData clubGetPostsOutputData = new ClubGetPostsOutputData(message,
+                    null, null);
             clubGetPostsPresenter.prepareFailMessage(clubGetPostsOutputData);
         }
         else {
