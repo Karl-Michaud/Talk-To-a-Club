@@ -5,7 +5,6 @@ package interface_adapter.student_logged_in.join_club;
  */
 public class JoinClubState {
     private boolean isMember;
-    private String successMessage;
     private String errorMessage;
 
     public boolean isMember() {
@@ -14,14 +13,6 @@ public class JoinClubState {
 
     public void setMember(boolean member) {
         isMember = member;
-    }
-
-    public String getSuccessMessage() {
-        return successMessage;
-    }
-
-    public void setSuccessMessage(String successMessage) {
-        this.successMessage = successMessage;
     }
 
     public String getErrorMessage() {

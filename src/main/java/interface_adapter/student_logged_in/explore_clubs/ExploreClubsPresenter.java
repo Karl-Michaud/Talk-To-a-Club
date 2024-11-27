@@ -27,7 +27,7 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
     public void prepareSuccessView(ExploreClubsOutputData data) {
         // Update the ExploreClubsState with clubs and clear errors
         final ExploreClubsState state = exploreClubsViewModel.getState();
-        state.setStudentEmail(data.getStudent().getEmail());
+        state.setStudentEmail(data.getStudentEmail());
         state.setClubValues(data.getNotJoinedClubs());
         state.setClubEmail(null);
         state.setError(null);

@@ -56,7 +56,7 @@ public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
             }
 
             final ExploreClubsOutputData outputData = new ExploreClubsOutputData(inputData.getEmail(),
-                    outputMap, false, student);
+                    outputMap, false, student.getEmail());
             exploreClubsPresenter.prepareSuccessView(outputData);
         }
     }

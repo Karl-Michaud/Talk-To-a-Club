@@ -3,27 +3,25 @@ package use_case.explore_clubs;
 import java.util.ArrayList;
 import java.util.Map;
 
-import entity.user.Student;
-
 /**
  * Output data for the explore clubs use case.
  */
 public class ExploreClubsOutputData {
-    private final String email;
+    private final String clubEmail;
     private final ArrayList<Map<String, String>> notJoinedClubs;
     private final boolean useCaseFailed;
-    private final Student student;
+    private final String studentEmail;
 
     public ExploreClubsOutputData(String email, ArrayList<Map<String, String>> clubs, boolean useCaseFailed,
-                                  Student student) {
-        this.email = email;
+                                  String studentEmail) {
+        this.clubEmail = email;
         this.notJoinedClubs = clubs;
         this.useCaseFailed = useCaseFailed;
-        this.student = student;
+        this.studentEmail = studentEmail;
     }
 
-    public String getEmail() {
-        return email;
+    public String getClubEmail() {
+        return clubEmail;
     }
 
     public ArrayList<Map<String, String>> getNotJoinedClubs() {
@@ -34,7 +32,7 @@ public class ExploreClubsOutputData {
         return useCaseFailed;
     }
 
-    public Student getStudent() {
-        return student;
+    public String getStudentEmail() {
+        return studentEmail;
     }
 }

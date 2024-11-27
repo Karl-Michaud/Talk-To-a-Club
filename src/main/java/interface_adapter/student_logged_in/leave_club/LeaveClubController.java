@@ -1,6 +1,5 @@
 package interface_adapter.student_logged_in.leave_club;
 
-
 import use_case.student_leave_club.StudentLeaveClubInputBoundary;
 import use_case.student_leave_club.StudentLeaveClubInputData;
 

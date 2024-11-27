@@ -1,11 +1,10 @@
 package interface_adapter.student_logged_in.leave_club;
 
 /**
- * State class for the Join Club Use Case.
+ * State class for the Leave Club Use Case.
  */
 public class LeaveClubState {
     private boolean isMember;
-    private String successMessage;
     private String errorMessage;
 
     public boolean isMember() {
@@ -14,14 +13,6 @@ public class LeaveClubState {
 
     public void setMember(boolean member) {
         isMember = member;
-    }
-
-    public String getSuccessMessage() {
-        return successMessage;
-    }
-
-    public void setSuccessMessage(String successMessage) {
-        this.successMessage = successMessage;
     }
 
     public String getErrorMessage() {
