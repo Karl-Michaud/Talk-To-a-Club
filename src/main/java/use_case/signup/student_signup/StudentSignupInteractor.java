@@ -49,6 +49,10 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
         else if (studentSignupInputData.getPassword().length() > maxLengthPassword) {
             userPresenter.prepareFailView("Password must be at most " + maxLengthPassword + onlyForCheckstyle);
         }
+        else if (!studentSignupInputData.getEmail().contentEquals("@")
+                || !studentSignupInputData.getEmail().contentEquals(".")) {
+            userPresenter.prepareFailView("Invalid email address.");
+        }
         else {
             final Student user = studentUserFactory.create(studentSignupInputData.getUsername(),
                     studentSignupInputData.getEmail(),

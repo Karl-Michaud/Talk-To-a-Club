@@ -49,6 +49,10 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
         else if (clubSignupInputData.getPassword().length() > maxLengthPassword) {
             userPresenter.prepareFailView("Password must be at most " + maxLengthPassword + onlyForCheckstyle);
         }
+        else if (!clubSignupInputData.getEmail().contentEquals("@")
+                || !clubSignupInputData.getEmail().contentEquals(".")) {
+            userPresenter.prepareFailView("Invalid email address.");
+        }
         else {
 
             final Club user = clubUserFactory.create(clubSignupInputData.getUsername(),
