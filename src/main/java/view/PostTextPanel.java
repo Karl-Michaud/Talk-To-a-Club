@@ -10,4 +10,9 @@ public class PostTextPanel extends JPanel {
     private JPanel postTextPanel;
     private JLabel postTitleText;
     private JLabel postBodyText;
+
+    public PostTextPanel(String title, String body) {
+        this.postTitleText.setText(title);
+        this.postBodyText.setText(body);
+    }
 }
