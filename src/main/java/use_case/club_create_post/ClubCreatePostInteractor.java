@@ -4,7 +4,7 @@ import entity.post.Announcement;
 import entity.user.Club;
 
 /**
- * Club post creation use case interactor. Contains all use cases to do with creating a club.
+ * Club post creation use case interactor. Contains all use cases to do with creating a club post.
  */
 public class ClubCreatePostInteractor implements ClubCreatePostInputBoundary {
     private final ClubCreatePostUserDataAccessInterface createPostDataAccessObject;

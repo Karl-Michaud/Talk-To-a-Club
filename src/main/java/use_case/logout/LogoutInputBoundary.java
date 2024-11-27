@@ -1,7 +1,7 @@
 package use_case.logout;
 
 /**
- * Input Boundary for the use case to switch to the login view.
+ * Input Boundary for the logout use case.
  */
 public interface LogoutInputBoundary {
 

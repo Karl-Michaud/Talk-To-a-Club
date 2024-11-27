@@ -20,18 +20,19 @@ public class ClubUpdateDescInteractor implements ClubUpdateDescInputBoundary {
     public void execute(ClubUpdateDescInputData descUpdateInputData) {
         if (!updateDescDataAccessObject.existsByEmailClub(descUpdateInputData.getClubEmail())) {
             // results in a failed message if the club doesn't exist
-            String message = "Failure in changing description: Club not Found";
-            ClubUpdateDescOutputData outputData = new ClubUpdateDescOutputData(message, null);
+            final String message = "Failure in changing description: Club not Found";
+            final ClubUpdateDescOutputData outputData = new ClubUpdateDescOutputData(message, null);
             updateDescPresenter.prepareFailMessage(outputData);
-        } else {
+        }
+        else {
             // Gets the current club entity and changes its description to the new one
-            Club currentClub = updateDescDataAccessObject.getClub(descUpdateInputData.getClubEmail());
+            final Club currentClub = updateDescDataAccessObject.getClub(descUpdateInputData.getClubEmail());
 
-            String newDescription = descUpdateInputData.getNewDescription();
+            final String newDescription = descUpdateInputData.getNewDescription();
             currentClub.setClubDescription(newDescription);
-            String message = "Success in changing description.";
-            ClubUpdateDescOutputData outputData = new ClubUpdateDescOutputData(message, newDescription);
-            updateDescPresenter.prepareNewDescMessage(outputData);
+            final String message = "Success in changing description.";
+            final ClubUpdateDescOutputData outputData = new ClubUpdateDescOutputData(message, newDescription);
+            updateDescPresenter.prepareSuccessMessage(outputData);
         }
     }
 }

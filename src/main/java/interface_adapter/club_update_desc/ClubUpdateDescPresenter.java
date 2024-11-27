@@ -20,7 +20,7 @@ public class ClubUpdateDescPresenter implements ClubUpdateDescOutputBoundary {
     }
 
     @Override
-    public void prepareNewDescMessage(ClubUpdateDescOutputData outputData) {
+    public void prepareSuccessMessage(ClubUpdateDescOutputData outputData) {
         // Get the state of the current ClubLoggedInViewModel and set the message and description to the new one
         final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
         clubLoggedInState.setMessage(outputData.getMessage());
