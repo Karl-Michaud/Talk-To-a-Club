@@ -8,6 +8,8 @@ import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import use_case.club_get_members.ClubGetMembersOutputBoundary;
 import use_case.club_get_members.ClubGetMembersOutputData;
 
+import java.util.ArrayList;
+
 /**
  * The presenter for the get members use case for clubs.
  */
@@ -26,13 +28,16 @@ public class GetMembersPresenter implements ClubGetMembersOutputBoundary {
         final String email = data.getEmail();
 
         // Get the members of the club
-        final DataStore<Student> members = data.getMembers();
+        final ArrayList<String> membersEmail = data.getMembersEmail();
+        final ArrayList<String> memebrsName = data.getMembersName();
 
         final ClubLoggedInState currentState = clubLoggedInViewModel.getState();
 
         // Set the current members and email to the state
-        currentState.setMembers(members);
+        currentState.setMembersEmail(membersEmail);
+        currentState.setMembersName(memebrsName);
         currentState.setEmail(email);
+
         // Save the state
         clubLoggedInViewModel.setState(currentState);
         clubLoggedInViewModel.firePropertyChanged("get members");

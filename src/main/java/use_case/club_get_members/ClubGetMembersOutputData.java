@@ -1,6 +1,6 @@
 package use_case.club_get_members;
 
-import entity.data_structure.DataStore;
+import java.util.ArrayList;
 
 /**
  * Output data for the get members use case.
@@ -10,12 +10,12 @@ public class ClubGetMembersOutputData {
 
     // Notice that for both lists, the element at the i-th index corresponds to one student.
     // Therefore memberEmail.pop() and memberName.pop() will correspond the the information of one student.
-    private final DataStore<String> membersEmail;
-    private final DataStore<String> membersName;
+    private final ArrayList<String> membersEmail;
+    private final ArrayList<String> membersName;
 
     private final boolean useCaseFailed;
 
-    public ClubGetMembersOutputData(String email, DataStore<String> membersEmail, DataStore<String> membersName,
+    public ClubGetMembersOutputData(String email, ArrayList<String> membersEmail, ArrayList<String> membersName,
                                     boolean useCaseFailed) {
         this.email = email;
         this.membersEmail = membersEmail;
@@ -27,11 +27,11 @@ public class ClubGetMembersOutputData {
         return email;
     }
 
-    public DataStore<String> getMembersEmail() {
+    public ArrayList<String> getMembersEmail() {
         return membersEmail;
     }
 
-    public DataStore<String> getMembersName() {
+    public ArrayList<String> getMembersName() {
         return membersName;
     }
 

@@ -1,8 +1,6 @@
 package interface_adapter.club_logged_in;
 
-import entity.data_structure.DataStore;
-import entity.post.Post;
-import entity.user.Student;
+import java.util.ArrayList;
 
 /**
  * Club Logged In state.
@@ -15,8 +13,8 @@ public class ClubLoggedInState {
     private String password = "";
     private String errorMessage;
 
-    private DataStore<Post> posts;
-    private DataStore<Student> members;
+    private ArrayList<String> membersEmail;
+    private ArrayList<String> membersName;
 
     public ClubLoggedInState() {
         // empty body since we have a constructor already and so no default constructor anymore.
@@ -54,19 +52,19 @@ public class ClubLoggedInState {
         this.errorMessage = errorMessage;
     }
 
-    public DataStore<Post> getPosts() {
-        return posts;
+    public ArrayList<String> getMembersEmail() {
+        return membersEmail;
     }
 
-    public void setPosts(DataStore<Post> posts) {
-        this.posts = posts;
+    public void setMembersEmail(ArrayList<String> membersEmail) {
+        this.membersEmail = membersEmail;
     }
 
-    public DataStore<Student> getMembers() {
-        return members;
+    public ArrayList<String> getMembersName() {
+        return membersName;
     }
 
-    public void setMembers(DataStore<Student> members) {
-        this.members = members;
+    public void setMembersName(ArrayList<String> membersName) {
+        this.membersName = membersName;
     }
 }
