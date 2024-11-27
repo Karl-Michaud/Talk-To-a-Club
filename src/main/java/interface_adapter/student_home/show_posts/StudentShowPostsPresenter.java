@@ -18,6 +18,7 @@ public class StudentShowPostsPresenter implements ShowPostsOutputBoundary {
     public void preparePostContent(ShowPostsOutputData showPostsOutputData) {
         final ShowPostsState state = viewModel.getState();
         state.setPosts(showPostsOutputData.getPosts());
+        state.setCurrentUser(showPostsOutputData.getCurrStudent());
         viewModel.setState(state);
         viewModel.firePropertyChanged();
     }

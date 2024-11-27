@@ -1,6 +1,6 @@
 package use_case.student_homepage.like;
 
-import entity.post.Post;
+import java.util.Map;
 
 /**
  * Input data like usecase.
@@ -8,12 +8,12 @@ import entity.post.Post;
 public class LikeInputData {
     private final String studentEmail;
     private final String clubEmail;
-    private final Post post;
+    private final Map<String, Object> postData;
 
-    public LikeInputData(String studentEmail, String clubEmail, Post post) {
+    public LikeInputData(String studentEmail, Map<String, Object> postData) {
         this.studentEmail = studentEmail;
-        this.clubEmail = clubEmail;
-        this.post = post;
+        this.postData = postData;
+        this.clubEmail = postData.get("clubEmail").toString();
     }
 
     public String getStudentEmail() {
@@ -24,7 +24,7 @@ public class LikeInputData {
         return clubEmail;
     }
 
-    public Post getPost() {
-        return post;
+    public Map<String, Object> getPost() {
+        return postData;
     }
 }

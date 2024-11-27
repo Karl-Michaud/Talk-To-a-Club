@@ -1,14 +1,14 @@
 package use_case.student_homepage.show_posts;
 
-import entity.data_structure.DataStoreArrays;
-import entity.post.Post;
-import entity.user.Club;
-import entity.user.Student;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import entity.data_structure.DataStoreArrays;
+import entity.post.Post;
+import entity.user.Club;
+import entity.user.Student;
 
 /**
  * Interactor for show posts use case.
@@ -38,11 +38,18 @@ public class ShowPostsInteractor implements ShowPostsInputBoundary {
                 postAttributes.put("Likes", post.numberOfLikes());
                 postAttributes.put("Dislikes", post.numberOfDislikes());
                 postAttributes.put("TimeOfPosting", post.timeOfPosting());
+                postAttributes.put("ClubEmail", club.getEmail());
+                if (post.getLikes().contains(currStudent)) {
+                    postAttributes.put("Liked", true);
+                }
+                else {
+                    postAttributes.put("Liked", false);
+                }
                 postsList.add(postAttributes);
             }
             posts.put(club.getUsername(), postsList);
         }
-        final ShowPostsOutputData showPostsOutputData = new ShowPostsOutputData(posts);
+        final ShowPostsOutputData showPostsOutputData = new ShowPostsOutputData(posts, currStudent.getEmail());
         showClubsPresenter.preparePostContent(showPostsOutputData);
     }
 }

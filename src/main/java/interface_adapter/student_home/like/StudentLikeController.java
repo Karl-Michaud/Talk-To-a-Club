@@ -1,6 +1,7 @@
 package interface_adapter.student_home.like;
 
-import entity.post.Post;
+import java.util.Map;
+
 import use_case.student_homepage.like.LikeInputBoundary;
 import use_case.student_homepage.like.LikeInputData;
 
@@ -17,11 +18,10 @@ public class StudentLikeController {
     /**
      * Adds the like to the post.
      * @param studentEmail the email of the current logged in student.
-     * @param clubName the name of the club whose post has been liked.
-     * @param post the post which has been liked.
+     * @param postData the post which has been liked.
      */
-    public void changeLike(String studentEmail, String clubName, Post post) {
-        final LikeInputData likeInputData = new LikeInputData(studentEmail, clubName, post);
+    public void changeLike(String studentEmail, Map<String, Object> postData) {
+        final LikeInputData likeInputData = new LikeInputData(studentEmail, postData);
         likeInputBoundary.execute(likeInputData);
     }
 }

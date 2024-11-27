@@ -9,9 +9,18 @@ import java.util.Map;
 public class ShowPostsState {
     private Map<String, List<Map<String, Object>>> posts;
     private String showPostsError;
+    private String currentUser;
 
     public void setPosts(Map<String, List<Map<String, Object>>> posts) {
         this.posts = posts;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
     }
 
     public Map<String, List<Map<String, Object>>> getPosts() {

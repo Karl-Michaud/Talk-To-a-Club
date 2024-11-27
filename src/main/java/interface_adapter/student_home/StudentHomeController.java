@@ -1,7 +1,6 @@
 package interface_adapter.student_home;
 
 import use_case.student_homepage.StudentHomeInputBoundary;
-import use_case.student_homepage.StudentHomeInputData;
 
 /**
  * Controller for the StudentHome view.

@@ -8,13 +8,18 @@ import java.util.Map;
  */
 public class ShowPostsOutputData {
     private final Map<String, List<Map<String, Object>>> posts;
+    private final String currStudent;
 
-    public ShowPostsOutputData(Map<String, List<Map<String, Object>>> posts) {
+    public ShowPostsOutputData(Map<String, List<Map<String, Object>>> posts, String currStudent) {
         this.posts = posts;
+        this.currStudent = currStudent;
     }
 
     public Map<String, List<Map<String, Object>>> getPosts() {
         return posts;
     }
 
+    public String getCurrStudent() {
+        return currStudent;
+    }
 }

@@ -63,7 +63,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
 
                         studentHomeController.execute(
                                 currentState.getQuery(),
-                                currentState.getEmail()
+                                currentState.getCurrentUser()
                         );
                     }
                 }
@@ -75,7 +75,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         final StudentHomeState state = studentHomeViewModel.getState();
         final ShowPostsState showPostsState = showPostsViewModel.getState();
         this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState.getPosts(),
-                studentLikeController), new ClubsContainer(state)));
+                showPostsState.getCurrentUser(), studentLikeController), new ClubsContainer(state)));
     }
 
     private void addSearchListener() {
@@ -109,7 +109,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         final StudentHomeState state = (StudentHomeState) evt.getNewValue();
         final ShowPostsState showPostsState = showPostsViewModel.getState();
         this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState.getPosts(),
-                studentLikeController), new ClubsContainer(state)));
+                state.getCurrentUser(), studentLikeController), new ClubsContainer(state)));
         if (state.getStudentHomeError() != null) {
             JOptionPane.showMessageDialog(this, state.getStudentHomeError());
         }
