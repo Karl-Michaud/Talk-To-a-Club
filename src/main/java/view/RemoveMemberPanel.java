@@ -11,4 +11,6 @@ public class RemoveMemberPanel implements JPanel{
     private JLabel memberNameLabel;
     private JButton removeMemberButton;
     private JPanel memberPanel;
+
+    // TODO add a listener to this button that deletes the member from the club
 }
