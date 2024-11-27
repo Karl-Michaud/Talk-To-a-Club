@@ -55,6 +55,7 @@
 
 ### Roy:
 
-1) Logout interface adapters and use cases.
-2) Club Home view
-3) get posts, logout, ClubUpdateDescription use cases and interface adapters
+1) Finished get posts, logout, ClubUpdateDescription use cases and interface adapters.
+2) Created and Finished ClubLoggedInView, RemoveMemberPanel, PostTextPanel.
+3) Edited the club login use case to return the club description to the presenter. 
+4) Added use cases to switch between the ClubLoggedInView and CreatePostView.
