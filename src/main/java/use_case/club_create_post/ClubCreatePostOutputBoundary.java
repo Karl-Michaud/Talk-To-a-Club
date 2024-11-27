@@ -16,4 +16,13 @@ public interface ClubCreatePostOutputBoundary {
      */
     void prepareFailView(String errorMessage);
 
+    /**
+     * Prepares to switch the view to the CreatePostView.
+     */
+    void switchToCreatePostView();
+
+    /**
+     * Prepares to switch the view to the ClubLoggedInView.
+     */
+    void switchToClubLoggedInView();
 }

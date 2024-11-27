@@ -24,21 +24,21 @@ import interface_adapter.logout.LogoutController;
  */
 public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
     private JPanel panelClubHome;
-    private JButton createPostButton;
     private JPanel membersPanel;
     private JPanel postsPanel;
     private JPanel descriptionPanel;
-    private JButton updateDescriptionButton;
-    private JTextArea descriptionTextArea;
+    private JPanel logoPanel;
     private JPanel optionsPanel;
+    private JButton updateDescriptionButton;
     private JButton logoutButton;
     private JButton refreshButton;
-    private JPanel logoPanel;
+    private JButton createPostButton;
     private JLabel logoLabel;
     private JLabel message;
     private JScrollPane membersScrollPane;
     private JScrollPane descScrollPane;
     private JScrollPane postsScrollPane;
+    private JTextArea descriptionTextArea;
 
     private final String viewName = "club logged in";
     private final ClubLoggedInViewModel clubLoggedInViewModel;
@@ -62,7 +62,7 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(createPostButton)) {
-                            // createPostController.switchToCreatePost(); // TODO By Karl
+                            clubCreatePostController.switchToCreatePostView();
                         }
                     }
                 }

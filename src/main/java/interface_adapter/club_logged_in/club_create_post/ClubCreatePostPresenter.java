@@ -43,4 +43,26 @@ public class ClubCreatePostPresenter implements ClubCreatePostOutputBoundary {
         clubCreatePostViewModel.setState(state);
         clubCreatePostViewModel.firePropertyChanged();
     }
+
+    @Override
+    public void switchToCreatePostView() {
+        // resets the state before switching
+        final ClubCreatePostState state = clubCreatePostViewModel.getState();
+        state.setContent(null);
+        state.setTitle(null);
+        state.setCreatePostError(null);
+        clubCreatePostViewModel.setState(state);
+        clubCreatePostViewModel.firePropertyChanged();
+
+        // fires a property change to the view manager model to switch to the create post view
+        viewManagerModel.setState(clubCreatePostViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToClubLoggedInView() {
+        // fires a property change to the view manager model to switch to the club logged in view
+        viewManagerModel.setState(clubCreatePostViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
 }

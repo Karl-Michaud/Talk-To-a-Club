@@ -23,4 +23,18 @@ public class ClubCreatePostController {
         final ClubCreatePostInputData createPostInputData = new ClubCreatePostInputData(email, title, content);
         createPostInteractor.execute(createPostInputData);
     }
+
+    /**
+     * Executes the Switch to Create Post View Use Case.
+     */
+    public void switchToCreatePostView() {
+        createPostInteractor.switchToCreatePostView();
+    }
+
+    /**
+     * Executes the Switch to Club Logged In View Use Case.
+     */
+    public void switchToClubLoggedInView() {
+        createPostInteractor.switchToClubLoggedInView();
+    }
 }

@@ -11,4 +11,13 @@ public interface ClubCreatePostInputBoundary {
      */
     void execute(ClubCreatePostInputData clubCreatePostInputData);
 
+    /**
+     * Executes the switch to create post view use case.
+     */
+    void switchToCreatePostView();
+
+    /**
+     * Executes the switch to club logged in view use case.
+     */
+    void switchToClubLoggedInView();
 }

@@ -107,8 +107,7 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
         cancelButton.addActionListener(
                 evt -> {
                     if (evt.getSource().equals(cancelButton)) {
-                        // TODO: Add code to go back to home page when button is clicked.
-                        System.out.println("Temporary");
+                        clubCreatePostController.switchToClubLoggedInView();
                     }
                 }
         );
