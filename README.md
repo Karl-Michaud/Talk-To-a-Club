@@ -57,5 +57,6 @@
 
 1) Finished get posts, logout, ClubUpdateDescription use cases and interface adapters.
 2) Created and Finished ClubLoggedInView, RemoveMemberPanel, PostTextPanel.
-3) Edited the club login use case to return the club description to the presenter. 
-4) Added use cases to switch between the ClubLoggedInView and CreatePostView.
+3) Edited the club login use case to return the club description to the presenter, and removed entities in output data
+4) Added use cases to switch between the ClubLoggedInView and CreatePostView in ClubCreatePost use case
+5) Added Logout use case into the Appbuilder
