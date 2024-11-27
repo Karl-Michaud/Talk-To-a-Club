@@ -8,10 +8,37 @@ import java.util.Map;
  */
 public class ExploreClubsState {
     private String error;
-    private String clubEmail;
+    private String currentClubName;
+    private String currentClubEmail;
+    private String currentClubDescription;
     private String studentEmail;
+    private String currentNumberOfMembersString;
     private ArrayList<Map<String, String>> clubValues = new ArrayList<>();
     private ArrayList<String> joinedClubEmails = new ArrayList<>();
+
+    public String getCurrentClubName() {
+        return currentClubName;
+    }
+
+    public void setCurrentClubName(String currentClubName) {
+        this.currentClubName = currentClubName;
+    }
+
+    public String getCurrentClubDescription() {
+        return currentClubDescription;
+    }
+
+    public void setCurrentClubDescription(String currentClubDescription) {
+        this.currentClubDescription = currentClubDescription;
+    }
+
+    public String getCurrentNumberOfMembersString() {
+        return currentNumberOfMembersString;
+    }
+
+    public void setCurrentNumberOfMembersString(String currentNumberOfMembersString) {
+        this.currentNumberOfMembersString = currentNumberOfMembersString;
+    }
 
     public void setJoinedClubEmails(ArrayList<String> joinedClubEmails) {
         this.joinedClubEmails = joinedClubEmails;
@@ -29,12 +56,12 @@ public class ExploreClubsState {
         return clubValues;
     }
 
-    public void setClubEmail(String clubEmail) {
-        this.clubEmail = clubEmail;
+    public void setCurrentClubEmail(String currentClubEmail) {
+        this.currentClubEmail = currentClubEmail;
     }
 
-    public String getClubEmail() {
-        return clubEmail;
+    public String getCurrentClubEmail() {
+        return currentClubEmail;
     }
 
     public void setStudentEmail(String studentEmail) {

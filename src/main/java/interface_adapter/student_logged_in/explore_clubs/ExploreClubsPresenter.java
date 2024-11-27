@@ -29,9 +29,6 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
         final ExploreClubsState state = exploreClubsViewModel.getState();
         state.setStudentEmail(data.getStudentEmail());
         state.setClubValues(data.getNotJoinedClubs());
-        state.setJoinedClubEmails(data.getJoinedClubsEmails());
-        state.setClubEmail(null);
-        state.setError(null);
 
         exploreClubsViewModel.setState(state);
         exploreClubsViewModel.firePropertyChanged();
@@ -55,13 +52,16 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
     public void switchToClubView(Map<String, String> club) {
         // Set the selected club in the state
         final ExploreClubsState state = exploreClubsViewModel.getState();
-        state.setClubEmail(club.get("email"));
+        state.setCurrentClubEmail(club.get("email"));
+        state.setCurrentClubDescription(club.get("description"));
+        state.setCurrentClubName(club.get("username"));
+        state.setCurrentNumberOfMembersString(club.get("numMembers"));
 
         exploreClubsViewModel.setState(state);
-        exploreClubsViewModel.firePropertyChanged("clubEmail");
+        exploreClubsViewModel.firePropertyChanged("ClubPageView");
 
         // Transition the ViewManager to the Club Description view
-        viewManagerModel.setState("ClubDescriptionView");
+        viewManagerModel.setState(exploreClubsViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 
@@ -70,7 +70,7 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
         // Transition the ViewManager to the Home view
         final ExploreClubsState state = exploreClubsViewModel.getState();
         state.setStudentEmail(null);
-        state.setClubEmail(null);
+        state.setCurrentClubEmail(null);
         // set and fire the states
         exploreClubsViewModel.setState(state);
         exploreClubsViewModel.firePropertyChanged();
