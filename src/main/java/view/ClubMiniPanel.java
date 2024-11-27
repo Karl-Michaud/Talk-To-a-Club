@@ -46,7 +46,7 @@ public class ClubMiniPanel extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("ClubDescriptionView")) {
+        if (evt.getPropertyName().equals("ClubPageView")) {
             controller.switchToClubView(club);
         }
     }

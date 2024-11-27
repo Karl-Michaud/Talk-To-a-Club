@@ -4,12 +4,18 @@ import entity.user.Club;
 import entity.user.ClubUserFactory;
 
 /**
- * The Club Signup Interactor.
+ * The Club Signup Interactor for the club sign up use case.
  */
 public class ClubSignupInteractor implements ClubSignupInputBoundary {
     private final ClubSignupUserDataAccessInterface userDataAccessObject;
     private final ClubSignupOutputBoundary userPresenter;
     private final ClubUserFactory clubUserFactory;
+
+    private final int minLengthUsername = 1;
+    private final int maxLengthUsername = 64;
+
+    private final int minLengthPassword = 8;
+    private final int maxLengthPassword = 64;
 
     public ClubSignupInteractor(ClubSignupUserDataAccessInterface signupDataAccessInterface,
                                 ClubSignupOutputBoundary clubSignupOutputBoundary,
@@ -21,6 +27,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
 
     @Override
     public void execute(ClubSignupInputData clubSignupInputData) {
+        final String onlyForCheckstyle = "characters.";
         if (userDataAccessObject.existsByNameClub(clubSignupInputData.getUsername())) {
             userPresenter.prepareFailView("Username already exists.");
         }
@@ -29,6 +36,22 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
         }
         else if (!clubSignupInputData.getPassword().equals(clubSignupInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match.");
+        }
+        else if (clubSignupInputData.getUsername().length() <= minLengthUsername) {
+            userPresenter.prepareFailView("Username must be at least " + minLengthUsername + onlyForCheckstyle);
+        }
+        else if (clubSignupInputData.getUsername().length() > maxLengthUsername) {
+            userPresenter.prepareFailView("Username must be at most " + maxLengthUsername + onlyForCheckstyle);
+        }
+        else if (clubSignupInputData.getPassword().length() <= minLengthPassword) {
+            userPresenter.prepareFailView("Password must be at least " + minLengthPassword + onlyForCheckstyle);
+        }
+        else if (clubSignupInputData.getPassword().length() > maxLengthPassword) {
+            userPresenter.prepareFailView("Password must be at most " + maxLengthPassword + onlyForCheckstyle);
+        }
+        else if (!clubSignupInputData.getEmail().contentEquals("@")
+                || !clubSignupInputData.getEmail().contentEquals(".")) {
+            userPresenter.prepareFailView("Invalid email address.");
         }
         else {
 

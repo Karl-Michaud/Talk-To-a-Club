@@ -1,6 +1,12 @@
 package app;
 
-import data_access.UserDataAccessObject;
+import java.awt.CardLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+
+import data_access.InMemoryUserDataAccessObject;
 import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
@@ -46,22 +52,25 @@ import use_case.signup.club_signup.ClubSignupOutputBoundary;
 import use_case.signup.student_signup.StudentSignupInputBoundary;
 import use_case.signup.student_signup.StudentSignupInteractor;
 import use_case.signup.student_signup.StudentSignupOutputBoundary;
-import view.*;
+import view.ClubHomeView;
+import view.ClubSignupView;
+import view.CreatePostView;
+import view.LoginView;
+import view.StudentHomeView;
+import view.StudentSignupView;
+import view.ViewManager;
 
-import javax.swing.*;
-import java.awt.*;
-
+// Checkstyle note: you can ignore the "Class Data Abstraction Coupling"
+//                  and the "Class Fan-Out Complexity" issues for this lab; we encourage
+//                  your team to think about ways to refactor the code to resolve these
+//                  if your team decides to work with this as your starter code
+//                  for your final project this term.
 /**
  * The AppBuilder class is responsible for putting together the pieces of
  * our CA architecture; piece by piece.
  * <p/>
  * This is done by adding each View and then adding related Use Cases.
  */
-// Checkstyle note: you can ignore the "Class Data Abstraction Coupling"
-//                  and the "Class Fan-Out Complexity" issues for this lab; we encourage
-//                  your team to think about ways to refactor the code to resolve these
-//                  if your team decides to work with this as your starter code
-//                  for your final project this term.
 public class AppBuilder {
     private final JPanel cardPanel = new JPanel();
     private final CardLayout cardLayout = new CardLayout();
@@ -72,7 +81,7 @@ public class AppBuilder {
     private final ViewManager viewManager = new ViewManager(cardLayout, cardPanel, viewManagerModel);
 
     // thought question: is the hard dependency below a problem?
-    private final UserDataAccessObject userDataAccessObject = new UserDataAccessObject();
+    private final InMemoryUserDataAccessObject inMemoryUserDataAccessObject = new InMemoryUserDataAccessObject();
 
     private ClubSignupViewModel clubSignupViewModel;
     private ClubSignupView clubSignupView;
@@ -159,7 +168,7 @@ public class AppBuilder {
         final ClubSignupOutputBoundary signupOutputBoundary = new ClubSignupPresenter(viewManagerModel,
                 clubSignupViewModel, loginViewModel);
 
-        final ClubSignupInputBoundary userSignupInteractor = new ClubSignupInteractor(userDataAccessObject,
+        final ClubSignupInputBoundary userSignupInteractor = new ClubSignupInteractor(inMemoryUserDataAccessObject,
                 signupOutputBoundary, clubFactory);
 
         final ClubSignupController controller = new ClubSignupController(userSignupInteractor);
@@ -175,7 +184,8 @@ public class AppBuilder {
         final StudentSignupOutputBoundary signupOutputBoundary = new StudentSignupPresenter(viewManagerModel,
                 studentSignupViewModel, loginViewModel);
 
-        final StudentSignupInputBoundary userSignupInteractor = new StudentSignupInteractor(userDataAccessObject,
+        final StudentSignupInputBoundary userSignupInteractor = new StudentSignupInteractor(
+                inMemoryUserDataAccessObject,
                 signupOutputBoundary, studentFactory);
 
         final StudentSignupController controller = new StudentSignupController(userSignupInteractor);
@@ -191,7 +201,7 @@ public class AppBuilder {
         final ClubLoginOutputBoundary loginOutputBoundary = new ClubLoginPresenter(viewManagerModel,
                 clubLoggedInViewModel, clubSignupViewModel, loginViewModel);
         final ClubLoginInputBoundary loginInteractor = new ClubLoginInteractor(
-                userDataAccessObject, loginOutputBoundary);
+                inMemoryUserDataAccessObject, loginOutputBoundary);
 
         final ClubLoginController loginController = new ClubLoginController(loginInteractor);
         loginView.setClubLoginController(loginController);
@@ -206,7 +216,7 @@ public class AppBuilder {
         final StudentLoginOutputBoundary loginOutputBoundary = new StudentLoginPresenter(viewManagerModel,
                 studentHomeViewModel, studentSignupViewModel, loginViewModel);
         final StudentLoginInputBoundary loginInteractor = new StudentLoginInteractor(
-                userDataAccessObject, loginOutputBoundary);
+                inMemoryUserDataAccessObject, loginOutputBoundary);
 
         final StudentLoginController loginController = new StudentLoginController(loginInteractor);
         loginView.setStudentLoginController(loginController);

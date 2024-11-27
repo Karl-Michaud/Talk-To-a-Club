@@ -1,7 +1,5 @@
 package use_case.explore_clubs;
 
-import entity.user.Club;
-
 import java.util.Map;
 
 /**

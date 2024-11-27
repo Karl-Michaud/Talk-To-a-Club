@@ -1,18 +1,28 @@
 package view;
 
-import interface_adapter.login.LoginState;
-import interface_adapter.login.LoginViewModel;
-import interface_adapter.login.club_login.ClubLoginController;
-import interface_adapter.login.student_login.StudentLoginController;
-
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import interface_adapter.login.LoginState;
+import interface_adapter.login.LoginViewModel;
+import interface_adapter.login.club_login.ClubLoginController;
+import interface_adapter.login.student_login.StudentLoginController;
+
+/**
+ * The view for the Club and Student Login.
+ */
 public class LoginView extends JPanel implements PropertyChangeListener {
     private final String viewName = "login";
 
