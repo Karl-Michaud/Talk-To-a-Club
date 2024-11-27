@@ -1,32 +1,37 @@
 package data_access;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import entity.user.Student;
 import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
+import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
 import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
-import use_case.student_join_club.StudentJoinClubAccessInterface;
-import use_case.student_leave_club.StudentLeaveClubAccessInterface;
+import use_case.student_join_club.StudentJoinClubDataAccessInterface;
+import use_case.student_leave_club.StudentLeaveClubDataAccessInterface;
 import use_case.student_search_club.StudentSearchClubAccessInterface;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-
 /**
- * Persisting memory implementation of the DAO for storing user data
+ * Persisting memory implementation of the DAO for storing user data.
  * This implementation uses Firebase and only persists data regarding the
  * Student entity
  */
 public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAccessInterface,
-        StudentSignupUserDataAccessInterface, StudentJoinClubAccessInterface,
-        StudentLeaveClubAccessInterface, StudentSearchClubAccessInterface,
-        ClubRemoveMemberStudentDataAccessInterface {
+        StudentSignupUserDataAccessInterface, StudentJoinClubDataAccessInterface,
+        StudentLeaveClubDataAccessInterface, StudentSearchClubAccessInterface,
+        ClubRemoveMemberStudentDataAccessInterface, StudentExploreClubsDataAccessInterface {
     private final Firestore db;
     private final String students = "students";
     private final String usernames = "username";

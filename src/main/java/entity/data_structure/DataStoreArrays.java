@@ -45,10 +45,7 @@ public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
         return data.get(index);
     }
 
-    /**
-     * Removes and returns the last element of the list.
-     * @return element that has been popped.
-     */
+    @Override
     public T pop() {
         final T last = data.get(data.size() - 1);
         data.remove(data.size() - 1);
@@ -63,6 +60,35 @@ public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
     @Override
     public Integer size() {
         return this.data.size();
+    }
+
+    @Override
+    public DataStore<T> intersection(DataStore<T> other) {
+        final DataStoreArrays<T> intersection = new DataStoreArrays<>();
+
+        for (T datum : data) {
+            if (other.contains(datum) && !intersection.contains(datum)) {
+                intersection.add(datum);
+            }
+        }
+        return intersection;
+    }
+
+    @Override
+    public DataStore<T> complement(DataStore<T> other) {
+        final DataStoreArrays<T> complement = new DataStoreArrays<>();
+
+        for (T datum : data) {
+            if (!other.contains(datum) && !complement.contains(datum)) {
+                complement.add(datum);
+            }
+        }
+        return complement;
+    }
+
+    @Override
+    public Iterable<T> getAll() {
+        return data;
     }
 
     @Override
