@@ -11,6 +11,7 @@ public class Club implements User {
     private final String username;
     private final String email;
     private final String password;
+    private String clubDescription = "";
     // Club's members and Posts information
     private final DataStore<Student> clubMembers;
     private final DataStore<Post> clubPosts;
@@ -37,6 +38,10 @@ public class Club implements User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getClubDescription() {
+        return clubDescription;
     }
 
     public DataStore<Student> getClubMembers() {
@@ -77,6 +82,10 @@ public class Club implements User {
      */
     public void removeClubPost(Post post) {
         clubPosts.remove(post);
+    }
+
+    public void setClubDescription(String newDescription) {
+        this.clubDescription = newDescription;
     }
 
 }

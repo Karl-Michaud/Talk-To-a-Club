@@ -1,32 +1,39 @@
 package interface_adapter.student_logged_in.explore_clubs;
 
-import entity.data_structure.DataStore;
-import entity.user.Club;
-import entity.user.Student;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * State for Explore clubs use case.
  */
 public class ExploreClubsState {
-    private DataStore<Club> clubs;
     private String error;
-    private Club selectedClub;
-    private Student currentStudent;
+    private String clubEmail;
+    private String studentEmail;
+    private ArrayList<Map<String, String>> clubValues = new ArrayList<>();
 
-    public DataStore<Club> getClubs() {
-        return clubs;
+    public void setClubValues(ArrayList<Map<String, String>> clubValues) {
+        this.clubValues = clubValues;
     }
 
-    public void setClubs(DataStore<Club> clubs) {
-        this.clubs = clubs;
+    public ArrayList<Map<String, String>> getClubValues() {
+        return clubValues;
     }
 
-    public Student getCurrentStudent() {
-        return currentStudent;
+    public void setClubEmail(String clubEmail) {
+        this.clubEmail = clubEmail;
     }
 
-    public void setCurrentStudent(Student currentStudent) {
-        this.currentStudent = currentStudent;
+    public String getClubEmail() {
+        return clubEmail;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
+    }
+
+    public String getStudentEmail() {
+        return studentEmail;
     }
 
     public String getError() {
@@ -35,13 +42,5 @@ public class ExploreClubsState {
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    public Club getSelectedClub() {
-        return selectedClub;
-    }
-
-    public void setSelectedClub(Club selectedClub) {
-        this.selectedClub = selectedClub;
     }
 }

@@ -1,6 +1,7 @@
 package interface_adapter.student_logged_in.explore_clubs;
 
-import entity.user.Club;
+import java.util.Map;
+
 import use_case.explore_clubs.ExploreClubsInputBoundary;
 import use_case.explore_clubs.ExploreClubsInputData;
 
@@ -24,10 +25,10 @@ public class ExploreClubsController {
     }
 
     /**
-     * Handle the selection of a club from the list.
+     * Handle the selection of a club from the list and switch the view.
      * @param club The selected club.
      */
-    public void switchToClubView(Club club) {
+    public void switchToClubView(Map<String, String> club) {
         inputBoundary.switchToClubView(club);
     }
 

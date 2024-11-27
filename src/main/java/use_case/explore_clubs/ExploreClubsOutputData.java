@@ -1,19 +1,21 @@
 package use_case.explore_clubs;
 
-import entity.data_structure.DataStore;
-import entity.user.Club;
+import java.util.ArrayList;
+import java.util.Map;
+
 import entity.user.Student;
 
 /**
- * Output data for the get clubs use case.
+ * Output data for the explore clubs use case.
  */
 public class ExploreClubsOutputData {
     private final String email;
-    private final DataStore<Club> notJoinedClubs;
+    private final ArrayList<Map<String, String>> notJoinedClubs;
     private final boolean useCaseFailed;
     private final Student student;
 
-    public ExploreClubsOutputData(String email, DataStore<Club> clubs, boolean useCaseFailed, Student student) {
+    public ExploreClubsOutputData(String email, ArrayList<Map<String, String>> clubs, boolean useCaseFailed,
+                                  Student student) {
         this.email = email;
         this.notJoinedClubs = clubs;
         this.useCaseFailed = useCaseFailed;
@@ -24,7 +26,7 @@ public class ExploreClubsOutputData {
         return email;
     }
 
-    public DataStore<Club> getNotJoinedClubs() {
+    public ArrayList<Map<String, String>> getNotJoinedClubs() {
         return notJoinedClubs;
     }
 

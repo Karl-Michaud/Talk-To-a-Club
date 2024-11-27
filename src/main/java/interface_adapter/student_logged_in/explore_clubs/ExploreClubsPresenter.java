@@ -1,6 +1,7 @@
 package interface_adapter.student_logged_in.explore_clubs;
 
-import entity.user.Club;
+import java.util.Map;
+
 import interface_adapter.ViewManagerModel;
 import interface_adapter.student_home.StudentHomeViewModel;
 import use_case.explore_clubs.ExploreClubsOutputBoundary;
@@ -26,9 +27,9 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
     public void prepareSuccessView(ExploreClubsOutputData data) {
         // Update the ExploreClubsState with clubs and clear errors
         final ExploreClubsState state = exploreClubsViewModel.getState();
-        state.setClubs(data.getNotJoinedClubs());
-        state.setCurrentStudent(data.getStudent());
-        state.setSelectedClub(null);
+        state.setStudentEmail(data.getStudent().getEmail());
+        state.setClubValues(data.getNotJoinedClubs());
+        state.setClubEmail(null);
         state.setError(null);
 
         exploreClubsViewModel.setState(state);
@@ -50,13 +51,13 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
     }
 
     @Override
-    public void switchToClubView(Club club) {
+    public void switchToClubView(Map<String, String> club) {
         // Set the selected club in the state
         final ExploreClubsState state = exploreClubsViewModel.getState();
-        state.setSelectedClub(club);
+        state.setClubEmail(club.get("email"));
 
         exploreClubsViewModel.setState(state);
-        exploreClubsViewModel.firePropertyChanged("selectedClub");
+        exploreClubsViewModel.firePropertyChanged("clubEmail");
 
         // Transition the ViewManager to the Club Description view
         viewManagerModel.setState("ClubDescriptionView");
@@ -67,9 +68,8 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
     public void switchToHomeView() {
         // Transition the ViewManager to the Home view
         final ExploreClubsState state = exploreClubsViewModel.getState();
-        state.setClubs(null);
-        state.setCurrentStudent(null);
-        state.setSelectedClub(null);
+        state.setStudentEmail(null);
+        state.setClubEmail(null);
         // set and fire the states
         exploreClubsViewModel.setState(state);
         exploreClubsViewModel.firePropertyChanged();

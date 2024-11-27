@@ -1,9 +1,12 @@
 package use_case.explore_clubs;
 
 import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
 import entity.user.Student;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Interactor for the get clubs use case.
@@ -11,14 +14,14 @@ import entity.user.Student;
 public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
     private final StudentExploreClubsDataAccessInterface studentExploreClubsDataAccessInterface;
     private final ClubExploreClubsDataAccessInterface clubExploreClubsDataAccessInterface;
-    private final ExploreClubsOutputBoundary getClubsPresenter;
+    private final ExploreClubsOutputBoundary exploreClubsPresenter;
 
     public ExploreClubsInteractor(StudentExploreClubsDataAccessInterface studentExploreClubsDataAccessInterface,
                                   ExploreClubsOutputBoundary getMembersPresenter,
                                   ClubExploreClubsDataAccessInterface clubExploreClubsDataAccessInterface) {
         this.studentExploreClubsDataAccessInterface = studentExploreClubsDataAccessInterface;
         this.clubExploreClubsDataAccessInterface = clubExploreClubsDataAccessInterface;
-        this.getClubsPresenter = getMembersPresenter;
+        this.exploreClubsPresenter = getMembersPresenter;
     }
 
     /**
@@ -29,7 +32,7 @@ public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
     public void execute(ExploreClubsInputData inputData) {
         final String email = inputData.getEmail();
         if (!studentExploreClubsDataAccessInterface.existsByEmailStudent(email)) {
-            getClubsPresenter.prepareFailView(email + ": Account does not exist.");
+            exploreClubsPresenter.prepareFailView(email + ": Account does not exist.");
         }
         else {
             // gets the joined clubs by retrieving user from database and getting joined clubs.
@@ -42,19 +45,29 @@ public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
             // all values of all clubs minus the joined ones
             final DataStore<Club> complement = allClubs.complement(joinedClubs);
 
+            final ArrayList<Map<String, String>> outputMap = new ArrayList<>();
+            for (Club club : complement.getAll()) {
+                final Map<String, String> map = new HashMap<>();
+                map.put("username", club.getUsername());
+                map.put("email", club.getEmail());
+                map.put("description", club.getClubDescription());
+                map.put("numMembers", club.getClubMembers().size().toString());
+                outputMap.add(map);
+            }
+
             final ExploreClubsOutputData outputData = new ExploreClubsOutputData(inputData.getEmail(),
-                    complement, false, student);
-            getClubsPresenter.prepareSuccessView(outputData);
+                    outputMap, false, student);
+            exploreClubsPresenter.prepareSuccessView(outputData);
         }
     }
 
     @Override
-    public void switchToClubView(Club club) {
-        getClubsPresenter.switchToClubView(club);
+    public void switchToClubView(Map<String, String> club) {
+        exploreClubsPresenter.switchToClubView(club);
     }
 
     @Override
     public void switchToHomeView() {
-        getClubsPresenter.switchToHomeView();
+        exploreClubsPresenter.switchToHomeView();
     }
 }

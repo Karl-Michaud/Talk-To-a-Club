@@ -2,6 +2,8 @@ package use_case.explore_clubs;
 
 import entity.user.Club;
 
+import java.util.Map;
+
 /**
  * Input boundary interface for the explore clubs use case.
  */
@@ -17,7 +19,7 @@ public interface ExploreClubsInputBoundary {
      * Prepares the club view for the explore clubs use case.
      * @param club is the club needed to switch to.
      */
-    void switchToClubView(Club club);
+    void switchToClubView(Map<String, String> club);
 
     /**
      * Prepares the home view for the explore clubs use case.
