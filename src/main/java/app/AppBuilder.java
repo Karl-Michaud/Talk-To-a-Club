@@ -20,6 +20,7 @@ import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_home.StudentHomePresenter;
 import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_home.like.StudentLikeController;
 import interface_adapter.student_home.show_posts.ShowPostsController;
 import interface_adapter.student_home.show_posts.ShowPostsViewModel;
 import interface_adapter.student_home.show_posts.StudentShowPostsPresenter;
@@ -41,7 +42,10 @@ import use_case.signup.student_signup.StudentSignupOutputBoundary;
 import use_case.student_homepage.StudentHomeInputBoundary;
 import use_case.student_homepage.StudentHomeInteractor;
 import use_case.student_homepage.StudentHomeOutputBoundary;
+import use_case.student_homepage.like.LikeInputBoundary;
+import use_case.student_homepage.like.LikeInteractor;
 import use_case.student_homepage.show_posts.ShowPostsInputBoundary;
+import use_case.student_homepage.show_posts.ShowPostsInputData;
 import use_case.student_homepage.show_posts.ShowPostsInteractor;
 import use_case.student_homepage.show_posts.ShowPostsOutputBoundary;
 import use_case.student_profile.StudentProfileInputBoundary;
@@ -146,13 +150,21 @@ public class AppBuilder {
     }
 
     /**
+     * Initializes the viewmodel for showing posts on the home screen.
+     * @return this builder
+     */
+    public AppBuilder addShowPostsView() {
+        showPostsViewModel = new ShowPostsViewModel();
+        return this;
+    }
+
+    /**
      * Adds the Student Home View to the application.
      * @return this builder
      */
     public AppBuilder addStudentHomeView() {
         studentHomeViewModel = new StudentHomeViewModel();
         studentHomeView = new StudentHomeView(studentHomeViewModel, showPostsViewModel);
-        showPostsViewModel = new ShowPostsViewModel();
         cardPanel.add(studentHomeView, studentHomeView.getViewName());
         return this;
     }
@@ -221,7 +233,7 @@ public class AppBuilder {
      */
     public AppBuilder addStudentLoginUseCase() {
         final StudentLoginOutputBoundary loginOutputBoundary = new StudentLoginPresenter(viewManagerModel,
-                studentHomeViewModel, studentSignupViewModel, loginViewModel);
+                studentHomeViewModel, studentSignupViewModel, loginViewModel, showPostsViewModel);
         final StudentLoginInputBoundary loginInteractor = new StudentLoginInteractor(
                 userDataAccessObject, loginOutputBoundary);
 
@@ -244,8 +256,16 @@ public class AppBuilder {
         final ShowPostsOutputBoundary showPostsOutputBoundary = new StudentShowPostsPresenter(showPostsViewModel);
         final ShowPostsInputBoundary showPostsInteractor = new ShowPostsInteractor(userDataAccessObject,
                 showPostsOutputBoundary);
+
         final ShowPostsController showPostsController = new ShowPostsController(showPostsInteractor);
         studentHomeView.setShowPostsController(showPostsController);
+        return this;
+    }
+
+    public AppBuilder addLikeUseCase() {
+        final LikeInputBoundary likeInteractor = new LikeInteractor(userDataAccessObject);
+        final StudentLikeController likeController = new StudentLikeController(likeInteractor);
+        studentHomeView.setLikeController(likeController);
         return this;
     }
 

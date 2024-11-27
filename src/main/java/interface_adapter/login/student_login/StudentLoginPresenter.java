@@ -6,6 +6,8 @@ import interface_adapter.login.LoginViewModel;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_home.show_posts.ShowPostsState;
+import interface_adapter.student_home.show_posts.ShowPostsViewModel;
 import use_case.login.student_login.StudentLoginOutputBoundary;
 import use_case.login.student_login.StudentLoginOutputData;
 
@@ -17,16 +19,18 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
     private final LoginViewModel loginViewModel;
     private final StudentHomeViewModel studentHomeViewModel;
     private final StudentSignupViewModel studentSignupViewModel;
+    private final ShowPostsViewModel showPostsViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public StudentLoginPresenter(ViewManagerModel viewManagerModel,
                                  StudentHomeViewModel studentHomeViewModel,
                                  StudentSignupViewModel studentSignupViewModel,
-                                 LoginViewModel loginViewModel) {
+                                 LoginViewModel loginViewModel, ShowPostsViewModel showPostsViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.studentHomeViewModel = studentHomeViewModel;
         this.studentSignupViewModel = studentSignupViewModel;
         this.loginViewModel = loginViewModel;
+        this.showPostsViewModel = showPostsViewModel;
     }
 
     @Override
@@ -44,8 +48,12 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
      */
     private void setHomePageState(StudentLoginOutputData response) {
         final StudentHomeState studentHomeState = studentHomeViewModel.getState();
-        studentHomeState.setEmail(response.getEmail());
+        studentHomeState.setCurrentUser(response.getEmail());
         studentHomeState.setUsername(response.getUsername());
+        final ShowPostsState showPostsState = showPostsViewModel.getState();
+        showPostsState.setCurrentUser(response.getEmail());
+        this.showPostsViewModel.setState(showPostsState);
+        this.showPostsViewModel.firePropertyChanged();
         this.studentHomeViewModel.setState(studentHomeState);
         this.studentHomeViewModel.firePropertyChanged();
     }

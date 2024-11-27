@@ -39,12 +39,7 @@ public class ShowPostsInteractor implements ShowPostsInputBoundary {
                 postAttributes.put("Dislikes", post.numberOfDislikes());
                 postAttributes.put("TimeOfPosting", post.timeOfPosting());
                 postAttributes.put("ClubEmail", club.getEmail());
-                if (post.getLikes().contains(currStudent)) {
-                    postAttributes.put("Liked", true);
-                }
-                else {
-                    postAttributes.put("Liked", false);
-                }
+                postAttributes.put("Liked", post.getLikes().contains(currStudent));
                 postsList.add(postAttributes);
             }
             posts.put(club.getUsername(), postsList);

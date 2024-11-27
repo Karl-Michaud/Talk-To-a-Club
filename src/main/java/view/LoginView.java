@@ -4,6 +4,7 @@ import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.login.club_login.ClubLoginController;
 import interface_adapter.login.student_login.StudentLoginController;
+import interface_adapter.student_home.show_posts.ShowPostsController;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

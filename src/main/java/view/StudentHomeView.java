@@ -107,6 +107,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final StudentHomeState state = (StudentHomeState) evt.getNewValue();
+        showPostsController.execute(state.getCurrentUser());
         final ShowPostsState showPostsState = showPostsViewModel.getState();
         this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState.getPosts(),
                 state.getCurrentUser(), studentLikeController), new ClubsContainer(state)));
@@ -127,7 +128,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         this.showPostsController = showPostsController;
     }
 
-    public void setStudentLikeController(StudentLikeController studentLikeController) {
-        this.studentLikeController = studentLikeController;
+    public void setLikeController(StudentLikeController likeController) {
+        this.studentLikeController = likeController;
     }
 }

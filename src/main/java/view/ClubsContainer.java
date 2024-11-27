@@ -13,9 +13,9 @@ public class ClubsContainer extends JPanel {
 
     public ClubsContainer(StudentHomeState state) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        for (Club club : state.getFollowedClubs()) {
-            this.add(new ClubMiniPanel(club));
-        }
+//        for (Club club : state.getFollowedClubs()) {
+//            this.add(new ClubMiniPanel(club));
+//        }
         // This temporarily creates a list of fake clubs to populate as an example.
         //
         // for (int i = 0; i <= 10; i++) {
