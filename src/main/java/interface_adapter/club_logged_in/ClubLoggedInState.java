@@ -1,5 +1,7 @@
 package interface_adapter.club_logged_in;
 
+import java.util.ArrayList;
+
 /**
  * Club Logged In state.
  */
@@ -7,20 +9,12 @@ public class ClubLoggedInState {
     private String clubName = "";
 
     private String email = "";
-    private String emailError;
 
     private String password = "";
-    private String passwordError;
+    private String errorMessage;
 
-    public ClubLoggedInState(ClubLoggedInState copy) {
-        this.clubName = copy.clubName;
-
-        this.email = copy.email;
-        this.emailError = copy.emailError;
-
-        this.password = copy.password;
-        this.passwordError = copy.passwordError;
-    }
+    private ArrayList<String> membersEmail;
+    private ArrayList<String> membersName;
 
     public ClubLoggedInState() {
         // empty body since we have a constructor already and so no default constructor anymore.
@@ -42,14 +36,6 @@ public class ClubLoggedInState {
         this.email = email;
     }
 
-    public String getEmailError() {
-        return emailError;
-    }
-
-    public void setEmailError(String emailError) {
-        this.emailError = emailError;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -58,11 +44,27 @@ public class ClubLoggedInState {
         this.password = password;
     }
 
-    public String getPasswordError() {
-        return passwordError;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setPasswordError(String passwordError) {
-        this.passwordError = passwordError;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public ArrayList<String> getMembersEmail() {
+        return membersEmail;
+    }
+
+    public void setMembersEmail(ArrayList<String> membersEmail) {
+        this.membersEmail = membersEmail;
+    }
+
+    public ArrayList<String> getMembersName() {
+        return membersName;
+    }
+
+    public void setMembersName(ArrayList<String> membersName) {
+        this.membersName = membersName;
     }
 }
