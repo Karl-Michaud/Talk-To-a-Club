@@ -1,8 +1,5 @@
 package use_case.login.club_login;
 
-import entity.data_structure.DataStore;
-import entity.post.Post;
-
 /**
  * Output data for the login use case for clubs.
  */

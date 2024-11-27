@@ -1,8 +1,5 @@
 package use_case.login.student_login;
 
-import entity.data_structure.DataStore;
-import entity.user.Club;
-
 /**
  * The output data for the login use case for students.
  */

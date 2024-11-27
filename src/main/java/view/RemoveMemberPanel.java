@@ -1,12 +1,13 @@
 package view;
 
-import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberController;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberController;
 
 /**
  * A JPanel that contains a member's information, and a button to remove that member from the logged in club.
