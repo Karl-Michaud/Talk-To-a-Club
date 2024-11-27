@@ -38,4 +38,31 @@ public interface DataStore<T> {
      */
     Integer size();
 
+    /**
+     * Deletes and returns the last element of data structure.
+     * An order must be established in implementation to insure the idea
+     * of "last".
+     * @return the last element.
+     */
+    T pop();
+
+    /**
+     * Returns the intersection between this DataStore and another.
+     * @param other the other DataStore data structure to intersect.
+     * @return the intersection.
+     */
+    DataStore<T> intersection(DataStore<T> other);
+
+    /**
+     * Returns the complement between this DataStore and another.
+     * @param other the other DataStore data structure to find complement.
+     * @return the complement.
+     */
+    DataStore<T> complement(DataStore<T> other);
+
+    /**
+     * Returns an iterable of all the elements of this data structure.
+     * @return an Iterable
+     */
+    Iterable<T> getAll();
 }

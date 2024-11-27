@@ -3,6 +3,8 @@ package interface_adapter.login.student_login;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.signup.club_signup.ClubSignupState;
+import interface_adapter.signup.student_signup.StudentSignupState;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
@@ -67,6 +69,17 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
 
     @Override
     public void switchToStudentSignupView() {
+        // Clears the StudentSignupState
+        final StudentSignupState state = studentSignupViewModel.getState();
+        state.setEmail("");
+        state.setPassword("");
+        state.setUsername("");
+        state.setRepeatPassword("");
+        state.setSignupError(null);
+        this.studentSignupViewModel.setState(state);
+        this.studentSignupViewModel.firePropertyChanged();
+
+        // Switches to the student signup view
         viewManagerModel.setState(studentSignupViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

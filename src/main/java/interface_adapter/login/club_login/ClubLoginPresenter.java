@@ -5,6 +5,7 @@ import interface_adapter.club_logged_in.ClubLoggedInState;
 import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.signup.club_signup.ClubSignupState;
 import interface_adapter.signup.club_signup.ClubSignupViewModel;
 import use_case.login.club_login.ClubLoginOutputBoundary;
 import use_case.login.club_login.ClubLoginOutputData;
@@ -31,7 +32,7 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
     @Override
     public void prepareSuccessView(ClubLoginOutputData response) {
-        // On success switch to the home view.
+        // On success switch to the club logged in view.
         setHomePageState(response);
 
         this.viewManagerModel.setState(clubLoggedInViewModel.getViewName());
@@ -43,15 +44,11 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
      * @param response the input data getting passed to the presenter
      */
     private void setHomePageState(ClubLoginOutputData response) {
-        final ClubLoggedInState clubHomeState = clubLoggedInViewModel.getState();
-        clubHomeState.setClubName(response.getUsername());
-        clubHomeState.setEmail(response.getEmail());
-
-        // IMPORTANT!!!
-        // Since we are changing the code to have a get posts use case, we don't need to assign it to the
-        // ClubLoggedInState. Therefore, this logic will be taking place in the get posts use case.
-
-        this.clubLoggedInViewModel.setState(clubHomeState);
+        final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
+        clubLoggedInState.setClubName(response.getUsername());
+        clubLoggedInState.setEmail(response.getEmail());
+        clubLoggedInState.setDescriptionTextArea(response.getDescription());
+        this.clubLoggedInViewModel.setState(clubLoggedInState);
         this.clubLoggedInViewModel.firePropertyChanged();
     }
 
@@ -64,6 +61,17 @@ public class ClubLoginPresenter implements ClubLoginOutputBoundary {
 
     @Override
     public void switchToClubSignupView() {
+        // Clears the ClubSignupState
+        final ClubSignupState state = clubSignupViewModel.getState();
+        state.setEmail("");
+        state.setPassword("");
+        state.setUsername("");
+        state.setRepeatPassword("");
+        state.setSignupError(null);
+        this.clubSignupViewModel.setState(state);
+        this.clubSignupViewModel.firePropertyChanged();
+
+        // Switches to the club signup state
         viewManagerModel.setState(clubSignupViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }

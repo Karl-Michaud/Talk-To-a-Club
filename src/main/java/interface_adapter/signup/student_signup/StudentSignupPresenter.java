@@ -44,6 +44,15 @@ public class StudentSignupPresenter implements StudentSignupOutputBoundary {
 
     @Override
     public void switchToLoginView() {
+        // Clears the LoginState
+        final LoginState state = loginViewModel.getState();
+        state.setLoginError(null);
+        state.setPassword("");
+        state.setIdentifier("");
+        loginViewModel.setState(state);
+        loginViewModel.firePropertyChanged();
+
+        // Switch to the login view
         viewManagerModel.setState(loginViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
