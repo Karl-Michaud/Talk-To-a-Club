@@ -9,11 +9,13 @@ import entity.post.Post;
 public class ClubLoginOutputData {
     private final String username;
     private final String email;
+    private final String description;
     private final boolean useCaseFailed;
 
-    public ClubLoginOutputData(String username, String email, boolean useCaseFailed) {
+    public ClubLoginOutputData(String username, String email, String description, boolean useCaseFailed) {
         this.username = username;
         this.email = email;
+        this.description = description;
         this.useCaseFailed = useCaseFailed;
     }
 
@@ -23,6 +25,10 @@ public class ClubLoginOutputData {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     /**
