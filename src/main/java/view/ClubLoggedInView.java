@@ -1,21 +1,21 @@
 package view;
 
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
-import interface_adapter.club_get_posts.ClubGetPostsController;
-import interface_adapter.club_logged_in.ClubLoggedInState;
-import interface_adapter.club_logged_in.ClubLoggedInViewModel;
-import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
-import interface_adapter.club_update_desc.ClubUpdateDescController;
-import interface_adapter.logout.LogoutController;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import interface_adapter.club_get_posts.ClubGetPostsController;
+import interface_adapter.club_logged_in.ClubLoggedInState;
+import interface_adapter.club_logged_in.ClubLoggedInViewModel;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
+import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
+import interface_adapter.club_update_desc.ClubUpdateDescController;
+import interface_adapter.logout.LogoutController;
 
 /**
  * The Club Logged View.
@@ -162,24 +162,24 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
         });
     }
 
-    public void setCreatePostController(ClubCreatePostController clubCreatePostController) {
-        this.clubCreatePostController = clubCreatePostController;
+    public void setCreatePostController(ClubCreatePostController controller) {
+        this.clubCreatePostController = controller;
     }
 
     public void setLogoutController(LogoutController logoutController) {
         this.logoutController = logoutController;
     }
 
-    public void setClubGetPostsController(ClubGetPostsController clubGetPostsController) {
-        this.clubGetPostsController = clubGetPostsController;
+    public void setClubGetPostsController(ClubGetPostsController controller) {
+        this.clubGetPostsController = controller;
     }
 
-    public void setGetMembersController(ClubGetMembersController clubGetMembersController) {
-        this.clubGetMembersController = clubGetMembersController;
+    public void setGetMembersController(ClubGetMembersController controller) {
+        this.clubGetMembersController = controller;
     }
 
-    public void setClubUpdateDescController(ClubUpdateDescController clubUpdateDescController) {
-        this.clubUpdateDescController = clubUpdateDescController;
+    public void setClubUpdateDescController(ClubUpdateDescController controller) {
+        this.clubUpdateDescController = controller;
     }
 
     public String getViewName() {

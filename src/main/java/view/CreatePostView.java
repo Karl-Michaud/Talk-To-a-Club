@@ -17,7 +17,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
-import interface_adapter.club_logged_in.club_create_post.CreatePostState;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostState;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostViewModel;
 
 /**
@@ -39,7 +39,8 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
 
     private ClubCreatePostController clubCreatePostController;
 
-    public CreatePostView(ClubCreatePostViewModel clubCreatePostViewModel, ClubCreatePostController clubCreatePostController) {
+    public CreatePostView(ClubCreatePostViewModel clubCreatePostViewModel,
+                          ClubCreatePostController clubCreatePostController) {
         this.clubCreatePostViewModel = clubCreatePostViewModel;
         this.clubCreatePostController = clubCreatePostController;
         this.createPostButton.addActionListener(this);
@@ -59,7 +60,7 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
 
         titleTextField.getDocument().addDocumentListener(new DocumentListener() {
             private void documentListenerHelper() {
-                final CreatePostState currentState = clubCreatePostViewModel.getState();
+                final ClubCreatePostState currentState = clubCreatePostViewModel.getState();
                 currentState.setTitle(titleTextField.getText());
                 clubCreatePostViewModel.setState(currentState);
             }
@@ -82,7 +83,7 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
 
         descriptionTextField.getDocument().addDocumentListener(new DocumentListener() {
             private void documentListenerHelper() {
-                final CreatePostState currentState = clubCreatePostViewModel.getState();
+                final ClubCreatePostState currentState = clubCreatePostViewModel.getState();
                 currentState.setContent(descriptionTextField.getText());
                 clubCreatePostViewModel.setState(currentState);
             }
@@ -115,7 +116,7 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
         createPostButton.addActionListener(
                 evt -> {
                     if (evt.getSource().equals(createPostButton)) {
-                        final CreatePostState currentState = clubCreatePostViewModel.getState();
+                        final ClubCreatePostState currentState = clubCreatePostViewModel.getState();
                         clubCreatePostController.execute(currentState.getEmail(), currentState.getTitle(),
                                 currentState.getContent());
                     }
@@ -148,14 +149,14 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
             JOptionPane.showMessageDialog(null, "Announcement successfully posted.");
         }
         else if (evt.getPropertyName().equals("state")) {
-            final CreatePostState state = (CreatePostState) evt.getNewValue();
+            final ClubCreatePostState state = (ClubCreatePostState) evt.getNewValue();
             titleErrorField.setText(state.getTitle());
             descriptionErrorField.setText(state.getContent());
             JOptionPane.showMessageDialog(null, state.getCreatePostError());
         }
     }
 
-    public void setCreatePostController(ClubCreatePostController clubCreatePostController) {
-        this.clubCreatePostController = clubCreatePostController;
+    public void setCreatePostController(ClubCreatePostController controller) {
+        this.clubCreatePostController = controller;
     }
 }
