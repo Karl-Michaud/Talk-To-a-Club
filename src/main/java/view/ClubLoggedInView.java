@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -14,6 +15,7 @@ import interface_adapter.club_logged_in.ClubLoggedInState;
 import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
+import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberController;
 import interface_adapter.club_update_desc.ClubUpdateDescController;
 import interface_adapter.logout.LogoutController;
 
@@ -46,6 +48,7 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
     private ClubGetPostsController clubGetPostsController;
     private ClubGetMembersController clubGetMembersController;
     private ClubUpdateDescController clubUpdateDescController;
+    private ClubRemoveMemberController clubRemoveMemberController;
 
     public ClubLoggedInView(ClubLoggedInViewModel clubLoggedInViewModel) {
         this.clubLoggedInViewModel = clubLoggedInViewModel;
@@ -119,15 +122,37 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
         }
         else if (evt.getPropertyName().equals("create post")) {
             final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
+            // Executes the get posts use case and gets the updated state
             clubGetPostsController.execute(state.getEmail());
-            // TODO add panels into the postsScrollPane of each post
+            final ClubLoggedInState updatedState = clubLoggedInViewModel.getState();
+
+            // Creates a PostTextPanel for every post retrieved and adds it to this view
+            final List<String> postTitles = updatedState.getPostTitles();
+            final List<String> postBodies = updatedState.getPostBodies();
+
+            for (int i = 0; i < postTitles.size(); i++) {
+                final PostTextPanel postPanel = new PostTextPanel(postTitles.get(i), postBodies.get(i));
+                postsScrollPane.add(postPanel);
+            }
         }
         else if (evt.getPropertyName().equals("get members")) {
             final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
+            // Executes the get members use case and gets the updated state
             clubGetMembersController.execute(state.getEmail());
-            // TODO add panels into the membersScrollPane of each student
+            final ClubLoggedInState updatedState = clubLoggedInViewModel.getState();
+
+            // Creates a RemoveMemberPanel for every member retrieved and adds it to this view
+            final List<String> memberNames = updatedState.getMembersName();
+            final List<String> memberEmails = updatedState.getMembersEmail();
+
+            for (int i = 0; i < memberNames.size(); i++) {
+                final RemoveMemberPanel memberPanel = new RemoveMemberPanel(clubRemoveMemberController,
+                        updatedState.getEmail(), memberEmails.get(i), memberNames.get(i));
+                membersScrollPane.add(memberPanel);
+            }
         }
         else if (evt.getPropertyName().equals("reload message")) {
+            // Sets the message JLabel to have the text in the current state.
             final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
             message.setText(state.getMessage());
         }
@@ -180,6 +205,10 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
 
     public void setClubUpdateDescController(ClubUpdateDescController controller) {
         this.clubUpdateDescController = controller;
+    }
+
+    public void setClubRemoveMemberController(ClubRemoveMemberController controller) {
+        this.clubRemoveMemberController = controller;
     }
 
     public String getViewName() {
