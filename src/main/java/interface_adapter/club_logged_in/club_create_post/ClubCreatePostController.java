@@ -1,4 +1,4 @@
-package interface_adapter.club_logged_in.create_post;
+package interface_adapter.club_logged_in.club_create_post;
 
 import use_case.club_create_post.ClubCreatePostInputBoundary;
 import use_case.club_create_post.ClubCreatePostInputData;
@@ -6,10 +6,10 @@ import use_case.club_create_post.ClubCreatePostInputData;
 /**
  * Controller for the login use case.
  */
-public class CreatePostController {
+public class ClubCreatePostController {
     private final ClubCreatePostInputBoundary createPostInteractor;
 
-    public CreatePostController(ClubCreatePostInputBoundary createPostInteractor) {
+    public ClubCreatePostController(ClubCreatePostInputBoundary createPostInteractor) {
         this.createPostInteractor = createPostInteractor;
     }
 
@@ -22,5 +22,19 @@ public class CreatePostController {
     public void execute(String email, String title, String content) {
         final ClubCreatePostInputData createPostInputData = new ClubCreatePostInputData(email, title, content);
         createPostInteractor.execute(createPostInputData);
+    }
+
+    /**
+     * Executes the Switch to Create Post View Use Case.
+     */
+    public void switchToCreatePostView() {
+        createPostInteractor.switchToCreatePostView();
+    }
+
+    /**
+     * Executes the Switch to Club Logged In View Use Case.
+     */
+    public void switchToClubLoggedInView() {
+        createPostInteractor.switchToClubLoggedInView();
     }
 }

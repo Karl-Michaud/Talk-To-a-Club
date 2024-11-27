@@ -1,4 +1,4 @@
-package interface_adapter.club_logged_in.create_post;
+package interface_adapter.club_logged_in.club_create_post;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,7 +8,7 @@ import interface_adapter.club_logged_in.ClubLoggedInState;
 /**
  * Create Post state.
  */
-public class CreatePostState extends ClubLoggedInState {
+public class ClubCreatePostState extends ClubLoggedInState {
     private String title;
     private String content;
     private LocalTime timeOfPosting;

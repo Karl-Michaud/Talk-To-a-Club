@@ -16,9 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import interface_adapter.club_logged_in.create_post.CreatePostController;
-import interface_adapter.club_logged_in.create_post.CreatePostState;
-import interface_adapter.club_logged_in.create_post.CreatePostViewModel;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostState;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostViewModel;
 
 /**
  * The View for when a club wants to create a post.
@@ -26,7 +26,7 @@ import interface_adapter.club_logged_in.create_post.CreatePostViewModel;
 public class CreatePostView extends JPanel implements PropertyChangeListener, ActionListener {
 
     private final String viewName = "create post";
-    private final CreatePostViewModel createPostViewModel;
+    private final ClubCreatePostViewModel clubCreatePostViewModel;
 
     private final JTextField titleTextField = new JTextField(20);
     private final JLabel titleErrorField = new JLabel();
@@ -37,11 +37,12 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
     private final JButton createPostButton = new JButton("Create Post");
     private final JButton cancelButton = new JButton("Cancel");
 
-    private CreatePostController createPostController;
+    private ClubCreatePostController clubCreatePostController;
 
-    public CreatePostView(CreatePostViewModel createPostViewModel, CreatePostController createPostController) {
-        this.createPostViewModel = createPostViewModel;
-        this.createPostController = createPostController;
+    public CreatePostView(ClubCreatePostViewModel clubCreatePostViewModel,
+                          ClubCreatePostController clubCreatePostController) {
+        this.clubCreatePostViewModel = clubCreatePostViewModel;
+        this.clubCreatePostController = clubCreatePostController;
         this.createPostButton.addActionListener(this);
 
         final JLabel title = new JLabel("Create Post Screen");
@@ -59,9 +60,9 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
 
         titleTextField.getDocument().addDocumentListener(new DocumentListener() {
             private void documentListenerHelper() {
-                final CreatePostState currentState = createPostViewModel.getState();
+                final ClubCreatePostState currentState = clubCreatePostViewModel.getState();
                 currentState.setTitle(titleTextField.getText());
-                createPostViewModel.setState(currentState);
+                clubCreatePostViewModel.setState(currentState);
             }
 
             @Override
@@ -82,9 +83,9 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
 
         descriptionTextField.getDocument().addDocumentListener(new DocumentListener() {
             private void documentListenerHelper() {
-                final CreatePostState currentState = createPostViewModel.getState();
+                final ClubCreatePostState currentState = clubCreatePostViewModel.getState();
                 currentState.setContent(descriptionTextField.getText());
-                createPostViewModel.setState(currentState);
+                clubCreatePostViewModel.setState(currentState);
             }
 
             @Override
@@ -106,8 +107,7 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
         cancelButton.addActionListener(
                 evt -> {
                     if (evt.getSource().equals(cancelButton)) {
-                        // TODO: Add code to go back to home page when button is clicked.
-                        System.out.println("Temporary");
+                        clubCreatePostController.switchToClubLoggedInView();
                     }
                 }
         );
@@ -115,8 +115,8 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
         createPostButton.addActionListener(
                 evt -> {
                     if (evt.getSource().equals(createPostButton)) {
-                        final CreatePostState currentState = createPostViewModel.getState();
-                        createPostController.execute(currentState.getEmail(), currentState.getTitle(),
+                        final ClubCreatePostState currentState = clubCreatePostViewModel.getState();
+                        clubCreatePostController.execute(currentState.getEmail(), currentState.getTitle(),
                                 currentState.getContent());
                     }
                 }
@@ -148,14 +148,14 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
             JOptionPane.showMessageDialog(null, "Announcement successfully posted.");
         }
         else if (evt.getPropertyName().equals("state")) {
-            final CreatePostState state = (CreatePostState) evt.getNewValue();
+            final ClubCreatePostState state = (ClubCreatePostState) evt.getNewValue();
             titleErrorField.setText(state.getTitle());
             descriptionErrorField.setText(state.getContent());
             JOptionPane.showMessageDialog(null, state.getCreatePostError());
         }
     }
 
-    public void setCreatePostController(CreatePostController createPostController) {
-        this.createPostController = createPostController;
+    public void setCreatePostController(ClubCreatePostController controller) {
+        this.clubCreatePostController = controller;
     }
 }

@@ -33,7 +33,7 @@ public class StudentLoginInteractor implements StudentLoginInputBoundary {
             else {
                 final Student student = studentDataAccessObject.getStudent(studentEmail);
                 final StudentLoginOutputData loginOutputData = new StudentLoginOutputData(student.getUsername(),
-                        student.getEmail(), student.getJoinedClubs(), false);
+                        student.getEmail(), false);
                 studentLoginPresenter.prepareSuccessView(loginOutputData);
             }
         }

@@ -1,4 +1,4 @@
-package interface_adapter.club_logged_in.get_members;
+package interface_adapter.club_logged_in.club_get_members;
 
 import use_case.club_get_members.ClubGetMembersInputBoundary;
 import use_case.club_get_members.ClubGetMembersInputData;
@@ -6,10 +6,10 @@ import use_case.club_get_members.ClubGetMembersInputData;
 /**
  * The controller for the get members use case for clubs.
  */
-public class GetMembersController {
+public class ClubGetMembersController {
     private final ClubGetMembersInputBoundary getMembersInteractor;
 
-    public GetMembersController(ClubGetMembersInputBoundary getMembersInteractor) {
+    public ClubGetMembersController(ClubGetMembersInputBoundary getMembersInteractor) {
         this.getMembersInteractor = getMembersInteractor;
     }
 
