@@ -87,5 +87,4 @@ public class Club implements User {
     public void setClubDescription(String newDescription) {
         this.clubDescription = newDescription;
     }
-
 }
