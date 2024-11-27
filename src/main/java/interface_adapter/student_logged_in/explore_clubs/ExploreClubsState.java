@@ -11,6 +11,15 @@ public class ExploreClubsState {
     private String clubEmail;
     private String studentEmail;
     private ArrayList<Map<String, String>> clubValues = new ArrayList<>();
+    private ArrayList<String> joinedClubEmails = new ArrayList<>();
+
+    public void setJoinedClubEmails(ArrayList<String> joinedClubEmails) {
+        this.joinedClubEmails = joinedClubEmails;
+    }
+
+    public ArrayList<String> getJoinedClubEmails() {
+        return joinedClubEmails;
+    }
 
     public void setClubValues(ArrayList<Map<String, String>> clubValues) {
         this.clubValues = clubValues;

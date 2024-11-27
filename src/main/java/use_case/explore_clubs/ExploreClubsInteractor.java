@@ -1,12 +1,12 @@
 package use_case.explore_clubs;
 
-import entity.data_structure.DataStore;
-import entity.user.Club;
-import entity.user.Student;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import entity.data_structure.DataStore;
+import entity.user.Club;
+import entity.user.Student;
 
 /**
  * Interactor for the get clubs use case.
@@ -54,9 +54,13 @@ public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
                 map.put("numMembers", club.getClubMembers().size().toString());
                 outputMap.add(map);
             }
+            final ArrayList<String> joinedClubsEmails = new ArrayList<>();
+            for (Club club : joinedClubs.getAll()) {
+                joinedClubsEmails.add(club.getEmail());
+            }
 
             final ExploreClubsOutputData outputData = new ExploreClubsOutputData(inputData.getEmail(),
-                    outputMap, false, student.getEmail());
+                    outputMap, false, student.getEmail(), joinedClubsEmails);
             exploreClubsPresenter.prepareSuccessView(outputData);
         }
     }

@@ -11,13 +11,15 @@ public class ExploreClubsOutputData {
     private final ArrayList<Map<String, String>> notJoinedClubs;
     private final boolean useCaseFailed;
     private final String studentEmail;
+    private final ArrayList<String> joinedClubEmails;
 
     public ExploreClubsOutputData(String email, ArrayList<Map<String, String>> clubs, boolean useCaseFailed,
-                                  String studentEmail) {
+                                  String studentEmail, ArrayList<String> joinedClubsEmails) {
         this.clubEmail = email;
         this.notJoinedClubs = clubs;
         this.useCaseFailed = useCaseFailed;
         this.studentEmail = studentEmail;
+        this.joinedClubEmails = joinedClubsEmails;
     }
 
     public String getClubEmail() {
@@ -35,4 +37,7 @@ public class ExploreClubsOutputData {
     public String getStudentEmail() {
         return studentEmail;
     }
+
+    public ArrayList<String> getJoinedClubsEmails() {
+        return joinedClubEmails; }
 }

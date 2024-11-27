@@ -29,6 +29,7 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
         final ExploreClubsState state = exploreClubsViewModel.getState();
         state.setStudentEmail(data.getStudentEmail());
         state.setClubValues(data.getNotJoinedClubs());
+        state.setJoinedClubEmails(data.getJoinedClubsEmails());
         state.setClubEmail(null);
         state.setError(null);
 
