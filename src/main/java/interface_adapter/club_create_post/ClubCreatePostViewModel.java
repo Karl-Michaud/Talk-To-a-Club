@@ -5,8 +5,8 @@ import interface_adapter.ViewModel;
 /**
  * Create Post ViewModel for create post view.
  */
-public class CreatePostViewModel extends ViewModel<CreatePostState> {
-    public CreatePostViewModel() {
+public class ClubCreatePostViewModel extends ViewModel<CreatePostState> {
+    public ClubCreatePostViewModel() {
         super("create post");
         setState(new CreatePostState());
     }

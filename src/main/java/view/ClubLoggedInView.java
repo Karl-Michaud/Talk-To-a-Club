@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import interface_adapter.club_create_post.CreatePostController;
+import interface_adapter.club_create_post.ClubCreatePostController;
 import interface_adapter.club_get_posts.ClubGetPostsController;
 import interface_adapter.club_logged_in.ClubLoggedInState;
 import interface_adapter.club_logged_in.ClubLoggedInViewModel;
@@ -41,7 +41,7 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
     private final String viewName = "club logged in";
     private final ClubLoggedInViewModel clubLoggedInViewModel;
 
-    private CreatePostController createPostController;
+    private ClubCreatePostController clubCreatePostController;
     private LogoutController logoutController;
     private ClubGetPostsController clubGetPostsController;
     private ClubGetMembersController clubGetMembersController;
@@ -162,8 +162,8 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
         });
     }
 
-    public void setCreatePostController(CreatePostController createPostController) {
-        this.createPostController = createPostController;
+    public void setCreatePostController(ClubCreatePostController clubCreatePostController) {
+        this.clubCreatePostController = clubCreatePostController;
     }
 
     public void setLogoutController(LogoutController logoutController) {

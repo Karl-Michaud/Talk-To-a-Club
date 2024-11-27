@@ -7,12 +7,12 @@ import use_case.club_create_post.ClubCreatePostOutputData;
 /**
  * Create post use case presenter.
  */
-public class CreatePostPresenter implements ClubCreatePostOutputBoundary {
-    private final CreatePostViewModel createPostViewModel;
+public class ClubCreatePostPresenter implements ClubCreatePostOutputBoundary {
+    private final ClubCreatePostViewModel clubCreatePostViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public CreatePostPresenter(CreatePostViewModel createPostViewModel, ViewManagerModel viewManagerModel) {
-        this.createPostViewModel = createPostViewModel;
+    public ClubCreatePostPresenter(ClubCreatePostViewModel clubCreatePostViewModel, ViewManagerModel viewManagerModel) {
+        this.clubCreatePostViewModel = clubCreatePostViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
@@ -21,15 +21,15 @@ public class CreatePostPresenter implements ClubCreatePostOutputBoundary {
      * @param data the output data
      */
     public void prepareSuccessView(ClubCreatePostOutputData data) {
-        final CreatePostState state = createPostViewModel.getState();
+        final CreatePostState state = clubCreatePostViewModel.getState();
         state.setTimeOfPosting(data.getTimeOfPosting());
         state.setDateOfPosting(data.getDateOfPosting());
         state.setContent(data.getContents());
         state.setTitle(data.getTitle());
-        createPostViewModel.setState(state);
-        createPostViewModel.firePropertyChanged("create post");
+        clubCreatePostViewModel.setState(state);
+        clubCreatePostViewModel.firePropertyChanged("create post");
 
-        viewManagerModel.setState(createPostViewModel.getViewName());
+        viewManagerModel.setState(clubCreatePostViewModel.getViewName());
         viewManagerModel.firePropertyChanged("create post");
     }
 
@@ -38,9 +38,9 @@ public class CreatePostPresenter implements ClubCreatePostOutputBoundary {
      * @param errorMessage the explanation of the failure
      */
     public void prepareFailView(String errorMessage) {
-        final CreatePostState state = createPostViewModel.getState();
+        final CreatePostState state = clubCreatePostViewModel.getState();
         state.setCreatePostError(errorMessage);
-        createPostViewModel.setState(state);
-        createPostViewModel.firePropertyChanged();
+        clubCreatePostViewModel.setState(state);
+        clubCreatePostViewModel.firePropertyChanged();
     }
 }

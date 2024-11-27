@@ -6,10 +6,10 @@ import use_case.club_create_post.ClubCreatePostInputData;
 /**
  * Controller for the login use case.
  */
-public class CreatePostController {
+public class ClubCreatePostController {
     private final ClubCreatePostInputBoundary createPostInteractor;
 
-    public CreatePostController(ClubCreatePostInputBoundary createPostInteractor) {
+    public ClubCreatePostController(ClubCreatePostInputBoundary createPostInteractor) {
         this.createPostInteractor = createPostInteractor;
     }
 

@@ -8,7 +8,7 @@ import interface_adapter.club_logged_in.ClubLoggedInState;
 /**
  * Create Post state.
  */
-public class CreatePostState extends ClubLoggedInState {
+public class ClubCreatePostState extends ClubLoggedInState {
     private String title;
     private String content;
     private LocalTime timeOfPosting;
