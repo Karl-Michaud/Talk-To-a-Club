@@ -1,6 +1,6 @@
 package use_case.club_get_posts;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * The output data for the Club Get Posts use case.
@@ -8,19 +8,25 @@ import java.util.Map;
 public class ClubGetPostsOutputData {
 
     private final String message;
-    // The key in this map is a post's title and the value is its body
-    private final Map<String, String> posts;
 
-    public ClubGetPostsOutputData(String message, Map<String, String> posts) {
+    private final List<String> postTitles;
+    private final List<String> postBodies;
+
+    public ClubGetPostsOutputData(String message, List<String> postTitles, List<String> postBodies) {
         this.message = message;
-        this.posts = posts;
+        this.postTitles = postTitles;
+        this.postBodies = postBodies;
     }
 
     public String getMessage() {
         return this.message;
     }
 
-    public Map<String, String> getPosts() {
-        return this.posts;
+    public List<String> getPostTitles() {
+        return this.postTitles;
+    }
+
+    public List<String> getPostBodies() {
+        return this.postBodies;
     }
 }

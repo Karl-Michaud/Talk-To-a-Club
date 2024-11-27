@@ -24,7 +24,8 @@ public class ClubGetPostsPresenter implements ClubGetPostsOutputBoundary {
         // Get the state of the current ClubLoggedInViewModel and set the message and clubPosts to the new ones
         final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
         clubLoggedInState.setMessage(outputData.getMessage());
-        clubLoggedInState.setPosts(outputData.getPosts());
+        clubLoggedInState.setPostTitles(outputData.getPostTitles());
+        clubLoggedInState.setPostBodies(outputData.getPostBodies());
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("reload posts");
         clubLoggedInViewModel.firePropertyChanged("reload message");
