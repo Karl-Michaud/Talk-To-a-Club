@@ -8,6 +8,7 @@ import java.util.Map;
 public class ClubGetPostsOutputData {
 
     private final String message;
+    // The key in this map is a post's title and the value is its body
     private final Map<String, String> posts;
 
     public ClubGetPostsOutputData(String message, Map<String, String> posts) {
