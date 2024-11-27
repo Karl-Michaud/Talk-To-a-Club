@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class to store the output data for the posts on the studenthome view.
+ * Class to store the output data for the posts on the student home view.
  */
 public class ShowPostsOutputData {
     private final Map<String, List<Map<String, Object>>> posts;

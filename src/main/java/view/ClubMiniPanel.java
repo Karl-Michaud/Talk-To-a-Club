@@ -14,8 +14,8 @@ public class ClubMiniPanel extends JPanel {
     private JLabel clubName;
     private JPanel clubMiniPanel;
 
-    public ClubMiniPanel(Club club) {
-        this.clubName.setText(club.getUsername());
+    public ClubMiniPanel(String club) {
+        this.clubName.setText(club);
         this.setBorder(BorderFactory.createBevelBorder(1));
         clubMiniPanel.setLayout(new BoxLayout(clubMiniPanel, BoxLayout.Y_AXIS));
         this.add(clubMiniPanel);

@@ -17,6 +17,9 @@ import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
 import interface_adapter.student_home.like.StudentLikeController;
+import interface_adapter.student_home.show_clubs.ShowClubsController;
+import interface_adapter.student_home.show_clubs.ShowClubsState;
+import interface_adapter.student_home.show_clubs.ShowClubsViewModel;
 import interface_adapter.student_home.show_posts.ShowPostsController;
 import interface_adapter.student_home.show_posts.ShowPostsState;
 import interface_adapter.student_home.show_posts.ShowPostsViewModel;
@@ -38,13 +41,17 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     private final String viewName = "student home";
     private final StudentHomeViewModel studentHomeViewModel;
     private final ShowPostsViewModel showPostsViewModel;
+    private final ShowClubsViewModel showClubsViewModel;
     private StudentHomeController studentHomeController;
     private ShowPostsController showPostsController;
     private StudentLikeController studentLikeController;
+    private ShowClubsController showClubsController;
 
-    public StudentHomeView(StudentHomeViewModel studentHomeViewModel, ShowPostsViewModel showPostsViewModel) {
+    public StudentHomeView(StudentHomeViewModel studentHomeViewModel,
+                           ShowPostsViewModel showPostsViewModel, ShowClubsViewModel showClubsViewModel) {
         this.studentHomeViewModel = studentHomeViewModel;
         this.showPostsViewModel = new ShowPostsViewModel();
+        this.showClubsViewModel = new ShowClubsViewModel();
         this.studentHomeViewModel.addPropertyChangeListener(this);
         this.showPostsViewModel.addPropertyChangeListener(this);
 
@@ -72,10 +79,11 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         addSearchListener();
         this.add(panelStudentHomeView);
-        final StudentHomeState state = studentHomeViewModel.getState();
         final ShowPostsState showPostsState = showPostsViewModel.getState();
+        final ShowClubsState showClubsState = showClubsViewModel.getState();
         this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState.getPosts(),
-                showPostsState.getCurrentUser(), studentLikeController), new ClubsContainer(state)));
+                showPostsState.getCurrentUser(), studentLikeController),
+                new ClubsContainer(showClubsState.getClubNames())));
     }
 
     private void addSearchListener() {
@@ -108,9 +116,11 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         final StudentHomeState state = (StudentHomeState) evt.getNewValue();
         showPostsController.execute(state.getCurrentUser());
+        showClubsController.execute(state.getCurrentUser());
         final ShowPostsState showPostsState = showPostsViewModel.getState();
+        final ShowClubsState showClubsState = showClubsViewModel.getState();
         this.pageScrollPane.setViewportView(new PageView(new PostsContainer(showPostsState.getPosts(),
-                state.getCurrentUser(), studentLikeController), new ClubsContainer(state)));
+                state.getCurrentUser(), studentLikeController), new ClubsContainer(showClubsState.getClubNames())));
         if (state.getStudentHomeError() != null) {
             JOptionPane.showMessageDialog(this, state.getStudentHomeError());
         }
@@ -130,5 +140,9 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
 
     public void setLikeController(StudentLikeController likeController) {
         this.studentLikeController = likeController;
+    }
+
+    public void setShowClubsController(ShowClubsController showClubsController) {
+        this.showClubsController = showClubsController;
     }
 }

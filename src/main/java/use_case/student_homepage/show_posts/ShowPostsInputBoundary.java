@@ -1,7 +1,7 @@
 package use_case.student_homepage.show_posts;
 
 /**
- * InputBoundary for StudentHome usecase.
+ * InputBoundary for show posts usecase.
  */
 public interface ShowPostsInputBoundary {
     /**

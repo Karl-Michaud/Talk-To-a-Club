@@ -14,12 +14,12 @@ import entity.user.Student;
  * Interactor for show posts use case.
  */
 public class ShowPostsInteractor implements ShowPostsInputBoundary {
-    private final ShowPostsOutputBoundary showClubsPresenter;
+    private final ShowPostsOutputBoundary showPostsPresenter;
     private final ShowPostsAccessInterface showPostsAccessInterface;
 
     public ShowPostsInteractor(ShowPostsAccessInterface showPostsAccessInterface,
-                               ShowPostsOutputBoundary showClubsPresenter) {
-        this.showClubsPresenter = showClubsPresenter;
+                               ShowPostsOutputBoundary showPostsPresenter) {
+        this.showPostsPresenter = showPostsPresenter;
         this.showPostsAccessInterface = showPostsAccessInterface;
     }
 
@@ -45,6 +45,6 @@ public class ShowPostsInteractor implements ShowPostsInputBoundary {
             posts.put(club.getUsername(), postsList);
         }
         final ShowPostsOutputData showPostsOutputData = new ShowPostsOutputData(posts, currStudent.getEmail());
-        showClubsPresenter.preparePostContent(showPostsOutputData);
+        showPostsPresenter.preparePostContent(showPostsOutputData);
     }
 }

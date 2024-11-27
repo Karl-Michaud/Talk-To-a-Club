@@ -1,21 +1,25 @@
 package view;
 
+import java.util.List;
+
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-
-import entity.user.Club;
-import interface_adapter.student_home.StudentHomeState;
 
 /**
  * A container which stores all the clubs the user has joined.
  */
 public class ClubsContainer extends JPanel {
 
-    public ClubsContainer(StudentHomeState state) {
+    public ClubsContainer(List<String> clubs) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-//        for (Club club : state.getFollowedClubs()) {
-//            this.add(new ClubMiniPanel(club));
-//        }
+        if (clubs == null || clubs.isEmpty()) {
+            this.add(new ClubMiniPanel("You currently don't follow any clubs."));
+        }
+        else {
+            for (String club : clubs) {
+                this.add(new ClubMiniPanel(club));
+            }
+        }
         // This temporarily creates a list of fake clubs to populate as an example.
         //
         // for (int i = 0; i <= 10; i++) {
