@@ -1,6 +1,7 @@
 package use_case.club_get_members;
 
 import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 import entity.user.Student;
 
 /**
@@ -28,9 +29,14 @@ public class ClubGetMembersInteractor {
         else {
             final DataStore<Student> members = getMembersDataAccessObject.getClub(email).getClubMembers();
 
-            final ClubGetMembersOutputData outputData = new ClubGetMembersOutputData(inputData.getEmail(), members,
-                    false);
-            getMembersPresenter.prepareSuccessView(outputData);
+            final DataStore<String> membersEmail = new DataStoreArrays<>();
+            final DataStore<String> membersName = new DataStoreArrays<>();
+
+//            for ()
+//
+//            final ClubGetMembersOutputData outputData = new ClubGetMembersOutputData(inputData.getEmail(), members,
+//                    false);
+//            getMembersPresenter.prepareSuccessView(outputData);
         }
     }
 }
