@@ -28,10 +28,6 @@ public class ClubUpdateDescPresenter implements ClubUpdateDescOutputBoundary {
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("reload description");
         clubLoggedInViewModel.firePropertyChanged("reload message");
-
-        // Fires property change to the viewManagerModel
-        viewManagerModel.setState(clubLoggedInViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
     }
 
     @Override
@@ -41,9 +37,5 @@ public class ClubUpdateDescPresenter implements ClubUpdateDescOutputBoundary {
         clubLoggedInState.setMessage(outputData.getMessage());
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("reload message");
-
-        // Fires property change to the viewManagerModel
-        viewManagerModel.setState(clubLoggedInViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
     }
 }

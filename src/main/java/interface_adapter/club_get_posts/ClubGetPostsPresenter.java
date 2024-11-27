@@ -28,10 +28,6 @@ public class ClubGetPostsPresenter implements ClubGetPostsOutputBoundary {
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("reload posts");
         clubLoggedInViewModel.firePropertyChanged("reload message");
-
-        // Fires property change to the viewManagerModel
-        viewManagerModel.setState(clubLoggedInViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
     }
 
     @Override
@@ -41,9 +37,5 @@ public class ClubGetPostsPresenter implements ClubGetPostsOutputBoundary {
         clubLoggedInState.setMessage(outputData.getMessage());
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("reload message");
-
-        // Fires property change to the viewManagerModel
-        viewManagerModel.setState(clubLoggedInViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
     }
 }
