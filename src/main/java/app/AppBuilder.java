@@ -4,9 +4,7 @@ import data_access.UserDataAccessObject;
 import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.club_home.ClubHomeViewModel;
-import interface_adapter.club_logged_in.create_post.CreatePostController;
-import interface_adapter.club_logged_in.create_post.CreatePostPresenter;
+import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import interface_adapter.club_logged_in.create_post.CreatePostViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.login.club_login.ClubLoginController;
@@ -20,9 +18,6 @@ import interface_adapter.signup.student_signup.StudentSignupController;
 import interface_adapter.signup.student_signup.StudentSignupPresenter;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeViewModel;
-import use_case.club_create_post.ClubCreatePostInputBoundary;
-import use_case.club_create_post.ClubCreatePostInteractor;
-import use_case.club_create_post.ClubCreatePostOutputBoundary;
 import use_case.login.club_login.ClubLoginInputBoundary;
 import use_case.login.club_login.ClubLoginInteractor;
 import use_case.login.club_login.ClubLoginOutputBoundary;
@@ -75,7 +70,7 @@ public class AppBuilder {
     private StudentHomeViewModel studentHomeViewModel;
     private StudentHomeView studentHomeView;
 
-    private ClubHomeViewModel clubHomeViewModel;
+    private ClubLoggedInViewModel clubLoggedInViewModel;
     private ClubHomeView clubHomeView;
 
     private CreatePostViewModel createPostViewModel;
@@ -123,8 +118,8 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addClubHomeView() {
-        clubHomeViewModel = new ClubHomeViewModel();
-        clubHomeView = new ClubHomeView(clubHomeViewModel);
+        clubLoggedInViewModel = new ClubLoggedInViewModel();
+        clubHomeView = new ClubHomeView(clubLoggedInViewModel);
         cardPanel.add(clubHomeView, clubHomeView.getViewName());
         return this;
     }
@@ -178,7 +173,7 @@ public class AppBuilder {
      */
     public AppBuilder addClubLoginUseCase() {
         final ClubLoginOutputBoundary loginOutputBoundary = new ClubLoginPresenter(viewManagerModel,
-                clubHomeViewModel, clubSignupViewModel, loginViewModel);
+                clubLoggedInViewModel, clubSignupViewModel, loginViewModel);
         final ClubLoginInputBoundary loginInteractor = new ClubLoginInteractor(
                 userDataAccessObject, loginOutputBoundary);
 
