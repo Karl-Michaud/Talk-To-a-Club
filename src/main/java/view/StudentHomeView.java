@@ -1,10 +1,14 @@
 package view;
 
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import interface_adapter.student_home.StudentHomeViewModel;
 
-
-import javax.swing.*;
-
+/**
+ * View for the student home.
+ */
 public class StudentHomeView extends JPanel {
     private JPanel panel1;
     private JLabel labelUsername;

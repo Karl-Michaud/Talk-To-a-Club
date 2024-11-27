@@ -39,5 +39,6 @@ public class ExploreClubsOutputData {
     }
 
     public ArrayList<String> getJoinedClubsEmails() {
-        return joinedClubEmails; }
+        return joinedClubEmails;
+    }
 }

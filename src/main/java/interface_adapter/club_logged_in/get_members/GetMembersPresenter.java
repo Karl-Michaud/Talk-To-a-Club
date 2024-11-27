@@ -1,14 +1,12 @@
 package interface_adapter.club_logged_in.get_members;
 
-import entity.data_structure.DataStore;
-import entity.user.Student;
+import java.util.ArrayList;
+
 import interface_adapter.ViewManagerModel;
 import interface_adapter.club_logged_in.ClubLoggedInState;
 import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import use_case.club_get_members.ClubGetMembersOutputBoundary;
 import use_case.club_get_members.ClubGetMembersOutputData;
-
-import java.util.ArrayList;
 
 /**
  * The presenter for the get members use case for clubs.

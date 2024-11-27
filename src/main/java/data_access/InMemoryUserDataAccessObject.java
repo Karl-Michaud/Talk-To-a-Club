@@ -14,7 +14,8 @@ import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
  * In-memory implementation of the DAO for storing user data. This implementation does
  * NOT persist data between runs of the program.
  */
-public class UserDataAccessObject implements ClubSignupUserDataAccessInterface, StudentSignupUserDataAccessInterface,
+public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInterface,
+        StudentSignupUserDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface {
 
     private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
