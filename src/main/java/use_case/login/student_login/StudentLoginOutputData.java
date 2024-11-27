@@ -9,13 +9,11 @@ import entity.user.Club;
 public class StudentLoginOutputData {
     private final String username;
     private final String email;
-    private final DataStore<Club> joinedClubs;
     private final boolean useCaseFailed;
 
-    public StudentLoginOutputData(String username, String email, DataStore<Club> joinedClubs, boolean useCaseFailed) {
+    public StudentLoginOutputData(String username, String email, boolean useCaseFailed) {
         this.username = username;
         this.email = email;
-        this.joinedClubs = joinedClubs;
         this.useCaseFailed = useCaseFailed;
     }
 
@@ -25,10 +23,6 @@ public class StudentLoginOutputData {
 
     public String getEmail() {
         return email;
-    }
-
-    public DataStore<Club> getJoinedClubs() {
-        return joinedClubs;
     }
 
     /**

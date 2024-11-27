@@ -9,13 +9,11 @@ import entity.post.Post;
 public class ClubLoginOutputData {
     private final String username;
     private final String email;
-    private final DataStore<Post> posts;
     private final boolean useCaseFailed;
 
-    public ClubLoginOutputData(String username, String email, DataStore<Post> posts, boolean useCaseFailed) {
+    public ClubLoginOutputData(String username, String email, boolean useCaseFailed) {
         this.username = username;
         this.email = email;
-        this.posts = posts;
         this.useCaseFailed = useCaseFailed;
     }
 
@@ -25,10 +23,6 @@ public class ClubLoginOutputData {
 
     public String getEmail() {
         return email;
-    }
-
-    public DataStore<Post> getPosts() {
-        return posts;
     }
 
     /**
