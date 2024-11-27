@@ -187,7 +187,7 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
         });
     }
 
-    public void setCreatePostController(ClubCreatePostController controller) {
+    public void setClubCreatePostController(ClubCreatePostController controller) {
         this.clubCreatePostController = controller;
     }
 
@@ -199,7 +199,7 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
         this.clubGetPostsController = controller;
     }
 
-    public void setGetMembersController(ClubGetMembersController controller) {
+    public void setClubGetMembersController(ClubGetMembersController controller) {
         this.clubGetMembersController = controller;
     }
 

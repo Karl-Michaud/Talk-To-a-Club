@@ -5,12 +5,19 @@ import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.club_logged_in.ClubLoggedInViewModel;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostPresenter;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostViewModel;
 import interface_adapter.club_logged_in.club_create_post.CreatePostViewModel;
+import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
+import interface_adapter.club_logged_in.club_get_members.ClubGetMembersPresenter;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.login.club_login.ClubLoginController;
 import interface_adapter.login.club_login.ClubLoginPresenter;
 import interface_adapter.login.student_login.StudentLoginController;
 import interface_adapter.login.student_login.StudentLoginPresenter;
+import interface_adapter.logout.LogoutController;
+import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.signup.club_signup.ClubSignupController;
 import interface_adapter.signup.club_signup.ClubSignupPresenter;
 import interface_adapter.signup.club_signup.ClubSignupViewModel;
@@ -18,12 +25,21 @@ import interface_adapter.signup.student_signup.StudentSignupController;
 import interface_adapter.signup.student_signup.StudentSignupPresenter;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeViewModel;
+import use_case.club_create_post.ClubCreatePostInputBoundary;
+import use_case.club_create_post.ClubCreatePostInteractor;
+import use_case.club_create_post.ClubCreatePostOutputBoundary;
+import use_case.club_get_members.ClubGetMembersInputBoundary;
+import use_case.club_get_members.ClubGetMembersInteractor;
+import use_case.club_get_members.ClubGetMembersOutputBoundary;
 import use_case.login.club_login.ClubLoginInputBoundary;
 import use_case.login.club_login.ClubLoginInteractor;
 import use_case.login.club_login.ClubLoginOutputBoundary;
 import use_case.login.student_login.StudentLoginInputBoundary;
 import use_case.login.student_login.StudentLoginInteractor;
 import use_case.login.student_login.StudentLoginOutputBoundary;
+import use_case.logout.LogoutInputBoundary;
+import use_case.logout.LogoutInteractor;
+import use_case.logout.LogoutOutputBoundary;
 import use_case.signup.club_signup.ClubSignupInputBoundary;
 import use_case.signup.club_signup.ClubSignupInteractor;
 import use_case.signup.club_signup.ClubSignupOutputBoundary;
@@ -73,7 +89,7 @@ public class AppBuilder {
     private ClubLoggedInViewModel clubLoggedInViewModel;
     private ClubLoggedInView clubLoggedInView;
 
-    private CreatePostViewModel createPostViewModel;
+    private ClubCreatePostViewModel createPostViewModel;
     private CreatePostView createPostView;
 
     public AppBuilder() {
@@ -197,19 +213,50 @@ public class AppBuilder {
         return this;
     }
 
-//    /**
-//     * Adds the Club Create Post use case to the application.
-//     * @return this builder
-//     */
-//    public AppBuilder addClubCreatePostUseCase() {
-//        final ClubCreatePostOutputBoundary clubCreatePostOutputBoundary = new CreatePostPresenter(createPostViewModel,
-//                viewManagerModel);
-//        final ClubCreatePostInputBoundary clubCreatePostInteractor = new ClubCreatePostInteractor(userDataAccessObject,
-//                clubCreatePostOutputBoundary);
-//        final CreatePostController createPostController = new CreatePostController(clubCreatePostInteractor);
-//        createPostView.setCreatePostController(createPostController);
-//        return this;
-//    }
+    /**
+     * Adds the Club Create Post use case to the application.
+     * @return this builder
+     */
+    public AppBuilder addClubCreatePostUseCase() {
+        final ClubCreatePostOutputBoundary clubCreatePostOutputBoundary = new ClubCreatePostPresenter(
+                createPostViewModel, viewManagerModel);
+        final ClubCreatePostInputBoundary clubCreatePostInteractor = new ClubCreatePostInteractor(userDataAccessObject,
+                clubCreatePostOutputBoundary);
+        final ClubCreatePostController createPostController = new ClubCreatePostController(clubCreatePostInteractor);
+        createPostView.setCreatePostController(createPostController);
+        clubLoggedInView.setClubCreatePostController(createPostController);
+        return this;
+    }
+
+    /**
+     * Adds the Club Get Members use case to the application.
+     * @return this builder
+     */
+    public AppBuilder addClubGetMembersUseCase() {
+        final ClubGetMembersOutputBoundary clubGetMembersOutputBoundary = new ClubGetMembersPresenter(
+                clubLoggedInViewModel, viewManagerModel);
+        final ClubGetMembersInputBoundary clubGetMembersInteractor = new ClubGetMembersInteractor(userDataAccessObject,
+                clubGetMembersOutputBoundary);
+        final ClubGetMembersController clubGetMembersController = new ClubGetMembersController(
+                clubGetMembersInteractor);
+        clubLoggedInView.setClubGetMembersController(clubGetMembersController);
+        return this;
+    }
+
+    /**
+     * Adds the Logout use case to the application.
+     * @return this builder
+     */
+    public AppBuilder addLogoutUseCase() {
+        final LogoutOutputBoundary logoutOutputBoundary = new LogoutPresenter(loginViewModel, viewManagerModel);
+        final LogoutInputBoundary logoutInteractor = new LogoutInteractor(logoutOutputBoundary);
+
+        final LogoutController logoutController = new LogoutController(logoutInteractor);
+        clubLoggedInView.setLogoutController(logoutController);
+        return this;
+    }
+
+    // TODO add use cases for: get_posts, club_remove_member, club_update_desc
 
     /**
      * Creates the JFrame for the application and initially sets the SignupView to be displayed.
