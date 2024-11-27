@@ -6,8 +6,6 @@ import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import use_case.club_remove_member.ClubRemoveMemberOutputBoundary;
 import use_case.club_remove_member.ClubRemoveMemberOutputData;
 
-import java.util.ArrayList;
-
 /**
  * The presenter for the remove member from club use case.
  */

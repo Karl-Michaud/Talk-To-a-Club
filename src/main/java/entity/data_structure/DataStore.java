@@ -62,7 +62,7 @@ public interface DataStore<T> {
 
     /**
      * Returns an iterable of all the elements of this data structure.
-     * @return
+     * @return an Iterable
      */
     Iterable<T> getAll();
 }

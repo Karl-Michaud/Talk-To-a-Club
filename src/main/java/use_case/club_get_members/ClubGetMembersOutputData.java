@@ -1,7 +1,5 @@
 package use_case.club_get_members;
 
-import entity.data_structure.DataStore;
-import entity.user.Student;
 import java.util.ArrayList;
 
 /**
