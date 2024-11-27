@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.swing.*;
 
+import interface_adapter.student_home.dislike.StudentDislikeController;
 import interface_adapter.student_home.like.StudentLikeController;
 
 /**
@@ -12,7 +13,7 @@ import interface_adapter.student_home.like.StudentLikeController;
  */
 public class PostsContainer extends JPanel {
     public PostsContainer(Map<String, List<Map<String, Object>>> posts, String currentStudent,
-                          StudentLikeController likeController) {
+                          StudentLikeController likeController, StudentDislikeController dislikeController) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         // Creates sample posts and populates the view as a visual example.
         // final Post examplePost = new Announcement("Example post.", "This is an example post to "
@@ -28,7 +29,7 @@ public class PostsContainer extends JPanel {
         else {
             for (String club : posts.keySet()) {
                 for (Map<String, Object> post : posts.get(club)) {
-                    this.add(new PostPanel(post, club, currentStudent, likeController));
+                    this.add(new PostPanel(post, club, currentStudent, likeController, dislikeController));
                 }
             }
         }

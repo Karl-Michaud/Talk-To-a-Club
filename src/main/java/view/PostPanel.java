@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import interface_adapter.student_home.dislike.StudentDislikeController;
 import interface_adapter.student_home.like.StudentLikeController;
 
 /**
@@ -20,6 +21,7 @@ import interface_adapter.student_home.like.StudentLikeController;
  */
 public class PostPanel extends JPanel {
     private static final String LIKED = "Liked";
+    private static final String DISLIKED = "Disliked";
     private JLabel labelPostTitle;
     private JButton buttonLike;
     private JButton buttonDislike;
@@ -33,10 +35,12 @@ public class PostPanel extends JPanel {
     private final Icon dislikeEmptyIcon = new ImageIcon("src/main/resources/dislike.png");
     private final Icon dislikeFilledIcon = new ImageIcon("src/main/resources/dislike_filled.png");
     private StudentLikeController likeController;
+    private StudentDislikeController dislikeController;
 
     public PostPanel(Map<String, Object> post, String clubName, String currentStudent,
-                     StudentLikeController likeController) {
+                     StudentLikeController likeController, StudentDislikeController dislikeController) {
         this.likeController = likeController;
+        this.dislikeController = dislikeController;
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(postPanel);
         this.labelPostTitle.setText(post.get("title").toString());
@@ -77,7 +81,21 @@ public class PostPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dislikeController.changeDislike(currentStudent, post);
+                if (post.get(DISLIKED).equals(true)) {
+                    buttonDislike.setIcon(dislikeEmptyIcon);
+                    int dislikedCount = Integer.parseInt(labelDislikes.getText());
+                    dislikedCount--;
+                    labelDislikes.setText(String.valueOf(dislikedCount));
+                    post.put(DISLIKED, false);
+                }
+                else {
+                    buttonDislike.setIcon(dislikeFilledIcon);
+                    int dislikedCount = Integer.parseInt(labelDislikes.getText());
+                    dislikedCount++;
+                    labelDislikes.setText(String.valueOf(dislikedCount));
+                    post.put(DISLIKED, true);
+                }
             }
         });
     }

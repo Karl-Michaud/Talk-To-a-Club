@@ -18,7 +18,6 @@ public class Main {
                                             .addClubSignupView()
                                             .addStudentSignupView()
                                             .addClubHomeView()
-                                            .addShowPostsView()
                                             .addStudentHomeView()
                                             .addStudentProfileView()
                                             .addClubSignupUseCase()
@@ -29,6 +28,7 @@ public class Main {
                                             .addStudentProfileUseCase()
                                             .addShowPostsUseCase()
                                             .addLikeUseCase()
+                                            .addDislikeUseCase()
                                             .build();
 
         application.pack();

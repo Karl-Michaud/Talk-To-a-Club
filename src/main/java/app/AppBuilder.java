@@ -20,6 +20,7 @@ import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_home.StudentHomePresenter;
 import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_home.dislike.StudentDislikeController;
 import interface_adapter.student_home.like.StudentLikeController;
 import interface_adapter.student_home.show_clubs.ShowClubsController;
 import interface_adapter.student_home.show_clubs.ShowClubsViewModel;
@@ -45,6 +46,8 @@ import use_case.signup.student_signup.StudentSignupOutputBoundary;
 import use_case.student_homepage.StudentHomeInputBoundary;
 import use_case.student_homepage.StudentHomeInteractor;
 import use_case.student_homepage.StudentHomeOutputBoundary;
+import use_case.student_homepage.dislike.DislikeInputBoundary;
+import use_case.student_homepage.dislike.DislikeInteractor;
 import use_case.student_homepage.like.LikeInputBoundary;
 import use_case.student_homepage.like.LikeInteractor;
 import use_case.student_homepage.show_clubs.ShowClubsInputBoundary;
@@ -273,6 +276,13 @@ public class AppBuilder {
         final LikeInputBoundary likeInteractor = new LikeInteractor(userDataAccessObject);
         final StudentLikeController likeController = new StudentLikeController(likeInteractor);
         studentHomeView.setLikeController(likeController);
+        return this;
+    }
+
+    public AppBuilder addDislikeUseCase() {
+        final DislikeInputBoundary dislikeInteractor = new DislikeInteractor(userDataAccessObject);
+        final StudentDislikeController dislikeController = new StudentDislikeController(dislikeInteractor);
+        studentHomeView.setDislikeController(dislikeController);
         return this;
     }
 
