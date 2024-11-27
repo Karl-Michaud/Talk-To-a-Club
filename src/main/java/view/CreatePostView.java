@@ -16,9 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import interface_adapter.club_create_post.ClubCreatePostController;
-import interface_adapter.club_create_post.CreatePostState;
-import interface_adapter.club_create_post.ClubCreatePostViewModel;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
+import interface_adapter.club_logged_in.club_create_post.CreatePostState;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostViewModel;
 
 /**
  * The View for when a club wants to create a post.

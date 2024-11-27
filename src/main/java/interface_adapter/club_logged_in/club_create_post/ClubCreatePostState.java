@@ -1,4 +1,4 @@
-package interface_adapter.club_logged_in.create_post;
+package interface_adapter.club_logged_in.club_create_post;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
