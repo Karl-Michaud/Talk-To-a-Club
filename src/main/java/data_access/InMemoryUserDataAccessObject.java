@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
@@ -19,6 +20,8 @@ import use_case.student_homepage.like.StudentLikeClubDataAccessInterface;
 import use_case.student_homepage.like.StudentLikeStudentDataAccessInterface;
 import use_case.student_homepage.show_clubs.StudentShowClubsAccessInterface;
 import use_case.student_homepage.show_posts.StudentShowPostsAccessInterface;
+import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
+import use_case.explore_clubs.ClubExploreClubsDataAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
@@ -30,7 +33,8 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
         ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface, ClubUpdateDescDataAccessInterface,
         ClubGetMembersUserDataAccessInterface, StudentShowPostsAccessInterface, StudentLikeClubDataAccessInterface,
         StudentLikeStudentDataAccessInterface, StudentDislikeClubDataAccessInterface,
-        StudentDislikeStudentDataAccessInterface, StudentShowClubsAccessInterface {
+        StudentDislikeStudentDataAccessInterface, StudentShowClubsAccessInterface, StudentExploreClubsDataAccessInterface,
+        ClubExploreClubsDataAccessInterface{
 
     private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
     private final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
@@ -143,5 +147,10 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
                 current.addClubPost(post);
             }
         }
+    }
+
+    @Override
+    public DataStore<Club> getAllClubs() {
+        return this.clubArrayList;
     }
 }
