@@ -25,12 +25,12 @@ public class ClubGetMembersInteractor implements ClubGetMembersInputBoundary {
      */
     @Override
     public void execute(ClubGetMembersInputData inputData) {
-        final String email = inputData.getEmail();
-        if (!getMembersDataAccessObject.existsByEmailClub(email)) {
-            getMembersPresenter.prepareFailView(email + ": Account does not exist.");
+        final String clubEmail = inputData.getClubEmail();
+        if (!getMembersDataAccessObject.existsByEmailClub(clubEmail)) {
+            getMembersPresenter.prepareFailView(clubEmail + ": Account does not exist.");
         }
         else {
-            final DataStore<Student> members = getMembersDataAccessObject.getClub(email).getClubMembers();
+            final DataStore<Student> members = getMembersDataAccessObject.getClub(clubEmail).getClubMembers();
 
             // Create the array lists for the output data.
             final ArrayList<String> membersEmail = new ArrayList<>();
@@ -50,7 +50,7 @@ public class ClubGetMembersInteractor implements ClubGetMembersInputBoundary {
             }
 
             // Create the output data with the ArrayLists
-            final ClubGetMembersOutputData outputData = new ClubGetMembersOutputData(inputData.getEmail(), membersEmail,
+            final ClubGetMembersOutputData outputData = new ClubGetMembersOutputData(inputData.getClubEmail(), membersEmail,
                     membersName, false);
 
             // Prepare the success view for the given output data

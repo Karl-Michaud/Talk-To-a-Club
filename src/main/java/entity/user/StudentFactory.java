@@ -8,7 +8,7 @@ import entity.data_structure.DataStore;
 public interface StudentFactory extends UserFactory {
 
     @Override
-    User create(String name, String email, String password);
+    Student create(String name, String email, String password);
 
     /**
      * Create a new student user.
@@ -18,5 +18,5 @@ public interface StudentFactory extends UserFactory {
      * @param joinedClubs the clubs the student has joined
      * @return the new student user
      */
-    User create(String name, String email, String password, DataStore<Club> joinedClubs);
+    Student create(String name, String email, String password, DataStore<Club> joinedClubs);
 }

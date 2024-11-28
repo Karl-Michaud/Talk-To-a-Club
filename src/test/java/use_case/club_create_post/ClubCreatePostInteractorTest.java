@@ -5,7 +5,6 @@ import entity.user.Club;
 import entity.user.ClubFactory;
 import entity.user.ClubUserFactory;
 import org.junit.Test;
-import use_case.club_create_post.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
