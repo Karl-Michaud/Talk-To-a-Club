@@ -23,9 +23,10 @@ public class StudentShowClubsPresenter implements StudentShowClubsOutputBoundary
     @Override
     public void preparePostContent(StudentShowClubsOutputData studentShowClubsOutputData) {
         final StudentHomeState state = studentHomeViewModel.getState();
-        final ArrayList<String> clubNames = (ArrayList<String>) studentShowClubsOutputData.getClubs();
+        // TODO make it so output data ONLY has a list of the names, not an entire list of maps with club data
+        // final ArrayList<String> clubNames = (ArrayList<String>) studentShowClubsOutputData.getClubs();
 
-        state.setClubs(clubNames);
+        state.setClubs(null);  // TODO remove the null
 
         studentHomeViewModel.setState(state);
         studentHomeViewModel.firePropertyChanged("show clubs");

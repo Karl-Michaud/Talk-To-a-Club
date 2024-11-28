@@ -343,11 +343,11 @@ public class AppBuilder {
     public AppBuilder addClubCreatePostUseCase() {
         final ClubCreatePostOutputBoundary clubCreatePostOutputBoundary = new ClubCreatePostPresenter(
                 createPostViewModel, viewManagerModel);
-        final ClubCreatePostInputBoundary clubCreatePostInteractor = new ClubCreatePostInteractor(inMemoryUserDataAccessObject,
-                clubCreatePostOutputBoundary);
+        final ClubCreatePostInputBoundary clubCreatePostInteractor = new ClubCreatePostInteractor(
+                inMemoryUserDataAccessObject, clubCreatePostOutputBoundary);
         final ClubCreatePostController createPostController = new ClubCreatePostController(clubCreatePostInteractor);
         createPostView.setCreatePostController(createPostController);
-        clubLoggedInView.setClubCreatePostController(createPostController); // TODO can we make it so it doesnt need this?
+        clubLoggedInView.setClubCreatePostController(createPostController);
         return this;
     }
 
@@ -358,8 +358,8 @@ public class AppBuilder {
     public AppBuilder addClubGetMembersUseCase() {
         final ClubGetMembersOutputBoundary clubGetMembersOutputBoundary = new ClubGetMembersPresenter(
                 clubLoggedInViewModel, viewManagerModel);
-        final ClubGetMembersInputBoundary clubGetMembersInteractor = new ClubGetMembersInteractor(inMemoryUserDataAccessObject,
-                clubGetMembersOutputBoundary);
+        final ClubGetMembersInputBoundary clubGetMembersInteractor = new ClubGetMembersInteractor(
+                inMemoryUserDataAccessObject, clubGetMembersOutputBoundary);
         final ClubGetMembersController clubGetMembersController = new ClubGetMembersController(
                 clubGetMembersInteractor);
         clubLoggedInView.setClubGetMembersController(clubGetMembersController);
