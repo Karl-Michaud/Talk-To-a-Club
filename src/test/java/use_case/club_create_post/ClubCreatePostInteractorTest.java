@@ -1,4 +1,4 @@
-package use_case.club_logged_in.club_create_post;
+package use_case.club_create_post;
 
 import data_access.InMemoryUserDataAccessObject;
 import entity.user.Club;
@@ -96,7 +96,7 @@ public class ClubCreatePostInteractorTest {
 
             @Override
             public void prepareFailView(String errorMessage) {
-                assertEquals("Tittle field is empty.", errorMessage);
+                assertEquals("Title field is empty.", errorMessage);
             }
 
             @Override

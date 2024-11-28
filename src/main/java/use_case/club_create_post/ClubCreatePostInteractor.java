@@ -26,7 +26,7 @@ public class ClubCreatePostInteractor implements ClubCreatePostInputBoundary {
             createPostPresenter.prepareFailView("Title field and Content field are empty.");
         }
         else if (title.isEmpty()) {
-            createPostPresenter.prepareFailView("Tittle field is empty.");
+            createPostPresenter.prepareFailView("Title field is empty.");
         }
         else if (content.isEmpty()) {
             createPostPresenter.prepareFailView("Content field is empty.");
