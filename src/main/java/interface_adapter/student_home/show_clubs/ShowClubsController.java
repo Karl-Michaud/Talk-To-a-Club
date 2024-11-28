@@ -14,7 +14,7 @@ public class ShowClubsController {
     }
 
     /**
-     * Populates the posts panel on the homepage view.
+     * Executes the show clubs use case for signed in students.
      * @param currentUser the email of the current user.
      */
     public void execute(String currentUser) {

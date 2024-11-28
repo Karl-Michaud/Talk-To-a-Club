@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import interface_adapter.student_home.StudentHomeViewController;
+import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
@@ -23,7 +23,7 @@ public class ExploreClubs extends JPanel {
 
     private final String viewName = "explore clubs";
     private ExploreClubsController exploreClubsController;
-    private StudentHomeViewController studentHomeViewController;
+    private StudentHomeController studentHomeViewController;
     private ExploreClubsViewModel exploreClubsViewModel;
 
     public ExploreClubs(ExploreClubsViewModel exploreClubsViewModel) {
@@ -51,7 +51,7 @@ public class ExploreClubs extends JPanel {
         this.exploreClubsController = exploreClubsController;
     }
 
-    public void setStudentHomeViewController(StudentHomeViewController studentHomeViewController) {
+    public void setStudentHomeViewController(StudentHomeController studentHomeController) {
         this.studentHomeViewController = studentHomeViewController;
     }
 

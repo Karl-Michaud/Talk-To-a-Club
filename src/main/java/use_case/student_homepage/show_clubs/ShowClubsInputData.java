@@ -4,13 +4,13 @@ package use_case.student_homepage.show_clubs;
  * The input data for the show clubs usecase.
  */
 public class ShowClubsInputData {
-    private String currentUser;
+    private final String currentUserEmail;
 
     public ShowClubsInputData(String currentUser) {
-        this.currentUser = currentUser;
+        this.currentUserEmail = currentUser;
     }
 
-    String getUser() {
-        return currentUser;
+    String getUserEmail() {
+        return currentUserEmail;
     }
 }

@@ -14,7 +14,7 @@ import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostPresenter;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostViewModel;
-import interface_adapter.club_logged_in.club_create_post.CreatePostViewModel;
+//import interface_adapter.club_logged_in.club_create_post.CreatePostViewModel;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersPresenter;
 import interface_adapter.login.LoginViewModel;
@@ -34,10 +34,8 @@ import interface_adapter.student_home.StudentHomeViewModel;
 import interface_adapter.student_home.dislike.StudentDislikeController;
 import interface_adapter.student_home.like.StudentLikeController;
 import interface_adapter.student_home.show_clubs.ShowClubsController;
-import interface_adapter.student_home.show_clubs.ShowClubsViewModel;
 import interface_adapter.student_home.show_clubs.StudentShowClubsPresenter;
 import interface_adapter.student_home.show_posts.ShowPostsController;
-import interface_adapter.student_home.show_posts.ShowPostsViewModel;
 import interface_adapter.student_home.show_posts.StudentShowPostsPresenter;
 import interface_adapter.student_profile.StudentProfileController;
 import interface_adapter.student_profile.StudentProfilePresenter;
@@ -63,7 +61,7 @@ import use_case.signup.club_signup.ClubSignupOutputBoundary;
 import use_case.signup.student_signup.StudentSignupInputBoundary;
 import use_case.signup.student_signup.StudentSignupInteractor;
 import use_case.signup.student_signup.StudentSignupOutputBoundary;
-import view.ClubHomeView;
+//import view.ClubHomeView;
 import view.ClubSignupView;
 import view.CreatePostView;
 import view.LoginView;
@@ -87,9 +85,6 @@ import use_case.student_profile.StudentProfileInputBoundary;
 import use_case.student_profile.StudentProfileInteractor;
 import use_case.student_profile.StudentProfileOutputBoundary;
 import view.*;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * The AppBuilder class is responsible for putting together the pieces of

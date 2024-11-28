@@ -20,7 +20,7 @@ public class DislikeInputData {
         return studentEmail;
     }
 
-    public String getClubName() {
+    public String getClubEmail() {
         return clubEmail;
     }
 

@@ -7,18 +7,18 @@ import java.util.List;
  */
 public class ShowClubsOutputData {
     private final List<String> clubNames;
-    private final String currStudent;
+    private final String currStudentEmail;
 
     public ShowClubsOutputData(List<String> clubs, String currStudent) {
         this.clubNames = clubs;
-        this.currStudent = currStudent;
+        this.currStudentEmail = currStudent;
     }
 
     public List<String> getClubs() {
         return clubNames;
     }
 
-    public String getCurrStudent() {
-        return currStudent;
+    public String getCurrStudentEmail() {
+        return currStudentEmail;
     }
 }

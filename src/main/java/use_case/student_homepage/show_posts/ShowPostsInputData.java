@@ -4,13 +4,13 @@ package use_case.student_homepage.show_posts;
  * The input data for the show posts usecase.
  */
 public class ShowPostsInputData {
-    private String currentUser;
+    private final String currentUserEmail;
 
-    public ShowPostsInputData(String user) {
-        this.currentUser = user;
+    public ShowPostsInputData(String userEmail) {
+        this.currentUserEmail = userEmail;
     }
 
-    String getUser() {
-        return currentUser;
+    String getUserEmail() {
+        return currentUserEmail;
     }
 }

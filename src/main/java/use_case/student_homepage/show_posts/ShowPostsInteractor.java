@@ -8,7 +8,7 @@ import java.util.Map;
 import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
-import entity.user.Student;
+import entity.user.User;
 
 /**
  * Interactor for show posts use case.
@@ -25,27 +25,34 @@ public class ShowPostsInteractor implements ShowPostsInputBoundary {
 
     @Override
     public void execute(ShowPostsInputData inputData) {
-        final String currUser = inputData.getUser();
-        final Student currStudent = showPostsAccessInterface.getStudent(currUser);
-        final DataStoreArrays<Club> joinedClubs = (DataStoreArrays<Club>) currStudent.getJoinedClubs();
-        final Map<String, List<Map<String, Object>>> posts = new HashMap<>();
-        for (Club club : joinedClubs) {
-            final List<Map<String, Object>> postsList = new ArrayList<>();
-            for (Post post: (DataStoreArrays<Post>) club.getClubPosts()) {
-                final Map<String, Object> postAttributes = new HashMap<>();
-                postAttributes.put("Title", post.getTitle());
-                postAttributes.put("Content", post.getContent());
-                postAttributes.put("Likes", post.numberOfLikes());
-                postAttributes.put("Dislikes", post.numberOfDislikes());
-                postAttributes.put("TimeOfPosting", post.timeOfPosting());
-                postAttributes.put("ClubEmail", club.getEmail());
-                postAttributes.put("Liked", post.getLikes().contains(currStudent));
-                postAttributes.put("Disliked", post.getDislikes().contains(currStudent));
-                postsList.add(postAttributes);
-            }
-            posts.put(club.getUsername(), postsList);
+        final String currUserEmail = inputData.getUserEmail();
+        if (!showPostsAccessInterface.existsByEmailStudent(currUserEmail)) {
+            showPostsPresenter.prepareFailView("The accounts does not exist.");
         }
-        final ShowPostsOutputData showPostsOutputData = new ShowPostsOutputData(posts, currStudent.getEmail());
-        showPostsPresenter.preparePostContent(showPostsOutputData);
+        else {
+            final DataStoreArrays<Club> clubs = (DataStoreArrays<Club>) showPostsAccessInterface.getStudent(
+                    currUserEmail).getJoinedClubs();
+            final User currentUser = showPostsAccessInterface.getStudent(currUserEmail);
+            final Map<String, List<Map<String, Object>>> postData = new HashMap<>();
+            for (final Club club : clubs) {
+                final ArrayList<Map<String, Object>> clubPostData = new ArrayList<>();
+                for (final Post post: (DataStoreArrays<Post>) club.getClubPosts()) {
+                    final Map<String, Object> singlePostData = new HashMap<>();
+                    singlePostData.put("title", post.getTitle());
+                    singlePostData.put("content", post.getContent());
+                    singlePostData.put("likes", post.numberOfLikes());
+                    singlePostData.put("dislikes", post.numberOfDislikes());
+                    singlePostData.put("liked", post.getLikes().contains(currentUser));
+                    singlePostData.put("disliked", post.getDislikes().contains(currentUser));
+                    singlePostData.put("club-email", club.getEmail());
+                    singlePostData.put("time", post.dateOfPosting());
+                    singlePostData.put("date", post.dateOfPosting());
+                    clubPostData.add(singlePostData);
+                }
+                postData.put(club.getUsername(), clubPostData);
+            }
+            final ShowPostsOutputData outputData = new ShowPostsOutputData(postData, currUserEmail);
+            showPostsPresenter.preparePostContent(outputData);
+        }
     }
 }

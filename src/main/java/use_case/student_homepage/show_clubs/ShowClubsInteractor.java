@@ -1,11 +1,9 @@
 package use_case.student_homepage.show_clubs;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
-import entity.user.Student;
 
 /**
  * Interactor for the show clubs usecase.
@@ -22,15 +20,19 @@ public class ShowClubsInteractor implements ShowClubsInputBoundary {
 
     @Override
     public void execute(ShowClubsInputData showClubsInputData) {
-        final String currUser = showClubsInputData.getUser();
-        final Student currStudent = showClubsAccessInterface.getStudent(currUser);
-        final DataStoreArrays<Club> joinedClubs = (DataStoreArrays<Club>) currStudent.getJoinedClubs();
-        final List<String> joinedClubNames = new ArrayList<>();
-        for (final Club club : joinedClubs) {
-            joinedClubNames.add(club.getUsername());
+        final String currUserEmail = showClubsInputData.getUserEmail();
+        if (!showClubsAccessInterface.existsByEmailStudent(currUserEmail)) {
+            showClubsPresenter.prepareFailView("The account does not exist.");
         }
-        final ShowClubsOutputData showClubsOutputData = new ShowClubsOutputData(joinedClubNames, currUser);
-        showClubsPresenter.preparePostContent(showClubsOutputData);
-
+        else {
+            final DataStoreArrays<Club> clubs = (DataStoreArrays<Club>) showClubsAccessInterface.getStudent(
+                    currUserEmail).getJoinedClubs();
+            final ArrayList<String> clubNames = new ArrayList<>();
+            for (final Club club : clubs) {
+                clubNames.add(club.getUsername());
+            }
+            final ShowClubsOutputData showClubsOutputData = new ShowClubsOutputData(clubNames, currUserEmail);
+            showClubsPresenter.preparePostContent(showClubsOutputData);
+        }
     }
 }
