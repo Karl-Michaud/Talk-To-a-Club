@@ -15,10 +15,13 @@ public class ClubGetPostsInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        ClubGetPostsDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
         DataStore<Post> posts = new DataStoreArrays<>();
         posts.add(new Announcement("title", "content"));
-        userRepository.saveClub(new Club("Roy", "ok@k.com", "password", null, posts));
+
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
+        dao.saveClub(new Club("Roy", "ok@k.com", "password", null, posts));
+
+        ClubGetPostsDataAccessInterface userRepository = dao;
 
         ClubGetPostsInputData inputData = new ClubGetPostsInputData("ok@k.com");
 
@@ -37,7 +40,7 @@ public class ClubGetPostsInteractorTest {
             }
         };
 
-        ClubGetPostsInteractor interactor = new ClubGetPostsInteractor(userRepository, successPresenter);
+        ClubGetPostsInputBoundary interactor = new ClubGetPostsInteractor(userRepository, successPresenter);
         interactor.execute(inputData);
     }
 
