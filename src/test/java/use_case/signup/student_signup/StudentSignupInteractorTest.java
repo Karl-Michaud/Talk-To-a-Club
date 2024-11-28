@@ -12,7 +12,7 @@ public class StudentSignupInteractorTest {
 
     @Test
     void successTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("test club", "roy@gmail.com",
+        StudentSignupInputData inputData = new StudentSignupInputData("Roy", "roy@gmail.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case
@@ -76,7 +76,7 @@ public class StudentSignupInteractorTest {
 
     @Test
     void emailAlreadyExistsTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("test club", "ok@k.com",
+        StudentSignupInputData inputData = new StudentSignupInputData("test", "ok@k.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case and stores a student with the same email
@@ -308,5 +308,31 @@ public class StudentSignupInteractorTest {
         };
         StudentSignupInputBoundary interactor = new StudentSignupInteractor(userRepository, successPresenter, new StudentUserFactory());
         interactor.execute(inputData);
+    }
+
+    @Test
+    void switchToLoginTest() {
+        // Uses an in memory database to test the use case
+        StudentSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        StudentSignupOutputBoundary successPresenter = new StudentSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(StudentSignupOutputData user) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                fail("Use case fail is unexpected.");
+            }
+
+            @Override
+            public void switchToLoginView() {
+                // This is expected to pass (everything is done by the presenter implementation)
+            }
+        };
+        StudentSignupInputBoundary interactor = new StudentSignupInteractor(userRepository, successPresenter, new StudentUserFactory());
+        interactor.switchToLoginView();
     }
 }

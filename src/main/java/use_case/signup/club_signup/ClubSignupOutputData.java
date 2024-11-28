@@ -2,23 +2,17 @@ package use_case.signup.club_signup;
 
 /**
  * Output Data for the Club Signup Use Case.
+ * Note that this is currently very empty, but is here for potential future expansions.
  */
 public class ClubSignupOutputData {
 
     private final String email;
 
-    private final boolean useCaseFailed;
-
-    public ClubSignupOutputData(String email, boolean useCaseFailed) {
+    public ClubSignupOutputData(String email) {
         this.email = email;
-        this.useCaseFailed = useCaseFailed;
     }
 
     public String getEmail() {
         return email;
-    }
-
-    public boolean isUseCaseFailed() {
-        return useCaseFailed;
     }
 }
