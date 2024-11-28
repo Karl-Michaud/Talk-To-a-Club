@@ -5,6 +5,9 @@ import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
 import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
+import use_case.club_get_posts.ClubGetPostsDataAccessInterface;
+import use_case.club_remove_member.ClubRemoveMemberClubDataAccessInterface;
+import use_case.club_update_desc.ClubUpdateDescDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
@@ -16,7 +19,8 @@ import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
  */
 public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInterface,
         StudentSignupUserDataAccessInterface,
-        ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface {
+        ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface,
+        ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface, ClubUpdateDescDataAccessInterface {
 
     private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
     private final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
@@ -58,6 +62,16 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
     }
 
     @Override
+    public void updateClubDescription(Club club) {
+        for (Club currentClub : clubArrayList) {
+            if (currentClub.getEmail().equals(club.getEmail())) {
+                currentClub.setClubDescription(club.getClubDescription());
+                break;
+            }
+        }
+    }
+
+    @Override
     public boolean existsByEmailStudent(String identifier) {
         boolean found = false;
         if (!found) {
@@ -91,6 +105,11 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
         }
         // This should not be returned as null since the precondition states that the club must exist.
         return clubFound;
+    }
+
+    @Override
+    public void updateClubMembers(Club club) {
+        // TODO NOTE: the given arguments is not enough to actually do this, the interactor must be changed for remove members
     }
 
     @Override
