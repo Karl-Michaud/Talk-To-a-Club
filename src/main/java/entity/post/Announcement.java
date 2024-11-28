@@ -80,7 +80,7 @@ public class Announcement implements Post {
 
     @Override
     public DataStore<User> getDislikes() {
-        return null;
+        return this.dislikes;
     }
 
     /**

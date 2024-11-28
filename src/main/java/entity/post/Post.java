@@ -2,7 +2,6 @@ package entity.post;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 import entity.data_structure.DataStore;
 import entity.user.User;
