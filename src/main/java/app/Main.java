@@ -29,6 +29,10 @@ public class Main {
                                             .addShowPostsUseCase()
                                             .addLikeUseCase()
                                             .addDislikeUseCase()
+                                            .addClubUpdateDescUseCase()
+                                            .addClubCreatePostUseCase()
+                                            .addClubGetPostsUseCase()
+                                            .addClubGetMembersUseCase()
                                             .build();
 
         application.pack();

@@ -14,11 +14,11 @@ import interface_adapter.student_logged_in.student_home.dislike.StudentDislikePr
 public class StudentDislikeInteractor implements StudentDislikeInputBoundary {
     private final StudentDislikeClubDataAccessInterface clubDataAccess;
     private final StudentDislikeStudentDataAccessInterface studentDataAccess;
-    private final StudentDislikePresenter studentDislikePresenter;
+    private final StudentDislikeOutputBoundary studentDislikePresenter;
 
     public StudentDislikeInteractor(StudentDislikeClubDataAccessInterface clubDataAccess,
                                     StudentDislikeStudentDataAccessInterface studentDataAccess,
-                                    StudentDislikePresenter presenter) {
+                                    StudentDislikeOutputBoundary presenter) {
         this.clubDataAccess = clubDataAccess;
         this.studentDataAccess = studentDataAccess;
         this.studentDislikePresenter = presenter;

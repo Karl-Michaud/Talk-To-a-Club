@@ -23,9 +23,9 @@ public class StudentShowClubsPresenter implements StudentShowClubsOutputBoundary
     @Override
     public void preparePostContent(StudentShowClubsOutputData studentShowClubsOutputData) {
         final StudentHomeState state = studentHomeViewModel.getState();
-        final ArrayList<String> clubNames = (ArrayList<String>) studentShowClubsOutputData.getClubs();
-
-        state.setClubs(clubNames);
+        // TODO Is this the intention of this method? - Roy
+        // TODO Change this methods name to prepareClubContent or something
+        state.setClubs(studentShowClubsOutputData.getClubs());
 
         studentHomeViewModel.setState(state);
         studentHomeViewModel.firePropertyChanged("show clubs");

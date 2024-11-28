@@ -12,11 +12,11 @@ import entity.user.Club;
  */
 public class ClubGetPostsInteractor implements ClubGetPostsInputBoundary {
 
-    private final ClubGetPostsOutputBoundary clubGetPostsPresenter;
     private final ClubGetPostsDataAccessInterface clubGetPostsDataAccessObject;
+    private final ClubGetPostsOutputBoundary clubGetPostsPresenter;
 
-    public ClubGetPostsInteractor(ClubGetPostsOutputBoundary clubGetPostsPresenter,
-                                  ClubGetPostsDataAccessInterface clubGetPostsDataAccessObject) {
+    public ClubGetPostsInteractor(ClubGetPostsDataAccessInterface clubGetPostsDataAccessObject,
+                                  ClubGetPostsOutputBoundary clubGetPostsPresenter) {
         this.clubGetPostsPresenter = clubGetPostsPresenter;
         this.clubGetPostsDataAccessObject = clubGetPostsDataAccessObject;
     }

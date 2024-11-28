@@ -14,10 +14,11 @@ import interface_adapter.student_logged_in.student_home.like.StudentLikePresente
 public class StudentLikeInteractor implements StudentLikeInputBoundary {
     private final StudentLikeStudentDataAccessInterface studentDataAccess;
     private final StudentLikeClubDataAccessInterface clubDataAccess;
-    private final StudentLikePresenter studentLikePresenter;
+    private final StudentLikeOutputBoundary studentLikePresenter;
 
     public StudentLikeInteractor(StudentLikeStudentDataAccessInterface studentDataAccess,
-                                 StudentLikeClubDataAccessInterface clubDataAccess, StudentLikePresenter studentLikePresenter) {
+                                 StudentLikeClubDataAccessInterface clubDataAccess,
+                                 StudentLikeOutputBoundary studentLikePresenter) {
         this.studentDataAccess = studentDataAccess;
         this.clubDataAccess = clubDataAccess;
         this.studentLikePresenter = studentLikePresenter;
