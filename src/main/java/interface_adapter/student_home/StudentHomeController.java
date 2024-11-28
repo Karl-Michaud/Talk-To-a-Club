@@ -14,15 +14,6 @@ public class StudentHomeController {
     }
 
     /**
-     * Executes the Controller.
-     * @param query the user input for the search field.
-     * @param email the current users email.
-     */
-    public void execute(String query, String email) {
-
-    }
-
-    /**
      * Switches from HomeView to LoginView.
      */
     public void switchToLoginView() {

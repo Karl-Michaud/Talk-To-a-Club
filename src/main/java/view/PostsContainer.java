@@ -15,14 +15,7 @@ public class PostsContainer extends JPanel {
     public PostsContainer(Map<String, List<Map<String, Object>>> posts, String currentStudent,
                           StudentLikeController likeController, StudentDislikeController dislikeController) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        // Creates sample posts and populates the view as a visual example.
-        // final Post examplePost = new Announcement("Example post.", "This is an example post to "
-        //         + "check what the post panel looks like and if the general layout works."
-        // );
-        // for (int i = 0; i <= 20; i++) {
-        //     final PostPanel samplePostPanel = new PostPanel(examplePost, "Sample Club", state.getCurrentUser());
-        //     this.add(samplePostPanel);
-        // }
+
         if (posts == null || posts.isEmpty()) {
             this.add(new JLabel("No posts found"));
         }

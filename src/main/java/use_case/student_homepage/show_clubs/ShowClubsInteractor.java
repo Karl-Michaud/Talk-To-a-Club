@@ -1,6 +1,8 @@
 package use_case.student_homepage.show_clubs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
@@ -27,11 +29,15 @@ public class ShowClubsInteractor implements ShowClubsInputBoundary {
         else {
             final DataStoreArrays<Club> clubs = (DataStoreArrays<Club>) showClubsAccessInterface.getStudent(
                     currUserEmail).getJoinedClubs();
-            final ArrayList<String> clubNames = new ArrayList<>();
+            final ArrayList<Map<String, String>> clubData = new ArrayList<>();
             for (final Club club : clubs) {
-                clubNames.add(club.getUsername());
+                final Map<String, String> singleClubData = new HashMap<>();
+                singleClubData.put("username", club.getUsername());
+                singleClubData.put("email", club.getEmail());
+                singleClubData.put("description", club.getClubDescription());
+                clubData.add(singleClubData);
             }
-            final ShowClubsOutputData showClubsOutputData = new ShowClubsOutputData(clubNames, currUserEmail);
+            final ShowClubsOutputData showClubsOutputData = new ShowClubsOutputData(clubData, currUserEmail);
             showClubsPresenter.preparePostContent(showClubsOutputData);
         }
     }

@@ -4,7 +4,7 @@ import use_case.student_homepage.show_posts.ShowPostsInputBoundary;
 import use_case.student_homepage.show_posts.ShowPostsInputData;
 
 /**
- * Controller for the show posts panel/ usecase.
+ * Controller for the show posts usecase.
  */
 public class ShowPostsController {
     private final ShowPostsInputBoundary showPostsInteractor;

@@ -13,7 +13,7 @@ public class StudentHomeState {
     private String username = "";
     private String query = "";
     private String studentHomeError;
-    private List<String> clubNames;
+    private List<Map<String, String>> clubsFollowed;
 
     public String getUsername() {
         return this.username;
@@ -54,12 +54,12 @@ public class StudentHomeState {
         return this.currentUserEmail;
     }
 
-    public void setClubs(List<String> clubs) {
-        this.clubNames = clubs;
+    public void setClubs(List<Map<String, String>> clubs) {
+        this.clubsFollowed = clubs;
     }
 
-    public List<String> getClubs() {
-        return this.clubNames;
+    public List<Map<String, String>> getClubs() {
+        return this.clubsFollowed;
     }
 
     public Map<String, List<Map<String, Object>>> getPostData() {
