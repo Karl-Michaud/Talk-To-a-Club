@@ -23,22 +23,27 @@ import entity.post.Post;
 import entity.user.Club;
 import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
 import use_case.club_get_members.ClubGetMembersUserDataAccessInterface;
+import use_case.club_get_posts.ClubGetPostsDataAccessInterface;
 import use_case.club_remove_member.ClubRemoveMemberClubDataAccessInterface;
+import use_case.club_update_desc.ClubUpdateDescDataAccessInterface;
 import use_case.explore_clubs.ClubExploreClubsDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
+import use_case.student_homepage.dislike.StudentDislikeClubDataAccessInterface;
+import use_case.student_homepage.like.StudentLikeClubDataAccessInterface;
 import use_case.student_join_club.ClubStudentJoinClubDataAccessInterface;
 import use_case.student_leave_club.ClubStudentLeaveClubDataAccessInterface;
 
 /**
  * Persisting memory implementation of the DAO for storing user data.
  * This implementation uses Firebase and only persists data regarding the
- * Student entity
+ * Club entity
  */
 public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserDataAccessInterface,
         ClubGetMembersUserDataAccessInterface, ClubRemoveMemberClubDataAccessInterface, ClubLoginDataAccessInterface,
         ClubSignupUserDataAccessInterface, ClubStudentJoinClubDataAccessInterface,
-        ClubStudentLeaveClubDataAccessInterface, ClubExploreClubsDataAccessInterface {
+        ClubStudentLeaveClubDataAccessInterface, ClubExploreClubsDataAccessInterface, ClubGetPostsDataAccessInterface,
+        ClubUpdateDescDataAccessInterface, StudentDislikeClubDataAccessInterface, StudentLikeClubDataAccessInterface {
     private final Firestore db;
     private final String clubs = "clubs";
     private final String usernames = "username";
@@ -89,11 +94,26 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
     }
 
     @Override
+    public void updateClubDescription(Club club) {
+        // same implementation as saveClub
+        // method overwrites the club data including the new post.
+        final DocumentReference docRef = db.collection(clubs).document(club.getEmail());
+        final ApiFuture<WriteResult> writeResult = docRef.set(club);
+        try {
+            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+        }
+        catch (InterruptedException | ExecutionException ex) {
+            // Handle exceptions appropriately
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
     public void saveClub(Club user) {
         final DocumentReference docRef = db.collection(clubs).document(user.getEmail());
         final ApiFuture<WriteResult> writeResult = docRef.set(user);
         try {
-            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+            System.out.println("Update time: " + writeResult.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately

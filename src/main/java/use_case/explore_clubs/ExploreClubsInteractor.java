@@ -46,6 +46,9 @@ public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
             final DataStore<Club> complement = allClubs.complement(joinedClubs);
 
             final ArrayList<Map<String, String>> outputMap = new ArrayList<>();
+
+            // TODO add these to constants file
+
             for (Club club : complement.getAll()) {
                 final Map<String, String> map = new HashMap<>();
                 map.put("username", club.getUsername());
