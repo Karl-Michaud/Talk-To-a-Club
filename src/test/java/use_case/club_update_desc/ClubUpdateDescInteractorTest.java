@@ -23,6 +23,7 @@ public class ClubUpdateDescInteractorTest {
             public void prepareSuccessMessage(ClubUpdateDescOutputData outputData) {
                 assertEquals("test", outputData.getNewDesc());
                 assertEquals("Success in changing description.", outputData.getMessage());
+                assertEquals("test", userRepository.getClub("ok@k.com").getClubDescription());
             }
 
             @Override
