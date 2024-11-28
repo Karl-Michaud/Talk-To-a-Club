@@ -100,10 +100,12 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         if (evt.getPropertyName().equals("state")) {
             final StudentHomeState currentState = studentHomeViewModel.getState();
             showClubsController.execute(currentState.getCurrentUser());
+            showPostsController.execute(currentState.getCurrentUser());
         }
         else if (evt.getPropertyName().equals("show clubs") || evt.getPropertyName().equals("show posts")) {
             final StudentHomeState currentState = studentHomeViewModel.getState();
             showClubsController.execute(currentState.getCurrentUser());
+            showPostsController.execute(currentState.getCurrentUser());
             final List<Map<String, String>> clubNames = currentState.getClubs();
             final Map<String, List<Map<String, Object>>> postData = currentState.getPostData();
             pageScrollPane.setViewportView(new PageView(new PostsContainer(postData, currentState.getCurrentUser(),
