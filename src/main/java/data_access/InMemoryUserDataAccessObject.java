@@ -24,6 +24,8 @@ import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.explore_clubs.ClubExploreClubsDataAccessInterface;
 import use_case.student_join_club.StudentJoinClubDataAccessInterface;
 import use_case.student_join_club.ClubStudentJoinClubDataAccessInterface;
+import use_case.student_leave_club.StudentLeaveClubDataAccessInterface;
+import use_case.student_leave_club.ClubStudentLeaveClubDataAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
@@ -35,8 +37,10 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
         ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface, ClubUpdateDescDataAccessInterface,
         ClubGetMembersUserDataAccessInterface, StudentShowPostsAccessInterface, StudentLikeClubDataAccessInterface,
         StudentLikeStudentDataAccessInterface, StudentDislikeClubDataAccessInterface,
-        StudentDislikeStudentDataAccessInterface, StudentShowClubsAccessInterface, StudentExploreClubsDataAccessInterface,
-        ClubExploreClubsDataAccessInterface, StudentJoinClubDataAccessInterface, ClubStudentJoinClubDataAccessInterface{
+        StudentDislikeStudentDataAccessInterface, StudentShowClubsAccessInterface,
+        StudentExploreClubsDataAccessInterface, ClubExploreClubsDataAccessInterface,
+        StudentJoinClubDataAccessInterface, ClubStudentJoinClubDataAccessInterface,
+        StudentLeaveClubDataAccessInterface, ClubStudentLeaveClubDataAccessInterface {
 
     private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
     private final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
