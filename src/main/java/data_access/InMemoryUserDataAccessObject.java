@@ -120,6 +120,8 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
     @Override
     public void updateClubMembers(Club club) {
         // The club should already be updated in the in memory model, since the entity objects are stored
+        this.clubArrayList.remove(club);
+        this.clubArrayList.add(club);
     }
 
     @Override

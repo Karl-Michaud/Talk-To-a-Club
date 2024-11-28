@@ -25,6 +25,7 @@ public class ClubPageView extends JPanel {
     private JLabel description;
     private JLabel email;
     private JLabel numMembers;
+    private JLabel logoLabel;
 
     // TODO: Change all string panel views to constants form CONSTANTS file
     private final String viewName = "ClubPageView";

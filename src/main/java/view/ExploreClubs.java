@@ -3,15 +3,12 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
-import interface_adapter.student_logged_in.student_home.StudentHomeController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
+import interface_adapter.student_logged_in.student_home.StudentHomeController;
 
 /**
  * Main view for the Explore clubs use case.
@@ -20,6 +17,7 @@ public class ExploreClubs extends JPanel {
     private JPanel explorePanel;
     private JButton backButton;
     private JScrollPane scrollPanel;
+    private JLabel explorePageTitle;
 
     private final String viewName = "explore clubs";
     private ExploreClubsController exploreClubsController;
