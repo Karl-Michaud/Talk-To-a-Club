@@ -14,7 +14,6 @@ import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostPresenter;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostViewModel;
-//import interface_adapter.club_logged_in.club_create_post.CreatePostViewModel;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersPresenter;
 import interface_adapter.login.LoginViewModel;
@@ -61,13 +60,13 @@ import use_case.signup.club_signup.ClubSignupOutputBoundary;
 import use_case.signup.student_signup.StudentSignupInputBoundary;
 import use_case.signup.student_signup.StudentSignupInteractor;
 import use_case.signup.student_signup.StudentSignupOutputBoundary;
-//import view.ClubHomeView;
 import view.ClubSignupView;
 import view.CreatePostView;
 import view.LoginView;
 import view.StudentHomeView;
 import view.StudentSignupView;
 import view.ViewManager;
+
 import use_case.student_homepage.StudentHomeInputBoundary;
 import use_case.student_homepage.StudentHomeInteractor;
 import use_case.student_homepage.StudentHomeOutputBoundary;
@@ -264,7 +263,7 @@ public class AppBuilder {
      */
     public AppBuilder addStudentLoginUseCase() {
         final StudentLoginOutputBoundary loginOutputBoundary = new StudentLoginPresenter(viewManagerModel,
-                studentHomeViewModel, studentSignupViewModel, loginViewModel, showPostsViewModel);
+                studentHomeViewModel, studentSignupViewModel, loginViewModel);
         final StudentLoginInputBoundary loginInteractor = new StudentLoginInteractor(
                 inMemoryUserDataAccessObject, loginOutputBoundary);
 
@@ -294,7 +293,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addShowClubsUseCase() {
-        final StudentShowClubsOutputBoundary studentShowClubsOutputBoundary = new StudentShowClubsPresenter(showClubsViewModel);
+        final StudentShowClubsOutputBoundary studentShowClubsOutputBoundary = new StudentShowClubsPresenter(studentHomeViewModel, viewManagerModel);
         final StudentShowClubsInputBoundary showClubsInteractor = new StudentShowClubsInteractor(studentShowClubsOutputBoundary,
                 userDataAccessObject);
         final StudentShowClubsController studentShowClubsController = new StudentShowClubsController(showClubsInteractor);
