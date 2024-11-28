@@ -86,8 +86,8 @@ public class ClubCreatePostInteractorTest {
         // Save the club to the in memory DAO/Database
         userRepository.saveClub(testClub);
 
-        // Create the successPresenter that tests whether the test case is as we expect.
-        ClubCreatePostOutputBoundary successPresenter = new ClubCreatePostOutputBoundary() {
+        // Create the failurePresenter that tests whether the test case is as we expect.
+        ClubCreatePostOutputBoundary failurePresenter = new ClubCreatePostOutputBoundary() {
             @Override
             public void prepareSuccessView(ClubCreatePostOutputData outputData) {
                 fail("Did not catch empty post title field");
@@ -110,7 +110,7 @@ public class ClubCreatePostInteractorTest {
         };
 
         // Execute the use case that need to be tested.
-        ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, successPresenter);
+        ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, failurePresenter);
         interactor.execute(inputData);
     }
 
@@ -134,8 +134,8 @@ public class ClubCreatePostInteractorTest {
         // Save the club to the in memory DAO/Database
         userRepository.saveClub(testClub);
 
-        // Create the successPresenter that tests whether the test case is as we expect.
-        ClubCreatePostOutputBoundary successPresenter = new ClubCreatePostOutputBoundary() {
+        // Create the failurePresenter that tests whether the test case is as we expect.
+        ClubCreatePostOutputBoundary failurePresenter = new ClubCreatePostOutputBoundary() {
             @Override
             public void prepareSuccessView(ClubCreatePostOutputData outputData) {
                 fail("Did not catch empty post content field");
@@ -158,7 +158,7 @@ public class ClubCreatePostInteractorTest {
         };
 
         // Execute the use case that need to be tested.
-        ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, successPresenter);
+        ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, failurePresenter);
         interactor.execute(inputData);
     }
 
@@ -233,8 +233,8 @@ public class ClubCreatePostInteractorTest {
         // Save the club to the in memory DAO/Database
         userRepository.saveClub(testClub);
 
-        // Create the successPresenter that tests whether the test case is as we expect.
-        ClubCreatePostOutputBoundary successPresenter = new ClubCreatePostOutputBoundary() {
+        // Create the failurePresenter that tests whether the test case is as we expect.
+        ClubCreatePostOutputBoundary failurePresenter = new ClubCreatePostOutputBoundary() {
             @Override
             public void prepareSuccessView(ClubCreatePostOutputData outputData) {
                 fail("Did not catch the error");
@@ -257,7 +257,7 @@ public class ClubCreatePostInteractorTest {
         };
 
         // Execute the use case that need to be tested.
-        ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, successPresenter);
+        ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, failurePresenter);
         interactor.execute(inputData);
     }
 
@@ -284,8 +284,8 @@ public class ClubCreatePostInteractorTest {
         // Save the club to the in memory DAO/Database
         userRepository.saveClub(testClub);
 
-        // Create the successPresenter that tests whether the test case is as we expect.
-        ClubCreatePostOutputBoundary successPresenter = new ClubCreatePostOutputBoundary() {
+        // Create the failurePresenter that tests whether the test case is as we expect.
+        ClubCreatePostOutputBoundary failurePresenter = new ClubCreatePostOutputBoundary() {
             @Override
             public void prepareSuccessView(ClubCreatePostOutputData outputData) {
                 fail("Did not catch the error");
@@ -308,7 +308,7 @@ public class ClubCreatePostInteractorTest {
         };
 
         // Execute the use case that need to be tested.
-        ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, successPresenter);
+        ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, failurePresenter);
         interactor.execute(inputData);
     }
 }
