@@ -5,8 +5,8 @@ import java.util.Map;
 
 import javax.swing.*;
 
-import interface_adapter.student_home.dislike.StudentDislikeController;
-import interface_adapter.student_home.like.StudentLikeController;
+import interface_adapter.student_logged_in.student_home.dislike.StudentDislikeController;
+import interface_adapter.student_logged_in.student_home.like.StudentLikeController;
 
 /**
  * Container for the list of posts on the student home view.

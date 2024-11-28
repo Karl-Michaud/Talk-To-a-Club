@@ -1,4 +1,4 @@
-package interface_adapter.student_home.like;
+package interface_adapter.student_logged_in.student_home.like;
 
 import java.util.Map;
 

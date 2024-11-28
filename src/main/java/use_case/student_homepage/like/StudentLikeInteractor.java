@@ -6,7 +6,7 @@ import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
-import interface_adapter.student_home.like.StudentLikePresenter;
+import interface_adapter.student_logged_in.student_home.like.StudentLikePresenter;
 
 /**
  * Interactor for the like usecase.

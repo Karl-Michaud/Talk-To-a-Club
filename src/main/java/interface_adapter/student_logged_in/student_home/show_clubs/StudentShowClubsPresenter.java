@@ -1,10 +1,10 @@
-package interface_adapter.student_home.show_clubs;
+package interface_adapter.student_logged_in.student_home.show_clubs;
 
 import java.util.ArrayList;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.student_home.StudentHomeState;
-import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_logged_in.student_home.StudentHomeState;
+import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
 import use_case.student_homepage.show_clubs.StudentShowClubsOutputBoundary;
 import use_case.student_homepage.show_clubs.StudentShowClubsOutputData;
 

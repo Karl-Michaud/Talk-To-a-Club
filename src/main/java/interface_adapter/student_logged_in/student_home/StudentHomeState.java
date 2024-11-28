@@ -1,6 +1,5 @@
-package interface_adapter.student_home;
+package interface_adapter.student_logged_in.student_home;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

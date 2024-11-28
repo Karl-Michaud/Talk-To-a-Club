@@ -1,4 +1,4 @@
-package interface_adapter.student_home;
+package interface_adapter.student_logged_in.student_home;
 
 import interface_adapter.ViewModel;
 

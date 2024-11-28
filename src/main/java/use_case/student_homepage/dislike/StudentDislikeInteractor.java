@@ -6,7 +6,7 @@ import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
-import interface_adapter.student_home.dislike.StudentDislikePresenter;
+import interface_adapter.student_logged_in.student_home.dislike.StudentDislikePresenter;
 
 /**
  * Interactor for the dislike usecase.

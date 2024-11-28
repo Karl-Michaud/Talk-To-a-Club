@@ -1,4 +1,4 @@
-package interface_adapter.student_home.show_clubs;
+package interface_adapter.student_logged_in.student_home.show_clubs;
 
 import use_case.student_homepage.show_clubs.StudentShowClubsInputBoundary;
 import use_case.student_homepage.show_clubs.StudentShowClubsInputData;

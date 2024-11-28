@@ -1,11 +1,11 @@
-package interface_adapter.student_home.show_posts;
+package interface_adapter.student_logged_in.student_home.show_posts;
 
 import java.util.List;
 import java.util.Map;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.student_home.StudentHomeState;
-import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_logged_in.student_home.StudentHomeState;
+import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
 import use_case.student_homepage.show_posts.StudentShowPostsOutputBoundary;
 import use_case.student_homepage.show_posts.StudentShowPostsOutputData;
 
