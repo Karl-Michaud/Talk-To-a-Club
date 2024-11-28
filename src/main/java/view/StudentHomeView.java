@@ -121,16 +121,16 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         this.studentHomeController = studentHomeController;
     }
 
-    public void setShowPostsController(StudentShowPostsController studentShowPostsController) {
-        this.studentShowPostsController = studentShowPostsController;
+    public void setShowPostsController(StudentShowPostsController showPostsController) {
+        this.studentShowPostsController = showPostsController;
     }
 
     public void setLikeController(StudentLikeController likeController) {
         this.likeController = likeController;
     }
 
-    public void setShowClubsController(StudentShowClubsController studentShowClubsController) {
-        this.studentShowClubsController = studentShowClubsController;
+    public void setShowClubsController(StudentShowClubsController showClubsController) {
+        this.studentShowClubsController = showClubsController;
     }
 
     public void setDislikeController(StudentDislikeController dislikeController) {

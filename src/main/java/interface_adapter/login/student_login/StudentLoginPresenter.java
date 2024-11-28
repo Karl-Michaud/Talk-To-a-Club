@@ -18,18 +18,16 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
     private final LoginViewModel loginViewModel;
     private final StudentHomeViewModel studentHomeViewModel;
     private final StudentSignupViewModel studentSignupViewModel;
-    private final ShowPostsViewModel showPostsViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public StudentLoginPresenter(ViewManagerModel viewManagerModel,
                                  StudentHomeViewModel studentHomeViewModel,
                                  StudentSignupViewModel studentSignupViewModel,
-                                 LoginViewModel loginViewModel, ShowPostsViewModel showPostsViewModel) {
+                                 LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.studentHomeViewModel = studentHomeViewModel;
         this.studentSignupViewModel = studentSignupViewModel;
         this.loginViewModel = loginViewModel;
-        this.showPostsViewModel = showPostsViewModel;
     }
 
     @Override
@@ -49,10 +47,6 @@ public class StudentLoginPresenter implements StudentLoginOutputBoundary {
         final StudentHomeState studentHomeState = studentHomeViewModel.getState();
         studentHomeState.setCurrentUser(response.getEmail());
         studentHomeState.setUsername(response.getUsername());
-        final ShowPostsState showPostsState = showPostsViewModel.getState();
-        showPostsState.setCurrentUser(response.getEmail());
-        this.showPostsViewModel.setState(showPostsState);
-        this.showPostsViewModel.firePropertyChanged();
         this.studentHomeViewModel.setState(studentHomeState);
         this.studentHomeViewModel.firePropertyChanged();
     }
