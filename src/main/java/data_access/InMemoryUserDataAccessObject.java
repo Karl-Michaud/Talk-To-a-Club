@@ -5,6 +5,7 @@ import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
 import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
+import use_case.club_get_members.ClubGetMembersUserDataAccessInterface;
 import use_case.club_get_posts.ClubGetPostsDataAccessInterface;
 import use_case.club_remove_member.ClubRemoveMemberClubDataAccessInterface;
 import use_case.club_update_desc.ClubUpdateDescDataAccessInterface;
@@ -12,6 +13,12 @@ import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
 import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
+import use_case.student_homepage.dislike.StudentDislikeClubDataAccessInterface;
+import use_case.student_homepage.dislike.StudentDislikeStudentDataAccessInterface;
+import use_case.student_homepage.like.StudentLikeClubDataAccessInterface;
+import use_case.student_homepage.like.StudentLikeStudentDataAccessInterface;
+import use_case.student_homepage.show_clubs.StudentShowClubsAccessInterface;
+import use_case.student_homepage.show_posts.StudentShowPostsAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
@@ -20,7 +27,10 @@ import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
 public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInterface,
         StudentSignupUserDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface,
-        ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface, ClubUpdateDescDataAccessInterface {
+        ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface, ClubUpdateDescDataAccessInterface,
+        ClubGetMembersUserDataAccessInterface, StudentShowPostsAccessInterface, StudentLikeClubDataAccessInterface,
+        StudentLikeStudentDataAccessInterface, StudentDislikeClubDataAccessInterface,
+        StudentDislikeStudentDataAccessInterface, StudentShowClubsAccessInterface {
 
     private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
     private final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
