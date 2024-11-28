@@ -18,14 +18,26 @@ public class ClubCreatePostInteractor implements ClubCreatePostInputBoundary {
 
     @Override
     public void execute(ClubCreatePostInputData clubCreatePostInputData) {
+        final int maxDescriptionLength = 380;
+        final int maxTitleLength = 130;
         final String title = clubCreatePostInputData.getTitle();
         final String content = clubCreatePostInputData.getContent();
-
-        if (title.isEmpty()) {
+        if (title.isEmpty() && content.isEmpty()) {
+            createPostPresenter.prepareFailView("Title field and Content field are empty.");
+        }
+        else if (title.isEmpty()) {
             createPostPresenter.prepareFailView("Tittle field is empty.");
         }
         else if (content.isEmpty()) {
             createPostPresenter.prepareFailView("Content field is empty.");
+        }
+        else if (content.length() > maxDescriptionLength) {
+            createPostPresenter.prepareFailView("Content field is longer than "
+                    + maxDescriptionLength + " characters.");
+        }
+        else if (title.length() > maxTitleLength) {
+            createPostPresenter.prepareFailView("Title field is longer than "
+                    + maxTitleLength + " characters.");
         }
         else {
             final Announcement post = new Announcement(title, content);
