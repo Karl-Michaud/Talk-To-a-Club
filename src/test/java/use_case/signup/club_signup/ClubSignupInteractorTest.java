@@ -11,7 +11,7 @@ public class ClubSignupInteractorTest {
 
     @Test
     void successTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("test club", "roy@gmail.com",
+        ClubSignupInputData inputData = new ClubSignupInputData("test club", "roy@gmail.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case
@@ -44,7 +44,7 @@ public class ClubSignupInteractorTest {
 
     @Test
     void usernameAlreadyExistsTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("test club", "roy@gmail.com",
+        ClubSignupInputData inputData = new ClubSignupInputData("test club", "roy@gmail.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case and stores a Club with the same name
@@ -75,7 +75,7 @@ public class ClubSignupInteractorTest {
 
     @Test
     void emailAlreadyExistsTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("test club", "ok@k.com",
+        ClubSignupInputData inputData = new ClubSignupInputData("test club", "ok@k.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case and stores a Club with the same email
@@ -106,7 +106,7 @@ public class ClubSignupInteractorTest {
 
     @Test
     void passwordsNotMatchTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("test club", "ok@k.com",
+        ClubSignupInputData inputData = new ClubSignupInputData("test club", "ok@k.com",
                 "password1", "password2");
 
         // Uses an in memory database to test the use case
@@ -135,7 +135,7 @@ public class ClubSignupInteractorTest {
 
     @Test
     void usernameShortTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("", "ok@k.com",
+        ClubSignupInputData inputData = new ClubSignupInputData("", "ok@k.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case
@@ -165,7 +165,7 @@ public class ClubSignupInteractorTest {
     @Test
     void usernameLongTest() {
         String username = "1".repeat(65);
-        StudentSignupInputData inputData = new StudentSignupInputData(username, "ok@k.com",
+        ClubSignupInputData inputData = new ClubSignupInputData(username, "ok@k.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case
@@ -194,7 +194,7 @@ public class ClubSignupInteractorTest {
 
     @Test
     void shortPasswordTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("ok", "ok@k.com",
+        ClubSignupInputData inputData = new ClubSignupInputData("ok", "ok@k.com",
                 "passwo", "passwo");
 
         // Uses an in memory database to test the use case
@@ -224,7 +224,7 @@ public class ClubSignupInteractorTest {
     @Test
     void longPasswordTest() {
         String password = "1".repeat(65);
-        StudentSignupInputData inputData = new StudentSignupInputData("ok", "ok@k.com",
+        ClubSignupInputData inputData = new ClubSignupInputData("ok", "ok@k.com",
                 password, password);
 
         // Uses an in memory database to test the use case
@@ -253,7 +253,7 @@ public class ClubSignupInteractorTest {
 
     @Test
     void emailNoDotTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("ok", "ok@kcom",
+        ClubSignupInputData inputData = new ClubSignupInputData("ok", "ok@kcom",
                 "password", "password");
 
         // Uses an in memory database to test the use case
@@ -282,7 +282,7 @@ public class ClubSignupInteractorTest {
 
     @Test
     void emailNoAtTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("ok", "okk.com",
+        ClubSignupInputData inputData = new ClubSignupInputData("ok", "okk.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case
