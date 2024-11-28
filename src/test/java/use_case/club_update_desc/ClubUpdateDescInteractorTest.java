@@ -1,8 +1,13 @@
 package use_case.club_update_desc;
 
 import data_access.InMemoryUserDataAccessObject;
+import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
+import entity.post.Announcement;
+import entity.post.Post;
 import entity.user.Club;
 import org.junit.jupiter.api.Test;
+import use_case.club_get_posts.ClubGetPostsDataAccessInterface;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -12,8 +17,10 @@ public class ClubUpdateDescInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        ClubUpdateDescDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-        userRepository.saveClub(new Club("Roy", "ok@k.com", "password", null, null));
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
+        dao.saveClub(new Club("Roy", "ok@k.com", "password", null, null));
+
+        ClubUpdateDescDataAccessInterface userRepository = dao;
 
         ClubUpdateDescInputData inputData = new ClubUpdateDescInputData("ok@k.com", "test");
 
