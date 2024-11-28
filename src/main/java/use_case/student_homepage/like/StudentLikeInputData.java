@@ -5,12 +5,12 @@ import java.util.Map;
 /**
  * Input data like usecase.
  */
-public class LikeInputData {
+public class StudentLikeInputData {
     private final String studentEmail;
     private final String clubEmail;
     private final Map<String, Object> postData;
 
-    public LikeInputData(String studentEmail, Map<String, Object> postData) {
+    public StudentLikeInputData(String studentEmail, Map<String, Object> postData) {
         this.studentEmail = studentEmail;
         this.postData = postData;
         this.clubEmail = postData.get("clubEmail").toString();

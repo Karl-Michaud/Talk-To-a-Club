@@ -3,12 +3,12 @@ package use_case.student_homepage.like;
 /**
  * Output boundary for the student like usecase.
  */
-public interface LikeOutputBoundary {
+public interface StudentLikeOutputBoundary {
     /**
      * Updates the view to include the like on the student home page.
      * @param data the output data.
      */
-    void prepareSuccessView(LikeOutputData data);
+    void prepareSuccessView(StudentLikeOutputData data);
 
     /**
      * Prepares an error message in case liking the post fails.

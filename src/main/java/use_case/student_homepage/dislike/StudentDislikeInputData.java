@@ -5,12 +5,12 @@ import java.util.Map;
 /**
  * Input data dislike usecase.
  */
-public class DislikeInputData {
+public class StudentDislikeInputData {
     private final String studentEmail;
     private final String clubEmail;
     private final Map<String, Object> postData;
 
-    public DislikeInputData(String studentEmail, Map<String, Object> postData) {
+    public StudentDislikeInputData(String studentEmail, Map<String, Object> postData) {
         this.studentEmail = studentEmail;
         this.postData = postData;
         this.clubEmail = postData.get("clubEmail").toString();

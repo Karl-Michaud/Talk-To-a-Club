@@ -2,17 +2,17 @@ package interface_adapter.student_home.like;
 
 import java.util.Map;
 
-import use_case.student_homepage.like.LikeInputBoundary;
-import use_case.student_homepage.like.LikeInputData;
+import use_case.student_homepage.like.StudentLikeInputBoundary;
+import use_case.student_homepage.like.StudentLikeInputData;
 
 /**
  * Controller for the like usecase on the student homepage.
  */
 public class StudentLikeController {
-    private final LikeInputBoundary likeInputBoundary;
+    private final StudentLikeInputBoundary studentLikeInputBoundary;
 
-    public StudentLikeController(LikeInputBoundary likeInputBoundary) {
-        this.likeInputBoundary = likeInputBoundary;
+    public StudentLikeController(StudentLikeInputBoundary studentLikeInputBoundary) {
+        this.studentLikeInputBoundary = studentLikeInputBoundary;
     }
 
     /**
@@ -21,7 +21,7 @@ public class StudentLikeController {
      * @param postData the post which has been liked.
      */
     public void changeLike(String studentEmail, Map<String, Object> postData) {
-        final LikeInputData likeInputData = new LikeInputData(studentEmail, postData);
-        likeInputBoundary.execute(likeInputData);
+        final StudentLikeInputData studentLikeInputData = new StudentLikeInputData(studentEmail, postData);
+        studentLikeInputBoundary.execute(studentLikeInputData);
     }
 }

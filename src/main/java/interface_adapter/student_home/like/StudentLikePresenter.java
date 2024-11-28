@@ -6,13 +6,13 @@ import java.util.Map;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
-import use_case.student_homepage.like.LikeOutputBoundary;
-import use_case.student_homepage.like.LikeOutputData;
+import use_case.student_homepage.like.StudentLikeOutputBoundary;
+import use_case.student_homepage.like.StudentLikeOutputData;
 
 /**
  * The presenter for the like usecase.
  */
-public class StudentLikePresenter implements LikeOutputBoundary {
+public class StudentLikePresenter implements StudentLikeOutputBoundary {
     private final StudentHomeViewModel viewModel;
     private final ViewManagerModel viewManagerModel;
 
@@ -22,7 +22,7 @@ public class StudentLikePresenter implements LikeOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(LikeOutputData data) {
+    public void prepareSuccessView(StudentLikeOutputData data) {
         final Map<String, Object> postData = data.getPostData();
 
         final StudentHomeState currentState = viewModel.getState();

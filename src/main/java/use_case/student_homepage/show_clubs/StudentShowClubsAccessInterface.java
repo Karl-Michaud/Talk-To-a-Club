@@ -5,7 +5,7 @@ import entity.user.Student;
 /**
  * Data access interface for the show clubs usecase.
  */
-public interface ShowClubsAccessInterface {
+public interface StudentShowClubsAccessInterface {
 
     /**
      * Checks if the email matches with a club in the database.

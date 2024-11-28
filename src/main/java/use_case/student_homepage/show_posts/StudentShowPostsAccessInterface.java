@@ -5,7 +5,7 @@ import entity.user.Student;
 /**
  * Interface for the show posts usecase.
  */
-public interface ShowPostsAccessInterface {
+public interface StudentShowPostsAccessInterface {
 
     /**
      * Checks if the email matches with a club in the database.

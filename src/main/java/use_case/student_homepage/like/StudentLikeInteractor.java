@@ -11,25 +11,25 @@ import interface_adapter.student_home.like.StudentLikePresenter;
 /**
  * Interactor for the like usecase.
  */
-public class LikeInteractor implements LikeInputBoundary {
-    private final LikeStudentDataAccessInterface studentDataAccess;
-    private final LikeClubDataAccessInterface clubDataAccess;
+public class StudentLikeInteractor implements StudentLikeInputBoundary {
+    private final StudentLikeStudentDataAccessInterface studentDataAccess;
+    private final StudentLikeClubDataAccessInterface clubDataAccess;
     private final StudentLikePresenter studentLikePresenter;
 
-    public LikeInteractor(LikeStudentDataAccessInterface studentDataAccess,
-                          LikeClubDataAccessInterface clubDataAccess, StudentLikePresenter studentLikePresenter) {
+    public StudentLikeInteractor(StudentLikeStudentDataAccessInterface studentDataAccess,
+                                 StudentLikeClubDataAccessInterface clubDataAccess, StudentLikePresenter studentLikePresenter) {
         this.studentDataAccess = studentDataAccess;
         this.clubDataAccess = clubDataAccess;
         this.studentLikePresenter = studentLikePresenter;
     }
 
     @Override
-    public void execute(LikeInputData likeInputData) {
-        final String studentEmail = likeInputData.getStudentEmail();
-        final String clubEmail = likeInputData.getClubEmail();
+    public void execute(StudentLikeInputData studentLikeInputData) {
+        final String studentEmail = studentLikeInputData.getStudentEmail();
+        final String clubEmail = studentLikeInputData.getClubEmail();
         final Student currStudent = studentDataAccess.getStudent(studentEmail);
         final Club currClub = clubDataAccess.getClub(clubEmail);
-        final Map<String, Object> postData = likeInputData.getPost();
+        final Map<String, Object> postData = studentLikeInputData.getPost();
         final DataStoreArrays<Post> clubPosts = (DataStoreArrays<Post>) currClub.getClubPosts();
         Post postObject = null;
         // Find the corresponding Post object for the data, using the date at which it was posted.
@@ -49,7 +49,7 @@ public class LikeInteractor implements LikeInputBoundary {
         }
         postData.put("Liked", !(Boolean) postData.get("Liked"));
 
-        final LikeOutputData likeOutputData = new LikeOutputData(postData, currClub.getUsername());
-        studentLikePresenter.prepareSuccessView(likeOutputData);
+        final StudentLikeOutputData studentLikeOutputData = new StudentLikeOutputData(postData, currClub.getUsername());
+        studentLikePresenter.prepareSuccessView(studentLikeOutputData);
     }
 }

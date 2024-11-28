@@ -5,7 +5,7 @@ import entity.user.Student;
 /**
  * The DAO interface to get data related to students for the like usecase.
  */
-public interface LikeStudentDataAccessInterface {
+public interface StudentLikeStudentDataAccessInterface {
 
     /**
      * Gets the student corresponding to the email.

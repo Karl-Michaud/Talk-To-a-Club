@@ -11,26 +11,26 @@ import interface_adapter.student_home.dislike.StudentDislikePresenter;
 /**
  * Interactor for the dislike usecase.
  */
-public class DislikeInteractor implements DislikeInputBoundary {
-    private final DislikeClubDataAccessInterface clubDataAccess;
-    private final DislikeStudentDataAccessInterface studentDataAccess;
+public class StudentDislikeInteractor implements StudentDislikeInputBoundary {
+    private final StudentDislikeClubDataAccessInterface clubDataAccess;
+    private final StudentDislikeStudentDataAccessInterface studentDataAccess;
     private final StudentDislikePresenter studentDislikePresenter;
 
-    public DislikeInteractor(DislikeClubDataAccessInterface clubDataAccess,
-                             DislikeStudentDataAccessInterface studentDataAccess,
-                             StudentDislikePresenter presenter) {
+    public StudentDislikeInteractor(StudentDislikeClubDataAccessInterface clubDataAccess,
+                                    StudentDislikeStudentDataAccessInterface studentDataAccess,
+                                    StudentDislikePresenter presenter) {
         this.clubDataAccess = clubDataAccess;
         this.studentDataAccess = studentDataAccess;
         this.studentDislikePresenter = presenter;
     }
 
     @Override
-    public void execute(DislikeInputData dislikeInputData) {
-        final String studentEmail = dislikeInputData.getStudentEmail();
-        final String clubEmail = dislikeInputData.getClubEmail();
+    public void execute(StudentDislikeInputData studentDislikeInputData) {
+        final String studentEmail = studentDislikeInputData.getStudentEmail();
+        final String clubEmail = studentDislikeInputData.getClubEmail();
         final Student currStudent = studentDataAccess.getStudent(studentEmail);
         final Club currClub = clubDataAccess.getClub(clubEmail);
-        final Map<String, Object> postData = dislikeInputData.getPost();
+        final Map<String, Object> postData = studentDislikeInputData.getPost();
         final DataStoreArrays<Post> clubPosts = (DataStoreArrays<Post>) currClub.getClubPosts();
         Post postObject = null;
         // Find the corresponding Post object for the data, using the date at which it was posted.
@@ -50,7 +50,7 @@ public class DislikeInteractor implements DislikeInputBoundary {
         }
         postData.put("Disliked", !(Boolean) postData.get("Disliked"));
 
-        final DislikeOutputData dislikeOutputData = new DislikeOutputData(postData, currClub.getUsername());
-        studentDislikePresenter.prepareSuccessView(dislikeOutputData);
+        final StudentDislikeOutputData studentDislikeOutputData = new StudentDislikeOutputData(postData, currClub.getUsername());
+        studentDislikePresenter.prepareSuccessView(studentDislikeOutputData);
     }
 }

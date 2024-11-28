@@ -6,7 +6,7 @@ import entity.user.Club;
 /**
  * Interface for the dislike usecase.
  */
-public interface DislikeClubDataAccessInterface {
+public interface StudentDislikeClubDataAccessInterface {
     /**
      * Returns the club with the given email.
      * @param clubEmail the club's email.

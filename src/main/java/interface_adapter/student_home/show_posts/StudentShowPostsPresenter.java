@@ -6,13 +6,13 @@ import java.util.Map;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
-import use_case.student_homepage.show_posts.ShowPostsOutputBoundary;
-import use_case.student_homepage.show_posts.ShowPostsOutputData;
+import use_case.student_homepage.show_posts.StudentShowPostsOutputBoundary;
+import use_case.student_homepage.show_posts.StudentShowPostsOutputData;
 
 /**
  * The presenter that passes the posts on to the ViewModel for the StudentHomeView.
  */
-public class StudentShowPostsPresenter implements ShowPostsOutputBoundary {
+public class StudentShowPostsPresenter implements StudentShowPostsOutputBoundary {
     private final StudentHomeViewModel studentHomeViewModel;
     private final ViewManagerModel viewManagerModel;
 
@@ -22,12 +22,12 @@ public class StudentShowPostsPresenter implements ShowPostsOutputBoundary {
     }
 
     @Override
-    public void preparePostContent(ShowPostsOutputData showPostsOutputData) {
+    public void preparePostContent(StudentShowPostsOutputData studentShowPostsOutputData) {
         final StudentHomeState state = studentHomeViewModel.getState();
-        final Map<String, List<Map<String, Object>>> postData = showPostsOutputData.getPostData();
+        final Map<String, List<Map<String, Object>>> postData = studentShowPostsOutputData.getPostData();
 
         state.setPostData(postData);
-        state.setCurrentUser(showPostsOutputData.getCurrStudent());
+        state.setCurrentUser(studentShowPostsOutputData.getCurrStudent());
 
         studentHomeViewModel.setState(state);
         studentHomeViewModel.firePropertyChanged("show posts");

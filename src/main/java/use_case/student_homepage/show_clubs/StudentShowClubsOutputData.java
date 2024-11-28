@@ -6,11 +6,11 @@ import java.util.Map;
 /**
  * Class to store the output data for the clubs on the student home view.
  */
-public class ShowClubsOutputData {
+public class StudentShowClubsOutputData {
     private final List<Map<String, String>> followedClubs;
     private final String currStudentEmail;
 
-    public ShowClubsOutputData(List<Map<String, String>> clubs, String currStudent) {
+    public StudentShowClubsOutputData(List<Map<String, String>> clubs, String currStudent) {
         this.followedClubs = clubs;
         this.currStudentEmail = currStudent;
     }

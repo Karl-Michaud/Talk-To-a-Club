@@ -2,17 +2,17 @@ package interface_adapter.student_home.dislike;
 
 import java.util.Map;
 
-import use_case.student_homepage.dislike.DislikeInputBoundary;
-import use_case.student_homepage.dislike.DislikeInputData;
+import use_case.student_homepage.dislike.StudentDislikeInputBoundary;
+import use_case.student_homepage.dislike.StudentDislikeInputData;
 
 /**
  * Controller for the dislike usecase on the student home page.
  */
 public class StudentDislikeController {
-    private final DislikeInputBoundary dislikeInputBoundary;
+    private final StudentDislikeInputBoundary studentDislikeInputBoundary;
 
-    public StudentDislikeController(DislikeInputBoundary dislikeInputBoundary) {
-        this.dislikeInputBoundary = dislikeInputBoundary;
+    public StudentDislikeController(StudentDislikeInputBoundary studentDislikeInputBoundary) {
+        this.studentDislikeInputBoundary = studentDislikeInputBoundary;
     }
 
     /**
@@ -21,7 +21,7 @@ public class StudentDislikeController {
      * @param postData the post which has been liked.
      */
     public void changeDislike(String studentEmail, Map<String, Object> postData) {
-        final DislikeInputData dislikeInputData = new DislikeInputData(studentEmail, postData);
-        dislikeInputBoundary.execute(dislikeInputData);
+        final StudentDislikeInputData studentDislikeInputData = new StudentDislikeInputData(studentEmail, postData);
+        studentDislikeInputBoundary.execute(studentDislikeInputData);
     }
 }

@@ -19,8 +19,8 @@ import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
 import interface_adapter.student_home.dislike.StudentDislikeController;
 import interface_adapter.student_home.like.StudentLikeController;
-import interface_adapter.student_home.show_clubs.ShowClubsController;
-import interface_adapter.student_home.show_posts.ShowPostsController;
+import interface_adapter.student_home.show_clubs.StudentShowClubsController;
+import interface_adapter.student_home.show_posts.StudentShowPostsController;
 
 /**
  * This is the view for the homepage that the student will be greated with upon logging in. This will show all the clubs
@@ -39,9 +39,9 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     private final String viewName = "student home";
     private final StudentHomeViewModel studentHomeViewModel;
     private StudentHomeController studentHomeController;
-    private ShowPostsController showPostsController;
+    private StudentShowPostsController studentShowPostsController;
     private StudentLikeController likeController;
-    private ShowClubsController showClubsController;
+    private StudentShowClubsController studentShowClubsController;
     private StudentDislikeController dislikeController;
 
     public StudentHomeView(StudentHomeViewModel studentHomeViewModel) {
@@ -99,13 +99,13 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
             final StudentHomeState currentState = studentHomeViewModel.getState();
-            showClubsController.execute(currentState.getCurrentUser());
-            showPostsController.execute(currentState.getCurrentUser());
+            studentShowClubsController.execute(currentState.getCurrentUser());
+            studentShowPostsController.execute(currentState.getCurrentUser());
         }
         else if (evt.getPropertyName().equals("show clubs") || evt.getPropertyName().equals("show posts")) {
             final StudentHomeState currentState = studentHomeViewModel.getState();
-            showClubsController.execute(currentState.getCurrentUser());
-            showPostsController.execute(currentState.getCurrentUser());
+            studentShowClubsController.execute(currentState.getCurrentUser());
+            studentShowPostsController.execute(currentState.getCurrentUser());
             final List<Map<String, String>> clubNames = currentState.getClubs();
             final Map<String, List<Map<String, Object>>> postData = currentState.getPostData();
             pageScrollPane.setViewportView(new PageView(new PostsContainer(postData, currentState.getCurrentUser(),
@@ -121,16 +121,16 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         this.studentHomeController = studentHomeController;
     }
 
-    public void setShowPostsController(ShowPostsController showPostsController) {
-        this.showPostsController = showPostsController;
+    public void setShowPostsController(StudentShowPostsController studentShowPostsController) {
+        this.studentShowPostsController = studentShowPostsController;
     }
 
     public void setLikeController(StudentLikeController likeController) {
         this.likeController = likeController;
     }
 
-    public void setShowClubsController(ShowClubsController showClubsController) {
-        this.showClubsController = showClubsController;
+    public void setShowClubsController(StudentShowClubsController studentShowClubsController) {
+        this.studentShowClubsController = studentShowClubsController;
     }
 
     public void setDislikeController(StudentDislikeController dislikeController) {

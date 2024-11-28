@@ -1,15 +1,15 @@
-package use_case.student_homepage.like;
+package use_case.student_homepage.dislike;
 
 import java.util.Map;
 
 /**
- * The output data for the like usecase.
+ * The output data for the dislike usecase.
  */
-public class LikeOutputData {
+public class StudentDislikeOutputData {
     private final Map<String, Object> postData;
     private final String clubName;
 
-    public LikeOutputData(Map<String, Object> postData, String clubName) {
+    public StudentDislikeOutputData(Map<String, Object> postData, String clubName) {
         this.postData = postData;
         this.clubName = clubName;
     }

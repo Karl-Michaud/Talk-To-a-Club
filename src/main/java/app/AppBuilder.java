@@ -33,9 +33,9 @@ import interface_adapter.student_home.StudentHomePresenter;
 import interface_adapter.student_home.StudentHomeViewModel;
 import interface_adapter.student_home.dislike.StudentDislikeController;
 import interface_adapter.student_home.like.StudentLikeController;
-import interface_adapter.student_home.show_clubs.ShowClubsController;
+import interface_adapter.student_home.show_clubs.StudentShowClubsController;
 import interface_adapter.student_home.show_clubs.StudentShowClubsPresenter;
-import interface_adapter.student_home.show_posts.ShowPostsController;
+import interface_adapter.student_home.show_posts.StudentShowPostsController;
 import interface_adapter.student_home.show_posts.StudentShowPostsPresenter;
 import interface_adapter.student_profile.StudentProfileController;
 import interface_adapter.student_profile.StudentProfilePresenter;
@@ -71,16 +71,16 @@ import view.ViewManager;
 import use_case.student_homepage.StudentHomeInputBoundary;
 import use_case.student_homepage.StudentHomeInteractor;
 import use_case.student_homepage.StudentHomeOutputBoundary;
-import use_case.student_homepage.dislike.DislikeInputBoundary;
-import use_case.student_homepage.dislike.DislikeInteractor;
-import use_case.student_homepage.like.LikeInputBoundary;
-import use_case.student_homepage.like.LikeInteractor;
-import use_case.student_homepage.show_clubs.ShowClubsInputBoundary;
-import use_case.student_homepage.show_clubs.ShowClubsInteractor;
-import use_case.student_homepage.show_clubs.ShowClubsOutputBoundary;
-import use_case.student_homepage.show_posts.ShowPostsInputBoundary;
-import use_case.student_homepage.show_posts.ShowPostsInteractor;
-import use_case.student_homepage.show_posts.ShowPostsOutputBoundary;
+import use_case.student_homepage.dislike.StudentDislikeInputBoundary;
+import use_case.student_homepage.dislike.StudentDislikeInteractor;
+import use_case.student_homepage.like.StudentLikeInputBoundary;
+import use_case.student_homepage.like.StudentLikeInteractor;
+import use_case.student_homepage.show_clubs.StudentShowClubsInputBoundary;
+import use_case.student_homepage.show_clubs.StudentShowClubsInteractor;
+import use_case.student_homepage.show_clubs.StudentShowClubsOutputBoundary;
+import use_case.student_homepage.show_posts.StudentShowPostsInputBoundary;
+import use_case.student_homepage.show_posts.StudentShowPostsInteractor;
+import use_case.student_homepage.show_posts.StudentShowPostsOutputBoundary;
 import use_case.student_profile.StudentProfileInputBoundary;
 import use_case.student_profile.StudentProfileInteractor;
 import use_case.student_profile.StudentProfileOutputBoundary;
@@ -284,32 +284,32 @@ public class AppBuilder {
     }
 
     public AppBuilder addShowPostsUseCase() {
-        final ShowPostsOutputBoundary showPostsOutputBoundary = new StudentShowPostsPresenter(showPostsViewModel);
-        final ShowPostsInputBoundary showPostsInteractor = new ShowPostsInteractor(userDataAccessObject,
-                showPostsOutputBoundary);
+        final StudentShowPostsOutputBoundary studentShowPostsOutputBoundary = new StudentShowPostsPresenter(showPostsViewModel);
+        final StudentShowPostsInputBoundary showPostsInteractor = new StudentShowPostsInteractor(userDataAccessObject,
+                studentShowPostsOutputBoundary);
 
-        final ShowPostsController showPostsController = new ShowPostsController(showPostsInteractor);
-        studentHomeView.setShowPostsController(showPostsController);
+        final StudentShowPostsController studentShowPostsController = new StudentShowPostsController(showPostsInteractor);
+        studentHomeView.setShowPostsController(studentShowPostsController);
         return this;
     }
 
     public AppBuilder addShowClubsUseCase() {
-        final ShowClubsOutputBoundary showClubsOutputBoundary = new StudentShowClubsPresenter(showClubsViewModel);
-        final ShowClubsInputBoundary showClubsInteractor = new ShowClubsInteractor(showClubsOutputBoundary,
+        final StudentShowClubsOutputBoundary studentShowClubsOutputBoundary = new StudentShowClubsPresenter(showClubsViewModel);
+        final StudentShowClubsInputBoundary showClubsInteractor = new StudentShowClubsInteractor(studentShowClubsOutputBoundary,
                 userDataAccessObject);
-        final ShowClubsController showClubsController = new ShowClubsController(showClubsInteractor);
-        studentHomeView.setShowClubsController(showClubsController);
+        final StudentShowClubsController studentShowClubsController = new StudentShowClubsController(showClubsInteractor);
+        studentHomeView.setShowClubsController(studentShowClubsController);
     }
 
     public AppBuilder addLikeUseCase() {
-        final LikeInputBoundary likeInteractor = new LikeInteractor(userDataAccessObject);
+        final StudentLikeInputBoundary likeInteractor = new StudentLikeInteractor(userDataAccessObject);
         final StudentLikeController likeController = new StudentLikeController(likeInteractor);
         studentHomeView.setLikeController(likeController);
         return this;
     }
 
     public AppBuilder addDislikeUseCase() {
-        final DislikeInputBoundary dislikeInteractor = new DislikeInteractor(userDataAccessObject);
+        final StudentDislikeInputBoundary dislikeInteractor = new StudentDislikeInteractor(userDataAccessObject);
         final StudentDislikeController dislikeController = new StudentDislikeController(dislikeInteractor);
         studentHomeView.setDislikeController(dislikeController);
         return this;

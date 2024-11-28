@@ -6,13 +6,13 @@ import java.util.Map;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
-import use_case.student_homepage.dislike.DislikeOutputBoundary;
-import use_case.student_homepage.dislike.DislikeOutputData;
+import use_case.student_homepage.dislike.StudentDislikeOutputBoundary;
+import use_case.student_homepage.dislike.StudentDislikeOutputData;
 
 /**
  * The presenter for the dislike usecase.
  */
-public class StudentDislikePresenter implements DislikeOutputBoundary {
+public class StudentDislikePresenter implements StudentDislikeOutputBoundary {
     private final StudentHomeViewModel viewModel;
     private final ViewManagerModel viewManagerModel;
 
@@ -22,7 +22,7 @@ public class StudentDislikePresenter implements DislikeOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(DislikeOutputData data) {
+    public void prepareSuccessView(StudentDislikeOutputData data) {
         final Map<String, Object> postData = data.getPostData();
 
         final StudentHomeState currentState = viewModel.getState();

@@ -2,12 +2,11 @@ package use_case.student_homepage.like;
 
 import entity.post.Post;
 import entity.user.Club;
-import entity.user.Student;
 
 /**
  * The DAO interface related to club data for the like usecase.
  */
-public interface LikeClubDataAccessInterface {
+public interface StudentLikeClubDataAccessInterface {
 
     /**
      * Returns the club with the given email.

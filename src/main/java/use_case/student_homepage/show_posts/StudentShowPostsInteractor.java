@@ -13,26 +13,26 @@ import entity.user.User;
 /**
  * Interactor for show posts use case.
  */
-public class ShowPostsInteractor implements ShowPostsInputBoundary {
-    private final ShowPostsOutputBoundary showPostsPresenter;
-    private final ShowPostsAccessInterface showPostsAccessInterface;
+public class StudentShowPostsInteractor implements StudentShowPostsInputBoundary {
+    private final StudentShowPostsOutputBoundary showPostsPresenter;
+    private final StudentShowPostsAccessInterface studentShowPostsAccessInterface;
 
-    public ShowPostsInteractor(ShowPostsAccessInterface showPostsAccessInterface,
-                               ShowPostsOutputBoundary showPostsPresenter) {
+    public StudentShowPostsInteractor(StudentShowPostsAccessInterface studentShowPostsAccessInterface,
+                                      StudentShowPostsOutputBoundary showPostsPresenter) {
         this.showPostsPresenter = showPostsPresenter;
-        this.showPostsAccessInterface = showPostsAccessInterface;
+        this.studentShowPostsAccessInterface = studentShowPostsAccessInterface;
     }
 
     @Override
-    public void execute(ShowPostsInputData inputData) {
+    public void execute(StudentShowPostsInputData inputData) {
         final String currUserEmail = inputData.getUserEmail();
-        if (!showPostsAccessInterface.existsByEmailStudent(currUserEmail)) {
+        if (!studentShowPostsAccessInterface.existsByEmailStudent(currUserEmail)) {
             showPostsPresenter.prepareFailView("The accounts does not exist.");
         }
         else {
-            final DataStoreArrays<Club> clubs = (DataStoreArrays<Club>) showPostsAccessInterface.getStudent(
+            final DataStoreArrays<Club> clubs = (DataStoreArrays<Club>) studentShowPostsAccessInterface.getStudent(
                     currUserEmail).getJoinedClubs();
-            final User currentUser = showPostsAccessInterface.getStudent(currUserEmail);
+            final User currentUser = studentShowPostsAccessInterface.getStudent(currUserEmail);
             final Map<String, List<Map<String, Object>>> postData = new HashMap<>();
             for (final Club club : clubs) {
                 final ArrayList<Map<String, Object>> clubPostData = new ArrayList<>();
@@ -51,7 +51,7 @@ public class ShowPostsInteractor implements ShowPostsInputBoundary {
                 }
                 postData.put(club.getUsername(), clubPostData);
             }
-            final ShowPostsOutputData outputData = new ShowPostsOutputData(postData, currUserEmail);
+            final StudentShowPostsOutputData outputData = new StudentShowPostsOutputData(postData, currUserEmail);
             showPostsPresenter.preparePostContent(outputData);
         }
     }

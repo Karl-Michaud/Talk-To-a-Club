@@ -6,11 +6,11 @@ import java.util.Map;
 /**
  * Class to store the output data for the posts on the student home view.
  */
-public class ShowPostsOutputData {
+public class StudentShowPostsOutputData {
     private final Map<String, List<Map<String, Object>>> posts;
     private final String currStudent;
 
-    public ShowPostsOutputData(Map<String, List<Map<String, Object>>> posts, String currStudent) {
+    public StudentShowPostsOutputData(Map<String, List<Map<String, Object>>> posts, String currStudent) {
         this.posts = posts;
         this.currStudent = currStudent;
     }
