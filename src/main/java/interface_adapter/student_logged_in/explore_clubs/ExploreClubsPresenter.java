@@ -3,7 +3,7 @@ package interface_adapter.student_logged_in.explore_clubs;
 import java.util.Map;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
 import use_case.explore_clubs.ExploreClubsOutputBoundary;
 import use_case.explore_clubs.ExploreClubsOutputData;
 

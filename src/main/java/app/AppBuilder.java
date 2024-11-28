@@ -14,7 +14,7 @@ import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostPresenter;
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostViewModel;
-import interface_adapter.club_logged_in.club_create_post.CreatePostViewModel;
+//import interface_adapter.club_logged_in.club_create_post.CreatePostViewModel;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersPresenter;
 import interface_adapter.login.LoginViewModel;
@@ -22,15 +22,24 @@ import interface_adapter.login.club_login.ClubLoginController;
 import interface_adapter.login.club_login.ClubLoginPresenter;
 import interface_adapter.login.student_login.StudentLoginController;
 import interface_adapter.login.student_login.StudentLoginPresenter;
-import interface_adapter.logout.LogoutController;
-import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.signup.club_signup.ClubSignupController;
 import interface_adapter.signup.club_signup.ClubSignupPresenter;
 import interface_adapter.signup.club_signup.ClubSignupViewModel;
 import interface_adapter.signup.student_signup.StudentSignupController;
 import interface_adapter.signup.student_signup.StudentSignupPresenter;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
-import interface_adapter.student_home.StudentHomeViewModel;
+import interface_adapter.student_logged_in.student_home.StudentHomeController;
+import interface_adapter.student_logged_in.student_home.StudentHomePresenter;
+import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
+import interface_adapter.student_logged_in.student_home.dislike.StudentDislikeController;
+import interface_adapter.student_logged_in.student_home.like.StudentLikeController;
+import interface_adapter.student_logged_in.student_home.show_clubs.StudentShowClubsController;
+import interface_adapter.student_logged_in.student_home.show_clubs.StudentShowClubsPresenter;
+import interface_adapter.student_logged_in.student_home.show_posts.StudentShowPostsController;
+import interface_adapter.student_logged_in.student_home.show_posts.StudentShowPostsPresenter;
+import interface_adapter.student_profile.StudentProfileController;
+import interface_adapter.student_profile.StudentProfilePresenter;
+import interface_adapter.student_profile.StudentProfileViewModel;
 import use_case.club_create_post.ClubCreatePostInputBoundary;
 import use_case.club_create_post.ClubCreatePostInteractor;
 import use_case.club_create_post.ClubCreatePostOutputBoundary;
@@ -52,14 +61,37 @@ import use_case.signup.club_signup.ClubSignupOutputBoundary;
 import use_case.signup.student_signup.StudentSignupInputBoundary;
 import use_case.signup.student_signup.StudentSignupInteractor;
 import use_case.signup.student_signup.StudentSignupOutputBoundary;
-import view.ClubHomeView;
+//import view.ClubHomeView;
 import view.ClubSignupView;
 import view.CreatePostView;
 import view.LoginView;
 import view.StudentHomeView;
 import view.StudentSignupView;
 import view.ViewManager;
+import use_case.student_homepage.StudentHomeInputBoundary;
+import use_case.student_homepage.StudentHomeInteractor;
+import use_case.student_homepage.StudentHomeOutputBoundary;
+import use_case.student_homepage.dislike.StudentDislikeInputBoundary;
+import use_case.student_homepage.dislike.StudentDislikeInteractor;
+import use_case.student_homepage.like.StudentLikeInputBoundary;
+import use_case.student_homepage.like.StudentLikeInteractor;
+import use_case.student_homepage.show_clubs.StudentShowClubsInputBoundary;
+import use_case.student_homepage.show_clubs.StudentShowClubsInteractor;
+import use_case.student_homepage.show_clubs.StudentShowClubsOutputBoundary;
+import use_case.student_homepage.show_posts.StudentShowPostsInputBoundary;
+import use_case.student_homepage.show_posts.StudentShowPostsInteractor;
+import use_case.student_homepage.show_posts.StudentShowPostsOutputBoundary;
+import use_case.student_profile.StudentProfileInputBoundary;
+import use_case.student_profile.StudentProfileInteractor;
+import use_case.student_profile.StudentProfileOutputBoundary;
+import view.*;
 
+/**
+ * The AppBuilder class is responsible for putting together the pieces of
+ * our CA architecture; piece by piece.
+ * <p/>
+ * This is done by adding each View and then adding related Use Cases.
+ */
 // Checkstyle note: you can ignore the "Class Data Abstraction Coupling"
 //                  and the "Class Fan-Out Complexity" issues for this lab; we encourage
 //                  your team to think about ways to refactor the code to resolve these
@@ -94,12 +126,17 @@ public class AppBuilder {
 
     private StudentHomeViewModel studentHomeViewModel;
     private StudentHomeView studentHomeView;
+    private ShowPostsViewModel showPostsViewModel;
+    private ShowClubsViewModel showClubsViewModel;
 
     private ClubLoggedInViewModel clubLoggedInViewModel;
     private ClubLoggedInView clubLoggedInView;
 
     private ClubCreatePostViewModel createPostViewModel;
     private CreatePostView createPostView;
+
+    private StudentProfileViewModel studentProfileViewModel;
+    private StudentProfileView studentProfileView;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -155,8 +192,21 @@ public class AppBuilder {
      */
     public AppBuilder addStudentHomeView() {
         studentHomeViewModel = new StudentHomeViewModel();
-        studentHomeView = new StudentHomeView(studentHomeViewModel);
+        showPostsViewModel = new ShowPostsViewModel();
+        showClubsViewModel = new ShowClubsViewModel();
+        studentHomeView = new StudentHomeView(studentHomeViewModel, showPostsViewModel, showClubsViewModel);
         cardPanel.add(studentHomeView, studentHomeView.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the Student Profile View to the application.
+     * @return this builder
+     */
+    public AppBuilder addStudentProfileView() {
+        studentProfileViewModel = new StudentProfileViewModel();
+        studentProfileView = new StudentProfileView(studentProfileViewModel);
+        cardPanel.add(studentProfileView, studentProfileView.getViewName());
         return this;
     }
 
@@ -214,12 +264,67 @@ public class AppBuilder {
      */
     public AppBuilder addStudentLoginUseCase() {
         final StudentLoginOutputBoundary loginOutputBoundary = new StudentLoginPresenter(viewManagerModel,
-                studentHomeViewModel, studentSignupViewModel, loginViewModel);
+                studentHomeViewModel, studentSignupViewModel, loginViewModel, showPostsViewModel);
         final StudentLoginInputBoundary loginInteractor = new StudentLoginInteractor(
                 inMemoryUserDataAccessObject, loginOutputBoundary);
 
         final StudentLoginController loginController = new StudentLoginController(loginInteractor);
         loginView.setStudentLoginController(loginController);
+        return this;
+    }
+
+    public AppBuilder addStudentHomeUseCase() {
+        final StudentHomeOutputBoundary studentHomeOutputBoundary = new StudentHomePresenter(studentHomeViewModel,
+                viewManagerModel, loginViewModel, studentProfileViewModel);
+        final StudentHomeInputBoundary studentHomeInteractor = new StudentHomeInteractor(studentHomeOutputBoundary);
+
+        final StudentHomeController studentHomeController = new StudentHomeController(studentHomeInteractor);
+        studentHomeView.setStudentHomeController(studentHomeController);
+        return this;
+    }
+
+    public AppBuilder addShowPostsUseCase() {
+        final StudentShowPostsOutputBoundary studentShowPostsOutputBoundary = new StudentShowPostsPresenter(showPostsViewModel);
+        final StudentShowPostsInputBoundary showPostsInteractor = new StudentShowPostsInteractor(userDataAccessObject,
+                studentShowPostsOutputBoundary);
+
+        final StudentShowPostsController studentShowPostsController = new StudentShowPostsController(showPostsInteractor);
+        studentHomeView.setShowPostsController(studentShowPostsController);
+        return this;
+    }
+
+    public AppBuilder addShowClubsUseCase() {
+        final StudentShowClubsOutputBoundary studentShowClubsOutputBoundary = new StudentShowClubsPresenter(showClubsViewModel);
+        final StudentShowClubsInputBoundary showClubsInteractor = new StudentShowClubsInteractor(studentShowClubsOutputBoundary,
+                userDataAccessObject);
+        final StudentShowClubsController studentShowClubsController = new StudentShowClubsController(showClubsInteractor);
+        studentHomeView.setShowClubsController(studentShowClubsController);
+    }
+
+    public AppBuilder addLikeUseCase() {
+        final StudentLikeInputBoundary likeInteractor = new StudentLikeInteractor(userDataAccessObject);
+        final StudentLikeController likeController = new StudentLikeController(likeInteractor);
+        studentHomeView.setLikeController(likeController);
+        return this;
+    }
+
+    public AppBuilder addDislikeUseCase() {
+        final StudentDislikeInputBoundary dislikeInteractor = new StudentDislikeInteractor(userDataAccessObject);
+        final StudentDislikeController dislikeController = new StudentDislikeController(dislikeInteractor);
+        studentHomeView.setDislikeController(dislikeController);
+        return this;
+    }
+
+    public AppBuilder addStudentProfileUseCase() {
+        final StudentProfileOutputBoundary studentProfileOutputBoundary = new StudentProfilePresenter(viewManagerModel,
+                studentProfileViewModel, studentHomeViewModel);
+        final StudentProfileInputBoundary studentProfileInteractor = new StudentProfileInteractor(
+                studentProfileOutputBoundary
+        );
+        final StudentProfileController studentProfileController = new StudentProfileController(
+                studentProfileInteractor
+        );
+        studentProfileView.setStudentProfileController(studentProfileController);
         return this;
     }
 

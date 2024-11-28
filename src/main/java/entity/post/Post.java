@@ -2,7 +2,9 @@ package entity.post;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
+import entity.data_structure.DataStore;
 import entity.user.User;
 
 /**
@@ -29,7 +31,7 @@ public interface Post {
 
     /**
      * User likes the post.
-     * @param user user that likes the post.
+     * @param user that likes the post.
      */
     void addLike(User user);
 
@@ -56,6 +58,18 @@ public interface Post {
      * @return int the number of dislikes
      */
     int numberOfDislikes();
+
+    /**
+     * Return the datastore object of all the likes of the post.
+     * @return the datastore object of all users who liked the post.
+     */
+    DataStore<User> getLikes();
+
+    /**
+     * Return the datastore object of all the dislikes of the post.
+     * @return the datastore object of all users who disliked the post.
+     */
+    DataStore<User> getDislikes();
 
     /**
      * Returns the date of publication of the post.
