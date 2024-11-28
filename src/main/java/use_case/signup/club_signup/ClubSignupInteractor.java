@@ -38,16 +38,20 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
             userPresenter.prepareFailView("Passwords don't match.");
         }
         else if (clubSignupInputData.getUsername().length() <= minLengthUsername) {
-            userPresenter.prepareFailView("Username must be at least " + minLengthUsername + onlyForCheckstyle);
+            userPresenter.prepareFailView("Username must be at least " + minLengthUsername
+                    + onlyForCheckstyle);
         }
         else if (clubSignupInputData.getUsername().length() > maxLengthUsername) {
-            userPresenter.prepareFailView("Username must be at most " + maxLengthUsername + onlyForCheckstyle);
+            userPresenter.prepareFailView("Username must be at most " + maxLengthUsername
+                    + onlyForCheckstyle);
         }
         else if (clubSignupInputData.getPassword().length() <= minLengthPassword) {
-            userPresenter.prepareFailView("Password must be at least " + minLengthPassword + onlyForCheckstyle);
+            userPresenter.prepareFailView("Password must be at least " + minLengthPassword
+                    + onlyForCheckstyle);
         }
         else if (clubSignupInputData.getPassword().length() > maxLengthPassword) {
-            userPresenter.prepareFailView("Password must be at most " + maxLengthPassword + onlyForCheckstyle);
+            userPresenter.prepareFailView("Password must be at most " + maxLengthPassword
+                    + onlyForCheckstyle);
         }
         else if (!clubSignupInputData.getEmail().contentEquals("@")
                 || !clubSignupInputData.getEmail().contentEquals(".")) {
