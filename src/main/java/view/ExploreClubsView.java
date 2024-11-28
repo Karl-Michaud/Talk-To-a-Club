@@ -5,13 +5,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import interface_adapter.student_home.StudentHomeViewController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
+import interface_adapter.student_logged_in.student_home.StudentHomeController;
 
 /**
  * Main view for the Explore clubs use case.
@@ -20,10 +21,11 @@ public class ExploreClubsView extends JPanel {
     private JPanel explorePanel;
     private JButton backButton;
     private JScrollPane scrollPanel;
+    private JLabel explorePageTitle;
 
     private final String viewName = "explore clubs";
     private ExploreClubsController exploreClubsController;
-    private StudentHomeViewController studentHomeViewController;
+    private StudentHomeController studentHomeViewController;
     private ExploreClubsViewModel exploreClubsViewModel;
 
     public ExploreClubsView(ExploreClubsViewModel exploreClubsViewModel) {
@@ -51,7 +53,7 @@ public class ExploreClubsView extends JPanel {
         this.exploreClubsController = exploreClubsController;
     }
 
-    public void setStudentHomeViewController(StudentHomeViewController studentHomeViewController) {
+    public void setStudentHomeViewController(StudentHomeController studentHomeViewController) {
         this.studentHomeViewController = studentHomeViewController;
     }
 
