@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentJoinClubInteractorTest {
-
     @Test
     void successTest() {
         // Set up in-memory repositories
