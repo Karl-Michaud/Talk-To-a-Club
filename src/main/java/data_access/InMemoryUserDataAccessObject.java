@@ -119,7 +119,7 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
 
     @Override
     public void updateClubMembers(Club club) {
-        // TODO NOTE: the given arguments is not enough to actually do this, the interactor must be changed for remove members
+        // The club should already be updated in the in memory model, since the entity objects are stored
     }
 
     @Override

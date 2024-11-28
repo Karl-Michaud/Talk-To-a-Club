@@ -38,20 +38,16 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
             userPresenter.prepareFailView("Passwords don't match.");
         }
         else if (studentSignupInputData.getUsername().length() <= minLengthUsername) {
-            userPresenter.prepareFailView("Username must be at least " + minLengthUsername
-                    + onlyForCheckstyle);
+            userPresenter.prepareFailView("Username must be at least " + minLengthUsername + onlyForCheckstyle);
         }
         else if (studentSignupInputData.getUsername().length() > maxLengthUsername) {
-            userPresenter.prepareFailView("Username must be at most " + maxLengthUsername
-                    + onlyForCheckstyle);
+            userPresenter.prepareFailView("Username must be at most " + maxLengthUsername + onlyForCheckstyle);
         }
         else if (studentSignupInputData.getPassword().length() <= minLengthPassword) {
-            userPresenter.prepareFailView("Password must be at least " + minLengthPassword
-                    + onlyForCheckstyle);
+            userPresenter.prepareFailView("Password must be at least " + minLengthPassword + onlyForCheckstyle);
         }
         else if (studentSignupInputData.getPassword().length() > maxLengthPassword) {
-            userPresenter.prepareFailView("Password must be at most " + maxLengthPassword
-                    + onlyForCheckstyle);
+            userPresenter.prepareFailView("Password must be at most " + maxLengthPassword + onlyForCheckstyle);
         }
         else if (!studentSignupInputData.getEmail().contentEquals("@")
                 || !studentSignupInputData.getEmail().contentEquals(".")) {
