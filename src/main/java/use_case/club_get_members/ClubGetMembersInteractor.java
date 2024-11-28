@@ -36,11 +36,9 @@ public class ClubGetMembersInteractor implements ClubGetMembersInputBoundary {
             final ArrayList<String> membersEmail = new ArrayList<>();
             final ArrayList<String> membersName = new ArrayList<>();
 
-            // TODO: Change once kabir merges to no casting
-            final DataStoreArrays<Student> temp = (DataStoreArrays) members;
             int index = 0;
-            while (index < temp.size()) {
-                final Student student = temp.getByIndex(index);
+            while (index < members.size()) {
+                final Student student = members.getByIndex(index);
                 // For a student at this index, assign membersEmail and membersName the values
                 membersEmail.add(student.getEmail());
                 membersName.add(student.getUsername());

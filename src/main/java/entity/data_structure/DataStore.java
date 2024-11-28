@@ -61,6 +61,13 @@ public interface DataStore<T> {
     DataStore<T> complement(DataStore<T> other);
 
     /**
+     * Returns element by index.
+     * @param index integer value of index.
+     * @return value at index.
+     */
+    T getByIndex(int index);
+
+    /**
      * Returns an iterable of all the elements of this data structure.
      * @return an Iterable
      */

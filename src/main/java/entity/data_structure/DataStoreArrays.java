@@ -36,11 +36,7 @@ public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
         return temp;
     }
 
-    /**
-     * Returns element by index.
-     * @param index integer value of index.
-     * @return value at index.
-     */
+    @Override
     public T getByIndex(int index) {
         return data.get(index);
     }
