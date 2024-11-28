@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -20,6 +21,7 @@ public class ExploreClubsView extends JPanel {
     private JPanel explorePanel;
     private JButton backButton;
     private JScrollPane scrollPanel;
+    private JLabel explorePageTitle;
 
     private final String viewName = "explore clubs";
     private ExploreClubsController exploreClubsController;

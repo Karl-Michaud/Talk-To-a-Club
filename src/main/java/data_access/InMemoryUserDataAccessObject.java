@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
@@ -19,6 +20,10 @@ import use_case.student_homepage.like.StudentLikeClubDataAccessInterface;
 import use_case.student_homepage.like.StudentLikeStudentDataAccessInterface;
 import use_case.student_homepage.show_clubs.StudentShowClubsAccessInterface;
 import use_case.student_homepage.show_posts.StudentShowPostsAccessInterface;
+import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
+import use_case.explore_clubs.ClubExploreClubsDataAccessInterface;
+import use_case.student_join_club.StudentJoinClubDataAccessInterface;
+import use_case.student_join_club.ClubStudentJoinClubDataAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
@@ -30,7 +35,8 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
         ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface, ClubUpdateDescDataAccessInterface,
         ClubGetMembersUserDataAccessInterface, StudentShowPostsAccessInterface, StudentLikeClubDataAccessInterface,
         StudentLikeStudentDataAccessInterface, StudentDislikeClubDataAccessInterface,
-        StudentDislikeStudentDataAccessInterface, StudentShowClubsAccessInterface {
+        StudentDislikeStudentDataAccessInterface, StudentShowClubsAccessInterface, StudentExploreClubsDataAccessInterface,
+        ClubExploreClubsDataAccessInterface, StudentJoinClubDataAccessInterface, ClubStudentJoinClubDataAccessInterface{
 
     private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
     private final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
@@ -120,6 +126,8 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
     @Override
     public void updateClubMembers(Club club) {
         // The club should already be updated in the in memory model, since the entity objects are stored
+        this.clubArrayList.remove(club);
+        this.clubArrayList.add(club);
     }
 
     @Override
@@ -135,11 +143,22 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
     }
 
     @Override
+    public void updateStudentClubsJoined(Student student) {
+        this.studentArrayList.remove(student);
+        this.studentArrayList.add(student);
+    }
+
+    @Override
     public void savePost(Post post, Club club) {
         for (Club current: clubArrayList) {
             if (current.getUsername().equals(club.getUsername())) {
                 current.addClubPost(post);
             }
         }
+    }
+
+    @Override
+    public DataStore<Club> getAllClubs() {
+        return this.clubArrayList;
     }
 }

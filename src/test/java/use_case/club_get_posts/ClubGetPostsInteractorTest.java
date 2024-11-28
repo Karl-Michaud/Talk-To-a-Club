@@ -11,11 +11,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ClubGetPostsInteractorTest {
-
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        ClubGetPostsDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
         DataStore<Post> posts = new DataStoreArrays<>();
         posts.add(new Announcement("title", "content"));
         userRepository.saveClub(new Club("Roy", "ok@k.com", "password", null, posts));
