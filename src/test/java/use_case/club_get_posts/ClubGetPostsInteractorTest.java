@@ -14,10 +14,13 @@ public class ClubGetPostsInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        ClubGetPostsDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // Add a club in the DAO that has a post
         DataStore<Post> posts = new DataStoreArrays<>();
         posts.add(new Announcement("title", "content"));
-        userRepository.saveClub(new Club("Roy", "ok@k.com", "password", null, posts));
+        ((InMemoryUserDataAccessObject) userRepository).saveClub(new Club("Roy", "ok@k.com",
+                "password", null, posts));
 
         ClubGetPostsInputData inputData = new ClubGetPostsInputData("ok@k.com");
 
@@ -42,7 +45,7 @@ public class ClubGetPostsInteractorTest {
 
     @Test
     void failTest() {
-        // Uses an in memory database to test the use case with a club
+        // Uses an in memory database to test the use case with no clubs
         ClubGetPostsDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         ClubGetPostsInputData inputData = new ClubGetPostsInputData("ok@k.com");

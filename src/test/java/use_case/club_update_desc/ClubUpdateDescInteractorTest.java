@@ -11,9 +11,10 @@ public class ClubUpdateDescInteractorTest {
 
     @Test
     void successTest() {
-        // Uses an in memory database to test the use case with a club
+        // Uses an in memory database to test the use case and adds a club to it
         ClubUpdateDescDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-        ((InMemoryUserDataAccessObject) userRepository).saveClub(new Club("Roy", "ok@k.com", "password", null, null));
+        ((InMemoryUserDataAccessObject) userRepository).saveClub(new Club("Roy", "ok@k.com",
+                "password", null, null));
 
         ClubUpdateDescInputData inputData = new ClubUpdateDescInputData("ok@k.com", "test");
 
