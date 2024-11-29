@@ -77,7 +77,7 @@ import use_case.signup.student_signup.StudentSignupOutputBoundary;
 import use_case.student_homepage.dislike.StudentDislikeOutputBoundary;
 import use_case.student_homepage.like.StudentLikeOutputBoundary;
 import view.ClubSignupView;
-import view.CreatePostView;
+import view.ClubCreatePostView;
 import view.LoginView;
 import view.StudentHomeView;
 import view.StudentSignupView;
@@ -139,8 +139,8 @@ public class AppBuilder {
     private ClubLoggedInViewModel clubLoggedInViewModel;
     private ClubLoggedInView clubLoggedInView;
 
-    private ClubCreatePostViewModel createPostViewModel;
-    private CreatePostView createPostView;
+    private ClubCreatePostViewModel clubCreatePostViewModel;
+    private ClubCreatePostView clubCreatePostView;
 
     private StudentProfileViewModel studentProfileViewModel;
     private StudentProfileView studentProfileView;
@@ -212,6 +212,17 @@ public class AppBuilder {
         studentProfileViewModel = new StudentProfileViewModel();
         studentProfileView = new StudentProfileView(studentProfileViewModel);
         cardPanel.add(studentProfileView, studentProfileView.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the Club Create Post View to the application.
+     * @return this builder
+     */
+    public AppBuilder addCreatePostView() {
+        clubCreatePostViewModel = new ClubCreatePostViewModel();
+        clubCreatePostView = new ClubCreatePostView(clubCreatePostViewModel);
+        cardPanel.add(clubCreatePostView, clubCreatePostView.getViewName());
         return this;
     }
 
@@ -342,12 +353,13 @@ public class AppBuilder {
      */
     public AppBuilder addClubCreatePostUseCase() {
         final ClubCreatePostOutputBoundary clubCreatePostOutputBoundary = new ClubCreatePostPresenter(
-                createPostViewModel, viewManagerModel);
+                clubCreatePostViewModel, viewManagerModel);
         final ClubCreatePostInputBoundary clubCreatePostInteractor = new ClubCreatePostInteractor(
                 inMemoryUserDataAccessObject, clubCreatePostOutputBoundary);
         final ClubCreatePostController createPostController = new ClubCreatePostController(clubCreatePostInteractor);
-        createPostView.setCreatePostController(createPostController);
+        clubCreatePostView.setClubCreatePostController(createPostController);
         clubLoggedInView.setClubCreatePostController(createPostController);
+        clubCreatePostView.setClubCreatePostController(createPostController);
         return this;
     }
 
