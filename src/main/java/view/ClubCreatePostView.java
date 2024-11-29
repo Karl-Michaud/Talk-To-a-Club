@@ -23,7 +23,7 @@ import interface_adapter.club_logged_in.club_create_post.ClubCreatePostViewModel
 /**
  * The View for when a club wants to create a post.
  */
-public class ClubCreatePostView extends JPanel implements PropertyChangeListener, ActionListener {
+public class ClubCreatePostView extends JPanel implements PropertyChangeListener{
 
     private final String viewName = "create post";
     private final ClubCreatePostViewModel clubCreatePostViewModel;
@@ -41,7 +41,6 @@ public class ClubCreatePostView extends JPanel implements PropertyChangeListener
 
     public ClubCreatePostView(ClubCreatePostViewModel clubCreatePostViewModel) {
         this.clubCreatePostViewModel = clubCreatePostViewModel;
-        this.createPostButton.addActionListener(this);
 
         final JLabel title = new JLabel("Create Post Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -116,6 +115,7 @@ public class ClubCreatePostView extends JPanel implements PropertyChangeListener
                         final ClubCreatePostState currentState = clubCreatePostViewModel.getState();
                         clubCreatePostController.execute(currentState.getEmail(), currentState.getTitle(),
                                 currentState.getContent());
+                        clubCreatePostController.switchToClubLoggedInView();
                     }
                 }
         );
@@ -125,15 +125,6 @@ public class ClubCreatePostView extends JPanel implements PropertyChangeListener
         this.add(descriptionFieldInfo);
         this.add(descriptionErrorField);
         this.add(buttonPanel);
-    }
-
-    /**
-     * React to a button click that results in evt.
-     *
-     * @param evt the ActionEvent to react to
-     */
-    public void actionPerformed(ActionEvent evt) {
-        System.out.println("Click " + evt.getActionCommand());
     }
 
     public String getViewName() {
