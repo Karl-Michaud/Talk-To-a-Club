@@ -31,7 +31,7 @@ public class ClubLoginInteractorTest {
         // Save Club to the DB (execute sign up use case)
         userRepository.saveClub(testClub);
 
-        // Create the input data for create post use case.
+        // Create the input data for club login use case.
         ClubLoginInputData inputData = new ClubLoginInputData(testClub.getEmail(), testClub.getPassword());
 
 
@@ -48,6 +48,12 @@ public class ClubLoginInteractorTest {
                 Club dbClub = userRepository.getClub(testClub.getEmail());
                 assertEquals(dbClub.getEmail(), clubLoginOutputData.getEmail());
                 assertEquals(dbClub.getUsername(), clubLoginOutputData.getUsername());
+
+                // Check that the db club has no posts and members (since new club)
+                int sizeMembers = dbClub.getClubMembers().size();
+                int sizePosts = dbClub.getClubPosts().size();
+                assertEquals(0, sizeMembers);
+                assertEquals(0, sizePosts);
             }
 
             @Override
@@ -79,7 +85,7 @@ public class ClubLoginInteractorTest {
         // Save Club to the DB (execute sign up use case)
         userRepository.saveClub(testClub);
 
-        // Create the input data for create post use case.
+        // Create the input data for club login use case.
         String wrongEmail = "wrong@email.com";
         ClubLoginInputData inputData = new ClubLoginInputData(wrongEmail, testClub.getPassword());
 
@@ -119,7 +125,7 @@ public class ClubLoginInteractorTest {
         // Save Club to the DB (execute sign up use case)
         userRepository.saveClub(testClub);
 
-        // Create the input data for create post use case.
+        // Create the input data for club login use case.
         String wrongPassword = "wrong";
         ClubLoginInputData inputData = new ClubLoginInputData(testClub.getEmail(), wrongPassword);
 
@@ -159,7 +165,7 @@ public class ClubLoginInteractorTest {
         // Save Club to the DB (execute sign up use case)
         userRepository.saveClub(testClub);
 
-        // Create the input data for create post use case.
+        // Create the input data for club login use case.
         ClubLoginInputData inputDataNoPassword = new ClubLoginInputData(testClub.getEmail(), "");
         ClubLoginInputData inputDataNoEmail = new ClubLoginInputData("", testClub.getPassword());
         ClubLoginInputData inputDataNothing = new ClubLoginInputData("", "");
