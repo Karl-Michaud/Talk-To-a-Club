@@ -1,7 +1,6 @@
 package interface_adapter.club_logged_in.club_create_post;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.club_logged_in.ClubLoggedInState;
 import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import use_case.club_create_post.ClubCreatePostOutputBoundary;
 import use_case.club_create_post.ClubCreatePostOutputData;
@@ -27,7 +26,6 @@ public class ClubCreatePostPresenter implements ClubCreatePostOutputBoundary {
      * @param data the output data
      */
     public void prepareSuccessView(ClubCreatePostOutputData data) {
-        final String createPost = "create post";
         final ClubCreatePostState state = clubCreatePostViewModel.getState();
         state.setTimeOfPosting(data.getTimeOfPosting());
         state.setDateOfPosting(data.getDateOfPosting());
@@ -40,7 +38,6 @@ public class ClubCreatePostPresenter implements ClubCreatePostOutputBoundary {
 
         viewManagerModel.setState(clubLoggedInViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-
     }
 
     /**
@@ -50,8 +47,7 @@ public class ClubCreatePostPresenter implements ClubCreatePostOutputBoundary {
     public void prepareFailView(String errorMessage) {
         final ClubCreatePostState state = clubCreatePostViewModel.getState();
         state.setCreatePostError(errorMessage);
-        clubCreatePostViewModel.setState(state);
-        clubCreatePostViewModel.firePropertyChanged();
+        clubCreatePostViewModel.firePropertyChanged("create post error");
     }
 
     @Override
