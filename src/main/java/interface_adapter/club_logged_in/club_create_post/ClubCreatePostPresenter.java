@@ -1,6 +1,7 @@
 package interface_adapter.club_logged_in.club_create_post;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.club_logged_in.ClubLoggedInViewModel;
 import use_case.club_create_post.ClubCreatePostOutputBoundary;
 import use_case.club_create_post.ClubCreatePostOutputData;
 
@@ -9,10 +10,14 @@ import use_case.club_create_post.ClubCreatePostOutputData;
  */
 public class ClubCreatePostPresenter implements ClubCreatePostOutputBoundary {
     private final ClubCreatePostViewModel clubCreatePostViewModel;
+    private final ClubLoggedInViewModel clubLoggedInViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public ClubCreatePostPresenter(ClubCreatePostViewModel clubCreatePostViewModel, ViewManagerModel viewManagerModel) {
+    public ClubCreatePostPresenter(ClubCreatePostViewModel clubCreatePostViewModel,
+                                   ClubLoggedInViewModel clubLoggedInViewModel,
+                                   ViewManagerModel viewManagerModel) {
         this.clubCreatePostViewModel = clubCreatePostViewModel;
+        this.clubLoggedInViewModel = clubLoggedInViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
@@ -29,7 +34,7 @@ public class ClubCreatePostPresenter implements ClubCreatePostOutputBoundary {
         clubCreatePostViewModel.setState(state);
         clubCreatePostViewModel.firePropertyChanged("create post");
 
-        viewManagerModel.setState(clubCreatePostViewModel.getViewName());
+        viewManagerModel.setState(clubLoggedInViewModel.getViewName());
         viewManagerModel.firePropertyChanged("create post");
     }
 
@@ -62,7 +67,7 @@ public class ClubCreatePostPresenter implements ClubCreatePostOutputBoundary {
     @Override
     public void switchToClubLoggedInView() {
         // fires a property change to the view manager model to switch to the club logged in view
-        viewManagerModel.setState(clubCreatePostViewModel.getViewName());
+        viewManagerModel.setState(clubLoggedInViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 }
