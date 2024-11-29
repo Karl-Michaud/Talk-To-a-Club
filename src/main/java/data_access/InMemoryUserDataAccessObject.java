@@ -8,6 +8,7 @@ import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
 import use_case.club_get_members.ClubGetMembersUserDataAccessInterface;
 import use_case.club_get_posts.ClubGetPostsDataAccessInterface;
 import use_case.club_remove_member.ClubRemoveMemberClubDataAccessInterface;
+import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
 import use_case.club_update_desc.ClubUpdateDescDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
@@ -27,7 +28,9 @@ import use_case.student_homepage.show_posts.StudentShowPostsAccessInterface;
 public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInterface,
         StudentSignupUserDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface,
-        ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface, ClubUpdateDescDataAccessInterface,
+        ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface,
+        ClubRemoveMemberStudentDataAccessInterface,
+        ClubUpdateDescDataAccessInterface,
         ClubGetMembersUserDataAccessInterface, StudentShowPostsAccessInterface, StudentLikeClubDataAccessInterface,
         StudentLikeStudentDataAccessInterface, StudentDislikeClubDataAccessInterface,
         StudentDislikeStudentDataAccessInterface, StudentShowClubsAccessInterface {
@@ -132,6 +135,12 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
         }
         // This should not be returned as null since the precondition states that the student must exist.
         return foundStudent;
+    }
+
+    @Override
+    public void updateStudentClubsJoined(Student student) {
+        this.studentArrayList.remove(student);
+        this.studentArrayList.add(student);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class ClubRemoveMemberPresenter implements ClubRemoveMemberOutputBoundary
 
     @Override
     public void prepareSuccessView(ClubRemoveMemberOutputData outputData) {
-        final String removedMemberName = outputData.getUsername();
+        final String removedMemberName = outputData.getStudentUsername();
 
         // We will remove the member manually from the state.
         // Start by getting the state.

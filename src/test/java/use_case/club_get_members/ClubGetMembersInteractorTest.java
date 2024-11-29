@@ -90,17 +90,18 @@ public class ClubGetMembersInteractorTest {
         // Create the club
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
+        // Initialise the DAO. In our case, we will the in memory DAO for tests.
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+
         // Add 10 test members to the club.
         ArrayList<Student> verificationList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             String index = String.valueOf(i);
             Student student = studentFactory.create("member" + index, "member" + index + "@mail.com", "password" + index);
+            userRepository.saveStudent(student);
             verificationList.add(student);
             testClub.addClubMember(student);
         }
-
-        // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Save the club to the in memory DAO/Database
         userRepository.saveClub(testClub);

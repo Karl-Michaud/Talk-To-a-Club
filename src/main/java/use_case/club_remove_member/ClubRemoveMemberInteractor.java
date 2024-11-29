@@ -49,8 +49,8 @@ public class ClubRemoveMemberInteractor implements ClubRemoveMemberInputBoundary
                 clubRemoveClubDataAccessObject.updateClubMembers(club);
 
                 // Prepare success view
-                final ClubRemoveMemberOutputData outputData = new ClubRemoveMemberOutputData(student.getUsername(),
-                        false);
+                final ClubRemoveMemberOutputData outputData = new ClubRemoveMemberOutputData(student.getEmail(),
+                        student.getUsername(), false);
                 clubRemovePresenter.prepareSuccessView(outputData);
             }
         }
