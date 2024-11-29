@@ -14,7 +14,7 @@ public class ClubGetPostsInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        ClubGetPostsDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Add a club in the DAO that has a post
         DataStore<Post> posts = new DataStoreArrays<>();

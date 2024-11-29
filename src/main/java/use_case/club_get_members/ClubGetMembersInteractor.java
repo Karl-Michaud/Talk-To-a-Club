@@ -25,22 +25,20 @@ public class ClubGetMembersInteractor implements ClubGetMembersInputBoundary {
      */
     @Override
     public void execute(ClubGetMembersInputData inputData) {
-        final String email = inputData.getEmail();
-        if (!getMembersDataAccessObject.existsByEmailClub(email)) {
-            getMembersPresenter.prepareFailView(email + ": Account does not exist.");
+        final String clubEmail = inputData.getClubEmail();
+        if (!getMembersDataAccessObject.existsByEmailClub(clubEmail)) {
+            getMembersPresenter.prepareFailView(clubEmail + ": Account does not exist.");
         }
         else {
-            final DataStore<Student> members = getMembersDataAccessObject.getClub(email).getClubMembers();
+            final DataStore<Student> members = getMembersDataAccessObject.getClub(clubEmail).getClubMembers();
 
             // Create the array lists for the output data.
             final ArrayList<String> membersEmail = new ArrayList<>();
             final ArrayList<String> membersName = new ArrayList<>();
 
-            // TODO: Change once kabir merges to no casting
-            final DataStoreArrays<Student> temp = (DataStoreArrays) members;
             int index = 0;
-            while (index < temp.size()) {
-                final Student student = temp.getByIndex(index);
+            while (index < members.size()) {
+                final Student student = members.getByIndex(index);
                 // For a student at this index, assign membersEmail and membersName the values
                 membersEmail.add(student.getEmail());
                 membersName.add(student.getUsername());
@@ -50,7 +48,7 @@ public class ClubGetMembersInteractor implements ClubGetMembersInputBoundary {
             }
 
             // Create the output data with the ArrayLists
-            final ClubGetMembersOutputData outputData = new ClubGetMembersOutputData(inputData.getEmail(), membersEmail,
+            final ClubGetMembersOutputData outputData = new ClubGetMembersOutputData(inputData.getClubEmail(), membersEmail,
                     membersName, false);
 
             // Prepare the success view for the given output data

@@ -4,13 +4,14 @@ package use_case.club_get_members;
  * Input data for the get members use case.
  */
 public class ClubGetMembersInputData {
-    private final String email;
+    private final String clubEmail;
 
-    public ClubGetMembersInputData(String email) {
-        this.email = email;
+    public ClubGetMembersInputData(String clubEmail) {
+        this.clubEmail = clubEmail;
     }
 
-    public String getEmail() {
-        return email;
+    public String getClubEmail() {
+        return clubEmail;
     }
+
 }

@@ -8,7 +8,7 @@ import entity.post.Post;
  */
 public interface ClubFactory extends UserFactory {
     @Override
-    User create(String name, String email, String password);
+    Club create(String name, String email, String password);
 
     /**
      * Create a new Club user.
@@ -19,6 +19,6 @@ public interface ClubFactory extends UserFactory {
      * @param clubPosts the posts of the new club
      * @return the new club user
      */
-    User create(String username, String email, String password, DataStore<Student> clubMembers,
+    Club create(String username, String email, String password, DataStore<Student> clubMembers,
                 DataStore<Post> clubPosts);
 }
