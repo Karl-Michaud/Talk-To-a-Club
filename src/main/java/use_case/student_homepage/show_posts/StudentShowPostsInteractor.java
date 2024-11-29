@@ -27,7 +27,7 @@ public class StudentShowPostsInteractor implements StudentShowPostsInputBoundary
     public void execute(StudentShowPostsInputData inputData) {
         final String currUserEmail = inputData.getUserEmail();
         if (!studentShowPostsAccessInterface.existsByEmailStudent(currUserEmail)) {
-            showPostsPresenter.prepareFailView("The accounts does not exist.");
+            showPostsPresenter.prepareFailView("The account does not exist.");
         }
         else {
             final DataStoreArrays<Club> clubs = (DataStoreArrays<Club>) studentShowPostsAccessInterface.getStudent(
@@ -45,7 +45,7 @@ public class StudentShowPostsInteractor implements StudentShowPostsInputBoundary
                     singlePostData.put("liked", post.getLikes().contains(currentUser));
                     singlePostData.put("disliked", post.getDislikes().contains(currentUser));
                     singlePostData.put("club-email", club.getEmail());
-                    singlePostData.put("time", post.dateOfPosting());
+                    singlePostData.put("time", post.timeOfPosting());
                     singlePostData.put("date", post.dateOfPosting());
                     clubPostData.add(singlePostData);
                 }

@@ -27,8 +27,8 @@ public class Announcement implements Post {
     public Announcement(String title, String content) {
         this.title = title;
         this.content = content;
-        this.likes = new DataStoreArrays<User>();
-        this.dislikes = new DataStoreArrays<User>();
+        this.likes = new DataStoreArrays<>();
+        this.dislikes = new DataStoreArrays<>();
         this.timeOfPosting = LocalTime.now();
         this.dateOfPosting = LocalDate.now();
     }

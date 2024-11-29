@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import interface_adapter.logout.LogoutController;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.student_home.StudentHomeController;
 import interface_adapter.student_logged_in.student_home.StudentHomeState;
 import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
@@ -43,6 +45,8 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     private StudentLikeController likeController;
     private StudentShowClubsController studentShowClubsController;
     private StudentDislikeController dislikeController;
+    private LogoutController logoutController;
+    private ExploreClubsController exploreClubsController;
 
     public StudentHomeView(StudentHomeViewModel studentHomeViewModel) {
         this.studentHomeViewModel = studentHomeViewModel;
@@ -53,7 +57,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
         this.add(panelStudentHomeView);
 
         buttonLogout.addActionListener(
-                evt -> studentHomeController.switchToLoginView()
+                evt -> logoutController.execute()
         );
 
         buttonProfile.addActionListener(
@@ -62,8 +66,9 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
 
         buttonSearch.addActionListener(
                 evt -> {
-                    if (evt.getSource().equals(buttonSearch)) {
-                        // TODO: link to explore page.
+                    if (evt.getSource().equals(buttonSearch) && buttonSearch.getText().isEmpty()) {
+                        final StudentHomeState currentState = studentHomeViewModel.getState();
+                        exploreClubsController.execute(currentState.getCurrentUser());
                     }
                 }
         );
@@ -135,5 +140,13 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
 
     public void setDislikeController(StudentDislikeController dislikeController) {
         this.dislikeController = dislikeController;
+    }
+
+    public void setLogoutController(LogoutController logoutController) {
+        this.logoutController = logoutController;
+    }
+
+    public void setExploreClubsController(ExploreClubsController exploreClubsController) {
+        this.exploreClubsController = exploreClubsController;
     }
 }

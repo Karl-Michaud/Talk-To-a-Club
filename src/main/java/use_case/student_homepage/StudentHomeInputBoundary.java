@@ -5,11 +5,6 @@ package use_case.student_homepage;
  */
 public interface StudentHomeInputBoundary {
     /**
-     * Switches to LoginView.
-     */
-    void switchToLoginView();
-
-    /**
      * Switches to ProfileView.
      */
     void switchToProfileView();

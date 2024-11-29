@@ -8,7 +8,7 @@ public interface StudentShowClubsOutputBoundary {
      * Gathers all the clubs the student follows to prepare to be viewed in the StudentHomeView.
      * @param studentShowClubsOutputData all the clubs.
      */
-    void preparePostContent(StudentShowClubsOutputData studentShowClubsOutputData);
+    void prepareClubsContent(StudentShowClubsOutputData studentShowClubsOutputData);
 
     /**
      * Gives the presenter an error to present in case something goes wrong.
