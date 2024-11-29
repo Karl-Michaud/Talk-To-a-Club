@@ -22,7 +22,10 @@ public class ClubLoginInteractor implements ClubLoginInputBoundary {
     public void execute(ClubLoginInputData clubLoginInputData) {
         final String email = clubLoginInputData.getEmail();
         final String password = clubLoginInputData.getPassword();
-        if (!clubDataAccessObject.existsByEmailClub(email)) {
+        if (email.isEmpty() || password.isEmpty()) {
+            clubLoginPresenter.prepareFailView("Empty text field(s).");
+        }
+        else if (!clubDataAccessObject.existsByEmailClub(email)) {
             clubLoginPresenter.prepareFailView(email + ": Account does not exist.");
         }
         else {
