@@ -9,6 +9,7 @@ import interface_adapter.club_logged_in.ClubLoggedInState;
  * Create Post state.
  */
 public class ClubCreatePostState extends ClubLoggedInState {
+    private String email;
     private String title;
     private String content;
     private LocalTime timeOfPosting;
@@ -53,6 +54,14 @@ public class ClubCreatePostState extends ClubLoggedInState {
 
     public void setCreatePostError(String createPostError) {
         this.createPostError = createPostError;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

@@ -34,7 +34,7 @@ public class ClubCreatePostPresenter implements ClubCreatePostOutputBoundary {
         clubCreatePostViewModel.setState(state);
         clubCreatePostViewModel.firePropertyChanged("create post");
 
-        viewManagerModel.setState(clubLoggedInViewModel.getViewName());
+        viewManagerModel.setState(clubCreatePostViewModel.getViewName());
         viewManagerModel.firePropertyChanged("create post");
     }
 
@@ -53,6 +53,7 @@ public class ClubCreatePostPresenter implements ClubCreatePostOutputBoundary {
     public void switchToCreatePostView() {
         // resets the state before switching
         final ClubCreatePostState state = clubCreatePostViewModel.getState();
+        state.setEmail(clubLoggedInViewModel.getState().getEmail());
         state.setContent(null);
         state.setTitle(null);
         state.setCreatePostError(null);
