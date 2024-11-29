@@ -47,6 +47,15 @@ import interface_adapter.student_logged_in.student_home.show_posts.StudentShowPo
 import interface_adapter.student_profile.StudentProfileController;
 import interface_adapter.student_profile.StudentProfilePresenter;
 import interface_adapter.student_profile.StudentProfileViewModel;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsPresenter;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
+import interface_adapter.student_logged_in.join_club.JoinClubController;
+import interface_adapter.student_logged_in.join_club.JoinClubPresenter;
+import interface_adapter.student_logged_in.join_club.JoinClubViewModel;
+import interface_adapter.student_logged_in.leave_club.LeaveClubController;
+import interface_adapter.student_logged_in.leave_club.LeaveClubPresenter;
+import interface_adapter.student_logged_in.leave_club.LeaveClubViewModel;
 import use_case.club_create_post.ClubCreatePostInputBoundary;
 import use_case.club_create_post.ClubCreatePostInteractor;
 import use_case.club_create_post.ClubCreatePostOutputBoundary;
@@ -59,6 +68,7 @@ import use_case.club_get_posts.ClubGetPostsOutputBoundary;
 import use_case.club_update_desc.ClubUpdateDescInputBoundary;
 import use_case.club_update_desc.ClubUpdateDescInteractor;
 import use_case.club_update_desc.ClubUpdateDescOutputBoundary;
+import use_case.explore_clubs.ExploreClubsInputBoundary;
 import use_case.login.club_login.ClubLoginInputBoundary;
 import use_case.login.club_login.ClubLoginInteractor;
 import use_case.login.club_login.ClubLoginOutputBoundary;
@@ -76,6 +86,15 @@ import use_case.signup.student_signup.StudentSignupInteractor;
 import use_case.signup.student_signup.StudentSignupOutputBoundary;
 import use_case.student_homepage.dislike.StudentDislikeOutputBoundary;
 import use_case.student_homepage.like.StudentLikeOutputBoundary;
+import use_case.explore_clubs.ExploreClubsOutputBoundary;
+import use_case.explore_clubs.ExploreClubsInteractor;
+import use_case.explore_clubs.ExploreClubsOutputBoundary;
+import use_case.student_join_club.StudentJoinClubInputBoundary;
+import use_case.student_join_club.StudentJoinClubInteractor;
+import use_case.student_join_club.StudentJoinClubOutputBoundary;
+import use_case.student_leave_club.StudentLeaveClubInputBoundary;
+import use_case.student_leave_club.StudentLeaveClubInteractor;
+import use_case.student_leave_club.StudentLeaveClubOutputBoundary;
 import view.ClubSignupView;
 import view.ClubCreatePostView;
 import view.LoginView;
@@ -144,6 +163,9 @@ public class AppBuilder {
 
     private StudentProfileViewModel studentProfileViewModel;
     private StudentProfileView studentProfileView;
+
+    private ExploreClubsViewModel exploreClubsViewModel;
+    private ExploreClubsView exploreClubsView;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -223,6 +245,17 @@ public class AppBuilder {
         clubCreatePostViewModel = new ClubCreatePostViewModel();
         clubCreatePostView = new ClubCreatePostView(clubCreatePostViewModel);
         cardPanel.add(clubCreatePostView, clubCreatePostView.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the Explore Clubs View to the application.
+     * @return this builder
+     */
+    public AppBuilder addExploreClubsView() {
+        exploreClubsViewModel = new ExploreClubsViewModel();
+        exploreClubsView = new ExploreClubsView(exploreClubsViewModel);
+        cardPanel.add(exploreClubsView, exploreClubsView.getViewName());
         return this;
     }
 
@@ -415,6 +448,23 @@ public class AppBuilder {
 
         final ClubUpdateDescController clubUpdateDescController = new ClubUpdateDescController(clubUpdateDescInteractor);
         clubLoggedInView.setClubUpdateDescController(clubUpdateDescController);
+        return this;
+    }
+
+    /**
+     * Adds the Explore clubs use case to the application.
+     * @return this builder.
+     */
+    public AppBuilder addExploreClubsUseCase() {
+        final ExploreClubsOutputBoundary exploreClubsOutputBoundary =
+                new ExploreClubsPresenter(viewManagerModel, exploreClubsViewModel, studentHomeViewModel);
+        final ExploreClubsInputBoundary exploreClubsInteractor =
+                new ExploreClubsInteractor(inMemoryUserDataAccessObject,
+                        exploreClubsOutputBoundary, inMemoryUserDataAccessObject);
+
+        final ExploreClubsController exploreClubsController = new ExploreClubsController(exploreClubsInteractor);
+        exploreClubsView.setExploreClubsController(exploreClubsController);
+        studentHomeView.setExploreClubsController(exploreClubsController);
         return this;
     }
 

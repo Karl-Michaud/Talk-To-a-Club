@@ -21,6 +21,8 @@ public class Main {
                                             .addStudentHomeView()
                                             .addStudentProfileView()
                                             .addCreatePostView()
+                                            .addExploreClubsView()
+                                            .addExploreClubsUseCase()
                                             .addClubSignupUseCase()
                                             .addStudentSignupUseCase()
                                             .addClubLoginUseCase()

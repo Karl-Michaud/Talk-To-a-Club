@@ -32,6 +32,7 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
 
         exploreClubsViewModel.setState(state);
         exploreClubsViewModel.firePropertyChanged();
+        System.out.println("Problem here ?");
 
         // Set the ViewManager to the ExploreClubs view
         viewManagerModel.setState(exploreClubsViewModel.getViewName());

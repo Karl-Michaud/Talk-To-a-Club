@@ -20,7 +20,7 @@ public class ClubDescriptionExploreContainer extends JPanel {
             final ClubMiniPanel clubMiniPanel = new ClubMiniPanel(club);
             clubMiniPanel.setExploreClubsController(exploreClubsController);
 
-            this.add(new ClubMiniPanel(club));
+            this.add(clubMiniPanel);
         }
     }
 }
