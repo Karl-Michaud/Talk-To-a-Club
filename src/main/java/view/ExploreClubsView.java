@@ -34,13 +34,13 @@ public class ExploreClubsView extends JPanel {
         this.add(explorePanel);
 
         backButton.addActionListener(
-            new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    if (evt.getSource().equals(backButton)) {
-                        exploreClubsController.switchToHomeView();
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(backButton)) {
+                            exploreClubsController.switchToHomeView();
+                        }
                     }
                 }
-            }
         );
         final ExploreClubsState state = exploreClubsViewModel.getState();
         final ClubDescriptionExploreContainer clubDescriptionExploreContainer =
