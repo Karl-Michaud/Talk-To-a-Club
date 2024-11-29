@@ -19,7 +19,8 @@ public class ClubGetPostsInteractorTest {
         // Add a club in the DAO that has a post
         DataStore<Post> posts = new DataStoreArrays<>();
         posts.add(new Announcement("title", "content"));
-        ((InMemoryUserDataAccessObject) userRepository).saveClub(new Club("Roy", "ok@k.com", "password", null, posts));
+        posts.add(new Announcement("title2", "content2"));
+        userRepository.saveClub(new Club("Roy", "ok@k.com", "password", null, posts));
 
         ClubGetPostsInputData inputData = new ClubGetPostsInputData("ok@k.com");
 
@@ -30,6 +31,10 @@ public class ClubGetPostsInteractorTest {
                 assertEquals("Success in Getting Club Posts", outputData.getMessage());
                 assertEquals("title", outputData.getPostTitles().get(0));
                 assertEquals("content", outputData.getPostBodies().get(0));
+                assertEquals("title2", outputData.getPostTitles().get(1));
+                assertEquals("content2", outputData.getPostBodies().get(1));
+                assertEquals(2, outputData.getPostTitles().size());
+                assertEquals(2, outputData.getPostBodies().size());
             }
 
             @Override
