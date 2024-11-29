@@ -27,7 +27,7 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
 
     @Override
     public void execute(StudentSignupInputData studentSignupInputData) {
-        final String onlyForCheckstyle = "characters.";
+        final String onlyForCheckstyle = " character(s).";
         if (userDataAccessObject.existsByNameStudent(studentSignupInputData.getUsername())) {
             userPresenter.prepareFailView("Username already exists.");
         }
@@ -37,20 +37,20 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
         else if (!studentSignupInputData.getPassword().equals(studentSignupInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match.");
         }
-        else if (studentSignupInputData.getUsername().length() <= minLengthUsername) {
+        else if (studentSignupInputData.getUsername().length() < minLengthUsername) {
             userPresenter.prepareFailView("Username must be at least " + minLengthUsername + onlyForCheckstyle);
         }
         else if (studentSignupInputData.getUsername().length() > maxLengthUsername) {
             userPresenter.prepareFailView("Username must be at most " + maxLengthUsername + onlyForCheckstyle);
         }
-        else if (studentSignupInputData.getPassword().length() <= minLengthPassword) {
+        else if (studentSignupInputData.getPassword().length() < minLengthPassword) {
             userPresenter.prepareFailView("Password must be at least " + minLengthPassword + onlyForCheckstyle);
         }
         else if (studentSignupInputData.getPassword().length() > maxLengthPassword) {
             userPresenter.prepareFailView("Password must be at most " + maxLengthPassword + onlyForCheckstyle);
         }
-        else if (!studentSignupInputData.getEmail().contentEquals("@")
-                || !studentSignupInputData.getEmail().contentEquals(".")) {
+        else if (!studentSignupInputData.getEmail().contains("@")
+                || !studentSignupInputData.getEmail().contains(".")) {
             userPresenter.prepareFailView("Invalid email address.");
         }
         else {
@@ -60,8 +60,7 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
             // Save user to database
             userDataAccessObject.saveStudent(user);
 
-            final StudentSignupOutputData studentSignupOutputData = new StudentSignupOutputData(user.getEmail(),
-                    false);
+            final StudentSignupOutputData studentSignupOutputData = new StudentSignupOutputData(user.getEmail());
             userPresenter.prepareSuccessView(studentSignupOutputData);
         }
     }

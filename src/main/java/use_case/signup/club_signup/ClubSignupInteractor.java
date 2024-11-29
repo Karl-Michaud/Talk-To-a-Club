@@ -27,7 +27,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
 
     @Override
     public void execute(ClubSignupInputData clubSignupInputData) {
-        final String onlyForCheckstyle = "characters.";
+        final String onlyForCheckstyle = " character(s).";
         if (userDataAccessObject.existsByNameClub(clubSignupInputData.getUsername())) {
             userPresenter.prepareFailView("Username already exists.");
         }
@@ -37,20 +37,20 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
         else if (!clubSignupInputData.getPassword().equals(clubSignupInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match.");
         }
-        else if (clubSignupInputData.getUsername().length() <= minLengthUsername) {
+        else if (clubSignupInputData.getUsername().length() < minLengthUsername) {
             userPresenter.prepareFailView("Username must be at least " + minLengthUsername + onlyForCheckstyle);
         }
         else if (clubSignupInputData.getUsername().length() > maxLengthUsername) {
             userPresenter.prepareFailView("Username must be at most " + maxLengthUsername + onlyForCheckstyle);
         }
-        else if (clubSignupInputData.getPassword().length() <= minLengthPassword) {
+        else if (clubSignupInputData.getPassword().length() < minLengthPassword) {
             userPresenter.prepareFailView("Password must be at least " + minLengthPassword + onlyForCheckstyle);
         }
         else if (clubSignupInputData.getPassword().length() > maxLengthPassword) {
             userPresenter.prepareFailView("Password must be at most " + maxLengthPassword + onlyForCheckstyle);
         }
-        else if (!clubSignupInputData.getEmail().contentEquals("@")
-                || !clubSignupInputData.getEmail().contentEquals(".")) {
+        else if (!clubSignupInputData.getEmail().contains("@")
+                || !clubSignupInputData.getEmail().contains(".")) {
             userPresenter.prepareFailView("Invalid email address.");
         }
         else {
@@ -61,8 +61,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
 
             userDataAccessObject.saveClub(user);
 
-            final ClubSignupOutputData clubSignupOutputData = new ClubSignupOutputData(user.getEmail(),
-                    false);
+            final ClubSignupOutputData clubSignupOutputData = new ClubSignupOutputData(user.getEmail());
             userPresenter.prepareSuccessView(clubSignupOutputData);
         }
     }

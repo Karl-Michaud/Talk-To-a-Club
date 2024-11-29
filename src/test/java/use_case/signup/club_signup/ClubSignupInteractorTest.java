@@ -75,7 +75,7 @@ public class ClubSignupInteractorTest {
 
     @Test
     void emailAlreadyExistsTest() {
-        ClubSignupInputData inputData = new ClubSignupInputData("test club", "ok@k.com",
+        ClubSignupInputData inputData = new ClubSignupInputData("test", "ok@k.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case and stores a Club with the same email
@@ -307,5 +307,31 @@ public class ClubSignupInteractorTest {
         };
         ClubSignupInputBoundary interactor = new ClubSignupInteractor(userRepository, successPresenter, new ClubUserFactory());
         interactor.execute(inputData);
+    }
+
+    @Test
+    void switchToLoginTest() {
+        // Uses an in memory database to test the use case
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(ClubSignupOutputData user) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                fail("Use case fail is unexpected.");
+            }
+
+            @Override
+            public void switchToLoginView() {
+                // This is expected to pass (everything is done by the presenter implementation)
+            }
+        };
+        ClubSignupInputBoundary interactor = new ClubSignupInteractor(userRepository, successPresenter, new ClubUserFactory());
+        interactor.switchToLoginView();
     }
 }
