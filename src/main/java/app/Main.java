@@ -35,6 +35,7 @@ public class Main {
                                             .addClubGetPostsUseCase()
                                             .addClubGetMembersUseCase()
                                             .addLogoutUseCase()
+                                            .addShowClubsUseCase()
                                             .build();
 
         application.pack();
