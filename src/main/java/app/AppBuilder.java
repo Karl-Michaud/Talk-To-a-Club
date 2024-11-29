@@ -388,6 +388,7 @@ public class AppBuilder {
 
         final LogoutController logoutController = new LogoutController(logoutInteractor);
         clubLoggedInView.setLogoutController(logoutController);
+        studentHomeView.setLogoutController(logoutController);
         return this;
     }
 

@@ -13,7 +13,7 @@ import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberContr
  * A JPanel that contains a member's information, and a button to remove that member from the logged in club.
  * This takes in a RemoveMemberController to do the usecase.
  */
-public class RemoveMemberPanel extends JPanel {
+public class RemoveMemberPanel {
     private JLabel memberNameLabel;
     private JButton removeMemberButton;
     private JPanel memberPanel;
@@ -33,5 +33,9 @@ public class RemoveMemberPanel extends JPanel {
                     }
                 }
         );
+    }
+
+    public JPanel getMemberPanel() {
+        return this.memberPanel;
     }
 }
