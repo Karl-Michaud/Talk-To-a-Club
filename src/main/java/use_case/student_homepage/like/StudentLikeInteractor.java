@@ -6,7 +6,6 @@ import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
-import interface_adapter.student_logged_in.student_home.like.StudentLikePresenter;
 
 /**
  * Interactor for the like usecase.
@@ -35,22 +34,27 @@ public class StudentLikeInteractor implements StudentLikeInputBoundary {
         Post postObject = null;
         // Find the corresponding Post object for the data, using the date at which it was posted.
         for (final Post post: clubPosts) {
-            if (post.dateOfPosting() == postData.get("time") && post.dateOfPosting() == postData.get("date")) {
+            if (post.dateOfPosting() == postData.get("date") && post.timeOfPosting() == postData.get("time")) {
                 postObject = post;
                 break;
             }
         }
-        if (postObject.getLikes().contains(currStudent)) {
-            postObject.removeLike(currClub);
-            clubDataAccess.savePost(postObject, currClub);
+        if (postObject == null) {
+            studentLikePresenter.prepareErrorView("post does not exist");
         }
         else {
-            postObject.addLike(currStudent);
-            clubDataAccess.savePost(postObject, currClub);
-        }
-        postData.put("Liked", !(Boolean) postData.get("Liked"));
+            if (Boolean.TRUE.equals(postObject.getLikes().contains(currStudent))) {
+                postObject.removeLike(currStudent);
+                clubDataAccess.savePost(postObject, currClub);
+            }
+            else {
+                postObject.addLike(currStudent);
+                clubDataAccess.savePost(postObject, currClub);
+            }
+            postData.put("liked", !(Boolean) postData.get("liked"));
 
-        final StudentLikeOutputData studentLikeOutputData = new StudentLikeOutputData(postData, currClub.getUsername());
-        studentLikePresenter.prepareSuccessView(studentLikeOutputData);
+            final StudentLikeOutputData studentLikeOutputData = new StudentLikeOutputData(postData, currClub.getUsername());
+            studentLikePresenter.prepareSuccessView(studentLikeOutputData);
+        }
     }
 }

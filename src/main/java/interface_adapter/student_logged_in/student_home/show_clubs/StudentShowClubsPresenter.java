@@ -21,7 +21,7 @@ public class StudentShowClubsPresenter implements StudentShowClubsOutputBoundary
     }
 
     @Override
-    public void preparePostContent(StudentShowClubsOutputData studentShowClubsOutputData) {
+    public void prepareClubsContent(StudentShowClubsOutputData studentShowClubsOutputData) {
         final StudentHomeState state = studentHomeViewModel.getState();
         // TODO Is this the intention of this method? - Roy
         // TODO Change this methods name to prepareClubContent or something

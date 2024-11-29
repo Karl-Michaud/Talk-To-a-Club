@@ -13,7 +13,7 @@ public class StudentLikeInputData {
     public StudentLikeInputData(String studentEmail, Map<String, Object> postData) {
         this.studentEmail = studentEmail;
         this.postData = postData;
-        this.clubEmail = postData.get("clubEmail").toString();
+        this.clubEmail = postData.get("club-email").toString();
     }
 
     public String getStudentEmail() {

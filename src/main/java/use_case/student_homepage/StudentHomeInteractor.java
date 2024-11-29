@@ -11,11 +11,6 @@ public class StudentHomeInteractor implements StudentHomeInputBoundary {
     }
 
     @Override
-    public void switchToLoginView() {
-        studentHomePresenter.switchToLoginView();
-    }
-
-    @Override
     public void switchToProfileView() {
         studentHomePresenter.switchToProfileView();
     }

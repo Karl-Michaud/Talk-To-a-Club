@@ -38,7 +38,7 @@ public class StudentShowClubsInteractor implements StudentShowClubsInputBoundary
                 clubData.add(singleClubData);
             }
             final StudentShowClubsOutputData studentShowClubsOutputData = new StudentShowClubsOutputData(clubData, currUserEmail);
-            showClubsPresenter.preparePostContent(studentShowClubsOutputData);
+            showClubsPresenter.prepareClubsContent(studentShowClubsOutputData);
         }
     }
 }

@@ -14,13 +14,6 @@ public class StudentHomeController {
     }
 
     /**
-     * Switches from HomeView to LoginView.
-     */
-    public void switchToLoginView() {
-        studentHomeUseCaseInteractor.switchToLoginView();
-    }
-
-    /**
      * Switches from HomeView to ProfileView.
      */
     public void switchToProfileView() {

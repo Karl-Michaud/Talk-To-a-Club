@@ -35,22 +35,27 @@ public class StudentDislikeInteractor implements StudentDislikeInputBoundary {
         Post postObject = null;
         // Find the corresponding Post object for the data, using the date at which it was posted.
         for (final Post post: clubPosts) {
-            if (post.dateOfPosting() == postData.get("time") && post.dateOfPosting() == postData.get("date")) {
+            if (post.dateOfPosting() == postData.get("date") && post.timeOfPosting() == postData.get("time")) {
                 postObject = post;
                 break;
             }
         }
-        if (postObject.getDislikes().contains(currStudent)) {
-            postObject.removeDislike(currClub);
-            clubDataAccess.savePost(postObject, currClub);
+        if (postObject == null) {
+            studentDislikePresenter.prepareErrorView("The post doesn't exist");
         }
         else {
-            postObject.addDislike(currStudent);
-            clubDataAccess.savePost(postObject, currClub);
-        }
-        postData.put("Disliked", !(Boolean) postData.get("Disliked"));
+            if (postObject.getDislikes().contains(currStudent)) {
+                postObject.removeDislike(currClub);
+                clubDataAccess.savePost(postObject, currClub);
+            }
+            else {
+                postObject.addDislike(currStudent);
+                clubDataAccess.savePost(postObject, currClub);
+            }
+            postData.put("disliked", !(Boolean) postData.get("disliked"));
 
-        final StudentDislikeOutputData studentDislikeOutputData = new StudentDislikeOutputData(postData, currClub.getUsername());
-        studentDislikePresenter.prepareSuccessView(studentDislikeOutputData);
+            final StudentDislikeOutputData studentDislikeOutputData = new StudentDislikeOutputData(postData, currClub.getUsername());
+            studentDislikePresenter.prepareSuccessView(studentDislikeOutputData);
+        }
     }
 }

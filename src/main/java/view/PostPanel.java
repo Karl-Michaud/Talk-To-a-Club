@@ -20,8 +20,8 @@ import interface_adapter.student_logged_in.student_home.like.StudentLikeControll
  * within a scrollable field.
  */
 public class PostPanel extends JPanel {
-    private static final String LIKED = "Liked";
-    private static final String DISLIKED = "Disliked";
+    private static final String LIKED = "liked";
+    private static final String DISLIKED = "disliked";
     private JLabel labelPostTitle;
     private JButton buttonLike;
     private JButton buttonDislike;

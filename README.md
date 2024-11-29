@@ -29,6 +29,8 @@
 ### Kabir: 
 1) use case: student_login and club_login
 
+### Frederik:
+1) Views: LoginView and ClubSignupView and StudentSignupView
 
 ## Week 2
 
@@ -60,6 +62,12 @@
 3) Edited the club login use case to return the club description to the presenter, and removed entities in output data
 4) Added use cases to switch between the ClubLoggedInView and CreatePostView in ClubCreatePost use case
 5) Added Logout use case into the Appbuilder
+
+### Frederik:
+1) Created StudentHomeView view and associated panels and views (PostPanel, ClubMiniPanel, ClubsContainer, PostsContainer)
+2) Implemented like, dislike, show_posts and show_clubs use cases and interface adapters for the student home view.
+3) implemented usecase to switch to profile view (not explicitly named that, can be found in the general student home usecase)
+4) wrote tests for the aforementioned use cases.
 
 # 📦 Talk to a Club
 
