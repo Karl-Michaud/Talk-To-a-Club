@@ -115,7 +115,6 @@ public class ClubCreatePostView extends JPanel implements PropertyChangeListener
                         final ClubCreatePostState currentState = clubCreatePostViewModel.getState();
                         clubCreatePostController.execute(currentState.getEmail(), currentState.getTitle(),
                                 currentState.getContent());
-                        clubCreatePostController.switchToClubLoggedInView();
                     }
                 }
         );
