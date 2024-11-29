@@ -126,10 +126,11 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
             clubGetPostsController.execute(state.getEmail());
         }
         else if (evt.getPropertyName().equals("create post")) {
-            final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
-            // Executes the get posts use case and gets the updated state
-            clubGetPostsController.execute(state.getEmail());
+            // Gets the current state
             final ClubLoggedInState updatedState = clubLoggedInViewModel.getState();
+
+            // removes all current panels in the posts scroll pane
+            postsScrollPane.removeAll();
 
             // Creates a PostTextPanel for every post retrieved and adds it to this view
             final List<String> postTitles = updatedState.getPostTitles();
@@ -141,10 +142,11 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
             }
         }
         else if (evt.getPropertyName().equals("get members")) {
-            final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
-            // Executes the get members use case and gets the updated state
-            clubGetMembersController.execute(state.getEmail());
+            // Gets the current state
             final ClubLoggedInState updatedState = clubLoggedInViewModel.getState();
+
+            // removes all current panels in the members scroll pane
+            membersScrollPane.removeAll();
 
             // Creates a RemoveMemberPanel for every member retrieved and adds it to this view
             final List<String> memberNames = updatedState.getMembersName();
