@@ -122,6 +122,8 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
             final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
+            state.setMessage("");
+            descriptionTextArea.setText(state.getDescriptionTextArea());
             clubGetMembersController.execute(state.getEmail());
             clubGetPostsController.execute(state.getEmail());
         }

@@ -353,7 +353,7 @@ public class AppBuilder {
      */
     public AppBuilder addClubCreatePostUseCase() {
         final ClubCreatePostOutputBoundary clubCreatePostOutputBoundary = new ClubCreatePostPresenter(
-                clubCreatePostViewModel, viewManagerModel);
+                clubCreatePostViewModel, clubLoggedInViewModel, viewManagerModel);
         final ClubCreatePostInputBoundary clubCreatePostInteractor = new ClubCreatePostInteractor(
                 inMemoryUserDataAccessObject, clubCreatePostOutputBoundary);
         final ClubCreatePostController createPostController = new ClubCreatePostController(clubCreatePostInteractor);
