@@ -41,6 +41,7 @@ public class ClubCreatePostInteractorTest {
         ClubCreatePostOutputBoundary successPresenter = new ClubCreatePostOutputBoundary() {
             @Override
             public void prepareSuccessView(ClubCreatePostOutputData outputData) {
+                assertEquals(false, outputData.useCaseFailed());
                 assertEquals(outputData.getTitle(), postTitle);
                 assertEquals(outputData.getContents(), postDescription);
             }
