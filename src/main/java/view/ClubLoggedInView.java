@@ -127,21 +127,22 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
             clubGetMembersController.execute(state.getEmail());
             clubGetPostsController.execute(state.getEmail());
         }
-        else if (evt.getPropertyName().equals("create post")) {
+        else if (evt.getPropertyName().equals("reload posts")) {
             // Gets the updated state
             final ClubLoggedInState updatedState = (ClubLoggedInState) evt.getNewValue();
 
-            // removes all current panels in the posts scroll pane
-            postsScrollPane.removeAll();
-
-            // Creates a PostTextPanel for every post retrieved and adds it to this view
+            // Creates a panel for every post retrieved and adds it to a new JPanel called posts
             final List<String> postTitles = updatedState.getPostTitles();
             final List<String> postBodies = updatedState.getPostBodies();
+            final JPanel posts = new JPanel();
+            posts.setLayout(new BoxLayout(posts, BoxLayout.Y_AXIS));
 
             for (int i = 0; i < postTitles.size(); i++) {
                 final PostTextPanel postPanel = new PostTextPanel(postTitles.get(i), postBodies.get(i));
-                postsScrollPane.add(postPanel);
+                posts.add(postPanel.getPostPanel());
             }
+            // Sets the Viewport of the postsScrollPane to the new JPanel posts
+            postsScrollPane.setViewportView(posts);
         }
         else if (evt.getPropertyName().equals("get members")) {
             // Gets the updated current state
@@ -150,15 +151,19 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
             // removes all current panels in the members scroll pane
             membersScrollPane.removeAll();
 
-            // Creates a RemoveMemberPanel for every member retrieved and adds it to this view
+            // Creates a panel for every member retrieved and adds it to a new JPanel called members
             final List<String> memberNames = updatedState.getMembersName();
             final List<String> memberEmails = updatedState.getMembersEmail();
+            final JPanel members = new JPanel();
+            members.setLayout(new BoxLayout(members, BoxLayout.Y_AXIS));
 
             for (int i = 0; i < memberNames.size(); i++) {
                 final RemoveMemberPanel memberPanel = new RemoveMemberPanel(clubRemoveMemberController,
                         updatedState.getEmail(), memberEmails.get(i), memberNames.get(i));
-                membersScrollPane.add(memberPanel);
+                membersScrollPane.add(memberPanel.getMemberPanel());
             }
+            // Sets the Viewport of the membersScrollPane to the new JPanel members
+            membersScrollPane.setViewportView(members);
         }
         else if (evt.getPropertyName().equals("reload message")) {
             // Sets the message JLabel to have the text in the current state.

@@ -46,7 +46,6 @@ public class ClubCreatePostInteractor implements ClubCreatePostInputBoundary {
             // Get club by email, since the user exists and logged in, we know the email exists for save
             final Club club = createPostDataAccessObject.getClub(clubCreatePostInputData.getEmail());
 
-            club.addClubPost(post);
             // Save post to database
             createPostDataAccessObject.savePost(post, club);
 
