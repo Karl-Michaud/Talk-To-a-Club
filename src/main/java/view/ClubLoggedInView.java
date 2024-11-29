@@ -141,6 +141,7 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
             for (int i = 0; i < postTitles.size(); i++) {
                 final PostTextPanel postPanel = new PostTextPanel(postTitles.get(i), postBodies.get(i));
                 postsScrollPane.add(postPanel);
+                postsScrollPane.validate();
             }
         }
         else if (evt.getPropertyName().equals("get members")) {

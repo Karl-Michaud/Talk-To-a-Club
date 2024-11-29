@@ -48,6 +48,10 @@ public class ClubGetMembersInteractorTest {
         ClubGetMembersOutputBoundary successPresenter = new ClubGetMembersOutputBoundary() {
             @Override
             public void prepareSuccessView(ClubGetMembersOutputData outputData) {
+                assertEquals(false, outputData.isUseCaseFailed());
+                // Check email
+                Club dbClub = userRepository.getClub(inputData.getClubEmail());
+                assertEquals(dbClub.getEmail(), outputData.getEmail());
                 // Get the members Names and emails from the verification list.
                 ArrayList<String> membersNames = new ArrayList<>();
                 ArrayList<String> membersEmails = new ArrayList<>();

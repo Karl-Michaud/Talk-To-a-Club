@@ -42,11 +42,11 @@ public class StudentLoginInteractorTest {
                 assertEquals(false, studentLoginOutputData.useCaseFailed());
 
                 // Verify that the test student has same values
-                assertEquals(testStudent.getEmail(), studentLoginOutputData.getEmail());
-                assertEquals(testStudent.getUsername(), studentLoginOutputData.getUsername());
+                Student dbStudent = userRepository.getStudent(studentLoginOutputData.getEmail());
+                assertEquals(dbStudent.getEmail(), studentLoginOutputData.getEmail());
+                assertEquals(dbStudent.getUsername(), studentLoginOutputData.getUsername());
 
                 // Verify that the database has the same info
-                Student dbStudent = userRepository.getStudent(studentLoginOutputData.getEmail());
                 assertEquals(dbStudent.getEmail(), studentLoginOutputData.getEmail());
                 assertEquals(dbStudent.getUsername(), studentLoginOutputData.getUsername());
 
@@ -69,6 +69,43 @@ public class StudentLoginInteractorTest {
         // Execute the use case that need to be tested.
         StudentLoginInputBoundary interactor = new StudentLoginInteractor(userRepository, successPresenter);
         interactor.execute(inputData);
+    }
+
+    @Test
+    public void successTestSwitchToStudentSignupView() {
+        // Initialise Student Factory
+        StudentFactory studentFactory = new StudentUserFactory();
+
+        // Initialise the DAO. In our case, we will the in memory DAO for tests.
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+
+        // Create the student (register)
+        Student testStudent = studentFactory.create(studentUsername, studentEmail, studentPassword);
+
+        // Save student to DB (register use case execution)
+        userRepository.saveStudent(testStudent);
+
+        // Create the successPresenter that tests whether the test case is as we expect.
+        StudentLoginOutputBoundary successPresenter = new StudentLoginOutputBoundary() {
+            @Override
+            public void prepareSuccessView(StudentLoginOutputData studentLoginOutputData) {
+                fail("Shouldn't run this.");
+            }
+
+            @Override
+            public void prepareFailView(String errorMessage) {
+                fail(errorMessage);
+            }
+
+            @Override
+            public void switchToStudentSignupView() {
+                // ignore since this will not be called during tests
+            }
+        };
+
+        // Execute the use case that need to be tested.
+        StudentLoginInputBoundary interactor = new StudentLoginInteractor(userRepository, successPresenter);
+        interactor.switchToStudentSignupView();
     }
 
     @Test

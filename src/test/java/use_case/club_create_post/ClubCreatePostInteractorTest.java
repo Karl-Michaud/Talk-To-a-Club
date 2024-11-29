@@ -6,8 +6,9 @@ import entity.user.ClubFactory;
 import entity.user.ClubUserFactory;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the club create post use case interactor.
@@ -28,22 +29,29 @@ public class ClubCreatePostInteractorTest {
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
         InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
+
+        // Save the club to the in memory DAO/Database
+        userRepository.saveClub(testClub);
+
         final String postTitle = "Test Post Title";
         final String postDescription = "Test Post Description";
 
         // Create the input data for create post use case.
-        ClubCreatePostInputData inputData = new ClubCreatePostInputData(clubEmail, postTitle, postDescription);
+        ArrayList<ClubCreatePostInputData> inputs = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            ClubCreatePostInputData inputData = new ClubCreatePostInputData(clubEmail, postTitle + i,
+                    postDescription + i);
+            inputs.add(inputData);
 
-        // Save the club to the in memory DAO/Database
-        userRepository.saveClub(testClub);
+        }
 
         // Create the successPresenter that tests whether the test case is as we expect.
         ClubCreatePostOutputBoundary successPresenter = new ClubCreatePostOutputBoundary() {
             @Override
             public void prepareSuccessView(ClubCreatePostOutputData outputData) {
                 assertEquals(false, outputData.useCaseFailed());
-                assertEquals(outputData.getTitle(), postTitle);
-                assertEquals(outputData.getContents(), postDescription);
+                assertTrue(!outputData.getTitle().equals(postTitle)
+                        && !outputData.getContents().equals(postDescription));
             }
 
             @Override
@@ -53,18 +61,108 @@ public class ClubCreatePostInteractorTest {
 
             @Override
             public void switchToCreatePostView() {
-                // This is expected since we are just switching views.
+                fail("Shouldn't run this.");
             }
 
             @Override
             public void switchToClubLoggedInView() {
-                // This is expected since we are just switching views.
+                fail("Shouldn't run this.");
             }
         };
 
         // Execute the use case that need to be tested.
         ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, successPresenter);
-        interactor.execute(inputData);
+        for (ClubCreatePostInputData inputData : inputs) {
+            interactor.execute(inputData);
+        }
+        int sizePosts = userRepository.getClub(testClub.getEmail()).getClubPosts().size();
+        assertEquals(10, sizePosts);
+    }
+
+    @Test
+    public void successTestSwitchCreatePostView() {
+        // Initialise the club factory.
+        ClubFactory clubFactory = new ClubUserFactory();
+
+        // Create the club
+        Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
+
+        // Initialise the DAO. In our case, we will the in memory DAO for tests.
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+
+
+        // Save the club to the in memory DAO/Database
+        userRepository.saveClub(testClub);
+
+        // Create the successPresenter that tests whether the test case is as we expect.
+        ClubCreatePostOutputBoundary successPresenter = new ClubCreatePostOutputBoundary() {
+            @Override
+            public void prepareSuccessView(ClubCreatePostOutputData outputData) {
+                fail("Shouldn't run this");
+            }
+
+            @Override
+            public void prepareFailView(String errorMessage) {
+                fail(errorMessage);
+            }
+
+            @Override
+            public void switchToCreatePostView() {
+                // This is expected since we are just switching views. This will always be true
+            }
+
+            @Override
+            public void switchToClubLoggedInView() {
+                fail("Shouldn't run this");
+            }
+        };
+
+        // Execute the use case that need to be tested.
+        ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, successPresenter);
+        interactor.switchToCreatePostView();
+    }
+
+    @Test
+    public void successTestSwitchToHomeView() {
+        // Initialise the club factory.
+        ClubFactory clubFactory = new ClubUserFactory();
+
+        // Create the club
+        Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
+
+        // Initialise the DAO. In our case, we will the in memory DAO for tests.
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+
+
+        // Save the club to the in memory DAO/Database
+        userRepository.saveClub(testClub);
+
+        // Create the successPresenter that tests whether the test case is as we expect.
+        ClubCreatePostOutputBoundary successPresenter = new ClubCreatePostOutputBoundary() {
+            @Override
+            public void prepareSuccessView(ClubCreatePostOutputData outputData) {
+                fail("Shouldn't run this");
+            }
+
+            @Override
+            public void prepareFailView(String errorMessage) {
+                fail(errorMessage);
+            }
+
+            @Override
+            public void switchToCreatePostView() {
+                fail("Shouldn't run this");
+            }
+
+            @Override
+            public void switchToClubLoggedInView() {
+                // This is expected since we are just switching views. This will always be true.
+            }
+        };
+
+        // Execute the use case that need to be tested.
+        ClubCreatePostInputBoundary interactor = new ClubCreatePostInteractor(userRepository, successPresenter);
+        interactor.switchToClubLoggedInView();
     }
 
     @Test
