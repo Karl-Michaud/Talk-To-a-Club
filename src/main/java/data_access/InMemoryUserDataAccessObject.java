@@ -124,6 +124,7 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
         for (Club club : clubArrayList) {
             if (club.getEmail().equals(email)) {
                 clubFound = club;
+                break;
             }
         }
         // This should not be returned as null since the precondition states that the club must exist.
@@ -143,6 +144,7 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
         for (Student student : studentArrayList) {
             if (student.getEmail().equals(email)) {
                 foundStudent = student;
+                break;
             }
         }
         // This should not be returned as null since the precondition states that the student must exist.
@@ -160,6 +162,7 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
         for (Club current: clubArrayList) {
             if (current.getUsername().equals(club.getUsername())) {
                 current.addClubPost(post);
+                break;
             }
         }
     }

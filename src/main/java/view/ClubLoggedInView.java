@@ -141,6 +141,7 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
 
             for (int i = 0; i < postTitles.size(); i++) {
                 final PostTextPanel postPanel = new PostTextPanel(postTitles.get(i), postBodies.get(i));
+
                 posts.add(postPanel.getPostPanel());
             }
             // Sets the Viewport of the postsScrollPane to the new JPanel posts
