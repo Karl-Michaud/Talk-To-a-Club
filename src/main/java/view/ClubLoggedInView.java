@@ -44,6 +44,7 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
     private JScrollPane descScrollPane;
     private JScrollPane postsScrollPane;
     private JTextArea descriptionTextArea;
+    private JLabel clubName;
 
     private final String viewName = "club logged in";
     private final ClubLoggedInViewModel clubLoggedInViewModel;
@@ -123,6 +124,7 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
         if (evt.getPropertyName().equals("state")) {
             final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
             state.setMessage("");
+            clubName.setText(state.getClubName());
             descriptionTextArea.setText(state.getDescriptionTextArea());
             clubGetMembersController.execute(state.getEmail());
             clubGetPostsController.execute(state.getEmail());
