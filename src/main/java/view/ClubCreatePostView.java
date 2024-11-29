@@ -23,7 +23,7 @@ import interface_adapter.club_logged_in.club_create_post.ClubCreatePostViewModel
 /**
  * The View for when a club wants to create a post.
  */
-public class CreatePostView extends JPanel implements PropertyChangeListener, ActionListener {
+public class ClubCreatePostView extends JPanel implements PropertyChangeListener, ActionListener {
 
     private final String viewName = "create post";
     private final ClubCreatePostViewModel clubCreatePostViewModel;
@@ -39,10 +39,8 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
 
     private ClubCreatePostController clubCreatePostController;
 
-    public CreatePostView(ClubCreatePostViewModel clubCreatePostViewModel,
-                          ClubCreatePostController clubCreatePostController) {
+    public ClubCreatePostView(ClubCreatePostViewModel clubCreatePostViewModel) {
         this.clubCreatePostViewModel = clubCreatePostViewModel;
-        this.clubCreatePostController = clubCreatePostController;
         this.createPostButton.addActionListener(this);
 
         final JLabel title = new JLabel("Create Post Screen");
@@ -155,7 +153,7 @@ public class CreatePostView extends JPanel implements PropertyChangeListener, Ac
         }
     }
 
-    public void setCreatePostController(ClubCreatePostController controller) {
+    public void setClubCreatePostController(ClubCreatePostController controller) {
         this.clubCreatePostController = controller;
     }
 }
