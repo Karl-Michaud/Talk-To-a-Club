@@ -113,7 +113,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
             final List<Map<String, String>> clubNames = currentState.getClubs();
             final Map<String, List<Map<String, Object>>> postData = currentState.getPostData();
             pageScrollPane.setViewportView(new PageView(new PostsContainer(postData, currentState.getCurrentUser(),
-                    likeController, dislikeController), new ClubsContainer(clubNames)));
+                    likeController, dislikeController), new ClubsContainer(clubNames, exploreClubsController)));
         }
     }
 
