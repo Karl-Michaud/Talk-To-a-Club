@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
 import entity.user.Student;
 
@@ -43,7 +42,8 @@ public class StudentShowClubsInteractor implements StudentShowClubsInputBoundary
                 singleClubData.put("description", club.getClubDescription());
                 clubData.add(singleClubData);
             }
-            final StudentShowClubsOutputData studentShowClubsOutputData = new StudentShowClubsOutputData(clubData, currUserEmail);
+            final StudentShowClubsOutputData studentShowClubsOutputData = new StudentShowClubsOutputData(clubData,
+                    currUserEmail);
             showClubsPresenter.prepareClubsContent(studentShowClubsOutputData);
         }
     }
