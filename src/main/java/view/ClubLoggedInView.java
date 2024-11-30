@@ -29,6 +29,7 @@ import interface_adapter.logout.LogoutController;
  * The Club Logged View.
  */
 public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
+    // Instance Variables of Displayed Elements
     private JPanel panelClubHome;
     private JPanel membersPanel;
     private JPanel postsPanel;
@@ -58,11 +59,18 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
     private ClubRemoveMemberController clubRemoveMemberController;
 
     public ClubLoggedInView(ClubLoggedInViewModel clubLoggedInViewModel) {
+        // Saves the view model to this view.
         this.clubLoggedInViewModel = clubLoggedInViewModel;
+
+        // Makes this View listen to property changes from the saved view model
         this.clubLoggedInViewModel.addPropertyChangeListener(this);
 
+        // Sets this view's layout and sets the view's main panel to be displayed
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(panelClubHome);
+
+        // Adds a text listener to the description text area
+        addDescriptionTextAreaListener();
 
         createPostButton.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -116,17 +124,23 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
                     }
                 }
         );
-
-        addDescriptionTextAreaListener();
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
             final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
+
+            // Clears the message from the view
             state.setMessage("");
+
+            // Displays the club name in the view
             clubName.setText(state.getClubName());
+
+            // Sets the text area to have the club's current description
             descriptionTextArea.setText(state.getDescriptionTextArea());
+
+            // Calls the controller to get the club's members and posts
             clubGetMembersController.execute(state.getEmail());
             clubGetPostsController.execute(state.getEmail());
         }
@@ -134,9 +148,11 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
             // Gets the updated state
             final ClubLoggedInState updatedState = (ClubLoggedInState) evt.getNewValue();
 
-            // Creates a panel for every post retrieved and adds it to a new JPanel called posts
+            // Stores the list of post titles and post bodies
             final List<String> postTitles = updatedState.getPostTitles();
             final List<String> postBodies = updatedState.getPostBodies();
+
+            // Creates a panel for every post body and title retrieved and adds it to a new JPanel called posts
             final JPanel posts = new JPanel();
             posts.setLayout(new BoxLayout(posts, BoxLayout.Y_AXIS));
 
@@ -152,9 +168,11 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
             // Gets the updated current state
             final ClubLoggedInState updatedState = (ClubLoggedInState) evt.getNewValue();
 
-            // Creates a panel for every member retrieved and adds it to a new JPanel called members
+            // Stores the list of member names and emails
             final List<String> memberNames = updatedState.getMembersName();
             final List<String> memberEmails = updatedState.getMembersEmail();
+
+            // Creates a panel for every member retrieved and adds it to a new JPanel called members
             final JPanel members = new JPanel();
             members.setLayout(new BoxLayout(members, BoxLayout.Y_AXIS));
 

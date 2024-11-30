@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * The Club Signup Interactor for the club sign up use case.
  */
 public class ClubSignupInteractor implements ClubSignupInputBoundary {
-    private final ClubSignupUserDataAccessInterface userDataAccessObject;
+    private final ClubSignupDataAccessInterface userDataAccessObject;
     private final ClubSignupOutputBoundary userPresenter;
     private final ClubUserFactory clubUserFactory;
 
@@ -19,7 +19,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
     private final int minLengthPassword = 8;
     private final int maxLengthPassword = 64;
 
-    public ClubSignupInteractor(ClubSignupUserDataAccessInterface signupDataAccessInterface,
+    public ClubSignupInteractor(ClubSignupDataAccessInterface signupDataAccessInterface,
                                 ClubSignupOutputBoundary clubSignupOutputBoundary,
                                 ClubUserFactory clubUserFactory) {
         this.userDataAccessObject = signupDataAccessInterface;
@@ -30,6 +30,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
     @Override
     public void execute(ClubSignupInputData clubSignupInputData) {
         final String onlyForCheckstyle = " character(s).";
+        // Tests if any inputs were not valid. Prepares a fail view with a message of the issue if any conditions fail
         if (userDataAccessObject.existsByNameClub(clubSignupInputData.getUsername())) {
             userPresenter.prepareFailView("Username already exists.");
         }
@@ -56,13 +57,15 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
             userPresenter.prepareFailView("Invalid email address.");
         }
         else {
-
+            // Creates a new club entity with the input data
             final Club user = clubUserFactory.create(clubSignupInputData.getUsername(),
                     clubSignupInputData.getEmail(),
                     clubSignupInputData.getPassword());
 
+            // Tells the DAO to save the club user entity in the database
             userDataAccessObject.saveClub(user);
 
+            // Prepares the output data. Tells the presenter to prepare the success view.
             final ClubSignupOutputData clubSignupOutputData = new ClubSignupOutputData(user.getEmail());
             userPresenter.prepareSuccessView(clubSignupOutputData);
         }

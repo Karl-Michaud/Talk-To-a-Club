@@ -7,7 +7,7 @@ import entity.user.StudentUserFactory;
  * The Student Signup Interactor.
  */
 public class StudentSignupInteractor implements StudentSignupInputBoundary {
-    private final StudentSignupUserDataAccessInterface userDataAccessObject;
+    private final StudentSignupDataAccessInterface userDataAccessObject;
     private final StudentSignupOutputBoundary userPresenter;
     private final StudentUserFactory studentUserFactory;
 
@@ -17,7 +17,7 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
     private final int minLengthPassword = 8;
     private final int maxLengthPassword = 64;
 
-    public StudentSignupInteractor(StudentSignupUserDataAccessInterface signupDataAccessInterface,
+    public StudentSignupInteractor(StudentSignupDataAccessInterface signupDataAccessInterface,
                                    StudentSignupOutputBoundary studentSignupOutputBoundary,
                                    StudentUserFactory studentUserFactory) {
         this.userDataAccessObject = signupDataAccessInterface;
@@ -28,6 +28,7 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
     @Override
     public void execute(StudentSignupInputData studentSignupInputData) {
         final String onlyForCheckstyle = " character(s).";
+        // Tests if any inputs were not valid. Prepares a fail view with a message of the issue if any conditions fail
         if (userDataAccessObject.existsByNameStudent(studentSignupInputData.getUsername())) {
             userPresenter.prepareFailView("Username already exists.");
         }
@@ -54,12 +55,15 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
             userPresenter.prepareFailView("Invalid email address.");
         }
         else {
+            // Creates a student entity with the input data
             final Student user = studentUserFactory.create(studentSignupInputData.getUsername(),
                     studentSignupInputData.getEmail(),
                     studentSignupInputData.getPassword());
-            // Save user to database
+
+            // Save the student to the database
             userDataAccessObject.saveStudent(user);
 
+            // Prepares the output data. Tells the presenter to prepare the success view.
             final StudentSignupOutputData studentSignupOutputData = new StudentSignupOutputData(user.getEmail());
             userPresenter.prepareSuccessView(studentSignupOutputData);
         }

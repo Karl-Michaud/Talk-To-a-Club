@@ -20,7 +20,7 @@ import entity.user.Student;
 import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
 import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
-import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
+import use_case.signup.student_signup.StudentSignupDataAccessInterface;
 import use_case.student_homepage.StudentHomeAccessInterface;
 import use_case.student_homepage.dislike.StudentDislikeStudentDataAccessInterface;
 import use_case.student_homepage.like.StudentLikeStudentDataAccessInterface;
@@ -36,7 +36,7 @@ import use_case.student_search_club.StudentSearchClubAccessInterface;
  * Student entity
  */
 public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAccessInterface,
-        StudentSignupUserDataAccessInterface, StudentJoinClubDataAccessInterface,
+        StudentSignupDataAccessInterface, StudentJoinClubDataAccessInterface,
         StudentLeaveClubDataAccessInterface, StudentSearchClubAccessInterface,
         ClubRemoveMemberStudentDataAccessInterface, StudentExploreClubsDataAccessInterface,
         StudentDislikeStudentDataAccessInterface, StudentLikeStudentDataAccessInterface,
