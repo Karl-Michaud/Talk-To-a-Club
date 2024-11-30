@@ -9,7 +9,7 @@
       <minimumSize width="400" height="58"/>
       <preferredSize width="400" height="58"/>
     </properties>
-    <border type="none"/>
+    <border type="line"/>
     <children>
       <component id="18663" class="javax.swing.JLabel" binding="memberNameLabel">
         <constraints>
