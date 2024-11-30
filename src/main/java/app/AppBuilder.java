@@ -1,12 +1,15 @@
 package app;
 
 import java.awt.CardLayout;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import data_access.ClubFirestoreUserDataAccessObject;
 import data_access.InMemoryUserDataAccessObject;
+import data_access.StudentFirestoreUserDataAccessObject;
 import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
@@ -68,7 +71,6 @@ import use_case.club_get_posts.ClubGetPostsOutputBoundary;
 import use_case.club_update_desc.ClubUpdateDescInputBoundary;
 import use_case.club_update_desc.ClubUpdateDescInteractor;
 import use_case.club_update_desc.ClubUpdateDescOutputBoundary;
-import use_case.explore_clubs.ExploreClubsInputBoundary;
 import use_case.login.club_login.ClubLoginInputBoundary;
 import use_case.login.club_login.ClubLoginInteractor;
 import use_case.login.club_login.ClubLoginOutputBoundary;
@@ -88,7 +90,7 @@ import use_case.student_homepage.dislike.StudentDislikeOutputBoundary;
 import use_case.student_homepage.like.StudentLikeOutputBoundary;
 import use_case.explore_clubs.ExploreClubsOutputBoundary;
 import use_case.explore_clubs.ExploreClubsInteractor;
-import use_case.explore_clubs.ExploreClubsOutputBoundary;
+import use_case.explore_clubs.ExploreClubsInputBoundary;
 import use_case.student_join_club.StudentJoinClubInputBoundary;
 import use_case.student_join_club.StudentJoinClubInteractor;
 import use_case.student_join_club.StudentJoinClubOutputBoundary;
@@ -142,6 +144,10 @@ public class AppBuilder {
 
     // thought question: is the hard dependency below a problem?
     private final InMemoryUserDataAccessObject inMemoryUserDataAccessObject = new InMemoryUserDataAccessObject();
+    private final ClubFirestoreUserDataAccessObject clubFirestoreUserDataAccessObject =
+            new ClubFirestoreUserDataAccessObject();
+    private final StudentFirestoreUserDataAccessObject studentFirestoreUserDataAccessObject =
+            new StudentFirestoreUserDataAccessObject();
 
     private ClubSignupViewModel clubSignupViewModel;
     private ClubSignupView clubSignupView;
@@ -167,7 +173,7 @@ public class AppBuilder {
     private ExploreClubsViewModel exploreClubsViewModel;
     private ExploreClubsView exploreClubsView;
 
-    public AppBuilder() {
+    public AppBuilder() throws IOException {
         cardPanel.setLayout(cardLayout);
     }
 
@@ -267,7 +273,7 @@ public class AppBuilder {
         final ClubSignupOutputBoundary signupOutputBoundary = new ClubSignupPresenter(viewManagerModel,
                 clubSignupViewModel, loginViewModel);
 
-        final ClubSignupInputBoundary userSignupInteractor = new ClubSignupInteractor(inMemoryUserDataAccessObject,
+        final ClubSignupInputBoundary userSignupInteractor = new ClubSignupInteractor(clubFirestoreUserDataAccessObject,
                 signupOutputBoundary, clubFactory);
 
         final ClubSignupController controller = new ClubSignupController(userSignupInteractor);
@@ -284,7 +290,7 @@ public class AppBuilder {
                 studentSignupViewModel, loginViewModel);
 
         final StudentSignupInputBoundary userSignupInteractor = new StudentSignupInteractor(
-                inMemoryUserDataAccessObject,
+                studentFirestoreUserDataAccessObject,
                 signupOutputBoundary, studentFactory);
 
         final StudentSignupController controller = new StudentSignupController(userSignupInteractor);
@@ -300,7 +306,7 @@ public class AppBuilder {
         final ClubLoginOutputBoundary loginOutputBoundary = new ClubLoginPresenter(viewManagerModel,
                 clubLoggedInViewModel, clubSignupViewModel, loginViewModel);
         final ClubLoginInputBoundary loginInteractor = new ClubLoginInteractor(
-                inMemoryUserDataAccessObject, loginOutputBoundary);
+                clubFirestoreUserDataAccessObject, loginOutputBoundary);
 
         final ClubLoginController loginController = new ClubLoginController(loginInteractor);
         loginView.setClubLoginController(loginController);
@@ -315,7 +321,7 @@ public class AppBuilder {
         final StudentLoginOutputBoundary loginOutputBoundary = new StudentLoginPresenter(viewManagerModel,
                 studentHomeViewModel, studentSignupViewModel, loginViewModel);
         final StudentLoginInputBoundary loginInteractor = new StudentLoginInteractor(
-                inMemoryUserDataAccessObject, loginOutputBoundary);
+                studentFirestoreUserDataAccessObject, loginOutputBoundary);
 
         final StudentLoginController loginController = new StudentLoginController(loginInteractor);
         loginView.setStudentLoginController(loginController);
@@ -334,7 +340,7 @@ public class AppBuilder {
 
     public AppBuilder addShowPostsUseCase() {
         final StudentShowPostsOutputBoundary studentShowPostsOutputBoundary = new StudentShowPostsPresenter(studentHomeViewModel, viewManagerModel);
-        final StudentShowPostsInputBoundary showPostsInteractor = new StudentShowPostsInteractor(inMemoryUserDataAccessObject,
+        final StudentShowPostsInputBoundary showPostsInteractor = new StudentShowPostsInteractor(studentFirestoreUserDataAccessObject,
                 studentShowPostsOutputBoundary);
 
         final StudentShowPostsController studentShowPostsController = new StudentShowPostsController(showPostsInteractor);
@@ -345,7 +351,7 @@ public class AppBuilder {
     public AppBuilder addShowClubsUseCase() {
         final StudentShowClubsOutputBoundary studentShowClubsOutputBoundary = new StudentShowClubsPresenter(studentHomeViewModel, viewManagerModel);
         final StudentShowClubsInputBoundary showClubsInteractor = new StudentShowClubsInteractor(studentShowClubsOutputBoundary,
-                inMemoryUserDataAccessObject);
+                studentFirestoreUserDataAccessObject);
         final StudentShowClubsController studentShowClubsController = new StudentShowClubsController(showClubsInteractor);
         studentHomeView.setShowClubsController(studentShowClubsController);
         return this;
@@ -353,7 +359,8 @@ public class AppBuilder {
 
     public AppBuilder addLikeUseCase() {
         final StudentLikeOutputBoundary studentLikeOutputBoundary = new StudentLikePresenter(studentHomeViewModel, viewManagerModel);
-        final StudentLikeInputBoundary likeInteractor = new StudentLikeInteractor(inMemoryUserDataAccessObject, inMemoryUserDataAccessObject, studentLikeOutputBoundary);
+        final StudentLikeInputBoundary likeInteractor = new StudentLikeInteractor(studentFirestoreUserDataAccessObject,
+                clubFirestoreUserDataAccessObject, studentLikeOutputBoundary);
         final StudentLikeController likeController = new StudentLikeController(likeInteractor);
         studentHomeView.setLikeController(likeController);
         return this;
@@ -361,7 +368,8 @@ public class AppBuilder {
 
     public AppBuilder addDislikeUseCase() {
         final StudentDislikeOutputBoundary studentDislikeOutputBoundary = new StudentDislikePresenter(studentHomeViewModel, viewManagerModel);
-        final StudentDislikeInputBoundary dislikeInteractor = new StudentDislikeInteractor(inMemoryUserDataAccessObject, inMemoryUserDataAccessObject, studentDislikeOutputBoundary);
+        final StudentDislikeInputBoundary dislikeInteractor = new StudentDislikeInteractor(clubFirestoreUserDataAccessObject,
+                studentFirestoreUserDataAccessObject, studentDislikeOutputBoundary);
         final StudentDislikeController dislikeController = new StudentDislikeController(dislikeInteractor);
         studentHomeView.setDislikeController(dislikeController);
         return this;
@@ -388,7 +396,7 @@ public class AppBuilder {
         final ClubCreatePostOutputBoundary clubCreatePostOutputBoundary = new ClubCreatePostPresenter(
                 clubCreatePostViewModel, clubLoggedInViewModel, viewManagerModel);
         final ClubCreatePostInputBoundary clubCreatePostInteractor = new ClubCreatePostInteractor(
-                inMemoryUserDataAccessObject, clubCreatePostOutputBoundary);
+                clubFirestoreUserDataAccessObject, clubCreatePostOutputBoundary);
         final ClubCreatePostController createPostController = new ClubCreatePostController(clubCreatePostInteractor);
         clubCreatePostView.setClubCreatePostController(createPostController);
         clubLoggedInView.setClubCreatePostController(createPostController);
@@ -404,7 +412,7 @@ public class AppBuilder {
         final ClubGetMembersOutputBoundary clubGetMembersOutputBoundary = new ClubGetMembersPresenter(
                 clubLoggedInViewModel, viewManagerModel);
         final ClubGetMembersInputBoundary clubGetMembersInteractor = new ClubGetMembersInteractor(
-                inMemoryUserDataAccessObject, clubGetMembersOutputBoundary);
+                clubFirestoreUserDataAccessObject, clubGetMembersOutputBoundary);
         final ClubGetMembersController clubGetMembersController = new ClubGetMembersController(
                 clubGetMembersInteractor);
         clubLoggedInView.setClubGetMembersController(clubGetMembersController);
@@ -431,7 +439,7 @@ public class AppBuilder {
      */
     public AppBuilder addClubGetPostsUseCase() {
         final ClubGetPostsOutputBoundary clubGetPostsOutputBoundary = new ClubGetPostsPresenter(clubLoggedInViewModel, viewManagerModel);
-        final ClubGetPostsInputBoundary clubGetPostsInteractor = new ClubGetPostsInteractor(inMemoryUserDataAccessObject, clubGetPostsOutputBoundary);
+        final ClubGetPostsInputBoundary clubGetPostsInteractor = new ClubGetPostsInteractor(clubFirestoreUserDataAccessObject, clubGetPostsOutputBoundary);
 
         final ClubGetPostsController clubGetPostsController = new ClubGetPostsController(clubGetPostsInteractor);
         clubLoggedInView.setClubGetPostsController(clubGetPostsController);
@@ -444,7 +452,7 @@ public class AppBuilder {
      */
     public AppBuilder addClubUpdateDescUseCase() {
         final ClubUpdateDescOutputBoundary clubUpdateDescOutputBoundary = new ClubUpdateDescPresenter(clubLoggedInViewModel, viewManagerModel);
-        final ClubUpdateDescInputBoundary clubUpdateDescInteractor = new ClubUpdateDescInteractor(inMemoryUserDataAccessObject, clubUpdateDescOutputBoundary);
+        final ClubUpdateDescInputBoundary clubUpdateDescInteractor = new ClubUpdateDescInteractor(clubFirestoreUserDataAccessObject, clubUpdateDescOutputBoundary);
 
         final ClubUpdateDescController clubUpdateDescController = new ClubUpdateDescController(clubUpdateDescInteractor);
         clubLoggedInView.setClubUpdateDescController(clubUpdateDescController);
@@ -459,8 +467,8 @@ public class AppBuilder {
         final ExploreClubsOutputBoundary exploreClubsOutputBoundary =
                 new ExploreClubsPresenter(viewManagerModel, exploreClubsViewModel, studentHomeViewModel);
         final ExploreClubsInputBoundary exploreClubsInteractor =
-                new ExploreClubsInteractor(inMemoryUserDataAccessObject,
-                        exploreClubsOutputBoundary, inMemoryUserDataAccessObject);
+                new ExploreClubsInteractor(studentFirestoreUserDataAccessObject,
+                        exploreClubsOutputBoundary, clubFirestoreUserDataAccessObject);
 
         final ExploreClubsController exploreClubsController = new ExploreClubsController(exploreClubsInteractor);
         exploreClubsView.setExploreClubsController(exploreClubsController);
