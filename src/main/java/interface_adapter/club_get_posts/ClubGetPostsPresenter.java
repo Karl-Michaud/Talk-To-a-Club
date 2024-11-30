@@ -21,11 +21,13 @@ public class ClubGetPostsPresenter implements ClubGetPostsOutputBoundary {
 
     @Override
     public void prepareDisplayPosts(ClubGetPostsOutputData outputData) {
-        // Get the state of the current ClubLoggedInViewModel and set the message and clubPosts to the new ones
+        // Get the state of the current ClubLoggedInViewModel and set the message and club post info to the new ones
         final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
         clubLoggedInState.setMessage(outputData.getMessage());
         clubLoggedInState.setPostTitles(outputData.getPostTitles());
         clubLoggedInState.setPostBodies(outputData.getPostBodies());
+
+        // Saves the state and tells the view to reload the club's displayed posts
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("reload posts");
     }
@@ -35,7 +37,9 @@ public class ClubGetPostsPresenter implements ClubGetPostsOutputBoundary {
         // Get the state of the current ClubLoggedInViewModel and set the message to the new one
         final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
         clubLoggedInState.setMessage(outputData.getMessage());
+
+        // Saves the state and tells the view to show the message
         clubLoggedInViewModel.setState(clubLoggedInState);
-        clubLoggedInViewModel.firePropertyChanged("reload message");
+        clubLoggedInViewModel.firePropertyChanged("show message");
     }
 }

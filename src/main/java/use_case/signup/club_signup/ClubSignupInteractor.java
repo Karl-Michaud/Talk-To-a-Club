@@ -28,7 +28,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
     @Override
     public void execute(ClubSignupInputData clubSignupInputData) {
         final String onlyForCheckstyle = " character(s).";
-        // Tests if any . Prepares a fail view with a message of the issue if any conditions fail
+        // Tests if any inputs were not valid. Prepares a fail view with a message of the issue if any conditions fail
         if (userDataAccessObject.existsByNameClub(clubSignupInputData.getUsername())) {
             userPresenter.prepareFailView("Username already exists.");
         }
