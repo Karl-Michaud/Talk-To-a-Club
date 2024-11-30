@@ -482,6 +482,7 @@ public class FirebaseAppBuilder {
 
         final ExploreClubsController exploreClubsController = new ExploreClubsController(exploreClubsInteractor);
         studentHomeView.setExploreClubsController(exploreClubsController);
+        exploreClubsView.setExploreClubsController(exploreClubsController);
         return this;
     }
 

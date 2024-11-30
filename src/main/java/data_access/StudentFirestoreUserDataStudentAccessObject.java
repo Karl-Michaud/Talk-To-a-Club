@@ -151,6 +151,7 @@ public class StudentFirestoreUserDataStudentAccessObject implements StudentLogin
         final DocumentReference docRef = db.collection(students).document(user.getEmail());
         final Map<String, Object> mapStudent = new HashMap<>();
         mapStudent.put(usernames, user.getUsername());
+        mapStudent.put("email", user.getEmail());
         mapStudent.put(password, user.getPassword());
         mapStudent.put(joinedClubEmails, user.getJoinedClubsEmails().toArrayList().stream().toList());
         mapStudent.put(joinedClubNames, user.getJoinedClubsNames().toArrayList().stream().toList());
