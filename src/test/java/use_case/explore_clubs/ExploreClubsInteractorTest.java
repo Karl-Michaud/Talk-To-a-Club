@@ -1,10 +1,7 @@
 package use_case.explore_clubs;
 
 import data_access.InMemoryUserDataAccessObject;
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
-import entity.user.Club;
-import entity.user.Student;
+import entity.user.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,17 +15,16 @@ public class ExploreClubsInteractorTest {
         // In-memory data setup
         InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
         // Create clubs
-        DataStore<Student> students1 = new DataStoreArrays<Student>();
-        DataStore<Student> students2 = new DataStoreArrays<Student>();
-        Club club1 = new Club("Club1", "club1@example.com", "password1", students1, null);
-        Club club2 = new Club("Club2", "club2@example.com", "password2", students2, null);
+        ClubFactory clubFactory = new ClubUserFactory();
+        Club club1 = clubFactory.create("Club1", "club1@example.com", "password1");
+        Club club2 = clubFactory.create("Club2", "club2@example.com", "password2");
         club1.setClubDescription("Description1");
         club2.setClubDescription("Description2");
 
         // Create a student and associate with one club
-        DataStore<Club> joinedClubs = new DataStoreArrays<>();
-        joinedClubs.add(club1);
-        Student student = new Student("Student1", "student1@example.com", "password", joinedClubs);
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Student1", "student1@example.com", "password");
+        student.joinClub(club1);
         club1.addClubMember(student);
 
         userRepository.saveStudent(student);

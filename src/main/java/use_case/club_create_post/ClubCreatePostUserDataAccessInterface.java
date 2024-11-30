@@ -9,6 +9,7 @@ import entity.user.Club;
 public interface ClubCreatePostUserDataAccessInterface {
     /**
      * Save post to database. The specific post will be stored with the data of the given club.
+     * PRECONDITION: the club already exists and has been saved before.
      * @param post the post that needs to be saved
      * @param club the club that posted
      */

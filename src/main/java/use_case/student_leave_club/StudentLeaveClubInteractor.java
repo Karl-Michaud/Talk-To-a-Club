@@ -37,7 +37,7 @@ public class StudentLeaveClubInteractor implements StudentLeaveClubInputBoundary
             final Student student = studentLeaveClubDataAccessInterface.getStudent(studentEmail);
 
             // Verify that student is in club
-            if (!club.getClubMembers().contains(student)) {
+            if (!club.getClubMembersEmails().contains(student.getEmail())) {
                 studentLeavePresenter.prepareFailView(studentEmail + ": Account not in club.");
             }
             else {

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
+import entity.user.Student;
 
 /**
  * Interactor for the show clubs usecase.
@@ -27,17 +27,23 @@ public class StudentShowClubsInteractor implements StudentShowClubsInputBoundary
             showClubsPresenter.prepareFailView("The account does not exist.");
         }
         else {
-            final DataStoreArrays<Club> clubs = (DataStoreArrays<Club>) studentShowClubsAccessInterface.getStudent(
-                    currUserEmail).getJoinedClubs();
+            // Get Student
+            final Student student = studentShowClubsAccessInterface.getStudent(
+                    studentShowClubsInputData.getUserEmail());
+            // Get joined clubs
+            final ArrayList<Club> joinedClubs = studentShowClubsAccessInterface.getStudentJoinedClubs(student);
+
             final ArrayList<Map<String, String>> clubData = new ArrayList<>();
-            for (final Club club : clubs) {
+
+            for (final Club club : joinedClubs) {
                 final Map<String, String> singleClubData = new HashMap<>();
                 singleClubData.put("username", club.getUsername());
                 singleClubData.put("email", club.getEmail());
                 singleClubData.put("description", club.getClubDescription());
                 clubData.add(singleClubData);
             }
-            final StudentShowClubsOutputData studentShowClubsOutputData = new StudentShowClubsOutputData(clubData, currUserEmail);
+            final StudentShowClubsOutputData studentShowClubsOutputData = new StudentShowClubsOutputData(clubData,
+                    currUserEmail);
             showClubsPresenter.prepareClubsContent(studentShowClubsOutputData);
         }
     }

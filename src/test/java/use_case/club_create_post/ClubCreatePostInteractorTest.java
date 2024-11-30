@@ -75,7 +75,7 @@ public class ClubCreatePostInteractorTest {
         for (ClubCreatePostInputData inputData : inputs) {
             interactor.execute(inputData);
         }
-        int sizePosts = userRepository.getClub(testClub.getEmail()).getClubPosts().size();
+        int sizePosts = userRepository.getClub(testClub.getEmail()).getClubPostsTitle().size();
         assertEquals(10, sizePosts);
     }
 

@@ -1,10 +1,7 @@
 package use_case.student_join_club;
 
 import data_access.InMemoryUserDataAccessObject;
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
-import entity.user.Club;
-import entity.user.Student;
+import entity.user.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,13 +13,14 @@ public class StudentJoinClubInteractorTest {
         InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club
-        DataStore<Student> students1 = new DataStoreArrays<Student>();
-        Club club = new Club("Photography Club", "photo@university.com", "password", students1, null);
+        ClubFactory clubFactory = new ClubUserFactory();
+
+        Club club = clubFactory.create("Photography Club", "photo@university.com", "password");
         club.setClubDescription("For photography enthusiasts.");
 
         // Create a student not in the club
-        DataStore<Club> joinedClubs = new DataStoreArrays<>();
-        Student student = new Student("Alice", "alice@university.com", "password", joinedClubs);
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Alice", "alice@university.com", "password");
         userRepository.saveStudent(student);
         userRepository.saveClub(club);
 
@@ -35,8 +33,8 @@ public class StudentJoinClubInteractorTest {
             public void prepareSuccessView(StudentJoinClubOutputData data) {
                 assertEquals("Alice", data.getUsername());
                 assertFalse(data.isUseCaseFailed());
-                assertTrue(club.getClubMembers().contains(student));
-                assertTrue(student.getJoinedClubs().contains(club));
+                assertTrue(club.getClubMembersEmails().contains(student.getEmail()));
+                assertTrue(student.getJoinedClubsEmails().contains(club.getEmail()));
             }
 
             @Override
@@ -56,8 +54,8 @@ public class StudentJoinClubInteractorTest {
         InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a student
-        DataStore<Club> joinedClubs = new DataStoreArrays<>();
-        Student student = new Student("Alice", "alice@university.com", "password", joinedClubs);
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Alice", "alice@university.com", "password");
         userRepository.saveStudent(student);
 
         // Input data with a non-existent club
@@ -87,13 +85,13 @@ public class StudentJoinClubInteractorTest {
         InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club
-        DataStore<Student> students = new DataStoreArrays<Student>();
-        Club club = new Club("Photography Club", "photo@university.com", "password", students, null);
+        ClubFactory clubFactory = new ClubUserFactory();
+        Club club = clubFactory.create("Photography Club", "photo@university.com", "password");
         club.setClubDescription("For photography enthusiasts.");
 
         // Create a student already in the club
-        DataStore<Club> joinedClubs = new DataStoreArrays<>();
-        Student student = new Student("Alice", "alice@university.com", "password", joinedClubs);
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Alice", "alice@university.com", "password");
         student.joinClub(club);
         club.addClubMember(student);
         userRepository.saveStudent(student);

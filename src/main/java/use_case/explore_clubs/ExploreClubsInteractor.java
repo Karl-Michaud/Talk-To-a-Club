@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
 import entity.user.Student;
 
@@ -37,13 +38,23 @@ public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
         else {
             // gets the joined clubs by retrieving user from database and getting joined clubs.
             final Student student = studentExploreClubsDataAccessInterface.getStudent(email);
-            final DataStore<Club> joinedClubs = student.getJoinedClubs();
+            final DataStore<String> joinedClubsEmails = student.getJoinedClubsEmails();
 
             // gets all the clubs from the database.
             final DataStore<Club> allClubs = clubExploreClubsDataAccessInterface.getAllClubs();
 
             // all values of all clubs minus the joined ones
-            final DataStore<Club> complement = allClubs.complement(joinedClubs);
+            final DataStore<Club> complement = new DataStoreArrays<>();
+            int index = 0;
+            while (index < allClubs.size()) {
+                final Club club = allClubs.getByIndex(index);
+                final String clubEmail = club.getEmail();
+                // Check if the student has joined this club. If it did not, then add to complement
+                if (!joinedClubsEmails.contains(clubEmail)) {
+                    complement.add(club);
+                }
+                index++;
+            }
 
             final ArrayList<Map<String, String>> outputMap = new ArrayList<>();
 
@@ -54,16 +65,18 @@ public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
                 map.put("username", club.getUsername());
                 map.put("email", club.getEmail());
                 map.put("description", club.getClubDescription());
-                map.put("numMembers", club.getClubMembers().size().toString());
+                map.put("numMembers", club.getClubMembersNames().size().toString());
                 outputMap.add(map);
             }
-            final ArrayList<String> joinedClubsEmails = new ArrayList<>();
-            for (Club club : joinedClubs.getAll()) {
-                joinedClubsEmails.add(club.getEmail());
+            final ArrayList<String> joinedEmails = new ArrayList<>();
+            int i = 0;
+            while (i < joinedClubsEmails.size()) {
+                joinedEmails.add(joinedClubsEmails.getByIndex(i));
+                i++;
             }
 
             final ExploreClubsOutputData outputData = new ExploreClubsOutputData(
-                    outputMap, false, student.getEmail(), joinedClubsEmails);
+                    outputMap, false, student.getEmail(), joinedEmails);
             exploreClubsPresenter.prepareSuccessView(outputData);
         }
     }

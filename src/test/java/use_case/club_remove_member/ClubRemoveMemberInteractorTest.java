@@ -61,13 +61,15 @@ public class ClubRemoveMemberInteractorTest {
 
                 // Get the updated members
                 Club updatedClub = userRepository.getClub(clubEmail);
-                DataStore<Student> members = updatedClub.getClubMembers();
+
+                DataStore<String> membersName = updatedClub.getClubMembersNames();
+                DataStore<String> membersEmail = updatedClub.getClubMembersEmails();
 
                 // Verify that every student in the members list is
                 int index = 0;
-                while (index < members.size()) {
-                    String studentEmail = members.getByIndex(index).getEmail();
-                    String studentUsername = members.getByIndex(index).getUsername();
+                while (index < membersName.size()) {
+                    String studentEmail = membersEmail.getByIndex(index);
+                    String studentUsername = membersName.getByIndex(index);
 
                     // We check the email first since it is unique.
                     assertNotEquals(outputData.getStudentEmail(), studentEmail);
@@ -75,7 +77,7 @@ public class ClubRemoveMemberInteractorTest {
                     // We check the username second since they are also unique.
                     assertNotEquals(outputData.getStudentUsername(),studentUsername);
 
-                    // Increment
+                     // Increment
                     index++;
                 }
             }
@@ -94,7 +96,7 @@ public class ClubRemoveMemberInteractorTest {
         }
 
         // Check that the club has no members since we in theory removed all members
-        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembers().size();
+        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembersEmails().size();
         assertEquals(0, numberOfMembers);
     }
 
@@ -131,10 +133,12 @@ public class ClubRemoveMemberInteractorTest {
 
                 // Get the members of the updated club;
                 Club updatedClub = userRepository.getClub(clubEmail);
-                DataStore<Student> members = updatedClub.getClubMembers();
+
+                DataStore<String> membersName = updatedClub.getClubMembersNames();
+                DataStore<String> membersEmail = updatedClub.getClubMembersEmails();
 
                 // Check that the removed member is not in the members list of the club
-                int size = members.size();
+                int size = membersEmail.size();
                 assertEquals(0, size);
             }
 
@@ -201,7 +205,7 @@ public class ClubRemoveMemberInteractorTest {
                 userRepository, failurePresenter);
         interactor.execute(inputData);
 
-        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembers().size();
+        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembersEmails().size();
         assertEquals(10, numberOfMembers);
     }
 
@@ -252,7 +256,7 @@ public class ClubRemoveMemberInteractorTest {
                 userRepository, failurePresenter);
         interactor.execute(inputData);
 
-        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembers().size();
+        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembersEmails().size();
         assertEquals(10, numberOfMembers);
     }
 
@@ -297,7 +301,7 @@ public class ClubRemoveMemberInteractorTest {
                 userRepository, failurePresenter);
         interactor.execute(inputData);
 
-        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembers().size();
+        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembersEmails().size();
         assertEquals(0, numberOfMembers);
 
     }

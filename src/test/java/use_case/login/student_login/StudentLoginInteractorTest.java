@@ -51,7 +51,7 @@ public class StudentLoginInteractorTest {
                 assertEquals(dbStudent.getUsername(), studentLoginOutputData.getUsername());
 
                 // Check that the number of clubs joined is 0 since it is a new student
-                int sizeJoinedClubs = dbStudent.getJoinedClubs().size();
+                int sizeJoinedClubs = dbStudent.getJoinedClubsEmails().size();
                 assertEquals(0, sizeJoinedClubs);
             }
 
