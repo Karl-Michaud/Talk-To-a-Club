@@ -74,6 +74,21 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
 //    }
 
     @Override
+    public ArrayList<Club> getStudentJoinedClubs(Student student) {
+        final DataStore<Club> clubs = clubMap.get("clubs");
+        final ArrayList<Club> joinedClubs = new ArrayList<>();
+        int index = 0;
+        while (index < clubs.size()) {
+            final Club currClub = clubs.getByIndex(index);
+            if (currClub.getClubMembersEmails().contains(student.getEmail())) {
+                joinedClubs.add(currClub);
+            }
+            index++;
+        }
+        return joinedClubs;
+    }
+
+    @Override
     public ArrayList<Post> getPosts(Club club) {
         final DataStore<ArrayList<Post>> posts = clubMap.get("posts");
         final DataStore<Club> clubs = clubMap.get("clubs");
