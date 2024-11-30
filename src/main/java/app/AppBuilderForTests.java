@@ -79,22 +79,15 @@ import use_case.signup.club_signup.ClubSignupOutputBoundary;
 import use_case.signup.student_signup.StudentSignupInputBoundary;
 import use_case.signup.student_signup.StudentSignupInteractor;
 import use_case.signup.student_signup.StudentSignupOutputBoundary;
-import use_case.student_homepage.dislike.StudentDislikeOutputBoundary;
-import use_case.student_homepage.like.StudentLikeOutputBoundary;
-import view.ClubSignupView;
-import view.ClubCreatePostView;
-import view.LoginView;
-import view.StudentHomeView;
-import view.StudentSignupView;
-import view.ViewManager;
-
 import use_case.student_homepage.StudentHomeInputBoundary;
 import use_case.student_homepage.StudentHomeInteractor;
 import use_case.student_homepage.StudentHomeOutputBoundary;
 import use_case.student_homepage.dislike.StudentDislikeInputBoundary;
 import use_case.student_homepage.dislike.StudentDislikeInteractor;
+import use_case.student_homepage.dislike.StudentDislikeOutputBoundary;
 import use_case.student_homepage.like.StudentLikeInputBoundary;
 import use_case.student_homepage.like.StudentLikeInteractor;
+import use_case.student_homepage.like.StudentLikeOutputBoundary;
 import use_case.student_homepage.show_clubs.StudentShowClubsInputBoundary;
 import use_case.student_homepage.show_clubs.StudentShowClubsInteractor;
 import use_case.student_homepage.show_clubs.StudentShowClubsOutputBoundary;
@@ -104,29 +97,31 @@ import use_case.student_homepage.show_posts.StudentShowPostsOutputBoundary;
 import use_case.student_profile.StudentProfileInputBoundary;
 import use_case.student_profile.StudentProfileInteractor;
 import use_case.student_profile.StudentProfileOutputBoundary;
-import view.*;
+import view.ClubCreatePostView;
+import view.ClubLoggedInView;
+import view.ClubSignupView;
+import view.LoginView;
+import view.StudentHomeView;
+import view.StudentProfileView;
+import view.StudentSignupView;
+import view.ViewManager;
 
-// Checkstyle note: you can ignore the "Class Data Abstraction Coupling"
-//                  and the "Class Fan-Out Complexity" issues for this lab; we encourage
-//                  your team to think about ways to refactor the code to resolve these
-//                  if your team decides to work with this as your starter code
-//                  for your final project this term.
+// Note: Checkstyle will be ignored in this file, as this is dedicated solely to tests. We will not fix the coupling
+//       error given by checkstyle.
 /**
- * The AppBuilder class is responsible for putting together the pieces of
+ * The AppBuilder class dedicated to tests only. It is responsible for putting together the pieces of
  * our CA architecture; piece by piece.
- * <p/>
  * This is done by adding each View and then adding related Use Cases.
  */
-public class AppBuilder {
+public class AppBuilderForTests {
     private final JPanel cardPanel = new JPanel();
     private final CardLayout cardLayout = new CardLayout();
-    // thought question: is the hard dependency below a problem?
+
     private final StudentUserFactory studentFactory = new StudentUserFactory();
     private final ClubUserFactory clubFactory = new ClubUserFactory();
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private final ViewManager viewManager = new ViewManager(cardLayout, cardPanel, viewManagerModel);
 
-    // thought question: is the hard dependency below a problem?
     private final InMemoryUserDataAccessObject inMemoryUserDataAccessObject = new InMemoryUserDataAccessObject();
 
     private ClubSignupViewModel clubSignupViewModel;
@@ -150,7 +145,7 @@ public class AppBuilder {
     private StudentProfileViewModel studentProfileViewModel;
     private StudentProfileView studentProfileView;
 
-    public AppBuilder() {
+    public AppBuilderForTests() {
         cardPanel.setLayout(cardLayout);
     }
 
@@ -158,7 +153,7 @@ public class AppBuilder {
      * Adds the Club Signup View to the application.
      * @return this builder
      */
-    public AppBuilder addClubSignupView() {
+    public AppBuilderForTests addClubSignupView() {
         clubSignupViewModel = new ClubSignupViewModel();
         clubSignupView = new ClubSignupView(clubSignupViewModel);
         cardPanel.add(clubSignupView, clubSignupView.getViewName());
@@ -169,7 +164,7 @@ public class AppBuilder {
      * Adds the Student Signup View to the application.
      * @return this builder
      */
-    public AppBuilder addStudentSignupView() {
+    public AppBuilderForTests addStudentSignupView() {
         studentSignupViewModel = new StudentSignupViewModel();
         studentSignupView = new StudentSignupView(studentSignupViewModel);
         cardPanel.add(studentSignupView, studentSignupView.getViewName());
@@ -180,7 +175,7 @@ public class AppBuilder {
      * Adds the Login View to the application.
      * @return this builder
      */
-    public AppBuilder addLoginView() {
+    public AppBuilderForTests addLoginView() {
         loginViewModel = new interface_adapter.login.LoginViewModel();
         loginView = new LoginView(loginViewModel);
         cardPanel.add(loginView, loginView.getViewName());
@@ -191,7 +186,7 @@ public class AppBuilder {
      * Adds the Club Home View to the application.
      * @return this builder
      */
-    public AppBuilder addClubHomeView() {
+    public AppBuilderForTests addClubHomeView() {
         clubLoggedInViewModel = new ClubLoggedInViewModel();
         clubLoggedInView = new ClubLoggedInView(clubLoggedInViewModel);
         cardPanel.add(clubLoggedInView, clubLoggedInView.getViewName());
@@ -202,7 +197,7 @@ public class AppBuilder {
      * Adds the Student Home View to the application.
      * @return this builder
      */
-    public AppBuilder addStudentHomeView() {
+    public AppBuilderForTests addStudentHomeView() {
         studentHomeViewModel = new StudentHomeViewModel();
         studentHomeView = new StudentHomeView(studentHomeViewModel);
         cardPanel.add(studentHomeView, studentHomeView.getViewName());
@@ -213,7 +208,7 @@ public class AppBuilder {
      * Adds the Student Profile View to the application.
      * @return this builder
      */
-    public AppBuilder addStudentProfileView() {
+    public AppBuilderForTests addStudentProfileView() {
         studentProfileViewModel = new StudentProfileViewModel();
         studentProfileView = new StudentProfileView(studentProfileViewModel);
         cardPanel.add(studentProfileView, studentProfileView.getViewName());
@@ -224,7 +219,7 @@ public class AppBuilder {
      * Adds the Club Create Post View to the application.
      * @return this builder
      */
-    public AppBuilder addCreatePostView() {
+    public AppBuilderForTests addCreatePostView() {
         clubCreatePostViewModel = new ClubCreatePostViewModel();
         clubCreatePostView = new ClubCreatePostView(clubCreatePostViewModel);
         cardPanel.add(clubCreatePostView, clubCreatePostView.getViewName());
@@ -235,7 +230,7 @@ public class AppBuilder {
      * Adds the Club Signup Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addClubSignupUseCase() {
+    public AppBuilderForTests addClubSignupUseCase() {
         final ClubSignupOutputBoundary signupOutputBoundary = new ClubSignupPresenter(viewManagerModel,
                 clubSignupViewModel, loginViewModel);
 
@@ -251,7 +246,7 @@ public class AppBuilder {
      * Adds the Student Signup Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addStudentSignupUseCase() {
+    public AppBuilderForTests addStudentSignupUseCase() {
         final StudentSignupOutputBoundary signupOutputBoundary = new StudentSignupPresenter(viewManagerModel,
                 studentSignupViewModel, loginViewModel);
 
@@ -268,7 +263,7 @@ public class AppBuilder {
      * Adds the Club Login Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addClubLoginUseCase() {
+    public AppBuilderForTests addClubLoginUseCase() {
         final ClubLoginOutputBoundary loginOutputBoundary = new ClubLoginPresenter(viewManagerModel,
                 clubLoggedInViewModel, clubSignupViewModel, loginViewModel);
         final ClubLoginInputBoundary loginInteractor = new ClubLoginInteractor(
@@ -283,7 +278,7 @@ public class AppBuilder {
      * Adds the Student Login Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addStudentLoginUseCase() {
+    public AppBuilderForTests addStudentLoginUseCase() {
         final StudentLoginOutputBoundary loginOutputBoundary = new StudentLoginPresenter(viewManagerModel,
                 studentHomeViewModel, studentSignupViewModel, loginViewModel);
         final StudentLoginInputBoundary loginInteractor = new StudentLoginInteractor(
@@ -294,7 +289,11 @@ public class AppBuilder {
         return this;
     }
 
-    public AppBuilder addStudentHomeUseCase() {
+    /**
+     * Adds the student home use case to the application.
+     * @return this builder
+     */
+    public AppBuilderForTests addStudentHomeUseCase() {
         final StudentHomeOutputBoundary studentHomeOutputBoundary = new StudentHomePresenter(studentHomeViewModel,
                 viewManagerModel, loginViewModel, studentProfileViewModel);
         final StudentHomeInputBoundary studentHomeInteractor = new StudentHomeInteractor(studentHomeOutputBoundary);
@@ -304,42 +303,70 @@ public class AppBuilder {
         return this;
     }
 
-    public AppBuilder addShowPostsUseCase() {
-        final StudentShowPostsOutputBoundary studentShowPostsOutputBoundary = new StudentShowPostsPresenter(studentHomeViewModel, viewManagerModel);
-        final StudentShowPostsInputBoundary showPostsInteractor = new StudentShowPostsInteractor(inMemoryUserDataAccessObject,
-                studentShowPostsOutputBoundary);
+    /**
+     * Adds the show posts use case to the app.
+     * @return this builder
+     */
+    public AppBuilderForTests addShowPostsUseCase() {
+        final StudentShowPostsOutputBoundary studentShowPostsOutputBoundary = new StudentShowPostsPresenter(
+                studentHomeViewModel, viewManagerModel);
+        final StudentShowPostsInputBoundary showPostsInteractor = new StudentShowPostsInteractor(
+                inMemoryUserDataAccessObject, studentShowPostsOutputBoundary);
 
-        final StudentShowPostsController studentShowPostsController = new StudentShowPostsController(showPostsInteractor);
+        final StudentShowPostsController studentShowPostsController = new StudentShowPostsController(
+                showPostsInteractor);
         studentHomeView.setShowPostsController(studentShowPostsController);
         return this;
     }
 
-    public AppBuilder addShowClubsUseCase() {
-        final StudentShowClubsOutputBoundary studentShowClubsOutputBoundary = new StudentShowClubsPresenter(studentHomeViewModel, viewManagerModel);
-        final StudentShowClubsInputBoundary showClubsInteractor = new StudentShowClubsInteractor(studentShowClubsOutputBoundary,
-                inMemoryUserDataAccessObject);
-        final StudentShowClubsController studentShowClubsController = new StudentShowClubsController(showClubsInteractor);
+    /**
+     * Adds the show clubs use case to the app.
+     * @return this builder
+     */
+    public AppBuilderForTests addShowClubsUseCase() {
+        final StudentShowClubsOutputBoundary studentShowClubsOutputBoundary = new StudentShowClubsPresenter(
+                studentHomeViewModel, viewManagerModel);
+        final StudentShowClubsInputBoundary showClubsInteractor = new StudentShowClubsInteractor(
+                studentShowClubsOutputBoundary, inMemoryUserDataAccessObject);
+        final StudentShowClubsController studentShowClubsController = new StudentShowClubsController(
+                showClubsInteractor);
         studentHomeView.setShowClubsController(studentShowClubsController);
         return this;
     }
 
-    public AppBuilder addLikeUseCase() {
-        final StudentLikeOutputBoundary studentLikeOutputBoundary = new StudentLikePresenter(studentHomeViewModel, viewManagerModel);
-        final StudentLikeInputBoundary likeInteractor = new StudentLikeInteractor(inMemoryUserDataAccessObject, inMemoryUserDataAccessObject, studentLikeOutputBoundary);
+    /**
+     * Adds the like use case to the app.
+     * @return this builder
+     */
+    public AppBuilderForTests addLikeUseCase() {
+        final StudentLikeOutputBoundary studentLikeOutputBoundary = new StudentLikePresenter(studentHomeViewModel,
+                viewManagerModel);
+        final StudentLikeInputBoundary likeInteractor = new StudentLikeInteractor(inMemoryUserDataAccessObject,
+                inMemoryUserDataAccessObject, studentLikeOutputBoundary);
         final StudentLikeController likeController = new StudentLikeController(likeInteractor);
         studentHomeView.setLikeController(likeController);
         return this;
     }
 
-    public AppBuilder addDislikeUseCase() {
-        final StudentDislikeOutputBoundary studentDislikeOutputBoundary = new StudentDislikePresenter(studentHomeViewModel, viewManagerModel);
-        final StudentDislikeInputBoundary dislikeInteractor = new StudentDislikeInteractor(inMemoryUserDataAccessObject, inMemoryUserDataAccessObject, studentDislikeOutputBoundary);
+    /**
+     * Adds the dislike use case to the app.
+     * @return this builder.
+     */
+    public AppBuilderForTests addDislikeUseCase() {
+        final StudentDislikeOutputBoundary studentDislikeOutputBoundary = new StudentDislikePresenter(
+                studentHomeViewModel, viewManagerModel);
+        final StudentDislikeInputBoundary dislikeInteractor = new StudentDislikeInteractor(inMemoryUserDataAccessObject,
+                inMemoryUserDataAccessObject, studentDislikeOutputBoundary);
         final StudentDislikeController dislikeController = new StudentDislikeController(dislikeInteractor);
         studentHomeView.setDislikeController(dislikeController);
         return this;
     }
 
-    public AppBuilder addStudentProfileUseCase() {
+    /**
+     * Adds the student profile use case to the app.
+     * @return this builder
+     */
+    public AppBuilderForTests addStudentProfileUseCase() {
         final StudentProfileOutputBoundary studentProfileOutputBoundary = new StudentProfilePresenter(viewManagerModel,
                 studentProfileViewModel, studentHomeViewModel);
         final StudentProfileInputBoundary studentProfileInteractor = new StudentProfileInteractor(
@@ -356,7 +383,7 @@ public class AppBuilder {
      * Adds the Club Create Post use case to the application.
      * @return this builder
      */
-    public AppBuilder addClubCreatePostUseCase() {
+    public AppBuilderForTests addClubCreatePostUseCase() {
         final ClubCreatePostOutputBoundary clubCreatePostOutputBoundary = new ClubCreatePostPresenter(
                 clubCreatePostViewModel, clubLoggedInViewModel, viewManagerModel);
         final ClubCreatePostInputBoundary clubCreatePostInteractor = new ClubCreatePostInteractor(
@@ -372,7 +399,7 @@ public class AppBuilder {
      * Adds the Club Get Members use case to the application.
      * @return this builder
      */
-    public AppBuilder addClubGetMembersUseCase() {
+    public AppBuilderForTests addClubGetMembersUseCase() {
         final ClubGetMembersOutputBoundary clubGetMembersOutputBoundary = new ClubGetMembersPresenter(
                 clubLoggedInViewModel, viewManagerModel);
         final ClubGetMembersInputBoundary clubGetMembersInteractor = new ClubGetMembersInteractor(
@@ -387,7 +414,7 @@ public class AppBuilder {
      * Adds the Logout use case to the application.
      * @return this builder
      */
-    public AppBuilder addLogoutUseCase() {
+    public AppBuilderForTests addLogoutUseCase() {
         final LogoutOutputBoundary logoutOutputBoundary = new LogoutPresenter(loginViewModel, viewManagerModel);
         final LogoutInputBoundary logoutInteractor = new LogoutInteractor(logoutOutputBoundary);
 
@@ -401,9 +428,11 @@ public class AppBuilder {
      * Adds the Club Get Posts use case to the application.
      * @return this builder
      */
-    public AppBuilder addClubGetPostsUseCase() {
-        final ClubGetPostsOutputBoundary clubGetPostsOutputBoundary = new ClubGetPostsPresenter(clubLoggedInViewModel, viewManagerModel);
-        final ClubGetPostsInputBoundary clubGetPostsInteractor = new ClubGetPostsInteractor(inMemoryUserDataAccessObject, clubGetPostsOutputBoundary);
+    public AppBuilderForTests addClubGetPostsUseCase() {
+        final ClubGetPostsOutputBoundary clubGetPostsOutputBoundary = new ClubGetPostsPresenter(clubLoggedInViewModel,
+                viewManagerModel);
+        final ClubGetPostsInputBoundary clubGetPostsInteractor = new ClubGetPostsInteractor(
+                inMemoryUserDataAccessObject, clubGetPostsOutputBoundary);
 
         final ClubGetPostsController clubGetPostsController = new ClubGetPostsController(clubGetPostsInteractor);
         clubLoggedInView.setClubGetPostsController(clubGetPostsController);
@@ -414,11 +443,14 @@ public class AppBuilder {
      * Adds the Club Update Description use case to the application.
      * @return this builder
      */
-    public AppBuilder addClubUpdateDescUseCase() {
-        final ClubUpdateDescOutputBoundary clubUpdateDescOutputBoundary = new ClubUpdateDescPresenter(clubLoggedInViewModel, viewManagerModel);
-        final ClubUpdateDescInputBoundary clubUpdateDescInteractor = new ClubUpdateDescInteractor(inMemoryUserDataAccessObject, clubUpdateDescOutputBoundary);
+    public AppBuilderForTests addClubUpdateDescUseCase() {
+        final ClubUpdateDescOutputBoundary clubUpdateDescOutputBoundary = new ClubUpdateDescPresenter(
+                clubLoggedInViewModel, viewManagerModel);
+        final ClubUpdateDescInputBoundary clubUpdateDescInteractor = new ClubUpdateDescInteractor(
+                inMemoryUserDataAccessObject, clubUpdateDescOutputBoundary);
 
-        final ClubUpdateDescController clubUpdateDescController = new ClubUpdateDescController(clubUpdateDescInteractor);
+        final ClubUpdateDescController clubUpdateDescController = new ClubUpdateDescController(
+                clubUpdateDescInteractor);
         clubLoggedInView.setClubUpdateDescController(clubUpdateDescController);
         return this;
     }
@@ -427,11 +459,14 @@ public class AppBuilder {
      * Adds the CLub Remove Member use case to the application.
      * @return this builder
      */
-    public AppBuilder addClubRemoveMemberUseCase() {
-        final ClubRemoveMemberOutputBoundary clubRemoveMemberOutputBoundary = new ClubRemoveMemberPresenter(clubLoggedInViewModel, viewManagerModel);
-        final ClubRemoveMemberInputBoundary clubRemoveMemberInteractor = new ClubRemoveMemberInteractor(inMemoryUserDataAccessObject, inMemoryUserDataAccessObject, clubRemoveMemberOutputBoundary);
+    public AppBuilderForTests addClubRemoveMemberUseCase() {
+        final ClubRemoveMemberOutputBoundary clubRemoveMemberOutputBoundary = new ClubRemoveMemberPresenter(
+                clubLoggedInViewModel, viewManagerModel);
+        final ClubRemoveMemberInputBoundary clubRemoveMemberInteractor = new ClubRemoveMemberInteractor(
+                inMemoryUserDataAccessObject, inMemoryUserDataAccessObject, clubRemoveMemberOutputBoundary);
 
-        final ClubRemoveMemberController clubRemoveMemberController = new ClubRemoveMemberController(clubRemoveMemberInteractor);
+        final ClubRemoveMemberController clubRemoveMemberController = new ClubRemoveMemberController(
+                clubRemoveMemberInteractor);
         clubLoggedInView.setClubRemoveMemberController(clubRemoveMemberController);
         return this;
     }
@@ -441,7 +476,7 @@ public class AppBuilder {
      * @return the application
      */
     public JFrame build() {
-        final JFrame application = new JFrame("Login Example");
+        final JFrame application = new JFrame("Talk To A Club");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         application.add(cardPanel);
