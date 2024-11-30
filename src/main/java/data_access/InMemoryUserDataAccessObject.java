@@ -28,6 +28,11 @@ import use_case.student_join_club.ClubStudentJoinClubDataAccessInterface;
 import use_case.student_leave_club.StudentLeaveClubDataAccessInterface;
 import use_case.student_leave_club.ClubStudentLeaveClubDataAccessInterface;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
  * NOT persist data between runs of the program.
@@ -46,29 +51,57 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
         StudentLeaveClubDataAccessInterface, ClubStudentLeaveClubDataAccessInterface {
 
     private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
-    private final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
+    private final Map<String, DataStore> clubMap = new HashMap<>();
 
     public InMemoryUserDataAccessObject() {
-        final Club club = new Club("test", "@.", "123123123", new DataStoreArrays<>(),
-                new DataStoreArrays<>());
-        final Student student = new Student("student", "student@.", "123123123", new DataStoreArrays<>());
-        studentArrayList.add(student);
-        student.joinClub(club);
-        System.out.println(studentArrayList.size());
-        club.addClubMember(student);
-        clubArrayList.add(club);
+        final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
+        final DataStoreArrays<ArrayList<Post>> postArrayList = new DataStoreArrays<>();
+        clubMap.put("clubs", clubArrayList);
+        clubMap.put("posts", postArrayList);
+    }
 
-        // TODO REMOVE THIS AFTER TESTING REMOVE MEMBERS
+//    public InMemoryUserDataAccessObject() {
+//        final Club club = new Club("test", "@.", "123123123", new DataStoreArrays<>(),
+//                new DataStoreArrays<>());
+//        final Student student = new Student("student", "student@.", "123123123", new DataStoreArrays<>());
+//        studentArrayList.add(student);
+//        student.joinClub(club);
+//        System.out.println(studentArrayList.size());
+//        club.addClubMember(student);
+//        clubArrayList.add(club);
+//
+//        // TODO REMOVE THIS AFTER TESTING REMOVE MEMBERS
+//    }
+
+    @Override
+    public ArrayList<Post> getPosts(Club club) {
+        final DataStore<ArrayList<Post>> posts = clubMap.get("posts");
+        final DataStore<Club> clubs = clubMap.get("clubs");
+        ArrayList<Post> clubPosts = null;
+        int index = 0;
+        while (index < clubs.size()) {
+            final String clubEmail = clubs.getByIndex(index).getEmail();
+            if (clubEmail.equals(club.getEmail())) {
+                clubPosts = posts.getByIndex(index);
+                break;
+            }
+            index++;
+        }
+        return clubPosts;
     }
 
     @Override
     public boolean existsByNameClub(String identifier) {
         boolean found = false;
-        for (Club club : clubArrayList) {
+        final DataStore<Club> clubs = clubMap.get("clubs");
+        int index = 0;
+        while (index < clubs.size()) {
+            final Club club = clubs.getByIndex(index);
             if (club.getUsername().equals(identifier)) {
                 found = true;
                 break;
             }
+            index++;
         }
         return found;
     }
@@ -88,23 +121,23 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
     @Override
     public boolean existsByEmailClub(String identifier) {
         boolean found = false;
-        for (Club club : clubArrayList) {
+        final DataStore<Club> clubs = clubMap.get("clubs");
+        int index = 0;
+        while (index < clubs.size()) {
+            final Club club = clubs.getByIndex(index);
             if (club.getEmail().equals(identifier)) {
                 found = true;
                 break;
             }
+            index++;
         }
         return found;
     }
 
     @Override
     public void updateClubDescription(Club club) {
-        for (Club currentClub : clubArrayList) {
-            if (currentClub.getEmail().equals(club.getEmail())) {
-                currentClub.setClubDescription(club.getClubDescription());
-                break;
-            }
-        }
+        clubMap.get("clubs").remove(club);
+        clubMap.get("clubs").add(club);
     }
 
     @Override
@@ -123,7 +156,7 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
 
     @Override
     public void saveClub(Club club) {
-        clubArrayList.add(club);
+        clubMap.get("clubs").add(club);
     }
 
     @Override
@@ -134,21 +167,24 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
     @Override
     public Club getClub(String email) {
         Club clubFound = null;
-        for (Club club : clubArrayList) {
+        final DataStore<Club> clubs = clubMap.get("clubs");
+        int index = 0;
+        while (index < clubs.size()) {
+            final Club club = clubs.getByIndex(index);
             if (club.getEmail().equals(email)) {
                 clubFound = club;
                 break;
             }
+            index++;
         }
-        // This should not be returned as null since the precondition states that the club must exist.
         return clubFound;
     }
 
     @Override
     public void updateClubMembers(Club club) {
         // The club should already be updated in the in memory model, since the entity objects are stored
-        this.clubArrayList.remove(club);
-        this.clubArrayList.add(club);
+        clubMap.get("clubs").remove(club);
+        clubMap.get("clubs").add(club);
     }
 
     @Override
@@ -172,16 +208,12 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
 
     @Override
     public void savePost(Post post, Club club) {
-        for (Club current: clubArrayList) {
-            if (current.getUsername().equals(club.getUsername())) {
-                current.addClubPost(post);
-                break;
-            }
-        }
+        clubMap.get("posts").remove(post);
+        clubMap.get("posts").add(post);
     }
 
     @Override
     public DataStore<Club> getAllClubs() {
-        return this.clubArrayList;
+        return clubMap.get("clubs");
     }
 }

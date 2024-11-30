@@ -1,5 +1,7 @@
 package use_case.student_homepage.like;
 
+import java.util.ArrayList;
+
 import entity.post.Post;
 import entity.user.Club;
 
@@ -22,4 +24,10 @@ public interface StudentLikeClubDataAccessInterface {
      * @param post The post which is being liked/ unliked.
      */
     void savePost(Post post, Club club);
+
+    /**
+     * Gets the posts of a given club.
+     * @param club the club
+     */
+    ArrayList<Post> getPosts(Club club);
 }
