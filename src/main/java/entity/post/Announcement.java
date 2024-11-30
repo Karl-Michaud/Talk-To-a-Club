@@ -75,7 +75,7 @@ public class Announcement implements Post {
 
     @Override
     public DataStore<String> getLikes() {
-        return this.userDisliked;
+        return this.userLiked;
     }
 
     @Override
