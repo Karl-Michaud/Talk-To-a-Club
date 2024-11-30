@@ -37,10 +37,11 @@ public class StudentLikeInteractorTest {
         Post post = postFactory.create("Black and White Photo contest announcement.", "We're planning to host"
                 + "a photo contest around the theme black and white photos and would like to hear your feedback!" +
                 " Get creative," + "ditch the colors, and win prizes!");
-
         club.addClubPost(post);
         dao.saveClub(club);
+        dao.savePost(post, club);
         dao.saveStudent(student);
+
         // Input Data
         Map<String, Object> postData = new HashMap<String, Object>();
         postData.put("title", post.getTitle());
@@ -94,8 +95,8 @@ public class StudentLikeInteractorTest {
                 + "a photo contest around the theme black and white photos and would like to hear your feedback!" +
                 " Get creative," + "ditch the colors, and win prizes!");
         post.addLike(student);
-        club.addClubPost(post);
         dao.saveClub(club);
+        dao.savePost(post, club);
         dao.saveStudent(student);
         // Input Data
         Map<String, Object> postData = new HashMap<String, Object>();

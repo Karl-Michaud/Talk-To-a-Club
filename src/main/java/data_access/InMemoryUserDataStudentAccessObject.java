@@ -202,7 +202,8 @@ public class InMemoryUserDataStudentAccessObject implements ClubSignupUserDataAc
 
     @Override
     public void updateStudentClubsJoined(Student student) {
-        saveStudent(student);
+        studentArrayList.remove(student);
+        studentArrayList.add(student);
     }
 
     @Override

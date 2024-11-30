@@ -77,7 +77,7 @@ public class ClubRemoveMemberInteractorTest {
                     // We check the username second since they are also unique.
                     assertNotEquals(outputData.getStudentUsername(),studentUsername);
 
-                    // Increment
+                     // Increment
                     index++;
                 }
             }

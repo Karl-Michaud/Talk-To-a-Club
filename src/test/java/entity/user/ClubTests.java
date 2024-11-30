@@ -66,7 +66,7 @@ public class ClubTests {
         ArrayList<Student> tracker = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Student student = studentFactory.create("members" + String.valueOf(i),
-                    "member@" + String.valueOf(i), "123123123");
+                    "members@" + String.valueOf(i), "123123123");
             testClub.addClubMember(student);
             tracker.add(student);
         }
@@ -79,6 +79,10 @@ public class ClubTests {
         for (int i = 0; i < 10; i++) {
             assertEquals(testClub.getClubMembersEmails().getByIndex(i), "members@" + String.valueOf(i));
             assertEquals(testClub.getClubMembersNames().getByIndex(i), "members" + String.valueOf(i));
+        }
+
+        // Remove all members
+        for (int i = 0; i < 10; i++) {
             testClub.removeClubMember(tracker.get(i));
         }
         int sizeAfterRemoveEmails = testClub.getClubMembersEmails().size();
