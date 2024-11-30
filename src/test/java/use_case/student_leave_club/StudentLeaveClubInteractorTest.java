@@ -1,10 +1,9 @@
 package use_case.student_leave_club;
 
-import data_access.InMemoryUserDataAccessObject;
+import data_access.InMemoryUserDataStudentAccessObject;
 import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
-import entity.user.Club;
-import entity.user.Student;
+import entity.user.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,16 +12,16 @@ public class StudentLeaveClubInteractorTest {
     @Test
     void successTest() {
         // Set up in-memory repositories
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Create a club
-        DataStore<Student> clubMembers = new DataStoreArrays<>();
-        Club club = new Club("Photography Club", "photo@university.com", "password", clubMembers, null);
+        ClubFactory clubFactory = new ClubUserFactory();
+        Club club = clubFactory.create("Photography Club", "photo@university.com", "password");
         club.setClubDescription("For photography enthusiasts.");
 
         // Create a student already in the club
-        DataStore<Club> joinedClubs = new DataStoreArrays<>();
-        Student student = new Student("Alice", "alice@university.com", "password", joinedClubs);
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Alice", "alice@university.com", "password");
         student.joinClub(club);
         club.addClubMember(student);
         userRepository.saveStudent(student);
@@ -37,8 +36,8 @@ public class StudentLeaveClubInteractorTest {
             public void prepareSuccessView(StudentLeaveClubOutputData data) {
                 assertEquals("Alice", data.getUsername());
                 assertFalse(data.isUseCaseFailed());
-                assertFalse(club.getClubMembers().contains(student));
-                assertFalse(student.getJoinedClubs().contains(club));
+                assertFalse(club.getClubMembersEmails().contains(student.getEmail()));
+                assertFalse(student.getJoinedClubsEmails().contains(club.getEmail()));
             }
 
             @Override
@@ -55,11 +54,11 @@ public class StudentLeaveClubInteractorTest {
     @Test
     void clubDoesNotExistTest() {
         // Set up in-memory repositories
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Create a student
-        DataStore<Club> joinedClubs = new DataStoreArrays<>();
-        Student student = new Student("Alice", "alice@university.com", "password", joinedClubs);
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Alice", "alice@university.com", "password");
         userRepository.saveStudent(student);
 
         // Input data with a non-existent club
@@ -86,17 +85,17 @@ public class StudentLeaveClubInteractorTest {
     @Test
     void studentNotInClubTest() {
         // Set up in-memory repositories
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Create a club
-        DataStore<Student> clubMembers = new DataStoreArrays<>();
-        Club club = new Club("Photography Club", "photo@university.com", "password", clubMembers, null);
+        ClubFactory clubFactory = new ClubUserFactory();
+        Club club = clubFactory.create("Photography Club", "photo@university.com", "password");
         club.setClubDescription("For photography enthusiasts.");
         userRepository.saveClub(club);
 
         // Create a student not in the club
-        DataStore<Club> joinedClubs = new DataStoreArrays<>();
-        Student student = new Student("Alice", "alice@university.com", "password", joinedClubs);
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Alice", "alice@university.com", "password");
         userRepository.saveStudent(student);
 
         // Input data

@@ -1,6 +1,6 @@
 package use_case.club_remove_member;
 
-import data_access.InMemoryUserDataAccessObject;
+import data_access.InMemoryUserDataStudentAccessObject;
 import entity.data_structure.DataStore;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ public class ClubRemoveMemberInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Add 10 test members to the club and save the students.
         ArrayList<Student> membersList = new ArrayList<>();
@@ -61,13 +61,15 @@ public class ClubRemoveMemberInteractorTest {
 
                 // Get the updated members
                 Club updatedClub = userRepository.getClub(clubEmail);
-                DataStore<Student> members = updatedClub.getClubMembers();
+
+                DataStore<String> membersName = updatedClub.getClubMembersNames();
+                DataStore<String> membersEmail = updatedClub.getClubMembersEmails();
 
                 // Verify that every student in the members list is
                 int index = 0;
-                while (index < members.size()) {
-                    String studentEmail = members.getByIndex(index).getEmail();
-                    String studentUsername = members.getByIndex(index).getUsername();
+                while (index < membersName.size()) {
+                    String studentEmail = membersEmail.getByIndex(index);
+                    String studentUsername = membersName.getByIndex(index);
 
                     // We check the email first since it is unique.
                     assertNotEquals(outputData.getStudentEmail(), studentEmail);
@@ -94,7 +96,7 @@ public class ClubRemoveMemberInteractorTest {
         }
 
         // Check that the club has no members since we in theory removed all members
-        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembers().size();
+        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembersEmails().size();
         assertEquals(0, numberOfMembers);
     }
 
@@ -108,7 +110,7 @@ public class ClubRemoveMemberInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Add 1 student for the sake fo this test
         ArrayList<Student> membersList = new ArrayList<>();
@@ -131,10 +133,12 @@ public class ClubRemoveMemberInteractorTest {
 
                 // Get the members of the updated club;
                 Club updatedClub = userRepository.getClub(clubEmail);
-                DataStore<Student> members = updatedClub.getClubMembers();
+
+                DataStore<String> membersName = updatedClub.getClubMembersNames();
+                DataStore<String> membersEmail = updatedClub.getClubMembersEmails();
 
                 // Check that the removed member is not in the members list of the club
-                int size = members.size();
+                int size = membersEmail.size();
                 assertEquals(0, size);
             }
 
@@ -160,7 +164,7 @@ public class ClubRemoveMemberInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Add 10 test members to the club and save the students.
         ArrayList<Student> membersList = new ArrayList<>();
@@ -201,7 +205,7 @@ public class ClubRemoveMemberInteractorTest {
                 userRepository, failurePresenter);
         interactor.execute(inputData);
 
-        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembers().size();
+        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembersEmails().size();
         assertEquals(10, numberOfMembers);
     }
 
@@ -215,7 +219,7 @@ public class ClubRemoveMemberInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Add 10 test members to the club and save the students.
         ArrayList<Student> membersList = new ArrayList<>();
@@ -252,7 +256,7 @@ public class ClubRemoveMemberInteractorTest {
                 userRepository, failurePresenter);
         interactor.execute(inputData);
 
-        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembers().size();
+        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembersEmails().size();
         assertEquals(10, numberOfMembers);
     }
 
@@ -266,7 +270,7 @@ public class ClubRemoveMemberInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Create the student which is not a member of the club.
         String wrongEmail = "wrong@email.com";
@@ -297,7 +301,7 @@ public class ClubRemoveMemberInteractorTest {
                 userRepository, failurePresenter);
         interactor.execute(inputData);
 
-        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembers().size();
+        int numberOfMembers = userRepository.getClub(clubEmail).getClubMembersEmails().size();
         assertEquals(0, numberOfMembers);
 
     }

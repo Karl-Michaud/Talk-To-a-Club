@@ -1,11 +1,10 @@
 package use_case.student_homepage.show_clubs;
 
-import data_access.InMemoryUserDataAccessObject;
+import data_access.InMemoryUserDataStudentAccessObject;
 
 import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
-import entity.user.Club;
-import entity.user.Student;
+import entity.user.*;
 import org.junit.jupiter.api.Test;
 
 
@@ -19,13 +18,15 @@ public class StudentShowClubsInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
         // Create 3 example clubs and a student.
-        Club climbingClub = new Club("Climbing club", "utcc@utoronto.ca", "12345678", new DataStoreArrays<Student>(), new DataStoreArrays<Post>());
-        Club outdoorsclub = new Club("Outdoors club", "utoc@utoronto.ca", "secure", new DataStoreArrays<Student>(), new DataStoreArrays<Post>());
-        Club rlClub = new Club("Rocket League club", "rlatuoft@utoronto.ca", "more_secure", new DataStoreArrays<Student>(), new DataStoreArrays<Post>());
+        ClubFactory clubFactory = new ClubUserFactory();
+        Club climbingClub = clubFactory.create("Climbing club", "utcc@utoronto.ca", "12345678");
+        Club outdoorsclub = clubFactory.create("Outdoors club", "utoc@utoronto.ca", "secure");
+        Club rlClub = clubFactory.create("Rocket League club", "rlatuoft@utoronto.ca", "more_secure");
 
-        Student student = new Student("Fred", "frederik.brecht@mail.utoronto.ca", "password", new DataStoreArrays<>());
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Fred", "frederik.brecht@mail.utoronto.ca", "password");
         // Add the sample student as a member to the clubs.
         climbingClub.addClubMember(student);
         outdoorsclub.addClubMember(student);
@@ -85,7 +86,7 @@ public class StudentShowClubsInteractorTest {
     @Test
     void failTest() {
         // Uses an in memory database to test the use case with a club.
-        StudentShowClubsAccessInterface dao = new InMemoryUserDataAccessObject();
+        StudentShowClubsAccessInterface dao = new InMemoryUserDataStudentAccessObject();
 
         StudentShowClubsInputData inputData = new StudentShowClubsInputData("frederik.brecht@mail.utoronto.ca");
 

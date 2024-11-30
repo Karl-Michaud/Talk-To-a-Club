@@ -1,7 +1,9 @@
 package use_case.club_update_desc;
 
-import data_access.InMemoryUserDataAccessObject;
+import data_access.InMemoryUserDataStudentAccessObject;
 import entity.user.Club;
+import entity.user.ClubFactory;
+import entity.user.ClubUserFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,8 +14,11 @@ public class ClubUpdateDescInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
-        userRepository.saveClub(new Club("Roy", "ok@k.com", "password", null, null));
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+
+        // Initialize the club factory
+        ClubFactory clubFactory = new ClubUserFactory();
+        userRepository.saveClub(clubFactory.create("Roy", "ok@k.com", "password"));
 
         ClubUpdateDescInputData inputData = new ClubUpdateDescInputData("ok@k.com", "test");
 
@@ -39,7 +44,7 @@ public class ClubUpdateDescInteractorTest {
     @Test
     void failTest() {
         // Uses an in memory database to test the use case
-        ClubUpdateDescDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubUpdateDescDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
 
         ClubUpdateDescInputData inputData = new ClubUpdateDescInputData("ok@k.com", "test");
 

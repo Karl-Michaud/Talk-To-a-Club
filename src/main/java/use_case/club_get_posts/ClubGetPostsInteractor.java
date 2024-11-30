@@ -3,8 +3,6 @@ package use_case.club_get_posts;
 import java.util.ArrayList;
 
 import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
-import entity.post.Post;
 import entity.user.Club;
 
 /**

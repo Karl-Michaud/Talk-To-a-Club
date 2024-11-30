@@ -3,7 +3,6 @@ package use_case.student_homepage.like;
 import java.util.ArrayList;
 import java.util.Map;
 
-import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;

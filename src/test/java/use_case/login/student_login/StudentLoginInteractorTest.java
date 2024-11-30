@@ -1,6 +1,6 @@
 package use_case.login.student_login;
 
-import data_access.InMemoryUserDataAccessObject;
+import data_access.InMemoryUserDataStudentAccessObject;
 import entity.user.Student;
 import entity.user.StudentFactory;
 import entity.user.StudentUserFactory;
@@ -24,7 +24,7 @@ public class StudentLoginInteractorTest {
         StudentFactory studentFactory = new StudentUserFactory();
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Create the student (register)
         Student testStudent = studentFactory.create(studentUsername, studentEmail, studentPassword);
@@ -51,7 +51,7 @@ public class StudentLoginInteractorTest {
                 assertEquals(dbStudent.getUsername(), studentLoginOutputData.getUsername());
 
                 // Check that the number of clubs joined is 0 since it is a new student
-                int sizeJoinedClubs = dbStudent.getJoinedClubs().size();
+                int sizeJoinedClubs = dbStudent.getJoinedClubsEmails().size();
                 assertEquals(0, sizeJoinedClubs);
             }
 
@@ -77,7 +77,7 @@ public class StudentLoginInteractorTest {
         StudentFactory studentFactory = new StudentUserFactory();
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Create the student (register)
         Student testStudent = studentFactory.create(studentUsername, studentEmail, studentPassword);
@@ -111,7 +111,7 @@ public class StudentLoginInteractorTest {
     @Test
     public void failureTestEmptyField() {
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Create the input data
         StudentLoginInputData inputDataNoEmail = new StudentLoginInputData("", studentPassword);
@@ -149,7 +149,7 @@ public class StudentLoginInteractorTest {
         StudentFactory studentFactory = new StudentUserFactory();
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Create the student (register)
         Student testStudent = studentFactory.create(studentUsername, studentEmail, studentPassword);
@@ -190,7 +190,7 @@ public class StudentLoginInteractorTest {
         StudentFactory studentFactory = new StudentUserFactory();
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         // Create the student (register)
         Student testStudent = studentFactory.create(studentUsername, studentEmail, studentPassword);

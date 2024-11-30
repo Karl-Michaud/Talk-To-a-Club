@@ -1,13 +1,12 @@
 package use_case.student_homepage.show_posts;
 
-import data_access.InMemoryUserDataAccessObject;
+import data_access.InMemoryUserDataStudentAccessObject;
 import entity.data_structure.DataStoreArrays;
 import entity.post.Announcement;
 import entity.post.AnnouncementFactory;
 import entity.post.PostFactory;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
-import use_case.student_homepage.show_clubs.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,12 +20,13 @@ public class StudentShowPostsInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
         // Create a sample club and a student.
         UserFactory clubFactory = new ClubUserFactory();
         Club climbingClub = (Club) clubFactory.create("Climbing club", "utcc@utoronto.ca", "secure");
 
-        Student student = new Student("Fred", "frederik.brecht@mail.utoronto.ca", "password", new DataStoreArrays<>());
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Fred", "frederik.brecht@mail.utoronto.ca", "password");
 
         // Create 3 sample posts.
         PostFactory announcementFactory = new AnnouncementFactory();
@@ -37,8 +37,8 @@ public class StudentShowPostsInteractorTest {
         announcement1Data.put("content", announcement1.getContent());
         announcement1Data.put("likes", announcement1.numberOfLikes());
         announcement1Data.put("dislikes", announcement1.numberOfDislikes());
-        announcement1Data.put("liked", announcement1.getLikes().contains(student));
-        announcement1Data.put("disliked", announcement1.getDislikes().contains(student));
+        announcement1Data.put("liked", announcement1.getLikes().contains(student.getEmail()));
+        announcement1Data.put("disliked", announcement1.getDislikes().contains(student.getEmail()));
         announcement1Data.put("club-email", climbingClub.getEmail());
         announcement1Data.put("time", announcement1.timeOfPosting());
         announcement1Data.put("date", announcement1.dateOfPosting());
@@ -48,8 +48,8 @@ public class StudentShowPostsInteractorTest {
         announcement2Data.put("content", announcement2.getContent());
         announcement2Data.put("likes", announcement2.numberOfLikes());
         announcement2Data.put("dislikes", announcement2.numberOfDislikes());
-        announcement2Data.put("liked", announcement2.getLikes().contains(student));
-        announcement2Data.put("disliked", announcement2.getDislikes().contains(student));
+        announcement2Data.put("liked", announcement2.getLikes().contains(student.getEmail()));
+        announcement2Data.put("disliked", announcement2.getDislikes().contains(student.getEmail()));
         announcement2Data.put("club-email", climbingClub.getEmail());
         announcement2Data.put("time", announcement2.timeOfPosting());
         announcement2Data.put("date", announcement2.dateOfPosting());
@@ -59,8 +59,8 @@ public class StudentShowPostsInteractorTest {
         announcement3Data.put("content", announcement3.getContent());
         announcement3Data.put("likes", announcement3.numberOfLikes());
         announcement3Data.put("dislikes", announcement3.numberOfDislikes());
-        announcement3Data.put("liked", announcement3.getLikes().contains(student));
-        announcement3Data.put("disliked", announcement3.getDislikes().contains(student));
+        announcement3Data.put("liked", announcement3.getLikes().contains(student.getEmail()));
+        announcement3Data.put("disliked", announcement3.getDislikes().contains(student.getEmail()));
         announcement3Data.put("club-email", climbingClub.getEmail());
         announcement3Data.put("time", announcement3.timeOfPosting());
         announcement3Data.put("date", announcement3.dateOfPosting());
@@ -95,14 +95,14 @@ public class StudentShowPostsInteractorTest {
                 fail("Unexpected fail call.");
             }
         };
-        StudentShowPostsInputBoundary interactor = new StudentShowPostsInteractor(dao, successPresenter);
+        StudentShowPostsInputBoundary interactor = new StudentShowPostsInteractor(dao, dao, successPresenter);
         interactor.execute(inputData);
     }
 
     @Test
     void failTest() {
         // Uses an in memory database to test the use case with a club.
-        StudentShowPostsAccessInterface dao = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
 
         StudentShowPostsInputData inputData = new StudentShowPostsInputData("frederik.brecht@mail.utoronto.ca");
 
@@ -121,7 +121,7 @@ public class StudentShowPostsInteractorTest {
             }
         };
 
-        StudentShowPostsInputBoundary interactor = new StudentShowPostsInteractor(dao, successPresenter);
+        StudentShowPostsInputBoundary interactor = new StudentShowPostsInteractor(dao, dao, successPresenter);
         interactor.execute(inputData);
     }
 }

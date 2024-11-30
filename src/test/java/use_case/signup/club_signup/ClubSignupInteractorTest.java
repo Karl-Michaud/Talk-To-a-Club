@@ -1,7 +1,8 @@
 package use_case.signup.club_signup;
 
-import data_access.InMemoryUserDataAccessObject;
+import data_access.InMemoryUserDataStudentAccessObject;
 import entity.user.Club;
+import entity.user.ClubFactory;
 import entity.user.ClubUserFactory;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ public class ClubSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
 
         // This creates a successPresenter that tests whether the test case is as we expect.
         ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
@@ -48,8 +49,9 @@ public class ClubSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case and stores a Club with the same name
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-        userRepository.saveClub(new Club("test club", "ok@k.com", "pass", null, null));
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
+        ClubFactory clubFactory = new ClubUserFactory();
+        userRepository.saveClub(clubFactory.create("test club", "ok@k.com", "pass"));
 
 
         // This creates a successPresenter that tests whether the test case is as we expect.
@@ -79,8 +81,10 @@ public class ClubSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case and stores a Club with the same email
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-        userRepository.saveClub(new Club("test club", "ok@k.com", "pass", null, null));
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
+
+        ClubFactory clubFactory = new ClubUserFactory();
+        userRepository.saveClub(clubFactory.create("test club", "ok@k.com", "pass"));
 
 
         // This creates a successPresenter that tests whether the test case is as we expect.
@@ -110,7 +114,7 @@ public class ClubSignupInteractorTest {
                 "password1", "password2");
 
         // Uses an in memory database to test the use case
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
 
         // This creates a successPresenter that tests whether the test case is as we expect.
         ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
@@ -139,7 +143,7 @@ public class ClubSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
 
         // This creates a successPresenter that tests whether the test case is as we expect.
         ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
@@ -169,7 +173,7 @@ public class ClubSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
 
         // This creates a successPresenter that tests whether the test case is as we expect.
         ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
@@ -198,7 +202,7 @@ public class ClubSignupInteractorTest {
                 "passwo", "passwo");
 
         // Uses an in memory database to test the use case
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
 
         // This creates a successPresenter that tests whether the test case is as we expect.
         ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
@@ -228,7 +232,7 @@ public class ClubSignupInteractorTest {
                 password, password);
 
         // Uses an in memory database to test the use case
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
 
         // This creates a successPresenter that tests whether the test case is as we expect.
         ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
@@ -257,7 +261,7 @@ public class ClubSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
 
         // This creates a successPresenter that tests whether the test case is as we expect.
         ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
@@ -286,7 +290,7 @@ public class ClubSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
 
         // This creates a successPresenter that tests whether the test case is as we expect.
         ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
@@ -312,7 +316,7 @@ public class ClubSignupInteractorTest {
     @Test
     void switchToLoginTest() {
         // Uses an in memory database to test the use case
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
 
         // This creates a successPresenter that tests whether the test case is as we expect.
         ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {

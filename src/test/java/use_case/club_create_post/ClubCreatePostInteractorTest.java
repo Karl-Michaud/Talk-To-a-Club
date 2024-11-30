@@ -1,6 +1,6 @@
 package use_case.club_create_post;
 
-import data_access.InMemoryUserDataAccessObject;
+import data_access.InMemoryUserDataStudentAccessObject;
 import entity.user.Club;
 import entity.user.ClubFactory;
 import entity.user.ClubUserFactory;
@@ -27,7 +27,7 @@ public class ClubCreatePostInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
 
         // Save the club to the in memory DAO/Database
@@ -75,7 +75,7 @@ public class ClubCreatePostInteractorTest {
         for (ClubCreatePostInputData inputData : inputs) {
             interactor.execute(inputData);
         }
-        int sizePosts = userRepository.getClub(testClub.getEmail()).getClubPosts().size();
+        int sizePosts = userRepository.getClub(testClub.getEmail()).getClubPostsTitle().size();
         assertEquals(10, sizePosts);
     }
 
@@ -88,7 +88,7 @@ public class ClubCreatePostInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
 
         // Save the club to the in memory DAO/Database
@@ -131,7 +131,7 @@ public class ClubCreatePostInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
 
         // Save the club to the in memory DAO/Database
@@ -174,7 +174,7 @@ public class ClubCreatePostInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         final String postTitle = "";
         final String postDescription = "Test Post Description for empty title";
@@ -222,7 +222,7 @@ public class ClubCreatePostInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         final String postTitle = "Test Post Title";
         final String postDescription = "";
@@ -270,7 +270,7 @@ public class ClubCreatePostInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         final String postTitle = "";
         final String postDescription = "";
@@ -318,7 +318,7 @@ public class ClubCreatePostInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         String postTitle = "this is 100 characters long because I know it is and if I am not mistaken this " +
                 "should be 100 charact";
@@ -369,7 +369,7 @@ public class ClubCreatePostInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
 
         String postDescription = "this is 100 characters long because I know it is and if I am not mistaken this " +
                 "should be 100 charact";

@@ -3,9 +3,7 @@ package use_case.club_get_members;
 import java.util.ArrayList;
 
 import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
-import entity.user.Student;
 
 /**
  * Interactor for the get members use case.

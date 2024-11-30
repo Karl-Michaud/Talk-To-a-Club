@@ -2,9 +2,7 @@ package entity.post;
 
 import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
-import entity.user.Club;
-import entity.user.Student;
-import entity.user.User;
+import entity.user.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -27,44 +25,48 @@ public class PostEntityTest {
 
     @Test
     void testLikePost() {
-        Post post = new Announcement("Sample Title", "Sample Content");
+        PostFactory factory = new AnnouncementFactory();
+        Post post = factory.create("Sample Title", "Sample Content");
 
-        DataStore<Club> joined = new DataStoreArrays<>();
-        User user = new Student("John Doe", "johndoe@example.com", "12345678hello", joined);
+        DataStore<String> joinedEmail = new DataStoreArrays<>();
+        DataStore<String> joinedName = new DataStoreArrays<>();
+        User user = new Student("John Doe", "johndoe@example.com", "12345678hello",
+                joinedEmail, joinedName );
 
         post.addLike(user);
         assertEquals(1, post.numberOfLikes());
-        assertTrue(post.getLikes().contains(user));
+        assertTrue(post.getLikes().contains(user.getEmail()));
 
         post.removeLike(user);
         assertEquals(0, post.numberOfLikes());
-        assertFalse(post.getLikes().contains(user));
+        assertFalse(post.getLikes().contains(user.getEmail()));
     }
 
     @Test
     void testDislikePost() {
-        Post post = new Announcement("Sample Title", "Sample Content");
-        DataStore<Club> joined = new DataStoreArrays<>();
-        User user = new Student("John Doe", "johndoe@example.com", "12345678hello", joined);
+        PostFactory factory = new AnnouncementFactory();
+        Post post = factory.create("Sample Title", "Sample Content");
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student user = studentFactory.create("John Doe", "johndoe@example.com", "12345678hello");
 
         post.addDislike(user);
         assertEquals(1, post.numberOfDislikes());
-        assertTrue(post.getDislikes().contains(user));
+        assertTrue(post.getDislikes().contains(user.getEmail()));
 
         post.removeDislike(user);
         assertEquals(0, post.numberOfDislikes());
-        assertFalse(post.getDislikes().contains(user));
+        assertFalse(post.getDislikes().contains(user.getEmail()));
     }
 
     @Test
     void testMultipleLikesAndDislikes() {
-        Post post = new Announcement("Title", "Content");
+        PostFactory factory = new AnnouncementFactory();
+        Post post = factory.create("Title", "Content");
 
-        DataStore<Club> joined1 = new DataStoreArrays<>();
-        User user1 = new Student("Alice", "alice@example.com", "12345678hello", joined1);
+        StudentFactory studentFactory = new StudentUserFactory();
+        User user1 = studentFactory.create("Alice", "alice@example.com", "12345678hello");
 
-        DataStore<Club> joined2 = new DataStoreArrays<>();
-        User user2 = new Student("Bob", "bob@example.com", "12345678hello", joined2);
+        User user2 = studentFactory.create("Bob", "bob@example.com", "12345678hello");
 
         post.addLike(user1);
         post.addLike(user2);
@@ -79,7 +81,8 @@ public class PostEntityTest {
 
     @Test
     void testPostMetadata() {
-        Post post = new Announcement("Metadata Title", "Metadata Content");
+        PostFactory factory = new AnnouncementFactory();
+        Post post = factory.create("Metadata Title", "Metadata Content");
 
         LocalDate today = LocalDate.now();
         LocalTime now = LocalTime.now();
