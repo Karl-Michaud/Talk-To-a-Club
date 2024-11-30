@@ -1,12 +1,11 @@
 package use_case.student_homepage.dislike;
 
+import java.util.ArrayList;
 import java.util.Map;
 
-import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
 import entity.user.Student;
-import interface_adapter.student_logged_in.student_home.dislike.StudentDislikePresenter;
 
 /**
  * Interactor for the dislike usecase.
@@ -26,12 +25,18 @@ public class StudentDislikeInteractor implements StudentDislikeInputBoundary {
 
     @Override
     public void execute(StudentDislikeInputData studentDislikeInputData) {
+        // Input data
         final String studentEmail = studentDislikeInputData.getStudentEmail();
         final String clubEmail = studentDislikeInputData.getClubEmail();
+        final Map<String, Object> postData = studentDislikeInputData.getPost();
+
+        // Get info from db
         final Student currStudent = studentDataAccess.getStudent(studentEmail);
         final Club currClub = clubDataAccess.getClub(clubEmail);
-        final Map<String, Object> postData = studentDislikeInputData.getPost();
-        final DataStoreArrays<Post> clubPosts = (DataStoreArrays<Post>) currClub.getClubPosts();
+
+        // Get the posts made by a club
+        final ArrayList<Post> clubPosts = clubDataAccess.getPosts(currClub);
+
         Post postObject = null;
         // Find the corresponding Post object for the data, using the date at which it was posted.
         for (final Post post: clubPosts) {
@@ -44,7 +49,7 @@ public class StudentDislikeInteractor implements StudentDislikeInputBoundary {
             studentDislikePresenter.prepareErrorView("The post doesn't exist");
         }
         else {
-            if (postObject.getDislikes().contains(currStudent)) {
+            if (postObject.getDislikes().contains(currStudent.getEmail())) {
                 postObject.removeDislike(currClub);
                 clubDataAccess.savePost(postObject, currClub);
             }
@@ -54,7 +59,8 @@ public class StudentDislikeInteractor implements StudentDislikeInputBoundary {
             }
             postData.put("disliked", !(Boolean) postData.get("disliked"));
 
-            final StudentDislikeOutputData studentDislikeOutputData = new StudentDislikeOutputData(postData, currClub.getUsername());
+            final StudentDislikeOutputData studentDislikeOutputData = new StudentDislikeOutputData(postData,
+                    currClub.getUsername());
             studentDislikePresenter.prepareSuccessView(studentDislikeOutputData);
         }
     }

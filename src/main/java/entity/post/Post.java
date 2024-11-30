@@ -62,13 +62,13 @@ public interface Post {
      * Return the datastore object of all the likes of the post.
      * @return the datastore object of all users who liked the post.
      */
-    DataStore<User> getLikes();
+    DataStore<String> getLikes();
 
     /**
      * Return the datastore object of all the dislikes of the post.
      * @return the datastore object of all users who disliked the post.
      */
-    DataStore<User> getDislikes();
+    DataStore<String> getDislikes();
 
     /**
      * Returns the date of publication of the post.

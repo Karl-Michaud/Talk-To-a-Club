@@ -2,10 +2,7 @@ package use_case.student_homepage.show_clubs;
 
 import data_access.InMemoryUserDataAccessObject;
 
-import entity.data_structure.DataStoreArrays;
-import entity.post.Post;
-import entity.user.Club;
-import entity.user.Student;
+import entity.user.*;
 import org.junit.jupiter.api.Test;
 
 
@@ -21,24 +18,13 @@ public class StudentShowClubsInteractorTest {
         // Uses an in memory database to test the use case with a club
         InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
         // Create 3 example clubs and a student.
-        Club climbingClub = new Club("Climbing club", "utcc@utoronto.ca", "12345678", new DataStoreArrays<Student>(), new DataStoreArrays<Post>());
-        Club outdoorsclub = new Club("Outdoors club", "utoc@utoronto.ca", "secure", new DataStoreArrays<Student>(), new DataStoreArrays<Post>());
-        Club rlClub = new Club("Rocket League club", "rlatuoft@utoronto.ca", "more_secure", new DataStoreArrays<Student>(), new DataStoreArrays<Post>());
+        ClubFactory clubFactory = new ClubUserFactory();
+        Club climbingClub = clubFactory.create("Climbing club", "utcc@utoronto.ca", "12345678");
+        Club outdoorsclub = clubFactory.create("Outdoors club", "utoc@utoronto.ca", "secure");
+        Club rlClub = clubFactory.create("Rocket League club", "rlatuoft@utoronto.ca", "more_secure");
 
-        Student student = new Student("Fred", "frederik.brecht@mail.utoronto.ca", "password", new DataStoreArrays<>());
-        // Add the sample student as a member to the clubs.
-        climbingClub.addClubMember(student);
-        outdoorsclub.addClubMember(student);
-        rlClub.addClubMember(student);
-        student.joinClub(outdoorsclub);
-        student.joinClub(climbingClub);
-        student.joinClub(rlClub);
-
-        // Save the sample student and clubs to the in memory database.
-        dao.saveStudent(student);
-        dao.saveClub(climbingClub);
-        dao.saveClub(outdoorsclub);
-        dao.saveClub(rlClub);
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Fred", "frederik.brecht@mail.utoronto.ca", "password");
 
         // set up a sample List of Maps to compare to the output test data
         ArrayList<HashMap<String, String>> sampleList  = new ArrayList<>();
@@ -62,6 +48,20 @@ public class StudentShowClubsInteractorTest {
         sampleList.add(climbingClubHash);
         sampleList.add(rlClubHash);
 
+        // Add the sample student as a member to the clubs.
+        climbingClub.addClubMember(student);
+        outdoorsclub.addClubMember(student);
+        rlClub.addClubMember(student);
+        student.joinClub(outdoorsclub);
+        student.joinClub(climbingClub);
+        student.joinClub(rlClub);
+
+        // Save the sample student and clubs to the in memory database.
+        dao.saveStudent(student);
+        dao.saveClub(outdoorsclub);
+        dao.saveClub(climbingClub);
+        dao.saveClub(rlClub);
+
         // prepare the inputData.
         StudentShowClubsInputData inputData = new StudentShowClubsInputData(student.getEmail());
 
@@ -70,7 +70,7 @@ public class StudentShowClubsInteractorTest {
             @Override
             public void prepareClubsContent(StudentShowClubsOutputData studentShowClubsOutputData) {
                 assertEquals("frederik.brecht@mail.utoronto.ca", studentShowClubsOutputData.getCurrStudentEmail());
-                assertEquals(sampleList, studentShowClubsOutputData.getClubs());
+                assertTrue(sampleList.equals(studentShowClubsOutputData.getClubs()));
             }
 
             @Override

@@ -37,7 +37,7 @@ public class StudentJoinClubInteractor implements StudentJoinClubInputBoundary {
             final Student student = studentJoinClubDataAccessInterface.getStudent(studentEmail);
 
             // Verify that student is not in club
-            if (club.getClubMembers().contains(student)) {
+            if (club.getClubMembersEmails().contains(student.getEmail())) {
                 joinClubPresenter.prepareFailView(studentEmail + ": Account in club already.");
             }
             else {

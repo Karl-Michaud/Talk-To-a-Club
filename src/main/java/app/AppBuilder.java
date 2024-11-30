@@ -306,7 +306,9 @@ public class AppBuilder {
 
     public AppBuilder addShowPostsUseCase() {
         final StudentShowPostsOutputBoundary studentShowPostsOutputBoundary = new StudentShowPostsPresenter(studentHomeViewModel, viewManagerModel);
-        final StudentShowPostsInputBoundary showPostsInteractor = new StudentShowPostsInteractor(inMemoryUserDataAccessObject,
+
+        final StudentShowPostsInputBoundary showPostsInteractor = new StudentShowPostsInteractor(
+                inMemoryUserDataAccessObject, inMemoryUserDataAccessObject,
                 studentShowPostsOutputBoundary);
 
         final StudentShowPostsController studentShowPostsController = new StudentShowPostsController(showPostsInteractor);

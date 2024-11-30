@@ -36,7 +36,7 @@ public class ClubRemoveMemberInteractor implements ClubRemoveMemberInputBoundary
             final Student student = clubRemoveStudentDataAccessObject.getStudent(studentEmail);
 
             // Verify that student is in club
-            if (!club.getClubMembers().contains(student)) {
+            if (!club.getClubMembersEmails().contains(student.getEmail())) {
                 clubRemovePresenter.prepareFailView(studentEmail + ": Account not in club.");
             }
             else {

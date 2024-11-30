@@ -1,7 +1,6 @@
 package entity.user;
 
 import entity.data_structure.DataStore;
-import entity.post.Post;
 
 /**
  * Factory for creating Clubs.
@@ -15,10 +14,13 @@ public interface ClubFactory extends UserFactory {
      * @param username the username of the new club
      * @param email the email of the new club
      * @param password the password of the new club
-     * @param clubMembers the members of the new club
-     * @param clubPosts the posts of the new club
+     * @param clubMembersEmails the members email
+     * @param clubMembersNames the members name
+     * @param clubPostsTitle the posts title
+     * @param clubPostsDescription the posts description
      * @return the new club user
      */
-    Club create(String username, String email, String password, DataStore<Student> clubMembers,
-                DataStore<Post> clubPosts);
+    Club create(String username, String email, String password, DataStore<String> clubMembersEmails,
+                DataStore<String> clubMembersNames, DataStore<String> clubPostsTitle,
+                DataStore<String> clubPostsDescription);
 }

@@ -1,7 +1,7 @@
 package use_case.signup.student_signup;
 
 import data_access.InMemoryUserDataAccessObject;
-import entity.user.Student;
+import entity.user.StudentFactory;
 import entity.user.StudentUserFactory;
 import org.junit.jupiter.api.Test;
 
@@ -50,7 +50,8 @@ public class StudentSignupInteractorTest {
 
         // Uses an in memory database to test the use case and stores a student with the same name
         StudentSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-        userRepository.saveStudent(new Student("test club", "ok@k.com", "pass", null));
+        StudentFactory studentFactory = new StudentUserFactory();
+        userRepository.saveStudent(studentFactory.create("test club", "ok@k.com", "pass"));
 
 
         // This creates a successPresenter that tests whether the test case is as we expect.
@@ -81,7 +82,8 @@ public class StudentSignupInteractorTest {
 
         // Uses an in memory database to test the use case and stores a student with the same email
         StudentSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-        userRepository.saveStudent(new Student("test club", "ok@k.com", "pass", null));
+        StudentFactory studentFactory = new StudentUserFactory();
+        userRepository.saveStudent(studentFactory.create("test club", "ok@k.com", "pass"));
 
 
         // This creates a successPresenter that tests whether the test case is as we expect.

@@ -1,5 +1,8 @@
 package use_case.student_homepage.show_clubs;
 
+import java.util.ArrayList;
+
+import entity.user.Club;
 import entity.user.Student;
 
 /**
@@ -20,4 +23,12 @@ public interface StudentShowClubsAccessInterface {
      * @return the student matching the email.
      */
     Student getStudent(String currentUser);
+
+    /**
+     * Gets the joined clubs for the given student.
+     * @param student the student
+     * @return an array lists of clubs
+     */
+    ArrayList<Club> getStudentJoinedClubs(Student student);
+
 }

@@ -11,20 +11,15 @@ public class StudentUserFactory implements StudentFactory {
     @Override
     public Student create(String name, String email, String password) {
         // new users that are part of no clubs.
-        final DataStoreArrays<Club> joinedClubs = new DataStoreArrays<>();
-        return new Student(name, email, password, joinedClubs);
+        final DataStoreArrays<String> joinedClubsEmails = new DataStoreArrays<>();
+        final DataStoreArrays<String> joinedClubsNames = new DataStoreArrays<>();
+        return new Student(name, email, password, joinedClubsEmails, joinedClubsNames);
     }
 
-    /**
-     * Create a new student user.
-     * @param name the name of the new student
-     * @param email the email of the new student
-     * @param password the password of the new student
-     * @param joinedClubs the clubs the student has joined
-     * @return the new student user
-     */
-    public Student create(String name, String email, String password, DataStore<Club> joinedClubs) {
-        return new Student(name, email, password, joinedClubs);
+    @Override
+    public Student create(String name, String email, String password, DataStore<String> joinedClubsEmails,
+                          DataStore<String> joinedClubsNames) {
+        return new Student(name, email, password, joinedClubsEmails, joinedClubsNames);
     }
 
 }

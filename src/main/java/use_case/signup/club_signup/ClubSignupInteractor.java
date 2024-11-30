@@ -3,6 +3,8 @@ package use_case.signup.club_signup;
 import entity.user.Club;
 import entity.user.ClubUserFactory;
 
+import java.util.ArrayList;
+
 /**
  * The Club Signup Interactor for the club sign up use case.
  */

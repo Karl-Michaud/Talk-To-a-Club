@@ -7,21 +7,24 @@ import entity.data_structure.DataStore;
  */
 public class Student implements User {
     // Student's personal information
-    private String username;
-    private String email;
-    private String password;
+    private final String username;
+    private final String email;
+    private final String password;
 
     // Student club information
-    private DataStore<Club> joinedClubs;
+    private final DataStore<String> joinedClubsNames;
+    private final DataStore<String> joinedClubsEmails;
 
-    public Student(String username, String email, String password, DataStore<Club> joinedClubs) {
+    public Student(String username, String email, String password, DataStore<String> joinedClubsEmails,
+                   DataStore<String> joinedClubsNames) {
         // Initialise student's personal information
         this.username = username;
         this.email = email;
         this.password = password;
 
         // Initialise student's club information
-        this.joinedClubs = joinedClubs;
+        this.joinedClubsEmails = joinedClubsEmails;
+        this.joinedClubsNames = joinedClubsNames;
     }
 
     public String getUsername() {
@@ -36,8 +39,12 @@ public class Student implements User {
         return password;
     }
 
-    public DataStore<Club> getJoinedClubs() {
-        return joinedClubs;
+    public DataStore<String> getJoinedClubsNames() {
+        return joinedClubsNames;
+    }
+
+    public DataStore<String> getJoinedClubsEmails() {
+        return joinedClubsEmails;
     }
 
     /**
@@ -45,7 +52,8 @@ public class Student implements User {
      * @param club particular club to be joined.
      */
     public void joinClub(Club club) {
-        joinedClubs.add(club);
+        joinedClubsNames.add(club.getUsername());
+        joinedClubsEmails.add(club.getEmail());
     }
 
     /**
@@ -53,7 +61,8 @@ public class Student implements User {
      * @param club particular club to be left.
      */
     public void leaveClub(Club club) {
-        joinedClubs.remove(club);
+        joinedClubsNames.remove(club.getUsername());
+        joinedClubsEmails.remove(club.getEmail());
     }
 
 }

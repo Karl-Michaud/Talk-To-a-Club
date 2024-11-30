@@ -1,7 +1,7 @@
 package use_case.signup.club_signup;
 
 import data_access.InMemoryUserDataAccessObject;
-import entity.user.Club;
+import entity.user.ClubFactory;
 import entity.user.ClubUserFactory;
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +49,8 @@ public class ClubSignupInteractorTest {
 
         // Uses an in memory database to test the use case and stores a Club with the same name
         ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-        userRepository.saveClub(new Club("test club", "ok@k.com", "pass", null, null));
+        ClubFactory clubFactory = new ClubUserFactory();
+        userRepository.saveClub(clubFactory.create("test club", "ok@k.com", "pass"));
 
 
         // This creates a successPresenter that tests whether the test case is as we expect.
@@ -80,7 +81,9 @@ public class ClubSignupInteractorTest {
 
         // Uses an in memory database to test the use case and stores a Club with the same email
         ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-        userRepository.saveClub(new Club("test club", "ok@k.com", "pass", null, null));
+
+        ClubFactory clubFactory = new ClubUserFactory();
+        userRepository.saveClub(clubFactory.create("test club", "ok@k.com", "pass"));
 
 
         // This creates a successPresenter that tests whether the test case is as we expect.

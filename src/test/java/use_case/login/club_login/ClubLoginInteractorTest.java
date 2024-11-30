@@ -50,8 +50,8 @@ public class ClubLoginInteractorTest {
                 assertEquals(dbClub.getUsername(), clubLoginOutputData.getUsername());
 
                 // Check that the db club has no posts and members (since new club)
-                int sizeMembers = dbClub.getClubMembers().size();
-                int sizePosts = dbClub.getClubPosts().size();
+                int sizeMembers = dbClub.getClubMembersEmails().size();
+                int sizePosts = dbClub.getClubPostsTitle().size();
                 assertEquals(0, sizeMembers);
                 assertEquals(0, sizePosts);
 
