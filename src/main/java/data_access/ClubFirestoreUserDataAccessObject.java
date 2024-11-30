@@ -28,7 +28,7 @@ import use_case.club_remove_member.ClubRemoveMemberClubDataAccessInterface;
 import use_case.club_update_desc.ClubUpdateDescDataAccessInterface;
 import use_case.explore_clubs.ClubExploreClubsDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
-import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
+import use_case.signup.club_signup.ClubSignupDataAccessInterface;
 import use_case.student_homepage.dislike.StudentDislikeClubDataAccessInterface;
 import use_case.student_homepage.like.StudentLikeClubDataAccessInterface;
 import use_case.student_join_club.ClubStudentJoinClubDataAccessInterface;
@@ -41,7 +41,7 @@ import use_case.student_leave_club.ClubStudentLeaveClubDataAccessInterface;
  */
 public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserDataAccessInterface,
         ClubGetMembersUserDataAccessInterface, ClubRemoveMemberClubDataAccessInterface, ClubLoginDataAccessInterface,
-        ClubSignupUserDataAccessInterface, ClubStudentJoinClubDataAccessInterface,
+        ClubSignupDataAccessInterface, ClubStudentJoinClubDataAccessInterface,
         ClubStudentLeaveClubDataAccessInterface, ClubExploreClubsDataAccessInterface, ClubGetPostsDataAccessInterface,
         ClubUpdateDescDataAccessInterface, StudentDislikeClubDataAccessInterface, StudentLikeClubDataAccessInterface {
     private final Firestore db;

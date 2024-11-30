@@ -5,7 +5,7 @@ import entity.user.Club;
 /**
  * DAO for the Club Signup Use Case.
  */
-public interface ClubSignupUserDataAccessInterface {
+public interface ClubSignupDataAccessInterface {
 
     /**
      * Checks if the given username exists.

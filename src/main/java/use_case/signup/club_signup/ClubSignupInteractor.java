@@ -7,7 +7,7 @@ import entity.user.ClubUserFactory;
  * The Club Signup Interactor for the club sign up use case.
  */
 public class ClubSignupInteractor implements ClubSignupInputBoundary {
-    private final ClubSignupUserDataAccessInterface userDataAccessObject;
+    private final ClubSignupDataAccessInterface userDataAccessObject;
     private final ClubSignupOutputBoundary userPresenter;
     private final ClubUserFactory clubUserFactory;
 
@@ -17,7 +17,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
     private final int minLengthPassword = 8;
     private final int maxLengthPassword = 64;
 
-    public ClubSignupInteractor(ClubSignupUserDataAccessInterface signupDataAccessInterface,
+    public ClubSignupInteractor(ClubSignupDataAccessInterface signupDataAccessInterface,
                                 ClubSignupOutputBoundary clubSignupOutputBoundary,
                                 ClubUserFactory clubUserFactory) {
         this.userDataAccessObject = signupDataAccessInterface;

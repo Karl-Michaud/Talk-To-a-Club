@@ -7,7 +7,7 @@ import entity.user.StudentUserFactory;
  * The Student Signup Interactor.
  */
 public class StudentSignupInteractor implements StudentSignupInputBoundary {
-    private final StudentSignupUserDataAccessInterface userDataAccessObject;
+    private final StudentSignupDataAccessInterface userDataAccessObject;
     private final StudentSignupOutputBoundary userPresenter;
     private final StudentUserFactory studentUserFactory;
 
@@ -17,7 +17,7 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
     private final int minLengthPassword = 8;
     private final int maxLengthPassword = 64;
 
-    public StudentSignupInteractor(StudentSignupUserDataAccessInterface signupDataAccessInterface,
+    public StudentSignupInteractor(StudentSignupDataAccessInterface signupDataAccessInterface,
                                    StudentSignupOutputBoundary studentSignupOutputBoundary,
                                    StudentUserFactory studentUserFactory) {
         this.userDataAccessObject = signupDataAccessInterface;

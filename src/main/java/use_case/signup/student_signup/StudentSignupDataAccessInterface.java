@@ -5,7 +5,7 @@ import entity.user.Student;
 /**
  * DAO for the Student Signup Use Case.
  */
-public interface StudentSignupUserDataAccessInterface {
+public interface StudentSignupDataAccessInterface {
 
     /**
      * Checks if the given username exists.

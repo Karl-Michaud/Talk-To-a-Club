@@ -13,8 +13,8 @@ import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
 import use_case.club_update_desc.ClubUpdateDescDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
-import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
-import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
+import use_case.signup.club_signup.ClubSignupDataAccessInterface;
+import use_case.signup.student_signup.StudentSignupDataAccessInterface;
 import use_case.student_homepage.dislike.StudentDislikeClubDataAccessInterface;
 import use_case.student_homepage.dislike.StudentDislikeStudentDataAccessInterface;
 import use_case.student_homepage.like.StudentLikeClubDataAccessInterface;
@@ -32,8 +32,8 @@ import use_case.student_leave_club.ClubStudentLeaveClubDataAccessInterface;
  * In-memory implementation of the DAO for storing user data. This implementation does
  * NOT persist data between runs of the program.
  */
-public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInterface,
-        StudentSignupUserDataAccessInterface,
+public class InMemoryUserDataAccessObject implements ClubSignupDataAccessInterface,
+        StudentSignupDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface,
         ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface,
         ClubRemoveMemberStudentDataAccessInterface,
