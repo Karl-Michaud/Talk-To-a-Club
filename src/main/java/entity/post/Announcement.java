@@ -57,6 +57,22 @@ public class Announcement implements Post {
     }
 
     /**
+     * Sets the date of publication of the post.
+     * @param dateOfPosting the date.
+     */
+    public void setDateOfPosting(LocalDate dateOfPosting) {
+        this.dateOfPosting = dateOfPosting;
+    }
+
+    /**
+     * Sets the time of publication of the post.
+     * @param timeOfPosting the time.
+     */
+    public void setTimeOfPosting(LocalTime timeOfPosting) {
+        this.timeOfPosting = timeOfPosting;
+    }
+
+    /**
      * Returns the number of likes.
      * @return int number of likes.
      */
