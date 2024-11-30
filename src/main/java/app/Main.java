@@ -17,6 +17,7 @@ public class Main {
      * @param args unused arguments
      */
     public static void main(String[] args) throws IOException {
+        // The initializing of the Firestore database.
         final FileInputStream serviceAccount =
                 new FileInputStream("/Users/kabirkumar/Desktop/ServiceAccountKey.json");
 
@@ -26,7 +27,7 @@ public class Main {
 
         FirebaseApp.initializeApp(options);
 
-        final AppBuilder appBuilder = new AppBuilder();
+        final FirebaseAppBuilder appBuilder = new FirebaseAppBuilder();
         // TODO: add the Logout Use Case to the app using the appBuilder
         final JFrame application = appBuilder
                                             .addLoginView()

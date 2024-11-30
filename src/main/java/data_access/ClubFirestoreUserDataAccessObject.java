@@ -1,12 +1,10 @@
 package data_access;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import com.google.api.core.ApiFuture;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -14,8 +12,6 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
@@ -49,15 +45,6 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
     private final String usernames = "username";
 
     public ClubFirestoreUserDataAccessObject() throws IOException {
-        // TODO fix this to be environment variable
-//        final FileInputStream serviceAccount =
-//                new FileInputStream("/Users/kabirkumar/Desktop/ServiceAccountKey.json");
-//
-//        final FirebaseOptions options = new FirebaseOptions.Builder()
-//                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-//                .build();
-//
-//        FirebaseApp.initializeApp(options);
         this.db = FirestoreClient.getFirestore();
     }
 
@@ -98,9 +85,10 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
         // same implementation as saveClub
         // method overwrites the club data including the new post.
         final DocumentReference docRef = db.collection(clubs).document(club.getEmail());
+
         final ApiFuture<WriteResult> writeResult = docRef.set(club);
         try {
-            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+            System.out.println("Update time: " + writeResult.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately
@@ -113,7 +101,7 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
         final DocumentReference docRef = db.collection(clubs).document(user.getEmail());
         final ApiFuture<WriteResult> writeResult = docRef.set(user);
         try {
-            System.out.println("Update time: " + writeResult.get().getUpdateTime());
+            System.out.println("Update time : " + writeResult.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately
@@ -126,9 +114,10 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
         // same implementation as saveClub
         // method overwrites the club data including the new post.
         final DocumentReference docRef = db.collection(clubs).document(club.getEmail());
+
         final ApiFuture<WriteResult> writeResult = docRef.set(club);
         try {
-            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+            System.out.println("Update time: " + writeResult.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately
@@ -146,9 +135,6 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
             final DocumentSnapshot document = future.get();
             if (document.exists()) {
                 returnValue = document.toObject(Club.class);
-                final String description = document.get("clubDescription").toString();
-                final String username = document.get("username").toString();
-
             }
         }
         catch (InterruptedException | ExecutionException ex) {
@@ -162,6 +148,7 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
         // same implementation as saveClub
         // method overwrites the club data including the updated student list.
         final DocumentReference docRef = db.collection(clubs).document(club.getEmail());
+
         final ApiFuture<WriteResult> writeResult = docRef.set(club);
         try {
             System.out.println("Update time: " + writeResult.get().getUpdateTime());

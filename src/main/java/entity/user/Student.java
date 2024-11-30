@@ -1,6 +1,7 @@
 package entity.user;
 
 import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 
 /**
  * This is the Student class implements User. A Student is a type of user.
@@ -12,7 +13,17 @@ public class Student implements User {
     private String password;
 
     // Student club information
-    private DataStore<Club> joinedClubs;
+    private DataStoreArrays<Club> joinedClubs;
+
+    public Student() {
+        // Initialise student's personal information
+        this.username = "";
+        this.email = "";
+        this.password = "";
+
+        // Initialise student's club information
+        this.joinedClubs = new DataStoreArrays();
+    }
 
     public Student(String username, String email, String password, DataStore<Club> joinedClubs) {
         // Initialise student's personal information
@@ -21,7 +32,7 @@ public class Student implements User {
         this.password = password;
 
         // Initialise student's club information
-        this.joinedClubs = joinedClubs;
+        this.joinedClubs = (DataStoreArrays<Club>) joinedClubs;
     }
 
     public String getUsername() {

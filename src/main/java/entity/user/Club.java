@@ -1,6 +1,7 @@
 package entity.user;
 
 import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 
 /**
@@ -13,8 +14,17 @@ public class Club implements User {
     private final String password;
     private String clubDescription = "";
     // Club's members and Posts information
-    private final DataStore<Student> clubMembers;
-    private final DataStore<Post> clubPosts;
+    private final DataStoreArrays<Student> clubMembers;
+    private final DataStoreArrays<Post> clubPosts;
+
+    // No-argument constructor (required by Firestore)
+    public Club() {
+        this.username = "";
+        this.email = "";
+        this.password = "";
+        this.clubMembers = new DataStoreArrays<>();
+        this.clubPosts = new DataStoreArrays<>();
+    }
 
     public Club(String username, String email, String password, DataStore<Student> clubMembers,
                 DataStore<Post> clubPosts) {
@@ -24,8 +34,8 @@ public class Club implements User {
         this.password = password;
 
         // Initialize club members and posts information
-        this.clubMembers = clubMembers;
-        this.clubPosts = clubPosts;
+        this.clubMembers = (DataStoreArrays<Student>) clubMembers;
+        this.clubPosts = (DataStoreArrays<Post>) clubPosts;
     }
 
     public String getUsername() {
