@@ -3,15 +3,13 @@ package interface_adapter.club_logged_in.club_create_post;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import interface_adapter.club_logged_in.ClubLoggedInState;
-
 /**
  * Create Post state.
  */
-public class ClubCreatePostState extends ClubLoggedInState {
+public class ClubCreatePostState {
     private String email;
-    private String title;
-    private String content;
+    private String title = "";
+    private String content = "";
     private LocalTime timeOfPosting;
     private LocalDate dateOfPosting;
     private String createPostError;
