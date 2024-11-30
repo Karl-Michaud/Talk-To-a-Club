@@ -3,6 +3,8 @@ package data_access;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import com.google.api.core.ApiFuture;
@@ -147,7 +149,13 @@ public class StudentFirestoreUserDataStudentAccessObject implements StudentLogin
     public void saveStudent(Student user) {
         // save students based off their usernames for ID's
         final DocumentReference docRef = db.collection(students).document(user.getEmail());
-        final ApiFuture<WriteResult> writeResult = docRef.set(user);
+        final Map<String, Object> mapStudent = new HashMap<>();
+        mapStudent.put(usernames, user.getUsername());
+        mapStudent.put(password, user.getPassword());
+        mapStudent.put(joinedClubEmails, user.getJoinedClubsEmails().toArrayList().stream().toList());
+        mapStudent.put(joinedClubNames, user.getJoinedClubsNames().toArrayList().stream().toList());
+
+        final ApiFuture<WriteResult> writeResult = docRef.set(mapStudent);
         try {
             System.out.println("Update time : " + writeResult.get().getUpdateTime());
         }
@@ -162,10 +170,16 @@ public class StudentFirestoreUserDataStudentAccessObject implements StudentLogin
         // very similar to saveStudent
         final String email = student.getEmail();
         final DocumentReference docRef = db.collection(students).document(email);
-        final ApiFuture<WriteResult> writeResult = docRef.set(student);
+
+        final ApiFuture<WriteResult> writeEmails = docRef.update(joinedClubEmails,
+                student.getJoinedClubsEmails().toArrayList().stream().toList());
+
+        final ApiFuture<WriteResult> writeNames = docRef.update(joinedClubNames,
+                student.getJoinedClubsNames().toArrayList().stream().toList());
 
         try {
-            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+            System.out.println("Update time : " + writeEmails.get().getUpdateTime());
+            System.out.println("Update time : " + writeNames.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately
