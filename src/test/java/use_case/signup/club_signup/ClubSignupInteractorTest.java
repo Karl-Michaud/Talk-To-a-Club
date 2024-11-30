@@ -48,7 +48,7 @@ public class ClubSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case and stores a Club with the same name
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
         ClubFactory clubFactory = new ClubUserFactory();
         userRepository.saveClub(clubFactory.create("test club", "ok@k.com", "pass"));
 
@@ -79,7 +79,7 @@ public class ClubSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case and stores a Club with the same email
-        ClubSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        ClubSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         ClubFactory clubFactory = new ClubUserFactory();
         userRepository.saveClub(clubFactory.create("test club", "ok@k.com", "pass"));

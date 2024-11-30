@@ -49,7 +49,7 @@ public class StudentSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case and stores a student with the same name
-        StudentSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        StudentSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
         StudentFactory studentFactory = new StudentUserFactory();
         userRepository.saveStudent(studentFactory.create("test club", "ok@k.com", "pass"));
 
@@ -80,7 +80,7 @@ public class StudentSignupInteractorTest {
                 "password", "password");
 
         // Uses an in memory database to test the use case and stores a student with the same email
-        StudentSignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        StudentSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
         StudentFactory studentFactory = new StudentUserFactory();
         userRepository.saveStudent(studentFactory.create("test club", "ok@k.com", "pass"));
 
