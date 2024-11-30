@@ -153,10 +153,11 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
             final List<String> postBodies = updatedState.getPostBodies();
 
             // Creates a panel for every post body and title retrieved and adds it to a new JPanel called posts
+            // Counts backwards to create the latest posts first
             final JPanel posts = new JPanel();
             posts.setLayout(new BoxLayout(posts, BoxLayout.Y_AXIS));
 
-            for (int i = 0; i < postTitles.size(); i++) {
+            for (int i = postTitles.size() - 1; i >= 0; i--) {
                 final PostTextPanel postPanel = new PostTextPanel(postTitles.get(i), postBodies.get(i));
 
                 posts.add(postPanel.getPostPanel());
