@@ -26,33 +26,61 @@ public class Main {
 
         FirebaseApp.initializeApp(options);
 
-        final AppBuilder appBuilder = new AppBuilder();
+//        final AppBuilder appBuilder = new AppBuilder();
+//        // TODO: add the Logout Use Case to the app using the appBuilder
+//        final JFrame application = appBuilder
+//                .addLoginView()
+//                .addClubSignupView()
+//                .addStudentSignupView()
+//                .addClubHomeView()
+//                .addStudentHomeView()
+//                .addStudentProfileView()
+//                .addCreatePostView()
+//                .addClubSignupUseCase()
+//                .addStudentSignupUseCase()
+//                .addClubLoginUseCase()
+//                .addStudentLoginUseCase()
+//                .addStudentHomeUseCase()
+//                .addStudentProfileUseCase()
+//                .addShowPostsUseCase()
+//                .addLikeUseCase()
+//                .addDislikeUseCase()
+//                .addClubUpdateDescUseCase()
+//                .addClubCreatePostUseCase()
+//                .addClubGetPostsUseCase()
+//                .addClubGetMembersUseCase()
+//                .addLogoutUseCase()
+//                .addShowClubsUseCase()
+//                .addClubRemoveMemberUseCase()
+//                .build();
+
+        final FirebaseAppBuilder appBuilder = new FirebaseAppBuilder();
         // TODO: add the Logout Use Case to the app using the appBuilder
         final JFrame application = appBuilder
-                                            .addLoginView()
-                                            .addClubSignupView()
-                                            .addStudentSignupView()
-                                            .addClubHomeView()
-                                            .addStudentHomeView()
-                                            .addStudentProfileView()
-                                            .addCreatePostView()
-                                            .addClubSignupUseCase()
-                                            .addStudentSignupUseCase()
-                                            .addClubLoginUseCase()
-                                            .addStudentLoginUseCase()
-                                            .addStudentHomeUseCase()
-                                            .addStudentProfileUseCase()
-                                            .addShowPostsUseCase()
-                                            .addLikeUseCase()
-                                            .addDislikeUseCase()
-                                            .addClubUpdateDescUseCase()
-                                            .addClubCreatePostUseCase()
-                                            .addClubGetPostsUseCase()
-                                            .addClubGetMembersUseCase()
-                                            .addLogoutUseCase()
-                                            .addShowClubsUseCase()
-                                            .addClubRemoveMemberUseCase()
-                                            .build();
+                .addLoginView()
+                .addClubSignupView()
+                .addStudentSignupView()
+                .addClubHomeView()
+                .addStudentHomeView()
+                .addStudentProfileView()
+                .addCreatePostView()
+                .addClubSignupUseCase()
+                .addStudentSignupUseCase()
+                .addClubLoginUseCase()
+                .addStudentLoginUseCase()
+                .addStudentHomeUseCase()
+                .addStudentProfileUseCase()
+                .addShowPostsUseCase()
+                .addLikeUseCase()
+                .addDislikeUseCase()
+                .addClubUpdateDescUseCase()
+                .addClubCreatePostUseCase()
+                .addClubGetPostsUseCase()
+                .addClubGetMembersUseCase()
+                .addLogoutUseCase()
+                .addShowClubsUseCase()
+                .addClubRemoveMemberUseCase()
+                .build();
 
         application.pack();
         application.setVisible(true);

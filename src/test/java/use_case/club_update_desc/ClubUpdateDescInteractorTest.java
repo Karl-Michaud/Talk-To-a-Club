@@ -1,7 +1,6 @@
 package use_case.club_update_desc;
 
 import data_access.InMemoryUserDataStudentAccessObject;
-import entity.user.Club;
 import entity.user.ClubFactory;
 import entity.user.ClubUserFactory;
 import org.junit.jupiter.api.Test;

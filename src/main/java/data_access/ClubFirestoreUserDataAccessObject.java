@@ -1,13 +1,13 @@
 package data_access;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import com.google.api.core.ApiFuture;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -15,13 +15,13 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 import entity.user.Club;
+import entity.user.ClubUserFactory;
+import org.checkerframework.checker.units.qual.C;
 import use_case.club_create_post.ClubCreatePostUserDataAccessInterface;
 import use_case.club_get_members.ClubGetMembersUserDataAccessInterface;
 import use_case.club_get_posts.ClubGetPostsDataAccessInterface;
@@ -92,9 +92,19 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
         // same implementation as saveClub
         // method overwrites the club data including the new post.
         final DocumentReference docRef = db.collection(clubs).document(club.getEmail());
-        final ApiFuture<WriteResult> writeResult = docRef.set(club);
+        final Map<String, Object> mapClub = new HashMap<>();
+        mapClub.put("username", club.getUsername());
+        mapClub.put("email", club.getEmail());
+        mapClub.put("password", club.getPassword());
+        mapClub.put("clubDescription", club.getClubDescription());
+        mapClub.put("clubMembersEmails", club.getClubMembersEmails().toArrayList().stream().toList());
+        mapClub.put("clubMembersNames", club.getClubMembersNames().toArrayList().stream().toList());
+        mapClub.put("clubPostsTitle", club.getClubPostsTitle().toArrayList().stream().toList());
+        mapClub.put("clubPostsDescription", club.getClubPostsDescription().toArrayList().stream().toList());
+
+        final ApiFuture<WriteResult> writeResult = docRef.set(mapClub);
         try {
-            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+            System.out.println("Update time: " + writeResult.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately
@@ -105,7 +115,17 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
     @Override
     public void saveClub(Club user) {
         final DocumentReference docRef = db.collection(clubs).document(user.getEmail());
-        final ApiFuture<WriteResult> writeResult = docRef.set(user);
+        final Map<String, Object> mapClub = new HashMap<>();
+        mapClub.put("username", user.getUsername());
+        mapClub.put("email", user.getEmail());
+        mapClub.put("password", user.getPassword());
+        mapClub.put("clubDescription", user.getClubDescription());
+        mapClub.put("clubMembersEmails", user.getClubMembersEmails().toArrayList().stream().toList());
+        mapClub.put("clubMembersNames", user.getClubMembersNames().toArrayList().stream().toList());
+        mapClub.put("clubPostsTitle", user.getClubPostsTitle().toArrayList().stream().toList());
+        mapClub.put("clubPostsDescription", user.getClubPostsDescription().toArrayList().stream().toList());
+
+        final ApiFuture<WriteResult> writeResult = docRef.set(mapClub);
         try {
             System.out.println("Update time: " + writeResult.get().getUpdateTime());
         }
@@ -120,9 +140,19 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
         // same implementation as saveClub
         // method overwrites the club data including the new post.
         final DocumentReference docRef = db.collection(clubs).document(club.getEmail());
-        final ApiFuture<WriteResult> writeResult = docRef.set(club);
+        final Map<String, Object> mapClub = new HashMap<>();
+        mapClub.put("username", club.getUsername());
+        mapClub.put("email", club.getEmail());
+        mapClub.put("password", club.getPassword());
+        mapClub.put("clubDescription", club.getClubDescription());
+        mapClub.put("clubMembersEmails", club.getClubMembersEmails().toArrayList().stream().toList());
+        mapClub.put("clubMembersNames", club.getClubMembersNames().toArrayList().stream().toList());
+        mapClub.put("clubPostsTitle", club.getClubPostsTitle().toArrayList().stream().toList());
+        mapClub.put("clubPostsDescription", club.getClubPostsDescription().toArrayList().stream().toList());
+
+        final ApiFuture<WriteResult> writeResult = docRef.set(mapClub);
         try {
-            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+            System.out.println("Update time: " + writeResult.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately
@@ -145,7 +175,31 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
         try {
             final DocumentSnapshot document = future.get();
             if (document.exists()) {
-                returnValue = document.toObject(Club.class);
+
+                final String username = document.getString("username");
+                final String password = document.getString("password");
+                String clubDescription = document.getString("clubDescription");
+                // Club's members and Posts information
+                ArrayList<String> memberEmails;
+                memberEmails = (ArrayList<String>) document.get("clubMembersEmails");
+                final DataStore<String> clubMembersEmails = new DataStoreArrays().toDataStore(memberEmails);
+
+                ArrayList<String> memberNames;
+                memberNames = (ArrayList<String>) document.get("clubMembersNames");
+                final DataStore<String> clubMemberNames = new DataStoreArrays().toDataStore(memberNames);
+
+                ArrayList<String> postTitles;
+                postTitles = (ArrayList<String>) document.get("clubPostsTitle");
+                final DataStore<String> clubPostsTitle = new DataStoreArrays().toDataStore(postTitles);
+
+                ArrayList<String> postDescription;
+                postDescription = (ArrayList<String>) document.get("clubPostsDescription");
+                final DataStore<String> clubPostsDescritption = new DataStoreArrays().toDataStore(postDescription);
+
+                final ClubUserFactory clubUserFactory = new ClubUserFactory();
+                final Club club = clubUserFactory.create(username, email, password, clubMembersEmails, clubMemberNames,
+                        clubPostsTitle, clubPostsDescritption);
+                returnValue = club;
             }
         }
         catch (InterruptedException | ExecutionException ex) {

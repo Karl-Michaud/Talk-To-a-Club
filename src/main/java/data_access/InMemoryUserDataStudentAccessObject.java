@@ -30,8 +30,6 @@ import use_case.student_leave_club.StudentLeaveClubDataAccessInterface;
 import use_case.student_leave_club.ClubStudentLeaveClubDataAccessInterface;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does

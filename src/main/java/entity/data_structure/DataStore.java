@@ -1,5 +1,7 @@
 package entity.data_structure;
 
+import java.util.ArrayList;
+
 /**
  * An abstract data structure.
  * @param <T> an object for the data structure.
@@ -72,4 +74,17 @@ public interface DataStore<T> {
      * @return an Iterable
      */
     Iterable<T> getAll();
+
+    /**
+     * Returns an array list version of this data store.
+     * @return array list of this
+     */
+    ArrayList<T> toArrayList();
+
+    /**
+     * Returns an data store from array list.
+     * @param arrayList to convert.
+     * @return data store of this
+     */
+    DataStore<T> toDataStore(ArrayList<T> arrayList);
 }

@@ -1,12 +1,7 @@
 package entity.user;
 
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
-import entity.post.Announcement;
 import entity.post.AnnouncementFactory;
 import entity.post.Post;
-import entity.post.PostFactory;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

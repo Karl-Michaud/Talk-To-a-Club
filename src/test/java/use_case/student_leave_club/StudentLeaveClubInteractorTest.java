@@ -1,8 +1,6 @@
 package use_case.student_leave_club;
 
 import data_access.InMemoryUserDataStudentAccessObject;
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
 

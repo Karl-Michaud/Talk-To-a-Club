@@ -2,8 +2,6 @@ package use_case.student_homepage.show_clubs;
 
 import data_access.InMemoryUserDataStudentAccessObject;
 
-import entity.data_structure.DataStoreArrays;
-import entity.post.Post;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
 

@@ -1,11 +1,8 @@
 package use_case.student_join_club;
 
 import data_access.InMemoryUserDataStudentAccessObject;
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
-import view.ClubCreatePostView;
 
 import static org.junit.jupiter.api.Assertions.*;
 

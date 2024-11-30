@@ -88,6 +88,20 @@ public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
     }
 
     @Override
+    public ArrayList<T> toArrayList() {
+        return data;
+    }
+
+    @Override
+    public DataStore<T> toDataStore(ArrayList<T> arrayList) {
+        final DataStore dataStore = new DataStoreArrays();
+        for (T datum : arrayList) {
+            dataStore.add(datum);
+        }
+        return dataStore;
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return data.iterator();
     }
