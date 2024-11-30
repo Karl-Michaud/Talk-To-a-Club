@@ -18,6 +18,8 @@ import interface_adapter.club_logged_in.club_create_post.ClubCreatePostPresenter
 import interface_adapter.club_logged_in.club_create_post.ClubCreatePostViewModel;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersPresenter;
+import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberController;
+import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberPresenter;
 import interface_adapter.club_update_desc.ClubUpdateDescController;
 import interface_adapter.club_update_desc.ClubUpdateDescPresenter;
 import interface_adapter.login.LoginViewModel;
@@ -56,6 +58,9 @@ import use_case.club_get_members.ClubGetMembersOutputBoundary;
 import use_case.club_get_posts.ClubGetPostsInputBoundary;
 import use_case.club_get_posts.ClubGetPostsInteractor;
 import use_case.club_get_posts.ClubGetPostsOutputBoundary;
+import use_case.club_remove_member.ClubRemoveMemberInputBoundary;
+import use_case.club_remove_member.ClubRemoveMemberInteractor;
+import use_case.club_remove_member.ClubRemoveMemberOutputBoundary;
 import use_case.club_update_desc.ClubUpdateDescInputBoundary;
 import use_case.club_update_desc.ClubUpdateDescInteractor;
 import use_case.club_update_desc.ClubUpdateDescOutputBoundary;
@@ -418,7 +423,18 @@ public class AppBuilder {
         return this;
     }
 
-    // TODO add use cases for: club_remove_member,
+    /**
+     * Adds the CLub Remove Member use case to the application.
+     * @return this builder
+     */
+    public AppBuilder addClubRemoveMemberUseCase() {
+        final ClubRemoveMemberOutputBoundary clubRemoveMemberOutputBoundary = new ClubRemoveMemberPresenter(clubLoggedInViewModel, viewManagerModel);
+        final ClubRemoveMemberInputBoundary clubRemoveMemberInteractor = new ClubRemoveMemberInteractor(inMemoryUserDataAccessObject, inMemoryUserDataAccessObject, clubRemoveMemberOutputBoundary);
+
+        final ClubRemoveMemberController clubRemoveMemberController = new ClubRemoveMemberController(clubRemoveMemberInteractor);
+        clubLoggedInView.setClubRemoveMemberController(clubRemoveMemberController);
+        return this;
+    }
 
     /**
      * Creates the JFrame for the application and initially sets the SignupView to be displayed.

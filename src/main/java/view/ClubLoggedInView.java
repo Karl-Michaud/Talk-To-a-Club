@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -147,12 +148,9 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
             // Sets the Viewport of the postsScrollPane to the new JPanel posts
             postsScrollPane.setViewportView(posts);
         }
-        else if (evt.getPropertyName().equals("get members")) {
+        else if (evt.getPropertyName().equals("reload members")) {
             // Gets the updated current state
             final ClubLoggedInState updatedState = (ClubLoggedInState) evt.getNewValue();
-
-            // removes all current panels in the members scroll pane
-            membersScrollPane.removeAll();
 
             // Creates a panel for every member retrieved and adds it to a new JPanel called members
             final List<String> memberNames = updatedState.getMembersName();
@@ -163,15 +161,15 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
             for (int i = 0; i < memberNames.size(); i++) {
                 final RemoveMemberPanel memberPanel = new RemoveMemberPanel(clubRemoveMemberController,
                         updatedState.getEmail(), memberEmails.get(i), memberNames.get(i));
-                membersScrollPane.add(memberPanel.getMemberPanel());
+                members.add(memberPanel.getMemberPanel());
             }
             // Sets the Viewport of the membersScrollPane to the new JPanel members
             membersScrollPane.setViewportView(members);
         }
-        else if (evt.getPropertyName().equals("reload message")) {
-            // Sets the message JLabel to have the text in the current state.
+        else if (evt.getPropertyName().equals("show message")) {
+            // gets the state's message and displays it in a message popup
             final ClubLoggedInState state = (ClubLoggedInState) evt.getNewValue();
-            message.setText(state.getMessage());
+            JOptionPane.showMessageDialog(null, state.getMessage());
         }
     }
 

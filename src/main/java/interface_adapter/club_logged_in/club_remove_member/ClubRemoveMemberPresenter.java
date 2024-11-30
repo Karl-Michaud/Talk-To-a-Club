@@ -37,12 +37,16 @@ public class ClubRemoveMemberPresenter implements ClubRemoveMemberOutputBoundary
         currentState.getMembersName().remove(removedMemberName);
         currentState.getMembersEmail().remove(removedMemberEmail);
 
+        // Save the success message in the state.
+        currentState.setMessage("Success in removing member.");
+
         // Save and fire property changed to club logged in state
         clubLoggedInViewModel.setState(currentState);
-        clubLoggedInViewModel.firePropertyChanged("member removed");
+        clubLoggedInViewModel.firePropertyChanged("reload members");
+        clubLoggedInViewModel.firePropertyChanged("show message");
 
         viewManagerModel.setState(clubLoggedInViewModel.getViewName());
-        viewManagerModel.firePropertyChanged("member removed");
+        viewManagerModel.firePropertyChanged("reload members");
     }
 
     @Override
@@ -51,5 +55,6 @@ public class ClubRemoveMemberPresenter implements ClubRemoveMemberOutputBoundary
         removeMemberState.setMessage(errorMessage);
         clubLoggedInViewModel.setState(removeMemberState);
         clubLoggedInViewModel.firePropertyChanged();
+        clubLoggedInViewModel.firePropertyChanged("show message");
     }
 }
