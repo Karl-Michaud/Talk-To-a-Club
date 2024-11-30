@@ -15,8 +15,12 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
 import entity.user.Student;
+import entity.user.StudentFactory;
+import entity.user.StudentUserFactory;
 import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
 import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
@@ -45,6 +49,10 @@ public class StudentFirestoreUserDataStudentAccessObject implements StudentLogin
     private final String students = "students";
     private final String usernames = "username";
 
+    private final String password = "password";
+    private final String joinedClubNames = "joinedClubNames";
+    private final String joinedClubEmails = "joinedClubEmails";
+
     public StudentFirestoreUserDataStudentAccessObject() throws IOException {
         this.db = FirestoreClient.getFirestore();
     }
@@ -55,10 +63,26 @@ public class StudentFirestoreUserDataStudentAccessObject implements StudentLogin
         final DocumentReference docRef = db.collection(students).document(email);
         final ApiFuture<DocumentSnapshot> future = docRef.get();
         Student returnValue = null;
+
         try {
             final DocumentSnapshot document = future.get();
             if (document.exists()) {
-                returnValue = document.toObject(Student.class);
+                final String usernameVal = document.getString(usernames);
+                final String passwordVal = document.getString(password);
+
+                final ArrayList<String> joinedNames;
+                joinedNames = (ArrayList<String>) document.get(joinedClubNames);
+                final DataStore<String> joinedClubNamesVal = new DataStoreArrays().toDataStore(joinedNames);
+
+                final ArrayList<String> joinedEmails;
+                joinedEmails = (ArrayList<String>) document.get(joinedClubEmails);
+                final DataStore<String> joinedClubEmailsVal = new DataStoreArrays().toDataStore(joinedEmails);
+
+                final StudentUserFactory studentUserFactory = new StudentUserFactory();
+                final Student student = studentUserFactory.create(email, usernameVal,
+                        passwordVal, joinedClubEmailsVal, joinedClubNamesVal);
+
+                returnValue = student;
             }
         }
         catch (InterruptedException | ExecutionException ex) {
@@ -75,8 +99,16 @@ public class StudentFirestoreUserDataStudentAccessObject implements StudentLogin
      */
     @Override
     public ArrayList<Club> getStudentJoinedClubs(Student student) {
-        // temp. See in memory for implementation
-        return null;
+        // Similar to in-memory implementation
+        final ClubFirestoreUserDataAccessObject clubDataAccess = new ClubFirestoreUserDataAccessObject();
+        final DataStoreArrays<Club> allClubs = (DataStoreArrays<Club>) clubDataAccess.getAllClubs();
+        final ArrayList<Club> returnValue = new ArrayList<>();
+        for (Club club : allClubs) {
+            if (club.getClubMembersEmails().contains(student.getEmail())) {
+                returnValue.add(club);
+            }
+        }
+        return returnValue;
     }
 
     @Override

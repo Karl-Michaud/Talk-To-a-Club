@@ -49,7 +49,7 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
     private final String clubs = "clubs";
     private final String usernames = "username";
 
-    public ClubFirestoreUserDataAccessObject() throws IOException {
+    public ClubFirestoreUserDataAccessObject() {
         this.db = FirestoreClient.getFirestore();
     }
 
@@ -200,7 +200,7 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
 
     @Override
     public Club getClub(String email) {
-        // get student through email
+        // get club through email
         final DocumentReference docRef = db.collection(clubs).document(email);
         final ApiFuture<DocumentSnapshot> future = docRef.get();
         Club returnValue = null;
