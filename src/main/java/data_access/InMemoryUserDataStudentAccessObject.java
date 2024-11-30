@@ -20,7 +20,8 @@ import use_case.student_homepage.dislike.StudentDislikeStudentDataAccessInterfac
 import use_case.student_homepage.like.StudentLikeClubDataAccessInterface;
 import use_case.student_homepage.like.StudentLikeStudentDataAccessInterface;
 import use_case.student_homepage.show_clubs.StudentShowClubsAccessInterface;
-import use_case.student_homepage.show_posts.StudentShowPostsAccessInterface;
+import use_case.student_homepage.show_posts.StudentShowPostsClubAccessInterface;
+import use_case.student_homepage.show_posts.StudentShowPostsStudentAccessInterface;
 import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.explore_clubs.ClubExploreClubsDataAccessInterface;
 import use_case.student_join_club.StudentJoinClubDataAccessInterface;
@@ -28,7 +29,6 @@ import use_case.student_join_club.ClubStudentJoinClubDataAccessInterface;
 import use_case.student_leave_club.StudentLeaveClubDataAccessInterface;
 import use_case.student_leave_club.ClubStudentLeaveClubDataAccessInterface;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,23 +37,25 @@ import java.util.Map;
  * In-memory implementation of the DAO for storing user data. This implementation does
  * NOT persist data between runs of the program.
  */
-public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInterface,
+public class InMemoryUserDataStudentAccessObject implements ClubSignupUserDataAccessInterface,
         StudentSignupUserDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface,
         ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface,
         ClubRemoveMemberStudentDataAccessInterface,
         ClubUpdateDescDataAccessInterface,
-        ClubGetMembersUserDataAccessInterface, StudentShowPostsAccessInterface, StudentLikeClubDataAccessInterface,
+        ClubGetMembersUserDataAccessInterface, StudentShowPostsStudentAccessInterface,
+        StudentLikeClubDataAccessInterface,
         StudentLikeStudentDataAccessInterface, StudentDislikeClubDataAccessInterface,
         StudentDislikeStudentDataAccessInterface, StudentShowClubsAccessInterface,
         StudentExploreClubsDataAccessInterface, ClubExploreClubsDataAccessInterface,
         StudentJoinClubDataAccessInterface, ClubStudentJoinClubDataAccessInterface,
-        StudentLeaveClubDataAccessInterface, ClubStudentLeaveClubDataAccessInterface {
+        StudentLeaveClubDataAccessInterface, ClubStudentLeaveClubDataAccessInterface,
+        StudentShowPostsClubAccessInterface {
 
     private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
     private final Map<String, DataStore> clubMap = new HashMap<>();
 
-    public InMemoryUserDataAccessObject() {
+    public InMemoryUserDataStudentAccessObject() {
         final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
         final DataStoreArrays<ArrayList<Post>> postArrayList = new DataStoreArrays<>();
         clubMap.put("clubs", clubArrayList);

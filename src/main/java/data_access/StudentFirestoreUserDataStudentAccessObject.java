@@ -25,7 +25,7 @@ import use_case.student_homepage.StudentHomeAccessInterface;
 import use_case.student_homepage.dislike.StudentDislikeStudentDataAccessInterface;
 import use_case.student_homepage.like.StudentLikeStudentDataAccessInterface;
 import use_case.student_homepage.show_clubs.StudentShowClubsAccessInterface;
-import use_case.student_homepage.show_posts.StudentShowPostsAccessInterface;
+import use_case.student_homepage.show_posts.StudentShowPostsStudentAccessInterface;
 import use_case.student_join_club.StudentJoinClubDataAccessInterface;
 import use_case.student_leave_club.StudentLeaveClubDataAccessInterface;
 import use_case.student_search_club.StudentSearchClubAccessInterface;
@@ -35,17 +35,17 @@ import use_case.student_search_club.StudentSearchClubAccessInterface;
  * This implementation uses Firebase and only persists data regarding the
  * Student entity
  */
-public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAccessInterface,
+public class StudentFirestoreUserDataStudentAccessObject implements StudentLoginDataAccessInterface,
         StudentSignupUserDataAccessInterface, StudentJoinClubDataAccessInterface,
         StudentLeaveClubDataAccessInterface, StudentSearchClubAccessInterface,
         ClubRemoveMemberStudentDataAccessInterface, StudentExploreClubsDataAccessInterface,
         StudentDislikeStudentDataAccessInterface, StudentLikeStudentDataAccessInterface,
-        StudentShowClubsAccessInterface, StudentShowPostsAccessInterface, StudentHomeAccessInterface {
+        StudentShowClubsAccessInterface, StudentShowPostsStudentAccessInterface, StudentHomeAccessInterface {
     private final Firestore db;
     private final String students = "students";
     private final String usernames = "username";
 
-    public StudentFirestoreUserDataAccessObject() throws IOException {
+    public StudentFirestoreUserDataStudentAccessObject() throws IOException {
         // TODO fix this to be environment variable
         final FileInputStream serviceAccount =
                 new FileInputStream("/ServiceAccountKey.json");
