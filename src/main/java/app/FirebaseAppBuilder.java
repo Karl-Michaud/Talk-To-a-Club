@@ -250,6 +250,7 @@ public class FirebaseAppBuilder {
 
     /**
      * Adds the explore clubs view to the application.
+     * @return this.
      */
     public FirebaseAppBuilder addExploreClubsView() {
         exploreClubsViewModel = new ExploreClubsViewModel();

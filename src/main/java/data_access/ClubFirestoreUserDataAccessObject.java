@@ -266,11 +266,12 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
     public DataStore<Club> getAllClubs() {
         final CollectionReference clubsRef = db.collection(clubs);
         final DataStoreArrays<Club> allClubs = new DataStoreArrays<>();
-
+        System.out.println("reached get all clubs call");
         try {
             final ApiFuture<QuerySnapshot> query = clubsRef.get();
             final QuerySnapshot querySnapshot = query.get();
             final List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+            System.out.println(documents.size());
 
             for (DocumentSnapshot document : documents) {
                 final String username = document.getString("username");

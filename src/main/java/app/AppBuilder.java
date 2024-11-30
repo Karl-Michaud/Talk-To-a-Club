@@ -35,6 +35,9 @@ import interface_adapter.signup.club_signup.ClubSignupViewModel;
 import interface_adapter.signup.student_signup.StudentSignupController;
 import interface_adapter.signup.student_signup.StudentSignupPresenter;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsPresenter;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
 import interface_adapter.student_logged_in.student_home.StudentHomeController;
 import interface_adapter.student_logged_in.student_home.StudentHomePresenter;
 import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
@@ -64,6 +67,9 @@ import use_case.club_remove_member.ClubRemoveMemberOutputBoundary;
 import use_case.club_update_desc.ClubUpdateDescInputBoundary;
 import use_case.club_update_desc.ClubUpdateDescInteractor;
 import use_case.club_update_desc.ClubUpdateDescOutputBoundary;
+import use_case.explore_clubs.ExploreClubsInputBoundary;
+import use_case.explore_clubs.ExploreClubsInteractor;
+import use_case.explore_clubs.ExploreClubsOutputBoundary;
 import use_case.login.club_login.ClubLoginInputBoundary;
 import use_case.login.club_login.ClubLoginInteractor;
 import use_case.login.club_login.ClubLoginOutputBoundary;
@@ -150,6 +156,9 @@ public class AppBuilder {
     private StudentProfileViewModel studentProfileViewModel;
     private StudentProfileView studentProfileView;
 
+    private ExploreClubsViewModel exploreClubsViewModel;
+    private ExploreClubsView exploreClubsView;
+
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
     }
@@ -228,6 +237,17 @@ public class AppBuilder {
         clubCreatePostViewModel = new ClubCreatePostViewModel();
         clubCreatePostView = new ClubCreatePostView(clubCreatePostViewModel);
         cardPanel.add(clubCreatePostView, clubCreatePostView.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the explore clubs view to the application.
+     * @return this.
+     */
+    public AppBuilder addExploreClubsView() {
+        exploreClubsViewModel = new ExploreClubsViewModel();
+        exploreClubsView = new ExploreClubsView(exploreClubsViewModel);
+        cardPanel.add(exploreClubsView, exploreClubsView.getViewName());
         return this;
     }
 
@@ -435,6 +455,23 @@ public class AppBuilder {
 
         final ClubRemoveMemberController clubRemoveMemberController = new ClubRemoveMemberController(clubRemoveMemberInteractor);
         clubLoggedInView.setClubRemoveMemberController(clubRemoveMemberController);
+        return this;
+    }
+
+    /**
+     * Adds the explore clubs use case to the application.
+     * @return this builder
+     */
+    public AppBuilder addExploreClubsUseCase() {
+        final ExploreClubsOutputBoundary exploreClubsOutputBoundary = new ExploreClubsPresenter(viewManagerModel,
+                exploreClubsViewModel, studentHomeViewModel);
+        final ExploreClubsInputBoundary exploreClubsInteractor =
+                new ExploreClubsInteractor(inMemoryUserDataAccessObject, exploreClubsOutputBoundary,
+                        inMemoryUserDataAccessObject);
+
+        final ExploreClubsController exploreClubsController = new ExploreClubsController(exploreClubsInteractor);
+        studentHomeView.setExploreClubsController(exploreClubsController);
+        exploreClubsView.setExploreClubsController(exploreClubsController);
         return this;
     }
 
