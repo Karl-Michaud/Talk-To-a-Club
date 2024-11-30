@@ -48,6 +48,16 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
     private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
     private final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
 
+    public InMemoryUserDataAccessObject() {
+        final Club club = new Club("test", "@.", "123123123", new DataStoreArrays<>(),
+                new DataStoreArrays<>());
+        final Student student = new Student("test", "@.", "123123123", new DataStoreArrays<>());
+        student.joinClub(club);
+        club.addClubMember(student);
+        clubArrayList.add(club);
+        studentArrayList.add(student);
+    }
+
     @Override
     public boolean existsByNameClub(String identifier) {
         boolean found = false;

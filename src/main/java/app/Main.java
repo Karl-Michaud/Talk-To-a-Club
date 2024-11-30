@@ -36,6 +36,7 @@ public class Main {
                                             .addClubGetMembersUseCase()
                                             .addLogoutUseCase()
                                             .addShowClubsUseCase()
+                                            .addClubRemoveMemberUseCase()
                                             .build();
 
         application.pack();

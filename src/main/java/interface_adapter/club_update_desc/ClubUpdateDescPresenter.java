@@ -27,7 +27,7 @@ public class ClubUpdateDescPresenter implements ClubUpdateDescOutputBoundary {
         clubLoggedInState.setDescriptionTextArea(outputData.getNewDesc());
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("reload description");
-        clubLoggedInViewModel.firePropertyChanged("reload message");
+        clubLoggedInViewModel.firePropertyChanged("show message");
     }
 
     @Override
@@ -36,6 +36,6 @@ public class ClubUpdateDescPresenter implements ClubUpdateDescOutputBoundary {
         final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
         clubLoggedInState.setMessage(outputData.getMessage());
         clubLoggedInViewModel.setState(clubLoggedInState);
-        clubLoggedInViewModel.firePropertyChanged("reload message");
+        clubLoggedInViewModel.firePropertyChanged("show message");
     }
 }

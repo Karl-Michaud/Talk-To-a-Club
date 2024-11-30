@@ -38,15 +38,15 @@ public class ClubGetMembersPresenter implements ClubGetMembersOutputBoundary {
 
         // Save the state
         clubLoggedInViewModel.setState(currentState);
-        clubLoggedInViewModel.firePropertyChanged("get members");
 
-        viewManagerModel.setState(clubLoggedInViewModel.getViewName());
-        viewManagerModel.firePropertyChanged("get members");
+        // Tells the ClubLoggedInView to reload the members panel.
+        clubLoggedInViewModel.firePropertyChanged("reload members");
     }
 
     @Override
     public void prepareFailView(String errorMessage) {
         final ClubLoggedInState currentState = clubLoggedInViewModel.getState();
         currentState.setMessage(errorMessage);
+        clubLoggedInViewModel.firePropertyChanged("show message");
     }
 }
