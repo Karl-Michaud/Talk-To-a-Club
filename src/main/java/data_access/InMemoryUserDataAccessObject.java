@@ -56,6 +56,7 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
         club.addClubMember(student);
         clubArrayList.add(club);
         studentArrayList.add(student);
+        // TODO REMOVE THIS AFTER TESTING REMOVE MEMBERS
     }
 
     @Override
