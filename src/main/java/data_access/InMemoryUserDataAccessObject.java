@@ -51,11 +51,13 @@ public class InMemoryUserDataAccessObject implements ClubSignupUserDataAccessInt
     public InMemoryUserDataAccessObject() {
         final Club club = new Club("test", "@.", "123123123", new DataStoreArrays<>(),
                 new DataStoreArrays<>());
-        final Student student = new Student("test", "@.", "123123123", new DataStoreArrays<>());
+        final Student student = new Student("student", "student@.", "123123123", new DataStoreArrays<>());
+        studentArrayList.add(student);
         student.joinClub(club);
+        System.out.println(studentArrayList.size());
         club.addClubMember(student);
         clubArrayList.add(club);
-        studentArrayList.add(student);
+
         // TODO REMOVE THIS AFTER TESTING REMOVE MEMBERS
     }
 

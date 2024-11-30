@@ -19,7 +19,7 @@ public class ClubRemoveMemberController {
      * @param studentEmail the email of the student to be removed
      */
     public void execute(String clubEmail, String studentEmail) {
-        final ClubRemoveMemberInputData inputData = new ClubRemoveMemberInputData(clubEmail, studentEmail);
+        final ClubRemoveMemberInputData inputData = new ClubRemoveMemberInputData(studentEmail, clubEmail);
         removeMemberInteractor.execute(inputData);
     }
 }
