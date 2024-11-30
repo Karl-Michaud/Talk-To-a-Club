@@ -46,15 +46,6 @@ public class StudentFirestoreUserDataStudentAccessObject implements StudentLogin
     private final String usernames = "username";
 
     public StudentFirestoreUserDataStudentAccessObject() throws IOException {
-        // TODO fix this to be environment variable
-        final FileInputStream serviceAccount =
-                new FileInputStream("/ServiceAccountKey.json");
-
-        final FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .build();
-
-        FirebaseApp.initializeApp(options);
         this.db = FirestoreClient.getFirestore();
     }
 
