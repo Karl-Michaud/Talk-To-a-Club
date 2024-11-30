@@ -13,7 +13,7 @@ public class AnnouncementFactory implements PostFactory {
      * @param content contents of the post.
      * @return the new post
      */
-    public Post create(String title, String content) {
+    public Announcement create(String title, String content) {
         return new Announcement(title, content, new DataStoreArrays<>(), new DataStoreArrays<>());
     }
 }

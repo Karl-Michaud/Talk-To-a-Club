@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
+import entity.user.Club;
 import entity.user.Student;
 
 /**
@@ -30,26 +31,31 @@ public class ClubGetMembersInteractor implements ClubGetMembersInputBoundary {
             getMembersPresenter.prepareFailView(clubEmail + ": Account does not exist.");
         }
         else {
-            final DataStore<Student> members = getMembersDataAccessObject.getClub(clubEmail).getClubMembers();
+            // Get Club info
+            final Club dbClub = getMembersDataAccessObject.getClub(clubEmail);
+            final DataStore<String> membersNames = dbClub.getClubMembersNames();
+            final DataStore<String> membersEmails = dbClub.getClubMembersEmails();
 
             // Create the array lists for the output data.
             final ArrayList<String> membersEmail = new ArrayList<>();
             final ArrayList<String> membersName = new ArrayList<>();
 
+            // Populate the lists
             int index = 0;
-            while (index < members.size()) {
-                final Student student = members.getByIndex(index);
+            while (index < membersEmails.size()) {
+                final String studentEmail = membersEmails.getByIndex(index);
+                final String studentName = membersNames.getByIndex(index);
                 // For a student at this index, assign membersEmail and membersName the values
-                membersEmail.add(student.getEmail());
-                membersName.add(student.getUsername());
+                membersEmail.add(studentEmail);
+                membersName.add(studentName);
 
                 // Increment the index
                 index++;
             }
 
             // Create the output data with the ArrayLists
-            final ClubGetMembersOutputData outputData = new ClubGetMembersOutputData(inputData.getClubEmail(), membersEmail,
-                    membersName, false);
+            final ClubGetMembersOutputData outputData = new ClubGetMembersOutputData(inputData.getClubEmail(),
+                    membersEmail, membersName, false);
 
             // Prepare the success view for the given output data
             getMembersPresenter.prepareSuccessView(outputData);

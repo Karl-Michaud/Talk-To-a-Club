@@ -1,6 +1,7 @@
 package use_case.club_create_post;
 
 import entity.post.Announcement;
+import entity.post.AnnouncementFactory;
 import entity.user.Club;
 
 /**
@@ -40,7 +41,8 @@ public class ClubCreatePostInteractor implements ClubCreatePostInputBoundary {
                     + maxTitleLength + " characters.");
         }
         else {
-            final Announcement post = new Announcement(title, content);
+            final AnnouncementFactory announcementFactory = new AnnouncementFactory();
+            final Announcement post = announcementFactory.create(title, content);
             final ClubCreatePostOutputData outputData = new ClubCreatePostOutputData(
                     post.getTitle(), post.getContent(), post.timeOfPosting(), post.dateOfPosting(), false);
             // Get club by email, since the user exists and logged in, we know the email exists for save
