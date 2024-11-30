@@ -24,7 +24,7 @@ public class ClubGetPostsInteractor implements ClubGetPostsInputBoundary {
     @Override
     public void execute(ClubGetPostsInputData clubGetPostsInputData) {
         if (!clubGetPostsDataAccessObject.existsByEmailClub(clubGetPostsInputData.getClubEmail())) {
-            // results in a failed message if the club doesn't exist
+            // Outputs a failed message if the club doesn't exist and calls the presenter to prepare the fail
             final String message = "Failure Getting Club Posts: Club not Found";
             final ClubGetPostsOutputData clubGetPostsOutputData = new ClubGetPostsOutputData(message,
                     null, null);
@@ -34,8 +34,8 @@ public class ClubGetPostsInteractor implements ClubGetPostsInputBoundary {
             // Gets the current club entity and gets a DataStore of its posts
             final Club currentClub = clubGetPostsDataAccessObject.getClub(clubGetPostsInputData.getClubEmail());
 
-            /* Stores the posts titles their contents into two arraylists. Calling both lists at the same index
-             gives the information for one post. */
+            /* Stores the posts titles their contents into two arraylists, then stores them in a DataStore object.
+            (Calling both lists at the same index gives the information for one post.) */
             final DataStore<Post> posts = currentClub.getClubPosts();
             final ArrayList<String> postTitles = new ArrayList<>();
             final ArrayList<String> postBodies = new ArrayList<>();
