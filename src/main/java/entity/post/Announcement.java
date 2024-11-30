@@ -21,14 +21,14 @@ public class Announcement implements Post {
     private LocalDate dateOfPosting;
 
     // Like/Dislike information of post
-    private DataStore<User> likes;
-    private DataStore<User> dislikes;
+    private DataStore<String> userLiked;
+    private DataStore<String> userDisliked;
 
-    public Announcement(String title, String content) {
+    public Announcement(String title, String content, DataStore<String> userLiked, DataStore<String> userDisliked) {
         this.title = title;
         this.content = content;
-        this.likes = new DataStoreArrays<>();
-        this.dislikes = new DataStoreArrays<>();
+        this.userLiked = userLiked;
+        this.userDisliked = userDisliked;
         this.timeOfPosting = LocalTime.now();
         this.dateOfPosting = LocalDate.now();
     }
@@ -62,7 +62,7 @@ public class Announcement implements Post {
      * @return int number of likes.
      */
     public int numberOfLikes() {
-        return likes.size();
+        return userLiked.size();
     }
 
     /**
@@ -70,17 +70,17 @@ public class Announcement implements Post {
      * @return int the number of dislikes
      */
     public int numberOfDislikes() {
-        return dislikes.size();
+        return userDisliked.size();
     }
 
     @Override
-    public DataStore<User> getLikes() {
-        return this.likes;
+    public DataStore<String> getLikes() {
+        return this.userDisliked;
     }
 
     @Override
-    public DataStore<User> getDislikes() {
-        return this.dislikes;
+    public DataStore<String> getDislikes() {
+        return this.userDisliked;
     }
 
     /**
@@ -88,7 +88,7 @@ public class Announcement implements Post {
      * @param user user that likes the post.
      */
     public void addLike(User user) {
-        likes.add(user);
+        userLiked.add(user.getEmail());
     }
 
     /**
@@ -96,7 +96,7 @@ public class Announcement implements Post {
      * @param user that unlikes the post
      */
     public void removeLike(User user) {
-        likes.remove(user);
+        userLiked.remove(user.getEmail());
     }
 
     /**
@@ -104,7 +104,7 @@ public class Announcement implements Post {
      * @param user that dislikes the post
      */
     public void addDislike(User user) {
-        dislikes.add(user);
+        userDisliked.add(user.getEmail());
     }
 
     /**
@@ -112,7 +112,7 @@ public class Announcement implements Post {
      * @param user that wants to remove dislike
      */
     public void removeDislike(User user) {
-        dislikes.remove(user);
+        userDisliked.remove(user.getEmail());
     }
 
 }

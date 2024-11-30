@@ -13,19 +13,25 @@ public class Club implements User {
     private final String password;
     private String clubDescription = "";
     // Club's members and Posts information
-    private final DataStore<Student> clubMembers;
-    private final DataStore<Post> clubPosts;
+    private final DataStore<String> clubMembersEmails;
+    private final DataStore<String> clubMembersNames;
 
-    public Club(String username, String email, String password, DataStore<Student> clubMembers,
-                DataStore<Post> clubPosts) {
+    private final DataStore<String> clubPostsTitle;
+    private final DataStore<String> clubPostsDescription;
+
+    public Club(String username, String email, String password, DataStore<String> clubMembersEmails,
+                DataStore<String> clubMembersNames, DataStore<String> clubPostsTitle,
+                DataStore<String> clubPostsDescription) {
         // Initialize club personal information
         this.username = username;
         this.email = email;
         this.password = password;
 
         // Initialize club members and posts information
-        this.clubMembers = clubMembers;
-        this.clubPosts = clubPosts;
+        this.clubMembersEmails = clubMembersEmails;
+        this.clubMembersNames = clubMembersNames;
+        this.clubPostsTitle = clubPostsTitle;
+        this.clubPostsDescription = clubPostsDescription;
     }
 
     public String getUsername() {
@@ -44,12 +50,20 @@ public class Club implements User {
         return clubDescription;
     }
 
-    public DataStore<Student> getClubMembers() {
-        return clubMembers;
+    public DataStore<String> getClubMembersEmails() {
+        return clubMembersEmails;
     }
 
-    public DataStore<Post> getClubPosts() {
-        return clubPosts;
+    public DataStore<String> getClubMembersNames() {
+        return clubMembersNames;
+    }
+
+    public DataStore<String> getClubPostsTitle() {
+        return clubPostsTitle;
+    }
+
+    public DataStore<String> getClubPostsDescription() {
+        return clubPostsDescription;
     }
 
     /**
@@ -57,7 +71,8 @@ public class Club implements User {
      * @param user particular user joining the club.
      */
     public void addClubMember(Student user) {
-        clubMembers.add(user);
+        clubMembersEmails.add(user.getEmail());
+        clubMembersNames.add(user.getUsername());
     }
 
     /**
@@ -65,7 +80,8 @@ public class Club implements User {
      * @param post particular post to add.
      */
     public void addClubPost(Post post) {
-        clubPosts.add(post);
+        clubPostsTitle.add(post.getTitle());
+        clubPostsDescription.add(post.getContent());
     }
 
     /**
@@ -73,7 +89,8 @@ public class Club implements User {
      * @param user particular user leaving the club.
      */
     public void removeClubMember(Student user) {
-        clubMembers.remove(user);
+        clubPostsDescription.remove(user.getUsername());
+        clubMembersEmails.remove(user.getEmail());
     }
 
     /**
@@ -81,7 +98,8 @@ public class Club implements User {
      * @param post particular post to be removed
      */
     public void removeClubPost(Post post) {
-        clubPosts.remove(post);
+        clubPostsDescription.remove(post.getTitle());
+        clubMembersNames.remove(post.getContent());
     }
 
     public void setClubDescription(String newDescription) {
