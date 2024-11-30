@@ -28,7 +28,6 @@ public class ClubGetPostsPresenter implements ClubGetPostsOutputBoundary {
         clubLoggedInState.setPostBodies(outputData.getPostBodies());
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("reload posts");
-        clubLoggedInViewModel.firePropertyChanged("reload message");
     }
 
     @Override
