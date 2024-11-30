@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import data_access.InMemoryUserDataStudentAccessObject;
+import data_access.InMemoryUserDataAccessObject;
 import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
@@ -127,7 +127,7 @@ public class AppBuilder {
     private final ViewManager viewManager = new ViewManager(cardLayout, cardPanel, viewManagerModel);
 
     // thought question: is the hard dependency below a problem?
-    private final InMemoryUserDataStudentAccessObject inMemoryUserDataAccessObject = new InMemoryUserDataStudentAccessObject();
+    private final InMemoryUserDataAccessObject inMemoryUserDataAccessObject = new InMemoryUserDataAccessObject();
 
     private ClubSignupViewModel clubSignupViewModel;
     private ClubSignupView clubSignupView;

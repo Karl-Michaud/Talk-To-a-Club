@@ -1,8 +1,6 @@
 package use_case.student_leave_club;
 
-import data_access.InMemoryUserDataStudentAccessObject;
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
+import data_access.InMemoryUserDataAccessObject;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +10,7 @@ public class StudentLeaveClubInteractorTest {
     @Test
     void successTest() {
         // Set up in-memory repositories
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club
         ClubFactory clubFactory = new ClubUserFactory();
@@ -54,7 +52,7 @@ public class StudentLeaveClubInteractorTest {
     @Test
     void clubDoesNotExistTest() {
         // Set up in-memory repositories
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a student
         StudentFactory studentFactory = new StudentUserFactory();
@@ -85,7 +83,7 @@ public class StudentLeaveClubInteractorTest {
     @Test
     void studentNotInClubTest() {
         // Set up in-memory repositories
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club
         ClubFactory clubFactory = new ClubUserFactory();

@@ -1,8 +1,6 @@
 package use_case.student_homepage.like;
 
-import data_access.InMemoryUserDataStudentAccessObject;
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
+import data_access.InMemoryUserDataAccessObject;
 import entity.post.AnnouncementFactory;
 import entity.post.Post;
 import entity.post.PostFactory;
@@ -18,7 +16,7 @@ public class StudentLikeInteractorTest {
     @Test
     void successLikedTest() {
         // Set up in-memory repository
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
 
         // Create a club
         ClubFactory clubFactory = new ClubUserFactory();
@@ -76,7 +74,7 @@ public class StudentLikeInteractorTest {
     @Test
     void successUnlikedTest() {
         // Set up in-memory repository
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
 
         // Create a club
         ClubFactory clubFactory = new ClubUserFactory();

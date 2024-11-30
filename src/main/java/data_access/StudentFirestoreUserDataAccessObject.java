@@ -35,7 +35,7 @@ import use_case.student_search_club.StudentSearchClubAccessInterface;
  * This implementation uses Firebase and only persists data regarding the
  * Student entity
  */
-public class StudentFirestoreUserDataStudentAccessObject implements StudentLoginDataAccessInterface,
+public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAccessInterface,
         StudentSignupUserDataAccessInterface, StudentJoinClubDataAccessInterface,
         StudentLeaveClubDataAccessInterface, StudentSearchClubAccessInterface,
         ClubRemoveMemberStudentDataAccessInterface, StudentExploreClubsDataAccessInterface,
@@ -45,7 +45,7 @@ public class StudentFirestoreUserDataStudentAccessObject implements StudentLogin
     private final String students = "students";
     private final String usernames = "username";
 
-    public StudentFirestoreUserDataStudentAccessObject() throws IOException {
+    public StudentFirestoreUserDataAccessObject() throws IOException {
         // TODO fix this to be environment variable
         final FileInputStream serviceAccount =
                 new FileInputStream("/ServiceAccountKey.json");

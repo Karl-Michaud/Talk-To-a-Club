@@ -1,8 +1,6 @@
 package use_case.explore_clubs;
 
-import data_access.InMemoryUserDataStudentAccessObject;
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
+import data_access.InMemoryUserDataAccessObject;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +13,7 @@ public class ExploreClubsInteractorTest {
     @Test
     void successTest() {
         // In-memory data setup
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
         // Create clubs
         ClubFactory clubFactory = new ClubUserFactory();
         Club club1 = clubFactory.create("Club1", "club1@example.com", "password1");
@@ -79,7 +77,7 @@ public class ExploreClubsInteractorTest {
     @Test
     void failTest() {
         // In-memory data setup
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Input data for a non-existent student
         ExploreClubsInputData inputData = new ExploreClubsInputData("nonexistent@example.com");

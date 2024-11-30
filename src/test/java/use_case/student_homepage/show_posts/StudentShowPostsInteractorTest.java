@@ -1,7 +1,6 @@
 package use_case.student_homepage.show_posts;
 
-import data_access.InMemoryUserDataStudentAccessObject;
-import entity.data_structure.DataStoreArrays;
+import data_access.InMemoryUserDataAccessObject;
 import entity.post.Announcement;
 import entity.post.AnnouncementFactory;
 import entity.post.PostFactory;
@@ -20,7 +19,7 @@ public class StudentShowPostsInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
         // Create a sample club and a student.
         UserFactory clubFactory = new ClubUserFactory();
         Club climbingClub = (Club) clubFactory.create("Climbing club", "utcc@utoronto.ca", "secure");
@@ -102,7 +101,7 @@ public class StudentShowPostsInteractorTest {
     @Test
     void failTest() {
         // Uses an in memory database to test the use case with a club.
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
 
         StudentShowPostsInputData inputData = new StudentShowPostsInputData("frederik.brecht@mail.utoronto.ca");
 

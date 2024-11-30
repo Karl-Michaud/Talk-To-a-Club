@@ -1,8 +1,6 @@
 package use_case.student_homepage.dislike;
 
-import data_access.InMemoryUserDataStudentAccessObject;
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
+import data_access.InMemoryUserDataAccessObject;
 import entity.post.AnnouncementFactory;
 import entity.post.Post;
 import entity.post.PostFactory;
@@ -20,7 +18,7 @@ public class StudentDislikeInteractorTest {
     void successDislikedTest() {
         // This test shows that a dislike is properly added after a user dislikes a post.
         // Set up in-memory repository
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
 
         // Create a club
         ClubFactory clubFactory = new ClubUserFactory();
@@ -80,7 +78,7 @@ public class StudentDislikeInteractorTest {
     void successUndislikedTest() {
         // This test shows whether the dislike is properly removed when a user removes their dislike from a post.
         // Set up in-memory repository
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
 
         // Create a club
         ClubFactory clubFactory = new ClubUserFactory();

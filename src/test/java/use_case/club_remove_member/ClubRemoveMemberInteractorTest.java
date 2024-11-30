@@ -1,6 +1,6 @@
 package use_case.club_remove_member;
 
-import data_access.InMemoryUserDataStudentAccessObject;
+import data_access.InMemoryUserDataAccessObject;
 import entity.data_structure.DataStore;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ public class ClubRemoveMemberInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Add 10 test members to the club and save the students.
         ArrayList<Student> membersList = new ArrayList<>();
@@ -110,7 +110,7 @@ public class ClubRemoveMemberInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Add 1 student for the sake fo this test
         ArrayList<Student> membersList = new ArrayList<>();
@@ -164,7 +164,7 @@ public class ClubRemoveMemberInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Add 10 test members to the club and save the students.
         ArrayList<Student> membersList = new ArrayList<>();
@@ -219,7 +219,7 @@ public class ClubRemoveMemberInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Add 10 test members to the club and save the students.
         ArrayList<Student> membersList = new ArrayList<>();
@@ -270,7 +270,7 @@ public class ClubRemoveMemberInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create the student which is not a member of the club.
         String wrongEmail = "wrong@email.com";
