@@ -2,6 +2,7 @@ package data_access;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -134,6 +135,12 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
             // Handle exceptions appropriately
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public ArrayList<Post> getPosts(Club club) {
+        // temp
+        return new ArrayList<>();
     }
 
     @Override

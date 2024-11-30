@@ -2,6 +2,7 @@ package data_access;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import com.google.api.core.ApiFuture;
@@ -14,6 +15,7 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import entity.user.Club;
 import entity.user.Student;
 import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
 import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
@@ -72,6 +74,18 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
             ex.printStackTrace();
         }
         return returnValue;
+    }
+
+    /**
+     * Gets the joined clubs for the given student.
+     *
+     * @param student the student
+     * @return an array lists of clubs
+     */
+    @Override
+    public ArrayList<Club> getStudentJoinedClubs(Student student) {
+        // temp. See in memory for implementation
+        return null;
     }
 
     @Override
