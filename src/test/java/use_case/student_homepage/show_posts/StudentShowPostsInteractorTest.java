@@ -64,14 +64,14 @@ public class StudentShowPostsInteractorTest {
         announcement3Data.put("club-email", climbingClub.getEmail());
         announcement3Data.put("time", announcement3.timeOfPosting());
         announcement3Data.put("date", announcement3.dateOfPosting());
-        climbingClub.addClubPost(announcement1);
-        climbingClub.addClubPost(announcement2);
-        climbingClub.addClubPost(announcement3);
 
         student.joinClub(climbingClub);
         climbingClub.addClubMember(student);
         dao.saveStudent(student);
         dao.saveClub(climbingClub);
+        dao.savePost(announcement1, climbingClub);
+        dao.savePost(announcement2, climbingClub);
+        dao.savePost(announcement3, climbingClub);
 
         Map<String, List<Map<String, Object>>> samplePostData = new HashMap<>();
         List<Map<String, Object>> samplePostsList = new ArrayList<>();
