@@ -146,6 +146,9 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
             final DocumentSnapshot document = future.get();
             if (document.exists()) {
                 returnValue = document.toObject(Club.class);
+                final String description = document.get("clubDescription").toString();
+                final String username = document.get("username").toString();
+
             }
         }
         catch (InterruptedException | ExecutionException ex) {
