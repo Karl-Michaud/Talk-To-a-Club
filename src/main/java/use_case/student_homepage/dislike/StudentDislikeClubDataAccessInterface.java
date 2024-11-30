@@ -19,6 +19,7 @@ public interface StudentDislikeClubDataAccessInterface {
     /**
      * Changes the dislike status in the post being interacted with (either likes if not previously liked,
      * or undislikes if
+     * PRECONDITION: the club already exists and has been saved before.
      * disliked), and saves the updated post to the db.
      * @param club The club which the post belongs to.
      * @param post The post which is being disliked/ undisliked.

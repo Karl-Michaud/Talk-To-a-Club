@@ -42,6 +42,7 @@ public class StudentDislikeInteractorTest {
 
         club.addClubPost(post);
         dao.saveClub(club);
+        dao.savePost(post, club);
         dao.saveStudent(student);
         // Input Data
         Map<String, Object> postData = new HashMap<String, Object>();
@@ -99,8 +100,8 @@ public class StudentDislikeInteractorTest {
                 + "a photo contest around the theme black and white photos and would like to hear your feedback!" +
                 " Get creative," + "ditch the colors, and win prizes!");
         post.addDislike(student);
-        club.addClubPost(post);
         dao.saveClub(club);
+        dao.savePost(post, club);
         dao.saveStudent(student);
         // Input Data
         Map<String, Object> postData = new HashMap<String, Object>();

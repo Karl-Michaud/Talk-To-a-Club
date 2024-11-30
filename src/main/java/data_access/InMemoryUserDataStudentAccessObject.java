@@ -52,15 +52,9 @@ public class InMemoryUserDataStudentAccessObject implements ClubSignupUserDataAc
         StudentLeaveClubDataAccessInterface, ClubStudentLeaveClubDataAccessInterface,
         StudentShowPostsClubAccessInterface {
 
-    private final DataStoreArrays<Student> studentArrayList = new DataStoreArrays<>();
-    private final Map<String, DataStore> clubMap = new HashMap<>();
-
-    public InMemoryUserDataStudentAccessObject() {
-        final DataStoreArrays<Club> clubArrayList = new DataStoreArrays<>();
-        final DataStoreArrays<ArrayList<Post>> postArrayList = new DataStoreArrays<>();
-        clubMap.put("clubs", clubArrayList);
-        clubMap.put("posts", postArrayList);
-    }
+    private final ArrayList<Student> studentArrayList = new ArrayList<>();
+    private final ArrayList<Club> clubArrayList = new ArrayList<>();
+    private final ArrayList<ArrayList<Post>> postArrayList = new ArrayList<>();
 
 //    public InMemoryUserDataAccessObject() {
 //        final Club club = new Club("test", "@.", "123123123", new DataStoreArrays<>(),
@@ -77,131 +71,120 @@ public class InMemoryUserDataStudentAccessObject implements ClubSignupUserDataAc
 
     @Override
     public ArrayList<Club> getStudentJoinedClubs(Student student) {
-        final DataStore<Club> clubs = clubMap.get("clubs");
         final ArrayList<Club> joinedClubs = new ArrayList<>();
-        int index = 0;
-        while (index < clubs.size()) {
-            final Club currClub = clubs.getByIndex(index);
-            if (currClub.getClubMembersEmails().contains(student.getEmail())) {
-                joinedClubs.add(currClub);
+        for (Club club : clubArrayList) {
+            if (club.getClubMembersEmails().contains(student.getEmail())) {
+                joinedClubs.add(club);
             }
-            index++;
         }
         return joinedClubs;
     }
 
     @Override
     public ArrayList<Post> getPosts(Club club) {
-        final DataStore<ArrayList<Post>> posts = clubMap.get("posts");
-        final DataStore<Club> clubs = clubMap.get("clubs");
-        ArrayList<Post> clubPosts = null;
-        int index = 0;
-        while (index < clubs.size()) {
-            final String clubEmail = clubs.getByIndex(index).getEmail();
-            if (clubEmail.equals(club.getEmail())) {
-                clubPosts = posts.getByIndex(index);
-                break;
-            }
-            index++;
-        }
-        return clubPosts;
+        final int index = clubArrayList.indexOf(club);
+        return postArrayList.get(index);
     }
 
     @Override
     public boolean existsByNameClub(String identifier) {
-        boolean found = false;
-        final DataStore<Club> clubs = clubMap.get("clubs");
-        int index = 0;
-        while (index < clubs.size()) {
-            final Club club = clubs.getByIndex(index);
+        boolean exists = false;
+        for (Club club : clubArrayList) {
             if (club.getUsername().equals(identifier)) {
-                found = true;
+                exists = true;
                 break;
             }
-            index++;
         }
-        return found;
+        return exists;
     }
 
     @Override
     public boolean existsByNameStudent(String username) {
-        boolean found = false;
+        boolean exists = false;
         for (Student student : studentArrayList) {
             if (student.getUsername().equals(username)) {
-                found = true;
+                exists = true;
                 break;
             }
         }
-        return found;
+        return exists;
     }
 
     @Override
     public boolean existsByEmailClub(String identifier) {
-        boolean found = false;
-        final DataStore<Club> clubs = clubMap.get("clubs");
-        int index = 0;
-        while (index < clubs.size()) {
-            final Club club = clubs.getByIndex(index);
+        boolean exists = false;
+        for (Club club : clubArrayList) {
             if (club.getEmail().equals(identifier)) {
-                found = true;
+                exists = true;
                 break;
             }
-            index++;
         }
-        return found;
+        return exists;
     }
 
     @Override
     public void updateClubDescription(Club club) {
-        clubMap.get("clubs").remove(club);
-        clubMap.get("clubs").add(club);
+        for (Club currClub : clubArrayList) {
+            if (currClub.getClubMembersEmails().contains(club.getEmail())) {
+                currClub.setClubDescription(club.getClubDescription());
+                break;
+            }
+        }
     }
 
     @Override
     public boolean existsByEmailStudent(String identifier) {
-        boolean found = false;
-        if (!found) {
-            for (Student student : studentArrayList) {
-                if (student.getEmail().equals(identifier)) {
-                    found = true;
-                    break;
-                }
+        boolean exists = false;
+        for (Student student : studentArrayList) {
+            if (student.getEmail().equals(identifier)) {
+                exists = true;
+                break;
             }
         }
-        return found;
+        return exists;
     }
 
     @Override
     public void saveClub(Club club) {
-        clubMap.get("clubs").add(club);
+        // Please note
+        boolean found = false;
+        for (Club currClub : clubArrayList) {
+            if (currClub.getEmail().equals(club.getEmail())) {
+                final int index = clubArrayList.indexOf(currClub);
+                clubArrayList.remove(currClub);
+                clubArrayList.add(index, club);
+                found = true;
+            }
+        }
+        if (!found) {
+            // Since clubs and posts have the same index. Thus, if the club didn't exist before, add both at the end of
+            // their respective lists.
+            clubArrayList.add(club);
+            postArrayList.add(new ArrayList<>());
+        }
     }
 
     @Override
     public void saveStudent(Student student) {
+        studentArrayList.remove(student);
         studentArrayList.add(student);
     }
 
     @Override
     public Club getClub(String email) {
         Club clubFound = null;
-        final DataStore<Club> clubs = clubMap.get("clubs");
-        int index = 0;
-        while (index < clubs.size()) {
-            final Club club = clubs.getByIndex(index);
-            if (club.getEmail().equals(email)) {
-                clubFound = club;
+        for (Club currClub : clubArrayList) {
+            if (currClub.getEmail().equals(email)) {
+                clubFound = currClub;
                 break;
             }
-            index++;
         }
         return clubFound;
     }
 
     @Override
     public void updateClubMembers(Club club) {
-        // The club should already be updated in the in memory model, since the entity objects are stored
-        clubMap.get("clubs").remove(club);
-        clubMap.get("clubs").add(club);
+        saveClub(club);
     }
 
     @Override
@@ -219,18 +202,30 @@ public class InMemoryUserDataStudentAccessObject implements ClubSignupUserDataAc
 
     @Override
     public void updateStudentClubsJoined(Student student) {
-        this.studentArrayList.remove(student);
-        this.studentArrayList.add(student);
+        saveStudent(student);
     }
 
     @Override
     public void savePost(Post post, Club club) {
-        clubMap.get("posts").remove(post);
-        clubMap.get("posts").add(post);
+        // Since this is only called when the club is logged in, we do not have to worry about the indexOf(club)
+        // being -1.
+
+        // IMPORTANT NOTE: IN TESTS, SAVE POST CAN ONLY BE CALLED AFTER THE CLUB IS SAVED. THE REASON BEHIND THAT IS
+        // THAT THE METHOD IS ONLY CALLED IN LOGGED IN USE CASES, MEANING THE CLUB EXISTS IN THE DB. CHECK METHOD
+        // PRECONDITION.
+
+        final int index = clubArrayList.indexOf(club);
+        postArrayList.get(index).remove(post);
+        postArrayList.get(index).add(post);
+        saveClub(club);
     }
 
     @Override
     public DataStore<Club> getAllClubs() {
-        return clubMap.get("clubs");
+        final DataStore<Club> allClubs = new DataStoreArrays<>();
+        for (Club club : clubArrayList) {
+            allClubs.add(club);
+        }
+        return allClubs;
     }
 }

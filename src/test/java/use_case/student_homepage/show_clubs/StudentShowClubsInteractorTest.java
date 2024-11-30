@@ -27,19 +27,6 @@ public class StudentShowClubsInteractorTest {
 
         StudentFactory studentFactory = new StudentUserFactory();
         Student student = studentFactory.create("Fred", "frederik.brecht@mail.utoronto.ca", "password");
-        // Add the sample student as a member to the clubs.
-        climbingClub.addClubMember(student);
-        outdoorsclub.addClubMember(student);
-        rlClub.addClubMember(student);
-        student.joinClub(outdoorsclub);
-        student.joinClub(climbingClub);
-        student.joinClub(rlClub);
-
-        // Save the sample student and clubs to the in memory database.
-        dao.saveStudent(student);
-        dao.saveClub(climbingClub);
-        dao.saveClub(outdoorsclub);
-        dao.saveClub(rlClub);
 
         // set up a sample List of Maps to compare to the output test data
         ArrayList<HashMap<String, String>> sampleList  = new ArrayList<>();
@@ -63,6 +50,20 @@ public class StudentShowClubsInteractorTest {
         sampleList.add(climbingClubHash);
         sampleList.add(rlClubHash);
 
+        // Add the sample student as a member to the clubs.
+        climbingClub.addClubMember(student);
+        outdoorsclub.addClubMember(student);
+        rlClub.addClubMember(student);
+        student.joinClub(outdoorsclub);
+        student.joinClub(climbingClub);
+        student.joinClub(rlClub);
+
+        // Save the sample student and clubs to the in memory database.
+        dao.saveStudent(student);
+        dao.saveClub(outdoorsclub);
+        dao.saveClub(climbingClub);
+        dao.saveClub(rlClub);
+
         // prepare the inputData.
         StudentShowClubsInputData inputData = new StudentShowClubsInputData(student.getEmail());
 
@@ -71,7 +72,7 @@ public class StudentShowClubsInteractorTest {
             @Override
             public void prepareClubsContent(StudentShowClubsOutputData studentShowClubsOutputData) {
                 assertEquals("frederik.brecht@mail.utoronto.ca", studentShowClubsOutputData.getCurrStudentEmail());
-                assertEquals(sampleList, studentShowClubsOutputData.getClubs());
+                assertTrue(sampleList.equals(studentShowClubsOutputData.getClubs()));
             }
 
             @Override
