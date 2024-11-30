@@ -68,6 +68,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
                 evt -> {
                     if (evt.getSource().equals(buttonSearch) && buttonSearch.getText().isEmpty()) {
                         final StudentHomeState currentState = studentHomeViewModel.getState();
+                        System.out.println(currentState.getCurrentUser());
                         exploreClubsController.execute(currentState.getCurrentUser());
                     }
                 }

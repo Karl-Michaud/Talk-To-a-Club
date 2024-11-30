@@ -220,6 +220,7 @@ public class InMemoryUserDataStudentAccessObject implements ClubSignupUserDataAc
 
     @Override
     public DataStore<Club> getAllClubs() {
+        System.out.println("getting all clubs");
         final DataStore<Club> allClubs = new DataStoreArrays<>();
         for (Club club : clubArrayList) {
             allClubs.add(club);

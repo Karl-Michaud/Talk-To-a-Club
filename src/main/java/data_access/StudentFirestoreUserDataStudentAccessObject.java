@@ -81,7 +81,7 @@ public class StudentFirestoreUserDataStudentAccessObject implements StudentLogin
                 final DataStore<String> joinedClubEmailsVal = new DataStoreArrays().toDataStore(joinedEmails);
 
                 final StudentUserFactory studentUserFactory = new StudentUserFactory();
-                final Student student = studentUserFactory.create(email, usernameVal,
+                final Student student = studentUserFactory.create(usernameVal, email,
                         passwordVal, joinedClubEmailsVal, joinedClubNamesVal);
 
                 returnValue = student;
