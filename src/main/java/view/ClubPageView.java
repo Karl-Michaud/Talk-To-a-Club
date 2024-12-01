@@ -26,12 +26,14 @@ public class ClubPageView extends JPanel {
     private JLabel email;
     private JLabel numMembers;
     private JLabel logoLabel;
+    private ExploreClubsController exploreClubsController;
+    private JoinClubController joinClubController;
+    private LeaveClubController leaveClubController;
 
     // TODO: Change all string panel views to constants form CONSTANTS file
     private final String viewName = "ClubPageView";
 
-    public ClubPageView(ExploreClubsState exploreClubsState, ExploreClubsController exploreClubsContoller,
-                        JoinClubController joinController, LeaveClubController leaveController) {
+    public ClubPageView(ExploreClubsState exploreClubsState) {
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(contentPanel);
@@ -48,7 +50,7 @@ public class ClubPageView extends JPanel {
         this.backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                exploreClubsContoller.switchToHomeView();
+                exploreClubsController.switchToHomeView();
             }
         });
 
@@ -75,7 +77,7 @@ public class ClubPageView extends JPanel {
                 // Check if student is in club or not
                 if (isMemberCheck) {
                     // Run the leave club use case
-                    leaveController.leaveClub(exploreClubsState.getStudentEmail(),
+                    leaveClubController.leaveClub(exploreClubsState.getStudentEmail(),
                             exploreClubsState.getCurrentClubEmail());
                     // Change the join button text
                     joinButton.setText("Join Club");
@@ -85,7 +87,7 @@ public class ClubPageView extends JPanel {
                 }
                 else {
                     // Run the join club use case
-                    joinController.joinClub(exploreClubsState.getStudentEmail(),
+                    joinClubController.joinClub(exploreClubsState.getStudentEmail(),
                             exploreClubsState.getCurrentClubEmail());
                     // Change the join button text
                     joinButton.setText("Leave Club");
@@ -99,6 +101,18 @@ public class ClubPageView extends JPanel {
     }
 
     public String getViewName() {
-        return viewName;
+        return this.viewName;
+    }
+
+    public void setExploreClubsController(ExploreClubsController exploreClubsController) {
+        this.exploreClubsController = exploreClubsController;
+    }
+
+    public void setJoinClubController(JoinClubController joinClubController) {
+        this.joinClubController = joinClubController;
+    }
+
+    public void setLeaveClubController(LeaveClubController leaveClubController) {
+        this.leaveClubController = leaveClubController;
     }
 }

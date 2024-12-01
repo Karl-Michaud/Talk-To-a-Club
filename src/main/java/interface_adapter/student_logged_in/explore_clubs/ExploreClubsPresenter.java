@@ -6,6 +6,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
 import use_case.explore_clubs.ExploreClubsOutputBoundary;
 import use_case.explore_clubs.ExploreClubsOutputData;
+import view.ClubPageView;
 
 /**
  * The Presenter for the Explore Clubs Use Case.
@@ -60,8 +61,8 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
         exploreClubsViewModel.setState(state);
         exploreClubsViewModel.firePropertyChanged("ClubPageView");
 
-        // Transition the ViewManager to the Club Description view
-        viewManagerModel.setState(exploreClubsViewModel.getViewName());
+        // Transition the ViewManager to the Club Description view'
+        viewManagerModel.setState("ClubPageView");
         viewManagerModel.firePropertyChanged();
     }
 

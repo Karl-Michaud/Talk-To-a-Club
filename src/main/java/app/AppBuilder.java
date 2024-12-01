@@ -38,6 +38,12 @@ import interface_adapter.signup.student_signup.StudentSignupViewModel;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsPresenter;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
+import interface_adapter.student_logged_in.join_club.JoinClubController;
+import interface_adapter.student_logged_in.join_club.JoinClubPresenter;
+import interface_adapter.student_logged_in.join_club.JoinClubViewModel;
+import interface_adapter.student_logged_in.leave_club.LeaveClubController;
+import interface_adapter.student_logged_in.leave_club.LeaveClubPresenter;
+import interface_adapter.student_logged_in.leave_club.LeaveClubViewModel;
 import interface_adapter.student_logged_in.student_home.StudentHomeController;
 import interface_adapter.student_logged_in.student_home.StudentHomePresenter;
 import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
@@ -87,6 +93,12 @@ import use_case.signup.student_signup.StudentSignupInteractor;
 import use_case.signup.student_signup.StudentSignupOutputBoundary;
 import use_case.student_homepage.dislike.StudentDislikeOutputBoundary;
 import use_case.student_homepage.like.StudentLikeOutputBoundary;
+import use_case.student_join_club.StudentJoinClubInputBoundary;
+import use_case.student_join_club.StudentJoinClubInteractor;
+import use_case.student_join_club.StudentJoinClubOutputBoundary;
+import use_case.student_leave_club.StudentLeaveClubInputBoundary;
+import use_case.student_leave_club.StudentLeaveClubInteractor;
+import use_case.student_leave_club.StudentLeaveClubOutputBoundary;
 import view.ClubSignupView;
 import view.ClubCreatePostView;
 import view.LoginView;
@@ -158,6 +170,11 @@ public class AppBuilder {
 
     private ExploreClubsViewModel exploreClubsViewModel;
     private ExploreClubsView exploreClubsView;
+
+    private ClubPageView clubPageView;
+
+    private JoinClubViewModel joinClubViewModel;
+    private LeaveClubViewModel leaveClubViewModel;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -248,6 +265,17 @@ public class AppBuilder {
         exploreClubsViewModel = new ExploreClubsViewModel();
         exploreClubsView = new ExploreClubsView(exploreClubsViewModel);
         cardPanel.add(exploreClubsView, exploreClubsView.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the club page view to the application.
+     * @return this.
+     */
+    public AppBuilder addClubPageView() {
+        exploreClubsViewModel = new ExploreClubsViewModel();
+        clubPageView = new ClubPageView(exploreClubsViewModel.getState());
+        cardPanel.add(clubPageView, clubPageView.getViewName());
         return this;
     }
 
@@ -472,6 +500,37 @@ public class AppBuilder {
         final ExploreClubsController exploreClubsController = new ExploreClubsController(exploreClubsInteractor);
         studentHomeView.setExploreClubsController(exploreClubsController);
         exploreClubsView.setExploreClubsController(exploreClubsController);
+        clubPageView.setExploreClubsController(exploreClubsController);
+        return this;
+    }
+
+    /**
+     * Adds the join use case to the application.
+     * @return this builder
+     */
+    public AppBuilder addJoinUseCase() {
+        final StudentJoinClubOutputBoundary joinClubOutputBoundary = new JoinClubPresenter(joinClubViewModel);
+        final StudentJoinClubInputBoundary joinClubInteractor =
+                new StudentJoinClubInteractor(inMemoryUserDataAccessObject,
+                        inMemoryUserDataAccessObject, joinClubOutputBoundary);
+
+        final JoinClubController joinClubController = new JoinClubController(joinClubInteractor);
+        clubPageView.setJoinClubController(joinClubController);
+        return this;
+    }
+
+    /**
+     * Adds the leave use case to the application.
+     * @return this builder
+     */
+    public AppBuilder addLeaveUseCase() {
+        final StudentLeaveClubOutputBoundary leaveClubOutputBoundary = new LeaveClubPresenter(leaveClubViewModel);
+        final StudentLeaveClubInputBoundary leaveClubInteractor =
+                new StudentLeaveClubInteractor(inMemoryUserDataAccessObject,
+                        inMemoryUserDataAccessObject, leaveClubOutputBoundary);
+
+        final LeaveClubController leaveClubController = new LeaveClubController(leaveClubInteractor);
+        clubPageView.setLeaveClubController(leaveClubController);
         return this;
     }
 

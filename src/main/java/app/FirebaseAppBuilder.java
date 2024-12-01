@@ -167,6 +167,11 @@ public class FirebaseAppBuilder {
     private ExploreClubsViewModel exploreClubsViewModel;
     private ExploreClubsView exploreClubsView;
 
+    private ClubPageView clubPageView;
+
+    private JoinClubViewModel joinClubViewModel;
+    private LeaveClubViewModel leaveClubViewModel;
+
     public FirebaseAppBuilder() throws IOException {
         cardPanel.setLayout(cardLayout);
     }
@@ -256,6 +261,17 @@ public class FirebaseAppBuilder {
         exploreClubsViewModel = new ExploreClubsViewModel();
         exploreClubsView = new ExploreClubsView(exploreClubsViewModel);
         cardPanel.add(exploreClubsView, exploreClubsView.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the club page view to the application.
+     * @return this.
+     */
+    public FirebaseAppBuilder addClubPageView() {
+        exploreClubsViewModel = new ExploreClubsViewModel();
+        clubPageView = new ClubPageView(exploreClubsViewModel.getState());
+        cardPanel.add(clubPageView, clubPageView.getViewName());
         return this;
     }
 
@@ -484,6 +500,37 @@ public class FirebaseAppBuilder {
         final ExploreClubsController exploreClubsController = new ExploreClubsController(exploreClubsInteractor);
         studentHomeView.setExploreClubsController(exploreClubsController);
         exploreClubsView.setExploreClubsController(exploreClubsController);
+        clubPageView.setExploreClubsController(exploreClubsController);
+        return this;
+    }
+
+    /**
+     * Adds the join use case to the application.
+     * @return this builder
+     */
+    public FirebaseAppBuilder addJoinUseCase() {
+        final StudentJoinClubOutputBoundary joinClubOutputBoundary = new JoinClubPresenter(joinClubViewModel);
+        final StudentJoinClubInputBoundary joinClubInteractor =
+                new StudentJoinClubInteractor(studentFirestoreUserDataAccessObject,
+                        clubFirestoreUserDataAccessObject, joinClubOutputBoundary);
+
+        final JoinClubController joinClubController = new JoinClubController(joinClubInteractor);
+        clubPageView.setJoinClubController(joinClubController);
+        return this;
+    }
+
+    /**
+     * Adds the leave use case to the application.
+     * @return this builder
+     */
+    public FirebaseAppBuilder addLeaveUseCase() {
+        final StudentLeaveClubOutputBoundary leaveClubOutputBoundary = new LeaveClubPresenter(leaveClubViewModel);
+        final StudentLeaveClubInputBoundary leaveClubInteractor =
+                new StudentLeaveClubInteractor(studentFirestoreUserDataAccessObject,
+                        clubFirestoreUserDataAccessObject, leaveClubOutputBoundary);
+
+        final LeaveClubController leaveClubController = new LeaveClubController(leaveClubInteractor);
+        clubPageView.setLeaveClubController(leaveClubController);
         return this;
     }
 
