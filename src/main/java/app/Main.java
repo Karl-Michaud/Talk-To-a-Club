@@ -1,65 +1,28 @@
 package app;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-
-import javax.swing.JFrame;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * The Main class of our application.
+ * This file is used to run the Talk To a Club app. Please carefully follow the steps on the README.md file
+ * for instructions on how to run the app. Note that if the user unsuccessfully connects to the database, the app will
+ * throw an error.
  */
 public class Main {
+
     /**
-     * Builds and runs the CA architecture of the application.
-     * @param args unused arguments
+     * This method will run the Talk To a Club app. Please follow the instructions on how to run the app.
+     * @param args this can be ignored.
      */
-    public static void main(String[] args) throws IOException {
-        final FileInputStream serviceAccount =
-                new FileInputStream("C:/dev/UofT/CSC207/ServiceAccountKey.json");
+    public static void main(String[] args) {
+        // Enter the file path to the ServiceAccountKey.json file here. Please carefully follow the instructions.
+        final String filePath = "/Users/karlosins/Desktop/ServiceAccountKey.json";
 
-        final FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .build();
-
-        FirebaseApp.initializeApp(options);
-
-//        final AppBuilder appBuilder = new AppBuilder();
-        final FirebaseAppBuilder appBuilder = new FirebaseAppBuilder();
-        final JFrame application = appBuilder
-                .addLoginView()
-                .addClubSignupView()
-                .addStudentSignupView()
-                .addClubHomeView()
-                .addStudentHomeView()
-                .addStudentProfileView()
-                .addCreatePostView()
-                .addExploreClubsView()
-                .addClubPageView()
-                .addClubSignupUseCase()
-                .addStudentSignupUseCase()
-                .addClubLoginUseCase()
-                .addStudentLoginUseCase()
-                .addStudentHomeUseCase()
-                .addStudentProfileUseCase()
-                .addShowPostsUseCase()
-                .addLikeUseCase()
-                .addDislikeUseCase()
-                .addClubUpdateDescUseCase()
-                .addClubCreatePostUseCase()
-                .addClubGetPostsUseCase()
-                .addClubGetMembersUseCase()
-                .addLogoutUseCase()
-                .addShowClubsUseCase()
-                .addClubRemoveMemberUseCase()
-                .addExploreClubsUseCase()
-                .addJoinUseCase()
-                .addLeaveUseCase()
-                .build();
-
-        application.pack();
-        application.setVisible(true);
+        final App app = new App();
+        try {
+            app.run(filePath);
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 }
