@@ -46,7 +46,7 @@ prospecting students
 - **To be added**: New types of posts such as polls and event registration posts (register for an event through the post),
 a settings page and the ability to respond to comments (once the student comment feature is added).
 
-## Installation
+## Installation Instructions
 
 **Software Requirements**: A computer with IntelliJ IDEA (community or professional) installed
 
@@ -69,7 +69,9 @@ made by JetBrains.
      ```  
      
 2) Open the project on the IntelliJ IDEA
-3) Navigate to the "Main" file found in the "app" folder by following the steps in the linked [video tutorial]()
+3) Navigate to the "Main" file found in the "app" folder by following the steps in the linked [video tutorial](https://youtu.be/KgJfcL3cjAs)
    - csc207-final-project-club-app > src > main > java > app > Main.java
+4) Download the Google FireBase token (ServiceAccountKey.json) and save to computer. [Download link](https://drive.google.com/file/d/18Jvt_BGyfrxYK1bGdtJyAnEidmPYn8YG/view?usp=sharing)
+5) Copy the file path of the downloaded token and enter 
 
 
