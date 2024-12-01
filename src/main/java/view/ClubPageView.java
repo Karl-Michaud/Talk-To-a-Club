@@ -35,6 +35,8 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
 
     public ClubPageView(ExploreClubsViewModel exploreClubsViewModel) {
 
+        exploreClubsViewModel.addPropertyChangeListener(this);
+
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(contentPanel);
         final ExploreClubsState exploreClubsState = exploreClubsViewModel.getState();
