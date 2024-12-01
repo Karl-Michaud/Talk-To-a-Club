@@ -10,6 +10,7 @@ import javax.swing.*;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
+import interface_adapter.student_logged_in.student_home.StudentHomeController;
 
 /**
  * Main view for the Explore clubs use case.
@@ -52,6 +53,9 @@ public class ExploreClubsView extends JPanel implements PropertyChangeListener {
         }
         if (evt.getPropertyName().equals("fail join")) {
             JOptionPane.showMessageDialog(this, "Failed to join club");
+        }
+        if (evt.getPropertyName().equals("fail leave")) {
+            JOptionPane.showMessageDialog(this, "Failed to leave club");
         }
     }
 
