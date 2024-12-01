@@ -1,12 +1,13 @@
 package app;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import javax.swing.JFrame;
+
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-
-import javax.swing.JFrame;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 /**
  * The Main class of our application.
@@ -15,6 +16,7 @@ public class Main {
     /**
      * Builds and runs the CA architecture of the application.
      * @param args unused arguments
+     * @throws IOException an IOException.
      */
     public static void main(String[] args) throws IOException {
         final FileInputStream serviceAccount =
@@ -26,7 +28,6 @@ public class Main {
 
         FirebaseApp.initializeApp(options);
 
-//        final AppBuilder appBuilder = new AppBuilder();
         final FirebaseAppBuilder appBuilder = new FirebaseAppBuilder();
         final JFrame application = appBuilder
                 .addLoginView()

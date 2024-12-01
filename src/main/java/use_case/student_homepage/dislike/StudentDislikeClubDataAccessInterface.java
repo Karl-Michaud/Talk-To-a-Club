@@ -29,6 +29,7 @@ public interface StudentDislikeClubDataAccessInterface {
     /**
      * Gets the posts of a given club.
      * @param club the club
+     * @return An arraylist of the post objects corresponding to the club.
      */
     ArrayList<Post> getPosts(Club club);
 }

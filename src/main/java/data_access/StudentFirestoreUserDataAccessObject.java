@@ -42,6 +42,8 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
         ClubRemoveMemberStudentDataAccessInterface, StudentExploreClubsDataAccessInterface,
         StudentDislikeStudentDataAccessInterface, StudentLikeStudentDataAccessInterface,
         StudentShowClubsAccessInterface, StudentShowPostsStudentAccessInterface, StudentHomeAccessInterface {
+    private static final String UPDATE_TIME = "Update time : ";
+
     private final Firestore db;
     private final String students = "students";
     private final String usernames = "username";
@@ -153,7 +155,7 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
 
         final ApiFuture<WriteResult> writeResult = docRef.set(mapStudent);
         try {
-            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+            System.out.println(UPDATE_TIME + writeResult.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             ex.printStackTrace();
@@ -174,8 +176,8 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
                 student.getJoinedClubsNames().toArrayList().stream().toList());
 
         try {
-            System.out.println("Update time : " + writeEmails.get().getUpdateTime());
-            System.out.println("Update time : " + writeNames.get().getUpdateTime());
+            System.out.println(UPDATE_TIME + writeEmails.get().getUpdateTime());
+            System.out.println(UPDATE_TIME + writeNames.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately
