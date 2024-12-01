@@ -167,7 +167,7 @@ SOFTWARE.
 We welcome feedback and contributions to improve **Talk To a Club**! Here's how you can get involved:
 
 ### 🐛 **Reporting Bugs**
-- If you encounter any issues, please report them via our [Google Form](#).
+- If you encounter any issues, please report them via our [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSeJoCcnzBNPrbCkUN0TZk2ORN6bRnHBcm4EMwXqjt2uevgQUg/viewform?usp=sf_link).
 - Alternatively, you can start a discussion on our GitHub [Discussions Page](https://github.com/Karl-Michaud/csc207-final-project-club-app/discussions).
 
 ### 💡 **Feature Suggestions**

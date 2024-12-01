@@ -64,6 +64,7 @@ public class StudentHomeState {
     public Map<String, List<Map<String, Object>>> getPostData() {
         return this.postData;
     }
+
     public void setPostData(Map<String, List<Map<String, Object>>> postData) {
         this.postData = postData;
     }

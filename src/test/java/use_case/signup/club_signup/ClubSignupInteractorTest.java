@@ -136,7 +136,7 @@ public class ClubSignupInteractorTest {
 
     @Test
     void usernameShortTest() {
-        ClubSignupInputData inputData = new ClubSignupInputData("", "ok@k.com",
+        ClubSignupInputData inputData = new ClubSignupInputData("1", "ok@k.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case
@@ -151,7 +151,7 @@ public class ClubSignupInteractorTest {
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("Username must be at least 1 character(s).", error);
+                assertEquals("Username must be at least 2 character(s).", error);
             }
 
             @Override
@@ -299,6 +299,122 @@ public class ClubSignupInteractorTest {
             @Override
             public void prepareFailView(String error) {
                 assertEquals("Invalid email address.", error);
+            }
+
+            @Override
+            public void switchToLoginView() {
+                fail("Use case switch to login is unexpected.");
+            }
+        };
+        ClubSignupInputBoundary interactor = new ClubSignupInteractor(userRepository, successPresenter, new ClubUserFactory());
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void emptyEmailTest() {
+        ClubSignupInputData inputData = new ClubSignupInputData("dd", "",
+                "password", "password");
+
+        // Uses an in memory database to test the use case
+        ClubSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(ClubSignupOutputData user) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                assertEquals("Email field is empty.", error);
+            }
+
+            @Override
+            public void switchToLoginView() {
+                fail("Use case switch to login is unexpected.");
+            }
+        };
+        ClubSignupInputBoundary interactor = new ClubSignupInteractor(userRepository, successPresenter, new ClubUserFactory());
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void emptyPasswordTest() {
+        ClubSignupInputData inputData = new ClubSignupInputData("dsfdsds", "okk.com",
+                "", "password");
+
+        // Uses an in memory database to test the use case
+        ClubSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(ClubSignupOutputData user) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                assertEquals("Password field is empty.", error);
+            }
+
+            @Override
+            public void switchToLoginView() {
+                fail("Use case switch to login is unexpected.");
+            }
+        };
+        ClubSignupInputBoundary interactor = new ClubSignupInteractor(userRepository, successPresenter, new ClubUserFactory());
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void emptyRepeatPasswordTest() {
+        ClubSignupInputData inputData = new ClubSignupInputData("ddddsssss", "okk.com",
+                "password", "");
+
+        // Uses an in memory database to test the use case
+        ClubSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(ClubSignupOutputData user) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                assertEquals("Repeat Password field is empty.", error);
+            }
+
+            @Override
+            public void switchToLoginView() {
+                fail("Use case switch to login is unexpected.");
+            }
+        };
+        ClubSignupInputBoundary interactor = new ClubSignupInteractor(userRepository, successPresenter, new ClubUserFactory());
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void emptyUsernameTest() {
+        ClubSignupInputData inputData = new ClubSignupInputData("", "okk@.com",
+                "password", "password");
+
+        // Uses an in memory database to test the use case
+        ClubSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(ClubSignupOutputData user) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                assertEquals("Username field is empty.", error);
             }
 
             @Override

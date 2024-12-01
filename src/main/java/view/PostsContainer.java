@@ -1,10 +1,12 @@
 package view;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import interface_adapter.student_logged_in.student_home.dislike.StudentDislikeController;
 import interface_adapter.student_logged_in.student_home.like.StudentLikeController;
@@ -13,10 +15,12 @@ import interface_adapter.student_logged_in.student_home.like.StudentLikeControll
  * Container for the list of posts on the student home view.
  */
 public class PostsContainer extends JPanel {
+    private static final int WIDTH = 500;
+
     public PostsContainer(Map<String, List<Map<String, Object>>> posts, String currentStudent,
                           StudentLikeController likeController, StudentDislikeController dislikeController) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setMaximumSize(new Dimension(500, Integer.MAX_VALUE));
+        this.setMaximumSize(new Dimension(WIDTH, Integer.MAX_VALUE));
         if (posts == null || posts.isEmpty()) {
             this.add(new JLabel("No posts found"));
         }

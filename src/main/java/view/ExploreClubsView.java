@@ -5,12 +5,16 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
-import interface_adapter.student_logged_in.student_home.StudentHomeController;
 
 /**
  * Main view for the Explore clubs use case.
@@ -66,5 +70,4 @@ public class ExploreClubsView extends JPanel implements PropertyChangeListener {
     public String getViewName() {
         return viewName;
     }
-
 }
