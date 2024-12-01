@@ -18,7 +18,7 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
         final FileInputStream serviceAccount =
-                new FileInputStream("TO ADD");
+                new FileInputStream("C:/dev/UofT/CSC207/ServiceAccountKey.json");
 
         final FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
