@@ -30,8 +30,10 @@ public class PostPanel extends JPanel {
     private JLabel labelClub;
     private JLabel labelLikes;
     private JLabel labelDislikes;
-    private final Icon likeEmptyIcon = new ImageIcon("src/main/resources/like.png");
-    private final Icon likeFilledIcon = new ImageIcon("src/main/resources/like_filled.png");
+    private final Icon likeEmptyIcon;
+    private final Icon likeFilledIcon;
+    //private final Icon likeEmptyIcon = new ImageIcon("src/main/resources/like.png");
+    //private final Icon likeFilledIcon = new ImageIcon("src/main/resources/like_filled.png");
     private final Icon dislikeEmptyIcon = new ImageIcon("src/main/resources/dislike.png");
     private final Icon dislikeFilledIcon = new ImageIcon("src/main/resources/dislike_filled.png");
     private final StudentLikeController likeController;
@@ -39,6 +41,8 @@ public class PostPanel extends JPanel {
 
     public PostPanel(Map<String, Object> post, String clubName, String currentStudent,
                      StudentLikeController likeController, StudentDislikeController dislikeController) {
+        this.likeEmptyIcon = new ImageIcon("src/main/resources/like.png");
+        this.likeFilledIcon = new ImageIcon("src/main/resources/like_filled.png");
         this.likeController = likeController;
         this.dislikeController = dislikeController;
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -65,7 +69,9 @@ public class PostPanel extends JPanel {
         buttonLike.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("like button pressed");
                 if (post.get(LIKED).equals(true)) {
+                    System.out.println("running if true");
                     buttonLike.setIcon(likeEmptyIcon);
                     int likedCount = Integer.parseInt(labelLikes.getText());
                     likedCount--;
@@ -75,13 +81,14 @@ public class PostPanel extends JPanel {
                 }
                 else {
                     buttonLike.setIcon(likeFilledIcon);
-                    buttonLike.setIcon(likeEmptyIcon);
+                    buttonDislike.setIcon(likeEmptyIcon);
                     int likedCount = Integer.parseInt(labelLikes.getText());
                     likedCount++;
                     labelLikes.setText(String.valueOf(likedCount));
                     post.put(LIKED, true);
                     likeController.changeLike(currentStudent, post);
                     dislikeController.changeDislike(currentStudent, post);
+                    System.out.println("running if false");
                 }
             }
         });

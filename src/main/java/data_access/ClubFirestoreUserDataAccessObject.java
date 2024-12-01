@@ -141,6 +141,19 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
             final DocumentSnapshot document = future.get();
             final ArrayList<Map<String, Object>> clubPostValues =
                     (ArrayList<Map<String, Object>>) document.get("allPosts");
+
+//            // delete the post to change
+//            Map<String, Object> savedVal = null;
+//            for (Map<String, Object> clubPostValue : clubPostValues) {
+//                if (clubPostValue.get("dateOfPosting").equals(post.dateOfPosting())
+//                        && clubPostValue.get("timeOfPosting").equals(post.timeOfPosting())) {
+//                    savedVal = clubPostValue;
+//                }
+//            }
+//
+//            clubPostValues.remove(savedVal);
+            System.out.println(clubPostValues);
+
             final Map<String, Object> clubPost = new HashMap<>();
             clubPost.put("title", post.getTitle());
             clubPost.put("content", post.getContent());
