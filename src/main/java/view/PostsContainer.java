@@ -16,6 +16,7 @@ import interface_adapter.student_logged_in.student_home.like.StudentLikeControll
  */
 public class PostsContainer extends JPanel {
     private static final int WIDTH = 500;
+
     public PostsContainer(Map<String, List<Map<String, Object>>> posts, String currentStudent,
                           StudentLikeController likeController, StudentDislikeController dislikeController) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

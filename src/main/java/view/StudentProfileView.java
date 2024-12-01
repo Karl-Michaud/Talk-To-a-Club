@@ -1,15 +1,22 @@
 package view;
 
-import interface_adapter.student_profile.StudentProfileController;
-import interface_adapter.student_profile.StudentProfileState;
-import interface_adapter.student_profile.StudentProfileViewModel;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import interface_adapter.student_profile.StudentProfileController;
+import interface_adapter.student_profile.StudentProfileState;
+import interface_adapter.student_profile.StudentProfileViewModel;
+
+/**
+ * The View for the student profile page.
+ */
 public class StudentProfileView extends JPanel implements PropertyChangeListener {
     private JButton backHomeButton;
     private JPanel panel1;
