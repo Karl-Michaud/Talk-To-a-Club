@@ -73,6 +73,10 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
                         .contains(exploreClubsState.getCurrentClubEmail());
                 // Check if student is in club or not
                 if (isMemberCheck) {
+                    // Update the member count on the view.
+                    final Integer intMembers = Integer.valueOf(exploreClubsState.getCurrentNumberOfMembersString()) - 1;
+                    exploreClubsState.setCurrentNumberOfMembersString(intMembers.toString());
+                    exploreClubsViewModel.setState(exploreClubsState);
                     // Run the leave club use case
                     leaveClubController.leaveClub(exploreClubsState.getStudentEmail(),
                             exploreClubsState.getCurrentClubEmail());
@@ -81,6 +85,9 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
                     studentShowPostsController.execute(exploreClubsState.getStudentEmail());
                 }
                 else {
+                    // Update the member count on the view.
+                    final Integer intMembers = Integer.valueOf(exploreClubsState.getCurrentNumberOfMembersString()) + 1;
+                    exploreClubsState.setCurrentNumberOfMembersString(intMembers.toString());
                     // Run the join club use case
                     joinClubController.joinClub(exploreClubsState.getStudentEmail(),
                             exploreClubsState.getCurrentClubEmail());
@@ -120,11 +127,14 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final ExploreClubsState state = (ExploreClubsState) evt.getNewValue();
+
+        final String memberNumberMessage = "Number of members: ";
+
         if (evt.getPropertyName().equals("state")) {
             this.clubNameLabel.setText(state.getCurrentClubName());
             this.description.setText(state.getCurrentClubDescription());
             this.email.setText("Contact info: " + state.getCurrentClubEmail());
-            this.numMembers.setText("Number of members: " + state.getCurrentNumberOfMembersString());
+            this.numMembers.setText(memberNumberMessage + state.getCurrentNumberOfMembersString());
 
             // Check to see if the student is a member of the club.
             // The purpose is to locally check if the student is a member and set the text of the button reducing the
@@ -132,9 +142,11 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
             final boolean isMember = state.getJoinedClubEmails().contains(state.getCurrentClubEmail());
             if (isMember) {
                 joinButton.setText("Leave Club");
+                this.numMembers.setText(memberNumberMessage + state.getCurrentNumberOfMembersString());
             }
             else {
                 joinButton.setText("Join Club");
+                this.numMembers.setText(memberNumberMessage + state.getCurrentNumberOfMembersString());
             }
         }
     }
