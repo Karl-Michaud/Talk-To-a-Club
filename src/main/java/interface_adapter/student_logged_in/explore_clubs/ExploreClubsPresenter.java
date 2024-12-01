@@ -59,8 +59,7 @@ public class ExploreClubsPresenter implements ExploreClubsOutputBoundary {
         state.setCurrentNumberOfMembersString(club.get("numMembers"));
 
         exploreClubsViewModel.setState(state);
-        exploreClubsViewModel.firePropertyChanged("ClubPageView");
-
+        exploreClubsViewModel.firePropertyChanged();
         // Transition the ViewManager to the Club Description view'
         viewManagerModel.setState("ClubPageView");
         viewManagerModel.firePropertyChanged();

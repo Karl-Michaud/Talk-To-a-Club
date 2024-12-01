@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
 import interface_adapter.student_logged_in.join_club.JoinClubController;
 import interface_adapter.student_logged_in.leave_club.LeaveClubController;
 
@@ -33,11 +34,11 @@ public class ClubPageView extends JPanel {
     // TODO: Change all string panel views to constants form CONSTANTS file
     private final String viewName = "ClubPageView";
 
-    public ClubPageView(ExploreClubsState exploreClubsState) {
+    public ClubPageView(ExploreClubsViewModel exploreClubsViewModel) {
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(contentPanel);
-
+        final ExploreClubsState exploreClubsState = exploreClubsViewModel.getState();
         this.clubNameLabel.setText(exploreClubsState.getCurrentClubName());
         this.description.setText(exploreClubsState.getCurrentClubDescription());
         this.email.setText(exploreClubsState.getCurrentClubEmail());

@@ -270,7 +270,7 @@ public class FirebaseAppBuilder {
      */
     public FirebaseAppBuilder addClubPageView() {
         exploreClubsViewModel = new ExploreClubsViewModel();
-        clubPageView = new ClubPageView(exploreClubsViewModel.getState());
+        clubPageView = new ClubPageView(exploreClubsViewModel);
         cardPanel.add(clubPageView, clubPageView.getViewName());
         return this;
     }
