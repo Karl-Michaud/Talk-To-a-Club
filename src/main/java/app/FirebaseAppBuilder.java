@@ -1,7 +1,7 @@
 package app;
 
 import data_access.ClubFirestoreUserDataAccessObject;
-import data_access.StudentFirestoreUserDataStudentAccessObject;
+import data_access.StudentFirestoreUserDataAccessObject;
 import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
@@ -139,7 +139,7 @@ public class FirebaseAppBuilder {
     //private final InMemoryUserDataStudentAccessObject inMemoryUserDataAccessObject = new InMemoryUserDataStudentAccessObject();
 
     private final ClubFirestoreUserDataAccessObject clubFirestoreUserDataAccessObject = new ClubFirestoreUserDataAccessObject();
-    private final StudentFirestoreUserDataStudentAccessObject studentFirestoreUserDataAccessObject = new StudentFirestoreUserDataStudentAccessObject();
+    private final StudentFirestoreUserDataAccessObject studentFirestoreUserDataAccessObject = new StudentFirestoreUserDataAccessObject();
 
     private ClubSignupViewModel clubSignupViewModel;
     private ClubSignupView clubSignupView;
