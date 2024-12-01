@@ -1,15 +1,15 @@
 package view;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  * Class of a JPanel which has a Title and Body for the text of a post.
  */
 public class PostTextPanel {
     private JPanel postPanel;
-    private JLabel postTitleText;
-    private JLabel postBodyText;
+    private JTextArea postTitleText;
+    private JTextArea postBodyText;
 
     public PostTextPanel(String title, String body) {
         this.postTitleText.setText(title);

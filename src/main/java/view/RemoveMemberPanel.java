@@ -3,9 +3,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberController;
 
@@ -14,13 +12,13 @@ import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberContr
  * This takes in a RemoveMemberController to do the usecase.
  */
 public class RemoveMemberPanel {
-    private JLabel memberNameLabel;
     private JButton removeMemberButton;
     private JPanel memberPanel;
+    private JTextArea memberName;
 
     public RemoveMemberPanel(ClubRemoveMemberController removeMemberController, String clubEmail,
                              String studentEmail, String studentUsername) {
-        memberNameLabel.setText(studentUsername);
+        memberName.setText(studentUsername);
 
         removeMemberButton.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.

@@ -46,7 +46,7 @@ public class ClubLoggedInView extends JPanel implements PropertyChangeListener {
     private JScrollPane descScrollPane;
     private JScrollPane postsScrollPane;
     private JTextArea descriptionTextArea;
-    private JLabel clubName;
+    private JTextArea clubName;
 
     private final String viewName = "club logged in";
     private final ClubLoggedInViewModel clubLoggedInViewModel;
