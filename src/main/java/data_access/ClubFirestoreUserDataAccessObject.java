@@ -142,27 +142,32 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
             final ArrayList<Map<String, Object>> clubPostValues =
                     (ArrayList<Map<String, Object>>) document.get("allPosts");
 
-//            // delete the post to change
-//            Map<String, Object> savedVal = null;
-//            for (Map<String, Object> clubPostValue : clubPostValues) {
-//                if (clubPostValue.get("dateOfPosting").equals(post.dateOfPosting())
-//                        && clubPostValue.get("timeOfPosting").equals(post.timeOfPosting())) {
-//                    savedVal = clubPostValue;
-//                }
-//            }
-//
-//            clubPostValues.remove(savedVal);
-            System.out.println(clubPostValues);
+            // Check if the post exists
+            Integer savedIndex = null;
+            for (int i = 0; i < clubPostValues.size(); i++) {
+                Map<String, Object> clubPost = clubPostValues.get(i);
+                if (clubPost.get("dateOfPosting").equals(post.dateOfPosting().toString())
+                    && clubPost.get("timeOfPosting").equals(post.timeOfPosting().toString())) {
+                    savedIndex = i;
+                }
+            }
 
-            final Map<String, Object> clubPost = new HashMap<>();
-            clubPost.put("title", post.getTitle());
-            clubPost.put("content", post.getContent());
-            clubPost.put("dateOfPosting", post.dateOfPosting().toString());
-            clubPost.put("timeOfPosting", post.timeOfPosting().toString());
-            clubPost.put("userLiked", post.getLikes().toArrayList().stream().toList());
-            clubPost.put("userDisliked", post.getDislikes().toArrayList().stream().toList());
+            if (savedIndex == null) {
+                final Map<String, Object> clubPost = new HashMap<>();
+                clubPost.put("title", post.getTitle());
+                clubPost.put("content", post.getContent());
+                clubPost.put("dateOfPosting", post.dateOfPosting().toString());
+                clubPost.put("timeOfPosting", post.timeOfPosting().toString());
+                clubPost.put("userLiked", post.getLikes().toArrayList().stream().toList());
+                clubPost.put("userDisliked", post.getDislikes().toArrayList().stream().toList());
 
-            clubPostValues.add(clubPost);
+                clubPostValues.add(clubPost);
+
+            }
+            else {
+                clubPostValues.get(savedIndex).put("userLiked", post.getLikes().toArrayList().stream().toList());
+                clubPostValues.get(savedIndex).put("userDisliked", post.getDislikes().toArrayList().stream().toList());
+            }
 
             final ApiFuture<WriteResult> writePostListUpdate = docRef.update("allPosts",
                     clubPostValues);
@@ -171,6 +176,7 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
 
             System.out.println("Update time: " + writeTitle.get().getUpdateTime());
             System.out.println("Update time: " + writePostDescription.get().getUpdateTime());
+
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately

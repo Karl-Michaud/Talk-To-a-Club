@@ -40,7 +40,8 @@ public class StudentDislikeInteractor implements StudentDislikeInputBoundary {
         Post postObject = null;
         // Find the corresponding Post object for the data, using the date at which it was posted.
         for (final Post post: clubPosts) {
-            if (post.dateOfPosting() == postData.get("date") && post.timeOfPosting() == postData.get("time")) {
+            if (post.dateOfPosting().equals(postData.get("date"))
+                    && post.timeOfPosting().equals(postData.get("time"))) {
                 postObject = post;
                 break;
             }
@@ -49,8 +50,8 @@ public class StudentDislikeInteractor implements StudentDislikeInputBoundary {
             studentDislikePresenter.prepareErrorView("The post doesn't exist");
         }
         else {
-            if (postObject.getDislikes().contains(currStudent.getEmail())) {
-                postObject.removeDislike(currClub);
+            if (Boolean.TRUE.equals(postObject.getDislikes().contains(currStudent.getEmail()))) {
+                postObject.removeDislike(currStudent);
                 clubDataAccess.savePost(postObject, currClub);
             }
             else {
