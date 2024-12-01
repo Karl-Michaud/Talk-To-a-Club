@@ -84,7 +84,7 @@ Follow these steps to use **Talk To a Club** effectively:
 ### 🖥️ **For Students**
 1. **Sign Up or Log In**:
 
-<img src="src/main/resources/student_signup.png" width="400"><img src="src/main/resources/student_login.png" width="400">
+<img src="src/main/resources/student_signup.png" width="400"> <img src="src/main/resources/student_login.png" width="400">
 
    - Use your University of Toronto email to create an account or log in.
 
