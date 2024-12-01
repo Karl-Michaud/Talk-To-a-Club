@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class PostsContainer extends JPanel {
     public PostsContainer(Map<String, List<Map<String, Object>>> posts, String currentStudent,
                           StudentLikeController likeController, StudentDislikeController dislikeController) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
+        this.setMaximumSize(new Dimension(500, Integer.MAX_VALUE));
         if (posts == null || posts.isEmpty()) {
             this.add(new JLabel("No posts found"));
         }
