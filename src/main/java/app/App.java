@@ -18,7 +18,7 @@ public class App {
      */
     public void run(String filePath) throws IOException {
         final FileInputStream serviceAccount =
-                new FileInputStream("TO ADD");
+                new FileInputStream(filePath);
 
         final FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
