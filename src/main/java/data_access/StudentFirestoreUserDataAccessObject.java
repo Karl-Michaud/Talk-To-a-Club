@@ -1,6 +1,5 @@
 package data_access;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,25 +7,21 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import com.google.api.core.ApiFuture;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
 import entity.user.Student;
-import entity.user.StudentFactory;
 import entity.user.StudentUserFactory;
 import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
 import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
-import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
+import use_case.signup.student_signup.StudentSignupDataAccessInterface;
 import use_case.student_homepage.StudentHomeAccessInterface;
 import use_case.student_homepage.dislike.StudentDislikeStudentDataAccessInterface;
 import use_case.student_homepage.like.StudentLikeStudentDataAccessInterface;
@@ -41,8 +36,8 @@ import use_case.student_search_club.StudentSearchClubAccessInterface;
  * This implementation uses Firebase and only persists data regarding the
  * Student entity
  */
-public class StudentFirestoreUserDataStudentAccessObject implements StudentLoginDataAccessInterface,
-        StudentSignupUserDataAccessInterface, StudentJoinClubDataAccessInterface,
+public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAccessInterface,
+        StudentSignupDataAccessInterface, StudentJoinClubDataAccessInterface,
         StudentLeaveClubDataAccessInterface, StudentSearchClubAccessInterface,
         ClubRemoveMemberStudentDataAccessInterface, StudentExploreClubsDataAccessInterface,
         StudentDislikeStudentDataAccessInterface, StudentLikeStudentDataAccessInterface,
@@ -55,7 +50,7 @@ public class StudentFirestoreUserDataStudentAccessObject implements StudentLogin
     private final String joinedClubNames = "joinedClubNames";
     private final String joinedClubEmails = "joinedClubEmails";
 
-    public StudentFirestoreUserDataStudentAccessObject() throws IOException {
+    public StudentFirestoreUserDataAccessObject() throws IOException {
         this.db = FirestoreClient.getFirestore();
     }
 

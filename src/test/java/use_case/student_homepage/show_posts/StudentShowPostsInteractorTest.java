@@ -1,7 +1,6 @@
 package use_case.student_homepage.show_posts;
 
-import data_access.InMemoryUserDataStudentAccessObject;
-import entity.data_structure.DataStoreArrays;
+import data_access.InMemoryUserDataAccessObject;
 import entity.post.Announcement;
 import entity.post.AnnouncementFactory;
 import entity.post.PostFactory;
@@ -20,7 +19,7 @@ public class StudentShowPostsInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
         // Create a sample club and a student.
         UserFactory clubFactory = new ClubUserFactory();
         Club climbingClub = (Club) clubFactory.create("Climbing club", "utcc@utoronto.ca", "secure");
@@ -64,14 +63,14 @@ public class StudentShowPostsInteractorTest {
         announcement3Data.put("club-email", climbingClub.getEmail());
         announcement3Data.put("time", announcement3.timeOfPosting());
         announcement3Data.put("date", announcement3.dateOfPosting());
-        climbingClub.addClubPost(announcement1);
-        climbingClub.addClubPost(announcement2);
-        climbingClub.addClubPost(announcement3);
 
         student.joinClub(climbingClub);
         climbingClub.addClubMember(student);
         dao.saveStudent(student);
         dao.saveClub(climbingClub);
+        dao.savePost(announcement1, climbingClub);
+        dao.savePost(announcement2, climbingClub);
+        dao.savePost(announcement3, climbingClub);
 
         Map<String, List<Map<String, Object>>> samplePostData = new HashMap<>();
         List<Map<String, Object>> samplePostsList = new ArrayList<>();
@@ -102,7 +101,7 @@ public class StudentShowPostsInteractorTest {
     @Test
     void failTest() {
         // Uses an in memory database to test the use case with a club.
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
 
         StudentShowPostsInputData inputData = new StudentShowPostsInputData("frederik.brecht@mail.utoronto.ca");
 

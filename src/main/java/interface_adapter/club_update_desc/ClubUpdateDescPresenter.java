@@ -25,6 +25,8 @@ public class ClubUpdateDescPresenter implements ClubUpdateDescOutputBoundary {
         final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
         clubLoggedInState.setMessage(outputData.getMessage());
         clubLoggedInState.setDescriptionTextArea(outputData.getNewDesc());
+
+        // Saves the state and tells the view to reload the description and to show the message
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("reload description");
         clubLoggedInViewModel.firePropertyChanged("show message");
@@ -35,6 +37,8 @@ public class ClubUpdateDescPresenter implements ClubUpdateDescOutputBoundary {
         // Get the state of the current ClubLoggedInViewModel and set the message to the new one
         final ClubLoggedInState clubLoggedInState = clubLoggedInViewModel.getState();
         clubLoggedInState.setMessage(outputData.getMessage());
+
+        // Saves the state and tells the view to show the message
         clubLoggedInViewModel.setState(clubLoggedInState);
         clubLoggedInViewModel.firePropertyChanged("show message");
     }

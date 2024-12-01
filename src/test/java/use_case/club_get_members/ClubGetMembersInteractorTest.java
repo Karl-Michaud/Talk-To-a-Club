@@ -1,6 +1,6 @@
 package use_case.club_get_members;
 
-import data_access.InMemoryUserDataStudentAccessObject;
+import data_access.InMemoryUserDataAccessObject;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +36,7 @@ public class ClubGetMembersInteractorTest {
         }
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Save the club to the in memory DAO/Database
         userRepository.saveClub(testClub);
@@ -95,7 +95,7 @@ public class ClubGetMembersInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Add 10 test members to the club.
         ArrayList<Student> verificationList = new ArrayList<>();
@@ -141,7 +141,7 @@ public class ClubGetMembersInteractorTest {
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Save the club to the in memory DAO/Database
         userRepository.saveClub(testClub);

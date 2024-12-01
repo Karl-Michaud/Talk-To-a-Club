@@ -25,18 +25,20 @@ public class StudentSignupPresenter implements StudentSignupOutputBoundary {
 
     @Override
     public void prepareSuccessView(StudentSignupOutputData response) {
-        // On success, switch to the login view.
+        // Gets the login state and sets the email field to the newly registered email
         final LoginState loginState = loginViewModel.getState();
         loginState.setIdentifier(response.getEmail());
         this.loginViewModel.setState(loginState);
         loginViewModel.firePropertyChanged();
 
+        // Switch to the login view
         viewManagerModel.setState(loginViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
+        // Sets the signup state to have an error message and fires a property change to display the message
         final StudentSignupState studentSignupState = studentSignupViewModel.getState();
         studentSignupState.setSignupError(error);
         studentSignupViewModel.firePropertyChanged();

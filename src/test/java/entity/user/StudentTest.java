@@ -69,6 +69,10 @@ public class StudentTest {
         for (int i = 0; i < 10; i++) {
             assertEquals(tracker.get(i).getEmail(), student.getJoinedClubsEmails().getByIndex(i));
             assertEquals(tracker.get(i).getUsername(), student.getJoinedClubsNames().getByIndex(i));
+        }
+
+        // Make everyone leave the club and check
+        for (int i = 0; i < 10; i++) {
             student.leaveClub(tracker.get(i));
         }
 

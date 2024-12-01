@@ -1,8 +1,6 @@
 package use_case.student_homepage.like;
 
-import data_access.InMemoryUserDataStudentAccessObject;
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
+import data_access.InMemoryUserDataAccessObject;
 import entity.post.AnnouncementFactory;
 import entity.post.Post;
 import entity.post.PostFactory;
@@ -18,7 +16,7 @@ public class StudentLikeInteractorTest {
     @Test
     void successLikedTest() {
         // Set up in-memory repository
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
 
         // Create a club
         ClubFactory clubFactory = new ClubUserFactory();
@@ -37,10 +35,11 @@ public class StudentLikeInteractorTest {
         Post post = postFactory.create("Black and White Photo contest announcement.", "We're planning to host"
                 + "a photo contest around the theme black and white photos and would like to hear your feedback!" +
                 " Get creative," + "ditch the colors, and win prizes!");
-
         club.addClubPost(post);
         dao.saveClub(club);
+        dao.savePost(post, club);
         dao.saveStudent(student);
+
         // Input Data
         Map<String, Object> postData = new HashMap<String, Object>();
         postData.put("title", post.getTitle());
@@ -75,7 +74,7 @@ public class StudentLikeInteractorTest {
     @Test
     void successUnlikedTest() {
         // Set up in-memory repository
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
 
         // Create a club
         ClubFactory clubFactory = new ClubUserFactory();
@@ -94,8 +93,8 @@ public class StudentLikeInteractorTest {
                 + "a photo contest around the theme black and white photos and would like to hear your feedback!" +
                 " Get creative," + "ditch the colors, and win prizes!");
         post.addLike(student);
-        club.addClubPost(post);
         dao.saveClub(club);
+        dao.savePost(post, club);
         dao.saveStudent(student);
         // Input Data
         Map<String, Object> postData = new HashMap<String, Object>();

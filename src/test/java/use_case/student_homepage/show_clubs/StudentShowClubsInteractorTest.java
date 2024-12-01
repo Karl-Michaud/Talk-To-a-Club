@@ -1,6 +1,6 @@
 package use_case.student_homepage.show_clubs;
 
-import data_access.InMemoryUserDataStudentAccessObject;
+import data_access.InMemoryUserDataAccessObject;
 
 import entity.user.*;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ public class StudentShowClubsInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        InMemoryUserDataStudentAccessObject dao = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
         // Create 3 example clubs and a student.
         ClubFactory clubFactory = new ClubUserFactory();
         Club climbingClub = clubFactory.create("Climbing club", "utcc@utoronto.ca", "12345678");
@@ -85,7 +85,7 @@ public class StudentShowClubsInteractorTest {
     @Test
     void failTest() {
         // Uses an in memory database to test the use case with a club.
-        StudentShowClubsAccessInterface dao = new InMemoryUserDataStudentAccessObject();
+        StudentShowClubsAccessInterface dao = new InMemoryUserDataAccessObject();
 
         StudentShowClubsInputData inputData = new StudentShowClubsInputData("frederik.brecht@mail.utoronto.ca");
 

@@ -1,6 +1,6 @@
 package use_case.student_join_club;
 
-import data_access.InMemoryUserDataStudentAccessObject;
+import data_access.InMemoryUserDataAccessObject;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ public class StudentJoinClubInteractorTest {
     @Test
     void successTest() {
         // Set up in-memory repositories
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club
         ClubFactory clubFactory = new ClubUserFactory();
@@ -51,7 +51,7 @@ public class StudentJoinClubInteractorTest {
     @Test
     void clubDoesNotExistTest() {
         // Set up in-memory repositories
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a student
         StudentFactory studentFactory = new StudentUserFactory();
@@ -82,7 +82,7 @@ public class StudentJoinClubInteractorTest {
     @Test
     void studentAlreadyInClubTest() {
         // Set up in-memory repositories
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club
         ClubFactory clubFactory = new ClubUserFactory();

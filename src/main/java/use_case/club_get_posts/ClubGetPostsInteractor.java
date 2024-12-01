@@ -22,7 +22,7 @@ public class ClubGetPostsInteractor implements ClubGetPostsInputBoundary {
     @Override
     public void execute(ClubGetPostsInputData clubGetPostsInputData) {
         if (!clubGetPostsDataAccessObject.existsByEmailClub(clubGetPostsInputData.getClubEmail())) {
-            // results in a failed message if the club doesn't exist
+            // Outputs a failed message if the club doesn't exist and calls the presenter to prepare the fail
             final String message = "Failure Getting Club Posts: Club not Found";
             final ClubGetPostsOutputData clubGetPostsOutputData = new ClubGetPostsOutputData(message,
                     null, null);

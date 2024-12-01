@@ -1,5 +1,7 @@
 package data_access;
 
+import java.util.ArrayList;
+
 import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
@@ -11,10 +13,12 @@ import use_case.club_get_posts.ClubGetPostsDataAccessInterface;
 import use_case.club_remove_member.ClubRemoveMemberClubDataAccessInterface;
 import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
 import use_case.club_update_desc.ClubUpdateDescDataAccessInterface;
+import use_case.explore_clubs.ClubExploreClubsDataAccessInterface;
+import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
-import use_case.signup.club_signup.ClubSignupUserDataAccessInterface;
-import use_case.signup.student_signup.StudentSignupUserDataAccessInterface;
+import use_case.signup.club_signup.ClubSignupDataAccessInterface;
+import use_case.signup.student_signup.StudentSignupDataAccessInterface;
 import use_case.student_homepage.dislike.StudentDislikeClubDataAccessInterface;
 import use_case.student_homepage.dislike.StudentDislikeStudentDataAccessInterface;
 import use_case.student_homepage.like.StudentLikeClubDataAccessInterface;
@@ -22,21 +26,17 @@ import use_case.student_homepage.like.StudentLikeStudentDataAccessInterface;
 import use_case.student_homepage.show_clubs.StudentShowClubsAccessInterface;
 import use_case.student_homepage.show_posts.StudentShowPostsClubAccessInterface;
 import use_case.student_homepage.show_posts.StudentShowPostsStudentAccessInterface;
-import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
-import use_case.explore_clubs.ClubExploreClubsDataAccessInterface;
-import use_case.student_join_club.StudentJoinClubDataAccessInterface;
 import use_case.student_join_club.ClubStudentJoinClubDataAccessInterface;
-import use_case.student_leave_club.StudentLeaveClubDataAccessInterface;
+import use_case.student_join_club.StudentJoinClubDataAccessInterface;
 import use_case.student_leave_club.ClubStudentLeaveClubDataAccessInterface;
-
-import java.util.ArrayList;
+import use_case.student_leave_club.StudentLeaveClubDataAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
  * NOT persist data between runs of the program.
  */
-public class InMemoryUserDataStudentAccessObject implements ClubSignupUserDataAccessInterface,
-        StudentSignupUserDataAccessInterface,
+public class InMemoryUserDataAccessObject implements ClubSignupDataAccessInterface,
+        StudentSignupDataAccessInterface,
         ClubLoginDataAccessInterface, StudentLoginDataAccessInterface, ClubCreatePostUserDataAccessInterface,
         ClubGetPostsDataAccessInterface, ClubRemoveMemberClubDataAccessInterface,
         ClubRemoveMemberStudentDataAccessInterface,
@@ -53,19 +53,6 @@ public class InMemoryUserDataStudentAccessObject implements ClubSignupUserDataAc
     private final ArrayList<Student> studentArrayList = new ArrayList<>();
     private final ArrayList<Club> clubArrayList = new ArrayList<>();
     private final ArrayList<ArrayList<Post>> postArrayList = new ArrayList<>();
-
-//    public InMemoryUserDataAccessObject() {
-//        final Club club = new Club("test", "@.", "123123123", new DataStoreArrays<>(),
-//                new DataStoreArrays<>());
-//        final Student student = new Student("student", "student@.", "123123123", new DataStoreArrays<>());
-//        studentArrayList.add(student);
-//        student.joinClub(club);
-//        System.out.println(studentArrayList.size());
-//        club.addClubMember(student);
-//        clubArrayList.add(club);
-//
-//        // TODO REMOVE THIS AFTER TESTING REMOVE MEMBERS
-//    }
 
     @Override
     public ArrayList<Club> getStudentJoinedClubs(Student student) {
@@ -200,7 +187,8 @@ public class InMemoryUserDataStudentAccessObject implements ClubSignupUserDataAc
 
     @Override
     public void updateStudentClubsJoined(Student student) {
-        saveStudent(student);
+        studentArrayList.remove(student);
+        studentArrayList.add(student);
     }
 
     @Override
@@ -220,7 +208,6 @@ public class InMemoryUserDataStudentAccessObject implements ClubSignupUserDataAc
 
     @Override
     public DataStore<Club> getAllClubs() {
-        System.out.println("getting all clubs");
         final DataStore<Club> allClubs = new DataStoreArrays<>();
         for (Club club : clubArrayList) {
             allClubs.add(club);

@@ -1,11 +1,7 @@
 package use_case.club_get_posts;
 
-import data_access.InMemoryUserDataStudentAccessObject;
-import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
-import entity.post.Announcement;
+import data_access.InMemoryUserDataAccessObject;
 import entity.post.AnnouncementFactory;
-import entity.post.Post;
 import entity.user.Club;
 import entity.user.ClubFactory;
 import entity.user.ClubUserFactory;
@@ -17,7 +13,7 @@ public class ClubGetPostsInteractorTest {
     @Test
     void successTest() {
         // Uses an in memory database to test the use case with a club
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
 
         // Initialize Post factory
@@ -58,7 +54,7 @@ public class ClubGetPostsInteractorTest {
     @Test
     void failTest() {
         // Uses an in memory database to test the use case with no clubs
-        ClubGetPostsDataAccessInterface userRepository = new InMemoryUserDataStudentAccessObject();
+        ClubGetPostsDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         ClubGetPostsInputData inputData = new ClubGetPostsInputData("ok@k.com");
 

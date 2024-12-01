@@ -26,6 +26,8 @@ public class LogoutPresenter implements LogoutOutputBoundary {
         loginState.setPassword("");
         loginState.setLoginError(null);
         this.loginViewModel.setState(loginState);
+
+        // Tells the view to put what's in its state into the text fields
         loginViewModel.firePropertyChanged();
 
         // fires a property change to the view manager model to switch to the login view

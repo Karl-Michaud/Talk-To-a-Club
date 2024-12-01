@@ -1,6 +1,6 @@
 package use_case.login.club_login;
 
-import data_access.InMemoryUserDataStudentAccessObject;
+import data_access.InMemoryUserDataAccessObject;
 import entity.user.Club;
 import entity.user.ClubFactory;
 import entity.user.ClubUserFactory;
@@ -23,7 +23,7 @@ public class ClubLoginInteractorTest {
         ClubFactory clubFactory = new ClubUserFactory();
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club (sign up)
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
@@ -80,7 +80,7 @@ public class ClubLoginInteractorTest {
         ClubFactory clubFactory = new ClubUserFactory();
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club (sign up)
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
@@ -121,7 +121,7 @@ public class ClubLoginInteractorTest {
         ClubFactory clubFactory = new ClubUserFactory();
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club (sign up)
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
@@ -161,7 +161,7 @@ public class ClubLoginInteractorTest {
         ClubFactory clubFactory = new ClubUserFactory();
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club (sign up)
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
@@ -201,7 +201,7 @@ public class ClubLoginInteractorTest {
         ClubFactory clubFactory = new ClubUserFactory();
 
         // Initialise the DAO. In our case, we will the in memory DAO for tests.
-        InMemoryUserDataStudentAccessObject userRepository = new InMemoryUserDataStudentAccessObject();
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
 
         // Create a club (sign up)
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
