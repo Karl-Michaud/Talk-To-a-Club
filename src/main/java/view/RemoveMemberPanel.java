@@ -3,7 +3,9 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
 import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberController;
 
@@ -14,7 +16,7 @@ import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberContr
 public class RemoveMemberPanel {
     private JButton removeMemberButton;
     private JPanel memberPanel;
-    private JTextArea memberName;
+    private JTextPane memberName;
 
     public RemoveMemberPanel(ClubRemoveMemberController removeMemberController, String clubEmail,
                              String studentEmail, String studentUsername) {
