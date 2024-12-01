@@ -2,7 +2,9 @@ package entity.post;
 
 import entity.data_structure.DataStore;
 import entity.data_structure.DataStoreArrays;
-import entity.user.*;
+import entity.user.Student;
+import entity.user.StudentUserFactory;
+import entity.user.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -24,14 +26,35 @@ public class PostEntityTest {
     }
 
     @Test
+    void testSetDateOfPosting() {
+        PostFactory factory = new AnnouncementFactory();
+        Announcement post = (Announcement) factory.create("Title", "Content");
+
+        LocalDate newDate = LocalDate.of(2023, 12, 1);
+        post.setDateOfPosting(newDate);
+
+        assertEquals(newDate, post.dateOfPosting(), "Post date should be updated correctly.");
+    }
+
+    @Test
+    void testSetTimeOfPosting() {
+        PostFactory factory = new AnnouncementFactory();
+        Announcement post = (Announcement) factory.create("Title", "Content");
+
+        LocalTime newTime = LocalTime.of(14, 30);
+        post.setTimeOfPosting(newTime);
+
+        assertEquals(newTime, post.timeOfPosting(), "Post time should be updated correctly.");
+    }
+
+    @Test
     void testLikePost() {
         PostFactory factory = new AnnouncementFactory();
         Post post = factory.create("Sample Title", "Sample Content");
 
         DataStore<String> joinedEmail = new DataStoreArrays<>();
         DataStore<String> joinedName = new DataStoreArrays<>();
-        User user = new Student("John Doe", "johndoe@example.com", "12345678hello",
-                joinedEmail, joinedName );
+        User user = new Student("John Doe", "johndoe@example.com", "12345678hello", joinedEmail, joinedName);
 
         post.addLike(user);
         assertEquals(1, post.numberOfLikes());
@@ -46,7 +69,7 @@ public class PostEntityTest {
     void testDislikePost() {
         PostFactory factory = new AnnouncementFactory();
         Post post = factory.create("Sample Title", "Sample Content");
-        StudentFactory studentFactory = new StudentUserFactory();
+        StudentUserFactory studentFactory = new StudentUserFactory();
         Student user = studentFactory.create("John Doe", "johndoe@example.com", "12345678hello");
 
         post.addDislike(user);
@@ -63,9 +86,8 @@ public class PostEntityTest {
         PostFactory factory = new AnnouncementFactory();
         Post post = factory.create("Title", "Content");
 
-        StudentFactory studentFactory = new StudentUserFactory();
+        StudentUserFactory studentFactory = new StudentUserFactory();
         User user1 = studentFactory.create("Alice", "alice@example.com", "12345678hello");
-
         User user2 = studentFactory.create("Bob", "bob@example.com", "12345678hello");
 
         post.addLike(user1);

@@ -60,11 +60,13 @@ public class ExploreClubsInteractorTest {
             @Override
             public void switchToClubView(Map<String, String> club) {
                 // Not used in this test
+                // Cannot test the view.
             }
 
             @Override
             public void switchToHomeView() {
                 // Not used in this test
+                // Cannot test the view.
             }
         };
 

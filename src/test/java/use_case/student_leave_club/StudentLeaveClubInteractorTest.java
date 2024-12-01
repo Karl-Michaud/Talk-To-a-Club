@@ -36,6 +36,7 @@ public class StudentLeaveClubInteractorTest {
                 assertFalse(data.isUseCaseFailed());
                 assertFalse(club.getClubMembersEmails().contains(student.getEmail()));
                 assertFalse(student.getJoinedClubsEmails().contains(club.getEmail()));
+                assertEquals("photo@university.com", data.getClubEmail());
             }
 
             @Override

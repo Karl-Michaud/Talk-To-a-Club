@@ -58,6 +58,7 @@ public class StudentLikeInteractorTest {
             @Override
             public void prepareSuccessView(StudentLikeOutputData data) {
                 assertEquals(postData, data.getPostData());
+                assertEquals("Photography Club", data.getClubName());
                 assertTrue((Boolean) data.getPostData().get("liked"));
             }
 
@@ -114,6 +115,7 @@ public class StudentLikeInteractorTest {
             @Override
             public void prepareSuccessView(StudentLikeOutputData data) {
                 assertEquals(postData, data.getPostData());
+                assertEquals("Photography Club", data.getClubName());
                 assertFalse((Boolean) data.getPostData().get("liked"));
             }
 

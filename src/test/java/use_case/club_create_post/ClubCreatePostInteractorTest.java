@@ -51,7 +51,9 @@ public class ClubCreatePostInteractorTest {
             public void prepareSuccessView(ClubCreatePostOutputData outputData) {
                 assertEquals(false, outputData.useCaseFailed());
                 assertTrue(!outputData.getTitle().equals(postTitle)
-                        && !outputData.getContents().equals(postDescription));
+                        && !outputData.getContents().equals(postDescription)
+                        && !outputData.getTimeOfPosting().toString().isEmpty()
+                        && !outputData.getDateOfPosting().toString().isEmpty());
             }
 
             @Override

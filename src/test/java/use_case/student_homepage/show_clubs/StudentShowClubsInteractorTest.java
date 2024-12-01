@@ -33,16 +33,19 @@ public class StudentShowClubsInteractorTest {
         climbingClubHash.put("username", climbingClub.getUsername());
         climbingClubHash.put("email", climbingClub.getEmail());
         climbingClubHash.put("description", climbingClub.getClubDescription());
+        climbingClubHash.put("numMembers", "1");
         // HashMap for outdoors club.
         HashMap<String, String> outdoorsclubHash = new HashMap<>();
         outdoorsclubHash.put("username", outdoorsclub.getUsername());
         outdoorsclubHash.put("email", outdoorsclub.getEmail());
         outdoorsclubHash.put("description", outdoorsclub.getClubDescription());
+        outdoorsclubHash.put("numMembers", "1");
         // HashMap for rocket league club.
         HashMap<String, String> rlClubHash = new HashMap<>();
         rlClubHash.put("username", rlClub.getUsername());
         rlClubHash.put("email", rlClub.getEmail());
         rlClubHash.put("description", rlClub.getClubDescription());
+        rlClubHash.put("numMembers", "1");
 
         sampleList.add(outdoorsclubHash);
         sampleList.add(climbingClubHash);

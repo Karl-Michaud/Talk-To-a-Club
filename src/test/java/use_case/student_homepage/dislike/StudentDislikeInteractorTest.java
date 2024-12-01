@@ -120,6 +120,7 @@ public class StudentDislikeInteractorTest {
             @Override
             public void prepareSuccessView(StudentDislikeOutputData data) {
                 assertEquals(postData, data.getPostData());
+                assertEquals("Photography Club", data.getClubName());
                 assertFalse((Boolean) data.getPostData().get("disliked"));
             }
 
