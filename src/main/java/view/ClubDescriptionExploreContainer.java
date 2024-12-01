@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.*;
 import java.util.Map;
 
 import javax.swing.BoxLayout;
@@ -15,7 +16,6 @@ public class ClubDescriptionExploreContainer extends JPanel {
     public ClubDescriptionExploreContainer(ExploreClubsState exploreClubsState,
                                            ExploreClubsController exploreClubsController) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
         for (Map<String, String> club: exploreClubsState.getClubValues()) {
             final ClubMiniPanel clubMiniPanel = new ClubMiniPanel(club, exploreClubsState.getStudentEmail());
             clubMiniPanel.setExploreClubsController(exploreClubsController);

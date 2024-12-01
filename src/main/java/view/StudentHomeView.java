@@ -37,6 +37,7 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
     private JScrollPane pageScrollPane;
     private JLabel labelLogo;
     private JLabel labelSearch;
+    private JButton buttonRefresh;
 
     private final String viewName = "student home";
     private final StudentHomeViewModel studentHomeViewModel;
@@ -69,6 +70,16 @@ public class StudentHomeView extends JPanel implements PropertyChangeListener {
                     if (evt.getSource().equals(buttonSearch) && buttonSearch.getText().isEmpty()) {
                         final StudentHomeState currentState = studentHomeViewModel.getState();
                         exploreClubsController.execute(currentState.getCurrentUser());
+                    }
+                }
+        );
+
+        buttonRefresh.addActionListener(
+                evt -> {
+                    if (evt.getSource().equals(buttonRefresh)) {
+                        final StudentHomeState currentState = studentHomeViewModel.getState();
+                        studentShowClubsController.execute(currentState.getCurrentUser());
+                        studentShowPostsController.execute(currentState.getCurrentUser());
                     }
                 }
         );

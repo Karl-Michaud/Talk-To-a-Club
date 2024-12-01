@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class ClubsContainer extends JPanel {
     public ClubsContainer(List<Map<String, String>> clubs, String studentEmail,
                           ExploreClubsController exploreClubsController) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setMaximumSize(new Dimension(300, Integer.MAX_VALUE));
         if (clubs == null || clubs.isEmpty()) {
             this.add(new JLabel("You currently don't follow any clubs."));
         }
