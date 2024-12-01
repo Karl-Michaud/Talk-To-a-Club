@@ -7,8 +7,9 @@ For each Principle of Universal Design, write 2-3 sentences — or point form no
 
 **(b)** Explain why the principle does not apply to a program like yours.
 
+## 1. Principles of Universal design
+
 - **Principle 1: Equitable Use**
-  - 
   - Our signup and login supports emails and names of varying lengths and characters outside the english language.
   - Features we can implement for this principle include:
     - Adding languages settings for UI elements.
@@ -18,7 +19,6 @@ For each Principle of Universal Design, write 2-3 sentences — or point form no
 
 
 - **Principle 2: Flexibility in Use**
-  - 
   - Currently, our UI element sizes are static and not very flexible in use.
   - Features we can implement for this principle include:
     - Windows size and UI element size adjustment for varying screen resolutions.
@@ -28,7 +28,6 @@ For each Principle of Universal Design, write 2-3 sentences — or point form no
 
 
 - **Principle 3: Simple and Intuitive Use**
-  -
   - We implemented easy to understand UI elements to navigate between views, including button icons and labels to 
     input fields.
   - Popups are used to relay when tasks succeed or fail, such as editing club descriptions and post making.
@@ -37,7 +36,6 @@ For each Principle of Universal Design, write 2-3 sentences — or point form no
 
 
 - **Principle 4: Perceptible Information**
-  - 
   - Our app is currently limited to only provide visual information.
   - Features we can implement for this principle include:
     - Windows size and UI element size adjustment for those with varying eyesight.
@@ -67,6 +65,8 @@ For each Principle of Universal Design, write 2-3 sentences — or point form no
 
 **2.** Write a paragraph (3-6 sentences) about who you would market your program towards, if you were to sell or license your program to customers. This could be a specific category of users, such as "students", or more vague, such as "people who like games". Try to give a bit more detail along with the category.
 
+## 2. Target Market
+
   Our app is specifically marketed towards University of Toronto students in all campuses. More specifically, 
   it is targeted towards students interested in an accessible platform to discover and join clubs. This provides an
   accessible way for students to find clubs outside club fairs. We will also market toward students using other
@@ -74,6 +74,8 @@ For each Principle of Universal Design, write 2-3 sentences — or point form no
   app is also targeted towards any student wanting to start their own club and want to keep their member's
   up-to-date with club activities and events.
 
+
+## 3. Inaccessibility for Certain Demographics
 
 **3.** Write a paragraph about whether or not your program is less likely to be used by certain demographics. Your discussion here should be informed by the content of our embedded ethics modules this term.
 
