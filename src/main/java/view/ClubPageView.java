@@ -30,11 +30,13 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
     private JoinClubController joinClubController;
     private LeaveClubController leaveClubController;
 
+    private ExploreClubsViewModel exploreClubsViewModel;
+
     // TODO: Change all string panel views to constants form CONSTANTS file
     private final String viewName = "ClubPageView";
 
     public ClubPageView(ExploreClubsViewModel exploreClubsViewModel) {
-
+        this.exploreClubsViewModel = exploreClubsViewModel;
         exploreClubsViewModel.addPropertyChangeListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -56,19 +58,6 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
                 exploreClubsController.execute(state.getStudentEmail());
             }
         });
-
-        // Check to see if the student is a member of the club.
-        // The purpose is to locally check if the student is a member and set the text of the button reducing the
-        // strain on the database and improves speed.
-        final boolean isMember = exploreClubsState.getJoinedClubEmails()
-                .contains(exploreClubsState.getCurrentClubEmail());
-
-        if (isMember) {
-            joinButton.setText("Leave Club");
-        }
-        else {
-            joinButton.setText("Join Club");
-        }
 
         // Add listener to join button such that it calls the join use case if the student is not a member of the club,
         // and similarly the leave use case if a member is a part of the club.
@@ -127,6 +116,17 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
             this.description.setText(state.getCurrentClubDescription());
             this.email.setText("Contact info: " + state.getCurrentClubEmail());
             this.numMembers.setText("Number of members: " + state.getCurrentNumberOfMembersString());
+
+            // Check to see if the student is a member of the club.
+            // The purpose is to locally check if the student is a member and set the text of the button reducing the
+            // strain on the database and improves speed.
+            final boolean isMember = state.getJoinedClubEmails().contains(state.getCurrentClubEmail());
+            if (isMember) {
+                joinButton.setText("Leave Club");
+            }
+            else {
+                joinButton.setText("Join Club");
+            }
         }
     }
 }

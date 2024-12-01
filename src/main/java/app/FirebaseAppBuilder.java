@@ -508,7 +508,7 @@ public class FirebaseAppBuilder {
      * @return this builder
      */
     public FirebaseAppBuilder addJoinUseCase() {
-        final StudentJoinClubOutputBoundary joinClubOutputBoundary = new JoinClubPresenter(joinClubViewModel);
+        final StudentJoinClubOutputBoundary joinClubOutputBoundary = new JoinClubPresenter(exploreClubsViewModel);
         final StudentJoinClubInputBoundary joinClubInteractor =
                 new StudentJoinClubInteractor(studentFirestoreUserDataAccessObject,
                         clubFirestoreUserDataAccessObject, joinClubOutputBoundary);

@@ -508,7 +508,7 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addJoinUseCase() {
-        final StudentJoinClubOutputBoundary joinClubOutputBoundary = new JoinClubPresenter(joinClubViewModel);
+        final StudentJoinClubOutputBoundary joinClubOutputBoundary = new JoinClubPresenter(exploreClubsViewModel);
         final StudentJoinClubInputBoundary joinClubInteractor =
                 new StudentJoinClubInteractor(inMemoryUserDataAccessObject,
                         inMemoryUserDataAccessObject, joinClubOutputBoundary);

@@ -5,11 +5,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
@@ -53,6 +49,9 @@ public class ExploreClubsView extends JPanel implements PropertyChangeListener {
             System.out.println(state.getStudentEmail() + "this is the email");
             scrollPanel.setViewportView(new ClubDescriptionExploreContainer(state,
                     exploreClubsController));
+        }
+        if (evt.getPropertyName().equals("fail join")) {
+            JOptionPane.showMessageDialog(this, "Failed to join club");
         }
     }
 
