@@ -18,15 +18,12 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="bc748" class="javax.swing.JTextArea" binding="postTitleText">
+          <component id="29861" class="javax.swing.JTextPane" binding="postTitleText">
             <constraints/>
             <properties>
               <editable value="false"/>
               <font size="20" style="1"/>
-              <lineWrap value="true"/>
-              <minimumSize width="478" height="20"/>
               <opaque value="false"/>
-              <preferredSize width="478" height="20"/>
             </properties>
           </component>
         </children>
@@ -38,15 +35,11 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="dcaa1" class="javax.swing.JTextArea" binding="postBodyText">
+          <component id="f6b8b" class="javax.swing.JTextPane" binding="postBodyText">
             <constraints/>
             <properties>
-              <editable value="false"/>
               <font size="16" style="0"/>
-              <lineWrap value="true"/>
-              <minimumSize width="478" height="20"/>
               <opaque value="false"/>
-              <preferredSize width="478" height="20"/>
             </properties>
           </component>
         </children>
