@@ -55,7 +55,7 @@ made by JetBrains.
 
 **Instructions** on how to install and run the app:
 1) Clone the repository from GitHub. This can be done two ways.
-    - Through IntelliJ IDEA by following the steps in the linked [video tutorial]():
+    - Through IntelliJ IDEA by following the steps in the linked [video tutorial](https://youtu.be/pjKLtVjBh3c):
        - Navigate to the right page: Projects > Get from VCS > Repository URL
        - Enter the git repository URL in the "URL" text field:
       ```bash
@@ -67,5 +67,9 @@ made by JetBrains.
      ```bash
      git clone https://github.com/Karl-Michaud/csc207-final-project-club-app.git
      ```  
+     
+2) Open the project on the IntelliJ IDEA
+3) Navigate to the "Main" file found in the "app" folder by following the steps in the linked [video tutorial]()
+   - csc207-final-project-club-app > src > main > java > app > Main.java
 
 
