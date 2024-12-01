@@ -27,7 +27,7 @@ public class ClubMiniPanel extends JPanel {
     private final int descriptionLength = 50;
     private final Map<String, String> club;
 
-    public ClubMiniPanel(Map<String, String> club) {
+    public ClubMiniPanel(Map<String, String> club, String studentEmail) {
         this.club = club;
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(clubMiniPanel);
@@ -39,6 +39,7 @@ public class ClubMiniPanel extends JPanel {
 
         viewMore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
+                controller.execute(studentEmail);
                 controller.switchToClubView(club);
             }
         });

@@ -40,6 +40,7 @@ public class StudentShowClubsInteractor implements StudentShowClubsInputBoundary
                 singleClubData.put("username", club.getUsername());
                 singleClubData.put("email", club.getEmail());
                 singleClubData.put("description", club.getClubDescription());
+                singleClubData.put("numMembers", club.getClubMembersNames().size().toString());
                 clubData.add(singleClubData);
             }
             final StudentShowClubsOutputData studentShowClubsOutputData = new StudentShowClubsOutputData(clubData,

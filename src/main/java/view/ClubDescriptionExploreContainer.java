@@ -17,7 +17,7 @@ public class ClubDescriptionExploreContainer extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         for (Map<String, String> club: exploreClubsState.getClubValues()) {
-            final ClubMiniPanel clubMiniPanel = new ClubMiniPanel(club);
+            final ClubMiniPanel clubMiniPanel = new ClubMiniPanel(club, exploreClubsState.getStudentEmail());
             clubMiniPanel.setExploreClubsController(exploreClubsController);
 
             this.add(clubMiniPanel);
