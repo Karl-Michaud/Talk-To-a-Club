@@ -11,7 +11,7 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
     private final ClubSignupOutputBoundary userPresenter;
     private final ClubUserFactory clubUserFactory;
 
-    private final int minLengthUsername = 1;
+    private final int minLengthUsername = 2;
     private final int maxLengthUsername = 64;
 
     private final int minLengthPassword = 8;

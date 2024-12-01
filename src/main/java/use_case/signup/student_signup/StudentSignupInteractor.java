@@ -11,7 +11,7 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
     private final StudentSignupOutputBoundary userPresenter;
     private final StudentUserFactory studentUserFactory;
 
-    private final int minLengthUsername = 1;
+    private final int minLengthUsername = 2;
     private final int maxLengthUsername = 64;
 
     private final int minLengthPassword = 8;
