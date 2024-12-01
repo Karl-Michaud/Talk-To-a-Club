@@ -269,7 +269,6 @@ public class FirebaseAppBuilder {
      * @return this.
      */
     public FirebaseAppBuilder addClubPageView() {
-        exploreClubsViewModel = new ExploreClubsViewModel();
         clubPageView = new ClubPageView(exploreClubsViewModel);
         cardPanel.add(clubPageView, clubPageView.getViewName());
         return this;

@@ -2,13 +2,12 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+import interface_adapter.signup.club_signup.ClubSignupState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
@@ -18,7 +17,7 @@ import interface_adapter.student_logged_in.leave_club.LeaveClubController;
 /**
  * The view for the Club popup page when exploring clubs.
  */
-public class ClubPageView extends JPanel {
+public class ClubPageView extends JPanel implements PropertyChangeListener {
     private JPanel contentPanel;
     private JButton joinButton;
     private JButton backButton;
@@ -51,7 +50,8 @@ public class ClubPageView extends JPanel {
         this.backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                exploreClubsController.switchToHomeView();
+                final ExploreClubsState state = exploreClubsViewModel.getState();
+                exploreClubsController.execute(state.getStudentEmail());
             }
         });
 
@@ -115,5 +115,16 @@ public class ClubPageView extends JPanel {
 
     public void setLeaveClubController(LeaveClubController leaveClubController) {
         this.leaveClubController = leaveClubController;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final ExploreClubsState state = (ExploreClubsState) evt.getNewValue();
+        if (evt.getPropertyName().equals("state")) {
+            this.clubNameLabel.setText(state.getCurrentClubName());
+            this.description.setText(state.getCurrentClubDescription());
+            this.email.setText("Contact info: " + state.getCurrentClubEmail());
+            this.numMembers.setText("Number of members: " + state.getCurrentNumberOfMembersString());
+        }
     }
 }
