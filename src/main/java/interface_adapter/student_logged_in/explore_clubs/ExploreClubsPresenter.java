@@ -6,7 +6,6 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
 import use_case.explore_clubs.ExploreClubsOutputBoundary;
 import use_case.explore_clubs.ExploreClubsOutputData;
-import view.ClubPageView;
 
 /**
  * The Presenter for the Explore Clubs Use Case.

@@ -1,7 +1,5 @@
 package interface_adapter.student_logged_in.student_home.show_clubs;
 
-import java.util.ArrayList;
-
 import interface_adapter.ViewManagerModel;
 import interface_adapter.student_logged_in.student_home.StudentHomeState;
 import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
@@ -23,8 +21,6 @@ public class StudentShowClubsPresenter implements StudentShowClubsOutputBoundary
     @Override
     public void prepareClubsContent(StudentShowClubsOutputData studentShowClubsOutputData) {
         final StudentHomeState state = studentHomeViewModel.getState();
-        // TODO Is this the intention of this method? - Roy
-        // TODO Change this methods name to prepareClubContent or something
         state.setClubs(studentShowClubsOutputData.getClubs());
 
         studentHomeViewModel.setState(state);

@@ -12,6 +12,7 @@ public interface StudentShowPostsClubAccessInterface {
     /**
      * Gets the posts of a given club.
      * @param club the club
+     * @return An arraylist of the posts of a given club.
      */
     ArrayList<Post> getPosts(Club club);
 

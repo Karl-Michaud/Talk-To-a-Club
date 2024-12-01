@@ -26,32 +26,37 @@ public class StudentShowClubsInteractorTest {
         StudentFactory studentFactory = new StudentUserFactory();
         Student student = studentFactory.create("Fred", "frederik.brecht@mail.utoronto.ca", "password");
 
+        // Add the sample student as a member to the clubs.
+        climbingClub.addClubMember(student);
+        outdoorsclub.addClubMember(student);
+        rlClub.addClubMember(student);
+
         // set up a sample List of Maps to compare to the output test data
-        ArrayList<HashMap<String, String>> sampleList  = new ArrayList<>();
+        ArrayList<HashMap<String, Object>> sampleList  = new ArrayList<>();
         // HashMap for climbing club.
-        HashMap<String, String> climbingClubHash = new HashMap<>();
+        HashMap<String, Object> climbingClubHash = new HashMap<>();
         climbingClubHash.put("username", climbingClub.getUsername());
         climbingClubHash.put("email", climbingClub.getEmail());
         climbingClubHash.put("description", climbingClub.getClubDescription());
+        climbingClubHash.put("numMembers", climbingClub.getClubMembersEmails().size());
         // HashMap for outdoors club.
-        HashMap<String, String> outdoorsclubHash = new HashMap<>();
+        HashMap<String, Object> outdoorsclubHash = new HashMap<>();
         outdoorsclubHash.put("username", outdoorsclub.getUsername());
         outdoorsclubHash.put("email", outdoorsclub.getEmail());
         outdoorsclubHash.put("description", outdoorsclub.getClubDescription());
+        outdoorsclubHash.put("numMembers", outdoorsclub.getClubMembersEmails().size());
         // HashMap for rocket league club.
-        HashMap<String, String> rlClubHash = new HashMap<>();
+        HashMap<String, Object> rlClubHash = new HashMap<>();
         rlClubHash.put("username", rlClub.getUsername());
         rlClubHash.put("email", rlClub.getEmail());
         rlClubHash.put("description", rlClub.getClubDescription());
+        rlClubHash.put("numMembers", rlClub.getClubMembersEmails().size());
 
         sampleList.add(outdoorsclubHash);
         sampleList.add(climbingClubHash);
         sampleList.add(rlClubHash);
 
-        // Add the sample student as a member to the clubs.
-        climbingClub.addClubMember(student);
-        outdoorsclub.addClubMember(student);
-        rlClub.addClubMember(student);
+
         student.joinClub(outdoorsclub);
         student.joinClub(climbingClub);
         student.joinClub(rlClub);

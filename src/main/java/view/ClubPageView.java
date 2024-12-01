@@ -5,15 +5,17 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import interface_adapter.signup.club_signup.ClubSignupState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
 import interface_adapter.student_logged_in.join_club.JoinClubController;
 import interface_adapter.student_logged_in.leave_club.LeaveClubController;
-import interface_adapter.student_logged_in.student_home.StudentHomeController;
 import interface_adapter.student_logged_in.student_home.show_clubs.StudentShowClubsController;
 import interface_adapter.student_logged_in.student_home.show_posts.StudentShowPostsController;
 
@@ -73,11 +75,10 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
                         .contains(exploreClubsState.getCurrentClubEmail());
                 // Check if student is in club or not
                 if (isMemberCheck) {
-                    // Update the member count on the view.
+                    // Update the member count on the view and run leave club usecase.
                     final Integer intMembers = Integer.valueOf(exploreClubsState.getCurrentNumberOfMembersString()) - 1;
                     exploreClubsState.setCurrentNumberOfMembersString(intMembers.toString());
                     exploreClubsViewModel.setState(exploreClubsState);
-                    // Run the leave club use case
                     leaveClubController.leaveClub(exploreClubsState.getStudentEmail(),
                             exploreClubsState.getCurrentClubEmail());
                     // Update the student home page

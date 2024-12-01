@@ -4,7 +4,6 @@ import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
 import use_case.student_join_club.StudentJoinClubOutputBoundary;
 import use_case.student_join_club.StudentJoinClubOutputData;
-import view.ExploreClubsView;
 
 /**
  * Presenter for the Join Club Use Case.
