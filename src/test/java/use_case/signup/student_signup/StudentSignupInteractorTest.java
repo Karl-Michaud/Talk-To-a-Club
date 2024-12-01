@@ -136,7 +136,7 @@ public class StudentSignupInteractorTest {
 
     @Test
     void usernameShortTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("", "ok@k.com",
+        StudentSignupInputData inputData = new StudentSignupInputData("1", "ok@k.com",
                 "password", "password");
 
         // Uses an in memory database to test the use case
@@ -151,7 +151,7 @@ public class StudentSignupInteractorTest {
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("Username must be at least 1 character(s).", error);
+                assertEquals("Username must be at least 2 character(s).", error);
             }
 
             @Override
@@ -299,6 +299,122 @@ public class StudentSignupInteractorTest {
             @Override
             public void prepareFailView(String error) {
                 assertEquals("Invalid email address.", error);
+            }
+
+            @Override
+            public void switchToLoginView() {
+                fail("Use case switch to login is unexpected.");
+            }
+        };
+        StudentSignupInputBoundary interactor = new StudentSignupInteractor(userRepository, successPresenter, new StudentUserFactory());
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void emptyEmailTest() {
+        StudentSignupInputData inputData = new StudentSignupInputData("ok", "",
+                "password", "password");
+
+        // Uses an in memory database to test the use case
+        StudentSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        StudentSignupOutputBoundary successPresenter = new StudentSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(StudentSignupOutputData user) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                assertEquals("Email field is empty.", error);
+            }
+
+            @Override
+            public void switchToLoginView() {
+                fail("Use case switch to login is unexpected.");
+            }
+        };
+        StudentSignupInputBoundary interactor = new StudentSignupInteractor(userRepository, successPresenter, new StudentUserFactory());
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void emptyPasswordTest() {
+        StudentSignupInputData inputData = new StudentSignupInputData("ok", "okk@.com",
+                "", "password");
+
+        // Uses an in memory database to test the use case
+        StudentSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        StudentSignupOutputBoundary successPresenter = new StudentSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(StudentSignupOutputData user) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                assertEquals("Password field is empty.", error);
+            }
+
+            @Override
+            public void switchToLoginView() {
+                fail("Use case switch to login is unexpected.");
+            }
+        };
+        StudentSignupInputBoundary interactor = new StudentSignupInteractor(userRepository, successPresenter, new StudentUserFactory());
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void emptyRepeatPasswordTest() {
+        StudentSignupInputData inputData = new StudentSignupInputData("ok", "okk@.com",
+                "password", "");
+
+        // Uses an in memory database to test the use case
+        StudentSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        StudentSignupOutputBoundary successPresenter = new StudentSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(StudentSignupOutputData user) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                assertEquals("Repeat Password field is empty.", error);
+            }
+
+            @Override
+            public void switchToLoginView() {
+                fail("Use case switch to login is unexpected.");
+            }
+        };
+        StudentSignupInputBoundary interactor = new StudentSignupInteractor(userRepository, successPresenter, new StudentUserFactory());
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void emptyUsernameTest() {
+        StudentSignupInputData inputData = new StudentSignupInputData("", "okk@.com",
+                "password", "password");
+
+        // Uses an in memory database to test the use case
+        StudentSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        StudentSignupOutputBoundary successPresenter = new StudentSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(StudentSignupOutputData user) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                assertEquals("Username field is empty.", error);
             }
 
             @Override
