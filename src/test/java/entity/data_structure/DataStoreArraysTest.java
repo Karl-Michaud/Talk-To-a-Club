@@ -8,6 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DataStoreArraysTest {
+
     @Test
     void testAddAndSize() {
         DataStore<String> dataStore = new DataStoreArrays<>();
@@ -125,5 +126,32 @@ public class DataStoreArraysTest {
         assertEquals("Element1", dataStore.getByIndex(0));
         assertEquals("Element2", dataStore.getByIndex(1));
         assertThrows(IndexOutOfBoundsException.class, () -> dataStore.getByIndex(2));
+    }
+
+    @Test
+    void testToArrayList() {
+        DataStoreArrays<String> dataStore = new DataStoreArrays<>();
+        dataStore.add("Element1");
+        dataStore.add("Element2");
+
+        ArrayList<String> arrayList = dataStore.toArrayList();
+
+        assertEquals(2, arrayList.size());
+        assertTrue(arrayList.contains("Element1"));
+        assertTrue(arrayList.contains("Element2"));
+    }
+
+    @Test
+    void testToDataStore() {
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Element1");
+        arrayList.add("Element2");
+
+        DataStoreArrays<String> dataStore = new DataStoreArrays<>();
+        DataStore<String> convertedDataStore = dataStore.toDataStore(arrayList);
+
+        assertEquals(2, convertedDataStore.size());
+        assertTrue(convertedDataStore.contains("Element1"));
+        assertTrue(convertedDataStore.contains("Element2"));
     }
 }

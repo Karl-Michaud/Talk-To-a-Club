@@ -35,6 +35,7 @@ public class StudentJoinClubInteractorTest {
                 assertFalse(data.isUseCaseFailed());
                 assertTrue(club.getClubMembersEmails().contains(student.getEmail()));
                 assertTrue(student.getJoinedClubsEmails().contains(club.getEmail()));
+                assertEquals("photo@university.com", data.getClubEmail());
             }
 
             @Override
