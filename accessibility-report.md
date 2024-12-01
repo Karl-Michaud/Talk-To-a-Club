@@ -77,12 +77,13 @@ For each Principle of Universal Design, write 2-3 sentences — or point form no
 
 **3.** Write a paragraph about whether or not your program is less likely to be used by certain demographics. Your discussion here should be informed by the content of our embedded ethics modules this term.
 
+Due to our app's concept, the app would not likely be used by any people who isn't a UofT student. Our app also isolates
+those whose primary language isn't English since there's no language selection option. This is a
+big concern because of the large proportion of international students at UofT. The app may be unusable if the user has
+visual impairments, or if the user's monitor does not support the window size of the app because of the lack of
+UI size adjustment.
 
-
-Another concern is the limitation  app currently only works with the Intellij IDE.
-Our app also isolates those whose primary language isn't English since there's no language selection option. 
-One big limitation for our app is the lack of UI size adjustment. This would make the app unusable if the user has
-visual impairments, or if their monitor does not support the window size of the app.
+# ADD MORE HERE ^
 
 
 
