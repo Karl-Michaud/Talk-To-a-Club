@@ -51,7 +51,7 @@ public class StudentLeaveClubInteractor implements StudentLeaveClubInputBoundary
 
                 // Prepare success view
                 final StudentLeaveClubOutputData outputData = new StudentLeaveClubOutputData(student.getUsername(),
-                        false);
+                        clubEmail, false);
                 studentLeavePresenter.prepareSuccessView(outputData);
             }
         }

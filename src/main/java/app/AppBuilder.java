@@ -40,10 +40,8 @@ import interface_adapter.student_logged_in.explore_clubs.ExploreClubsPresenter;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
 import interface_adapter.student_logged_in.join_club.JoinClubController;
 import interface_adapter.student_logged_in.join_club.JoinClubPresenter;
-import interface_adapter.student_logged_in.join_club.JoinClubViewModel;
 import interface_adapter.student_logged_in.leave_club.LeaveClubController;
 import interface_adapter.student_logged_in.leave_club.LeaveClubPresenter;
-import interface_adapter.student_logged_in.leave_club.LeaveClubViewModel;
 import interface_adapter.student_logged_in.student_home.StudentHomeController;
 import interface_adapter.student_logged_in.student_home.StudentHomePresenter;
 import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
@@ -172,9 +170,6 @@ public class AppBuilder {
     private ExploreClubsView exploreClubsView;
 
     private ClubPageView clubPageView;
-
-    private JoinClubViewModel joinClubViewModel;
-    private LeaveClubViewModel leaveClubViewModel;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -523,7 +518,7 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addLeaveUseCase() {
-        final StudentLeaveClubOutputBoundary leaveClubOutputBoundary = new LeaveClubPresenter(leaveClubViewModel);
+        final StudentLeaveClubOutputBoundary leaveClubOutputBoundary = new LeaveClubPresenter(exploreClubsViewModel);
         final StudentLeaveClubInputBoundary leaveClubInteractor =
                 new StudentLeaveClubInteractor(inMemoryUserDataAccessObject,
                         inMemoryUserDataAccessObject, leaveClubOutputBoundary);

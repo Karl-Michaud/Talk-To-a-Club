@@ -13,6 +13,9 @@ import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
 import interface_adapter.student_logged_in.join_club.JoinClubController;
 import interface_adapter.student_logged_in.leave_club.LeaveClubController;
+import interface_adapter.student_logged_in.student_home.StudentHomeController;
+import interface_adapter.student_logged_in.student_home.show_clubs.StudentShowClubsController;
+import interface_adapter.student_logged_in.student_home.show_posts.StudentShowPostsController;
 
 /**
  * The view for the Club popup page when exploring clubs.
@@ -29,6 +32,8 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
     private ExploreClubsController exploreClubsController;
     private JoinClubController joinClubController;
     private LeaveClubController leaveClubController;
+    private StudentShowClubsController studentShowClubsController;
+    private StudentShowPostsController studentShowPostsController;
 
     private ExploreClubsViewModel exploreClubsViewModel;
 
@@ -71,21 +76,17 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
                     // Run the leave club use case
                     leaveClubController.leaveClub(exploreClubsState.getStudentEmail(),
                             exploreClubsState.getCurrentClubEmail());
-                    // Change the join button text
-                    joinButton.setText("Join Club");
-                    // Update the member count on the view.
-                    final Integer intMembers = Integer.valueOf(exploreClubsState.getCurrentNumberOfMembersString()) - 1;
-                    numMembers.setText(intMembers.toString());
+                    // Update the student home page
+                    studentShowClubsController.execute(exploreClubsState.getStudentEmail());
+                    studentShowPostsController.execute(exploreClubsState.getStudentEmail());
                 }
                 else {
                     // Run the join club use case
                     joinClubController.joinClub(exploreClubsState.getStudentEmail(),
                             exploreClubsState.getCurrentClubEmail());
-                    // Change the join button text
-                    joinButton.setText("Leave Club");
-                    // Update the member count on the view
-                    final Integer intMembers = Integer.valueOf(exploreClubsState.getCurrentNumberOfMembersString()) + 1;
-                    numMembers.setText(intMembers.toString());
+                    // Update the student home page
+                    studentShowClubsController.execute(exploreClubsState.getStudentEmail());
+                    studentShowPostsController.execute(exploreClubsState.getStudentEmail());
                 }
             }
         });
@@ -106,6 +107,14 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
 
     public void setLeaveClubController(LeaveClubController leaveClubController) {
         this.leaveClubController = leaveClubController;
+    }
+
+    public void setStudentShowClubsController(StudentShowClubsController studentShowClubsController) {
+        this.studentShowClubsController = studentShowClubsController;
+    }
+
+    public void setStudentShowPostsController(StudentShowPostsController studentShowPostsController) {
+        this.studentShowPostsController = studentShowPostsController;
     }
 
     @Override

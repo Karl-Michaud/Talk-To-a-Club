@@ -49,10 +49,8 @@ import interface_adapter.student_logged_in.explore_clubs.ExploreClubsPresenter;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
 import interface_adapter.student_logged_in.join_club.JoinClubController;
 import interface_adapter.student_logged_in.join_club.JoinClubPresenter;
-import interface_adapter.student_logged_in.join_club.JoinClubViewModel;
 import interface_adapter.student_logged_in.leave_club.LeaveClubController;
 import interface_adapter.student_logged_in.leave_club.LeaveClubPresenter;
-import interface_adapter.student_logged_in.leave_club.LeaveClubViewModel;
 import use_case.club_create_post.ClubCreatePostInputBoundary;
 import use_case.club_create_post.ClubCreatePostInteractor;
 import use_case.club_create_post.ClubCreatePostOutputBoundary;
@@ -168,9 +166,6 @@ public class FirebaseAppBuilder {
     private ExploreClubsView exploreClubsView;
 
     private ClubPageView clubPageView;
-
-    private JoinClubViewModel joinClubViewModel;
-    private LeaveClubViewModel leaveClubViewModel;
 
     public FirebaseAppBuilder() throws IOException {
         cardPanel.setLayout(cardLayout);
@@ -356,6 +351,7 @@ public class FirebaseAppBuilder {
 
         final StudentShowPostsController studentShowPostsController = new StudentShowPostsController(showPostsInteractor);
         studentHomeView.setShowPostsController(studentShowPostsController);
+        clubPageView.setStudentShowPostsController(studentShowPostsController);
         return this;
     }
 
@@ -365,6 +361,7 @@ public class FirebaseAppBuilder {
                 studentFirestoreUserDataAccessObject);
         final StudentShowClubsController studentShowClubsController = new StudentShowClubsController(showClubsInteractor);
         studentHomeView.setShowClubsController(studentShowClubsController);
+        clubPageView.setStudentShowClubsController(studentShowClubsController);
         return this;
     }
 
@@ -523,7 +520,7 @@ public class FirebaseAppBuilder {
      * @return this builder
      */
     public FirebaseAppBuilder addLeaveUseCase() {
-        final StudentLeaveClubOutputBoundary leaveClubOutputBoundary = new LeaveClubPresenter(leaveClubViewModel);
+        final StudentLeaveClubOutputBoundary leaveClubOutputBoundary = new LeaveClubPresenter(exploreClubsViewModel);
         final StudentLeaveClubInputBoundary leaveClubInteractor =
                 new StudentLeaveClubInteractor(studentFirestoreUserDataAccessObject,
                         clubFirestoreUserDataAccessObject, leaveClubOutputBoundary);

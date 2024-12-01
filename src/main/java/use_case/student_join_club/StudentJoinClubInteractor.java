@@ -51,7 +51,7 @@ public class StudentJoinClubInteractor implements StudentJoinClubInputBoundary {
 
                 // Prepare success view
                 final StudentJoinClubOutputData outputData = new StudentJoinClubOutputData(student.getUsername(),
-                        false);
+                        clubEmail, false);
                 joinClubPresenter.prepareSuccessView(outputData);
             }
         }

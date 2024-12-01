@@ -18,6 +18,9 @@ public class JoinClubPresenter implements StudentJoinClubOutputBoundary {
 
     @Override
     public void prepareSuccessView(StudentJoinClubOutputData data) {
+        final ExploreClubsState state = viewModel.getState();
+        state.getJoinedClubEmails().add(data.getClubEmail());
+        viewModel.setState(state);
         // Tells the view to update the club's information
         viewModel.firePropertyChanged();
     }

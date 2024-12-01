@@ -5,10 +5,12 @@ package use_case.student_join_club;
  */
 public class StudentJoinClubOutputData {
     private final String username;
+    private final String clubEmail;
     private final boolean useCaseFailed;
 
-    public StudentJoinClubOutputData(String username, boolean useCaseFailed) {
+    public StudentJoinClubOutputData(String username, String clubEmail, boolean useCaseFailed) {
         this.username = username;
+        this.clubEmail = clubEmail;
         this.useCaseFailed = useCaseFailed;
     }
 
@@ -18,5 +20,9 @@ public class StudentJoinClubOutputData {
 
     public boolean isUseCaseFailed() {
         return useCaseFailed;
+    }
+
+    public String getClubEmail() {
+        return this.clubEmail;
     }
 }
