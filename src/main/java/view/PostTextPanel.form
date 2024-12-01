@@ -1,34 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.PostTextPanel">
-  <grid id="27dc6" binding="postPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="postPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="8" left="8" bottom="8" right="8"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="97"/>
+      <xy x="20" y="20" width="500" height="400"/>
     </constraints>
     <properties>
-      <minimumSize width="400" height="65"/>
-      <preferredSize width="400" height="65"/>
+      <minimumSize width="400" height="200"/>
+      <preferredSize width="400" height="200"/>
     </properties>
     <border type="line"/>
     <children>
-      <component id="75723" class="javax.swing.JLabel" binding="postTitleText">
+      <scrollpane id="f3861">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties>
-          <font size="20" style="1"/>
-          <text value="Placeholder Title"/>
-        </properties>
-      </component>
-      <component id="8fcad" class="javax.swing.JLabel" binding="postBodyText">
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="29861" class="javax.swing.JTextPane" binding="postTitleText">
+            <constraints/>
+            <properties>
+              <editable value="false"/>
+              <font size="20" style="1"/>
+              <opaque value="false"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+      <scrollpane id="7df7">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties>
-          <font size="16"/>
-          <text value="Placeholder Body"/>
-        </properties>
-      </component>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="f6b8b" class="javax.swing.JTextPane" binding="postBodyText">
+            <constraints/>
+            <properties>
+              <font size="16" style="0"/>
+              <opaque value="false"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>
