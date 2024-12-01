@@ -270,7 +270,7 @@ public class ClubFirestoreUserDataAccessObject implements ClubCreatePostUserData
                 club.getClubMembersEmails().toArrayList());
 
         final ApiFuture<WriteResult> writeNames = docRef.update("clubMembersNames",
-                club.getClubMembersEmails().toArrayList());
+                club.getClubMembersNames().toArrayList());
         try {
             System.out.println("Update time: " + writeEmails.get().getUpdateTime());
             System.out.println("Update time: " + writeNames.get().getUpdateTime());
