@@ -1,12 +1,7 @@
 package app;
 
-import java.awt.CardLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-
-import data_access.InMemoryUserDataAccessObject;
+import data_access.ClubFirestoreUserDataAccessObject;
+import data_access.StudentFirestoreUserDataStudentAccessObject;
 import entity.user.ClubUserFactory;
 import entity.user.StudentUserFactory;
 import interface_adapter.ViewManagerModel;
@@ -35,13 +30,6 @@ import interface_adapter.signup.club_signup.ClubSignupViewModel;
 import interface_adapter.signup.student_signup.StudentSignupController;
 import interface_adapter.signup.student_signup.StudentSignupPresenter;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsPresenter;
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
-import interface_adapter.student_logged_in.join_club.JoinClubController;
-import interface_adapter.student_logged_in.join_club.JoinClubPresenter;
-import interface_adapter.student_logged_in.leave_club.LeaveClubController;
-import interface_adapter.student_logged_in.leave_club.LeaveClubPresenter;
 import interface_adapter.student_logged_in.student_home.StudentHomeController;
 import interface_adapter.student_logged_in.student_home.StudentHomePresenter;
 import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
@@ -56,6 +44,13 @@ import interface_adapter.student_logged_in.student_home.show_posts.StudentShowPo
 import interface_adapter.student_profile.StudentProfileController;
 import interface_adapter.student_profile.StudentProfilePresenter;
 import interface_adapter.student_profile.StudentProfileViewModel;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsPresenter;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
+import interface_adapter.student_logged_in.join_club.JoinClubController;
+import interface_adapter.student_logged_in.join_club.JoinClubPresenter;
+import interface_adapter.student_logged_in.leave_club.LeaveClubController;
+import interface_adapter.student_logged_in.leave_club.LeaveClubPresenter;
 import use_case.club_create_post.ClubCreatePostInputBoundary;
 import use_case.club_create_post.ClubCreatePostInteractor;
 import use_case.club_create_post.ClubCreatePostOutputBoundary;
@@ -71,9 +66,6 @@ import use_case.club_remove_member.ClubRemoveMemberOutputBoundary;
 import use_case.club_update_desc.ClubUpdateDescInputBoundary;
 import use_case.club_update_desc.ClubUpdateDescInteractor;
 import use_case.club_update_desc.ClubUpdateDescOutputBoundary;
-import use_case.explore_clubs.ExploreClubsInputBoundary;
-import use_case.explore_clubs.ExploreClubsInteractor;
-import use_case.explore_clubs.ExploreClubsOutputBoundary;
 import use_case.login.club_login.ClubLoginInputBoundary;
 import use_case.login.club_login.ClubLoginInteractor;
 import use_case.login.club_login.ClubLoginOutputBoundary;
@@ -89,28 +81,15 @@ import use_case.signup.club_signup.ClubSignupOutputBoundary;
 import use_case.signup.student_signup.StudentSignupInputBoundary;
 import use_case.signup.student_signup.StudentSignupInteractor;
 import use_case.signup.student_signup.StudentSignupOutputBoundary;
-import use_case.student_homepage.dislike.StudentDislikeOutputBoundary;
-import use_case.student_homepage.like.StudentLikeOutputBoundary;
-import use_case.student_join_club.StudentJoinClubInputBoundary;
-import use_case.student_join_club.StudentJoinClubInteractor;
-import use_case.student_join_club.StudentJoinClubOutputBoundary;
-import use_case.student_leave_club.StudentLeaveClubInputBoundary;
-import use_case.student_leave_club.StudentLeaveClubInteractor;
-import use_case.student_leave_club.StudentLeaveClubOutputBoundary;
-import view.ClubSignupView;
-import view.ClubCreatePostView;
-import view.LoginView;
-import view.StudentHomeView;
-import view.StudentSignupView;
-import view.ViewManager;
-
 import use_case.student_homepage.StudentHomeInputBoundary;
 import use_case.student_homepage.StudentHomeInteractor;
 import use_case.student_homepage.StudentHomeOutputBoundary;
 import use_case.student_homepage.dislike.StudentDislikeInputBoundary;
 import use_case.student_homepage.dislike.StudentDislikeInteractor;
+import use_case.student_homepage.dislike.StudentDislikeOutputBoundary;
 import use_case.student_homepage.like.StudentLikeInputBoundary;
 import use_case.student_homepage.like.StudentLikeInteractor;
+import use_case.student_homepage.like.StudentLikeOutputBoundary;
 import use_case.student_homepage.show_clubs.StudentShowClubsInputBoundary;
 import use_case.student_homepage.show_clubs.StudentShowClubsInteractor;
 import use_case.student_homepage.show_clubs.StudentShowClubsOutputBoundary;
@@ -120,20 +99,34 @@ import use_case.student_homepage.show_posts.StudentShowPostsOutputBoundary;
 import use_case.student_profile.StudentProfileInputBoundary;
 import use_case.student_profile.StudentProfileInteractor;
 import use_case.student_profile.StudentProfileOutputBoundary;
+import use_case.explore_clubs.ExploreClubsInputBoundary;
+import use_case.explore_clubs.ExploreClubsInteractor;
+import use_case.explore_clubs.ExploreClubsOutputBoundary;
+import use_case.student_join_club.StudentJoinClubInputBoundary;
+import use_case.student_join_club.StudentJoinClubInteractor;
+import use_case.student_join_club.StudentJoinClubOutputBoundary;
+import use_case.student_leave_club.StudentLeaveClubInputBoundary;
+import use_case.student_leave_club.StudentLeaveClubInteractor;
+import use_case.student_leave_club.StudentLeaveClubOutputBoundary;
 import view.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 // Checkstyle note: you can ignore the "Class Data Abstraction Coupling"
 //                  and the "Class Fan-Out Complexity" issues for this lab; we encourage
 //                  your team to think about ways to refactor the code to resolve these
 //                  if your team decides to work with this as your starter code
 //                  for your final project this term.
+
 /**
  * The AppBuilder class is responsible for putting together the pieces of
  * our CA architecture; piece by piece.
  * <p/>
  * This is done by adding each View and then adding related Use Cases.
  */
-public class AppBuilder {
+public class FirebaseAppBuilder {
     private final JPanel cardPanel = new JPanel();
     private final CardLayout cardLayout = new CardLayout();
     // thought question: is the hard dependency below a problem?
@@ -143,7 +136,10 @@ public class AppBuilder {
     private final ViewManager viewManager = new ViewManager(cardLayout, cardPanel, viewManagerModel);
 
     // thought question: is the hard dependency below a problem?
-    private final InMemoryUserDataAccessObject inMemoryUserDataAccessObject = new InMemoryUserDataAccessObject();
+    //private final InMemoryUserDataStudentAccessObject inMemoryUserDataAccessObject = new InMemoryUserDataStudentAccessObject();
+
+    private final ClubFirestoreUserDataAccessObject clubFirestoreUserDataAccessObject = new ClubFirestoreUserDataAccessObject();
+    private final StudentFirestoreUserDataStudentAccessObject studentFirestoreUserDataAccessObject = new StudentFirestoreUserDataStudentAccessObject();
 
     private ClubSignupViewModel clubSignupViewModel;
     private ClubSignupView clubSignupView;
@@ -171,7 +167,7 @@ public class AppBuilder {
 
     private ClubPageView clubPageView;
 
-    public AppBuilder() {
+    public FirebaseAppBuilder() throws IOException {
         cardPanel.setLayout(cardLayout);
     }
 
@@ -179,7 +175,7 @@ public class AppBuilder {
      * Adds the Club Signup View to the application.
      * @return this builder
      */
-    public AppBuilder addClubSignupView() {
+    public FirebaseAppBuilder addClubSignupView() {
         clubSignupViewModel = new ClubSignupViewModel();
         clubSignupView = new ClubSignupView(clubSignupViewModel);
         cardPanel.add(clubSignupView, clubSignupView.getViewName());
@@ -190,7 +186,7 @@ public class AppBuilder {
      * Adds the Student Signup View to the application.
      * @return this builder
      */
-    public AppBuilder addStudentSignupView() {
+    public FirebaseAppBuilder addStudentSignupView() {
         studentSignupViewModel = new StudentSignupViewModel();
         studentSignupView = new StudentSignupView(studentSignupViewModel);
         cardPanel.add(studentSignupView, studentSignupView.getViewName());
@@ -201,8 +197,8 @@ public class AppBuilder {
      * Adds the Login View to the application.
      * @return this builder
      */
-    public AppBuilder addLoginView() {
-        loginViewModel = new interface_adapter.login.LoginViewModel();
+    public FirebaseAppBuilder addLoginView() {
+        loginViewModel = new LoginViewModel();
         loginView = new LoginView(loginViewModel);
         cardPanel.add(loginView, loginView.getViewName());
         return this;
@@ -212,7 +208,7 @@ public class AppBuilder {
      * Adds the Club Home View to the application.
      * @return this builder
      */
-    public AppBuilder addClubHomeView() {
+    public FirebaseAppBuilder addClubHomeView() {
         clubLoggedInViewModel = new ClubLoggedInViewModel();
         clubLoggedInView = new ClubLoggedInView(clubLoggedInViewModel);
         cardPanel.add(clubLoggedInView, clubLoggedInView.getViewName());
@@ -223,7 +219,7 @@ public class AppBuilder {
      * Adds the Student Home View to the application.
      * @return this builder
      */
-    public AppBuilder addStudentHomeView() {
+    public FirebaseAppBuilder addStudentHomeView() {
         studentHomeViewModel = new StudentHomeViewModel();
         studentHomeView = new StudentHomeView(studentHomeViewModel);
         cardPanel.add(studentHomeView, studentHomeView.getViewName());
@@ -234,7 +230,7 @@ public class AppBuilder {
      * Adds the Student Profile View to the application.
      * @return this builder
      */
-    public AppBuilder addStudentProfileView() {
+    public FirebaseAppBuilder addStudentProfileView() {
         studentProfileViewModel = new StudentProfileViewModel();
         studentProfileView = new StudentProfileView(studentProfileViewModel);
         cardPanel.add(studentProfileView, studentProfileView.getViewName());
@@ -245,7 +241,7 @@ public class AppBuilder {
      * Adds the Club Create Post View to the application.
      * @return this builder
      */
-    public AppBuilder addCreatePostView() {
+    public FirebaseAppBuilder addCreatePostView() {
         clubCreatePostViewModel = new ClubCreatePostViewModel();
         clubCreatePostView = new ClubCreatePostView(clubCreatePostViewModel);
         cardPanel.add(clubCreatePostView, clubCreatePostView.getViewName());
@@ -256,7 +252,7 @@ public class AppBuilder {
      * Adds the explore clubs view to the application.
      * @return this.
      */
-    public AppBuilder addExploreClubsView() {
+    public FirebaseAppBuilder addExploreClubsView() {
         exploreClubsViewModel = new ExploreClubsViewModel();
         exploreClubsView = new ExploreClubsView(exploreClubsViewModel);
         cardPanel.add(exploreClubsView, exploreClubsView.getViewName());
@@ -267,7 +263,7 @@ public class AppBuilder {
      * Adds the club page view to the application.
      * @return this.
      */
-    public AppBuilder addClubPageView() {
+    public FirebaseAppBuilder addClubPageView() {
         clubPageView = new ClubPageView(exploreClubsViewModel);
         cardPanel.add(clubPageView, clubPageView.getViewName());
         return this;
@@ -277,11 +273,11 @@ public class AppBuilder {
      * Adds the Club Signup Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addClubSignupUseCase() {
+    public FirebaseAppBuilder addClubSignupUseCase() {
         final ClubSignupOutputBoundary signupOutputBoundary = new ClubSignupPresenter(viewManagerModel,
                 clubSignupViewModel, loginViewModel);
 
-        final ClubSignupInputBoundary userSignupInteractor = new ClubSignupInteractor(inMemoryUserDataAccessObject,
+        final ClubSignupInputBoundary userSignupInteractor = new ClubSignupInteractor(clubFirestoreUserDataAccessObject,
                 signupOutputBoundary, clubFactory);
 
         final ClubSignupController controller = new ClubSignupController(userSignupInteractor);
@@ -293,12 +289,12 @@ public class AppBuilder {
      * Adds the Student Signup Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addStudentSignupUseCase() {
+    public FirebaseAppBuilder addStudentSignupUseCase() {
         final StudentSignupOutputBoundary signupOutputBoundary = new StudentSignupPresenter(viewManagerModel,
                 studentSignupViewModel, loginViewModel);
 
         final StudentSignupInputBoundary userSignupInteractor = new StudentSignupInteractor(
-                inMemoryUserDataAccessObject,
+                studentFirestoreUserDataAccessObject,
                 signupOutputBoundary, studentFactory);
 
         final StudentSignupController controller = new StudentSignupController(userSignupInteractor);
@@ -310,11 +306,11 @@ public class AppBuilder {
      * Adds the Club Login Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addClubLoginUseCase() {
+    public FirebaseAppBuilder addClubLoginUseCase() {
         final ClubLoginOutputBoundary loginOutputBoundary = new ClubLoginPresenter(viewManagerModel,
                 clubLoggedInViewModel, clubSignupViewModel, loginViewModel);
         final ClubLoginInputBoundary loginInteractor = new ClubLoginInteractor(
-                inMemoryUserDataAccessObject, loginOutputBoundary);
+                clubFirestoreUserDataAccessObject, loginOutputBoundary);
 
         final ClubLoginController loginController = new ClubLoginController(loginInteractor);
         loginView.setClubLoginController(loginController);
@@ -325,18 +321,18 @@ public class AppBuilder {
      * Adds the Student Login Use Case to the application.
      * @return this builder
      */
-    public AppBuilder addStudentLoginUseCase() {
+    public FirebaseAppBuilder addStudentLoginUseCase() {
         final StudentLoginOutputBoundary loginOutputBoundary = new StudentLoginPresenter(viewManagerModel,
                 studentHomeViewModel, studentSignupViewModel, loginViewModel);
         final StudentLoginInputBoundary loginInteractor = new StudentLoginInteractor(
-                inMemoryUserDataAccessObject, loginOutputBoundary);
+                studentFirestoreUserDataAccessObject, loginOutputBoundary);
 
         final StudentLoginController loginController = new StudentLoginController(loginInteractor);
         loginView.setStudentLoginController(loginController);
         return this;
     }
 
-    public AppBuilder addStudentHomeUseCase() {
+    public FirebaseAppBuilder addStudentHomeUseCase() {
         final StudentHomeOutputBoundary studentHomeOutputBoundary = new StudentHomePresenter(studentHomeViewModel,
                 viewManagerModel, loginViewModel, studentProfileViewModel);
         final StudentHomeInputBoundary studentHomeInteractor = new StudentHomeInteractor(studentHomeOutputBoundary);
@@ -346,44 +342,48 @@ public class AppBuilder {
         return this;
     }
 
-    public AppBuilder addShowPostsUseCase() {
+    public FirebaseAppBuilder addShowPostsUseCase() {
         final StudentShowPostsOutputBoundary studentShowPostsOutputBoundary = new StudentShowPostsPresenter(studentHomeViewModel, viewManagerModel);
 
         final StudentShowPostsInputBoundary showPostsInteractor = new StudentShowPostsInteractor(
-                inMemoryUserDataAccessObject, inMemoryUserDataAccessObject,
+                studentFirestoreUserDataAccessObject, clubFirestoreUserDataAccessObject,
                 studentShowPostsOutputBoundary);
 
         final StudentShowPostsController studentShowPostsController = new StudentShowPostsController(showPostsInteractor);
         studentHomeView.setShowPostsController(studentShowPostsController);
+        clubPageView.setStudentShowPostsController(studentShowPostsController);
         return this;
     }
 
-    public AppBuilder addShowClubsUseCase() {
+    public FirebaseAppBuilder addShowClubsUseCase() {
         final StudentShowClubsOutputBoundary studentShowClubsOutputBoundary = new StudentShowClubsPresenter(studentHomeViewModel, viewManagerModel);
         final StudentShowClubsInputBoundary showClubsInteractor = new StudentShowClubsInteractor(studentShowClubsOutputBoundary,
-                inMemoryUserDataAccessObject);
+                studentFirestoreUserDataAccessObject);
         final StudentShowClubsController studentShowClubsController = new StudentShowClubsController(showClubsInteractor);
         studentHomeView.setShowClubsController(studentShowClubsController);
+        clubPageView.setStudentShowClubsController(studentShowClubsController);
         return this;
     }
 
-    public AppBuilder addLikeUseCase() {
+    public FirebaseAppBuilder addLikeUseCase() {
         final StudentLikeOutputBoundary studentLikeOutputBoundary = new StudentLikePresenter(studentHomeViewModel, viewManagerModel);
-        final StudentLikeInputBoundary likeInteractor = new StudentLikeInteractor(inMemoryUserDataAccessObject, inMemoryUserDataAccessObject, studentLikeOutputBoundary);
+        final StudentLikeInputBoundary likeInteractor = new StudentLikeInteractor(studentFirestoreUserDataAccessObject,
+                clubFirestoreUserDataAccessObject, studentLikeOutputBoundary);
         final StudentLikeController likeController = new StudentLikeController(likeInteractor);
         studentHomeView.setLikeController(likeController);
         return this;
     }
 
-    public AppBuilder addDislikeUseCase() {
+    public FirebaseAppBuilder addDislikeUseCase() {
         final StudentDislikeOutputBoundary studentDislikeOutputBoundary = new StudentDislikePresenter(studentHomeViewModel, viewManagerModel);
-        final StudentDislikeInputBoundary dislikeInteractor = new StudentDislikeInteractor(inMemoryUserDataAccessObject, inMemoryUserDataAccessObject, studentDislikeOutputBoundary);
+        final StudentDislikeInputBoundary dislikeInteractor = new StudentDislikeInteractor(clubFirestoreUserDataAccessObject,
+                studentFirestoreUserDataAccessObject, studentDislikeOutputBoundary);
         final StudentDislikeController dislikeController = new StudentDislikeController(dislikeInteractor);
         studentHomeView.setDislikeController(dislikeController);
         return this;
     }
 
-    public AppBuilder addStudentProfileUseCase() {
+    public FirebaseAppBuilder addStudentProfileUseCase() {
         final StudentProfileOutputBoundary studentProfileOutputBoundary = new StudentProfilePresenter(viewManagerModel,
                 studentProfileViewModel, studentHomeViewModel);
         final StudentProfileInputBoundary studentProfileInteractor = new StudentProfileInteractor(
@@ -400,11 +400,11 @@ public class AppBuilder {
      * Adds the Club Create Post use case to the application.
      * @return this builder
      */
-    public AppBuilder addClubCreatePostUseCase() {
+    public FirebaseAppBuilder addClubCreatePostUseCase() {
         final ClubCreatePostOutputBoundary clubCreatePostOutputBoundary = new ClubCreatePostPresenter(
                 clubCreatePostViewModel, clubLoggedInViewModel, viewManagerModel);
         final ClubCreatePostInputBoundary clubCreatePostInteractor = new ClubCreatePostInteractor(
-                inMemoryUserDataAccessObject, clubCreatePostOutputBoundary);
+                clubFirestoreUserDataAccessObject, clubCreatePostOutputBoundary);
         final ClubCreatePostController createPostController = new ClubCreatePostController(clubCreatePostInteractor);
         clubCreatePostView.setClubCreatePostController(createPostController);
         clubLoggedInView.setClubCreatePostController(createPostController);
@@ -416,11 +416,11 @@ public class AppBuilder {
      * Adds the Club Get Members use case to the application.
      * @return this builder
      */
-    public AppBuilder addClubGetMembersUseCase() {
+    public FirebaseAppBuilder addClubGetMembersUseCase() {
         final ClubGetMembersOutputBoundary clubGetMembersOutputBoundary = new ClubGetMembersPresenter(
                 clubLoggedInViewModel, viewManagerModel);
         final ClubGetMembersInputBoundary clubGetMembersInteractor = new ClubGetMembersInteractor(
-                inMemoryUserDataAccessObject, clubGetMembersOutputBoundary);
+                clubFirestoreUserDataAccessObject, clubGetMembersOutputBoundary);
         final ClubGetMembersController clubGetMembersController = new ClubGetMembersController(
                 clubGetMembersInteractor);
         clubLoggedInView.setClubGetMembersController(clubGetMembersController);
@@ -431,7 +431,7 @@ public class AppBuilder {
      * Adds the Logout use case to the application.
      * @return this builder
      */
-    public AppBuilder addLogoutUseCase() {
+    public FirebaseAppBuilder addLogoutUseCase() {
         final LogoutOutputBoundary logoutOutputBoundary = new LogoutPresenter(loginViewModel, viewManagerModel);
         final LogoutInputBoundary logoutInteractor = new LogoutInteractor(logoutOutputBoundary);
 
@@ -445,9 +445,9 @@ public class AppBuilder {
      * Adds the Club Get Posts use case to the application.
      * @return this builder
      */
-    public AppBuilder addClubGetPostsUseCase() {
+    public FirebaseAppBuilder addClubGetPostsUseCase() {
         final ClubGetPostsOutputBoundary clubGetPostsOutputBoundary = new ClubGetPostsPresenter(clubLoggedInViewModel, viewManagerModel);
-        final ClubGetPostsInputBoundary clubGetPostsInteractor = new ClubGetPostsInteractor(inMemoryUserDataAccessObject, clubGetPostsOutputBoundary);
+        final ClubGetPostsInputBoundary clubGetPostsInteractor = new ClubGetPostsInteractor(clubFirestoreUserDataAccessObject, clubGetPostsOutputBoundary);
 
         final ClubGetPostsController clubGetPostsController = new ClubGetPostsController(clubGetPostsInteractor);
         clubLoggedInView.setClubGetPostsController(clubGetPostsController);
@@ -458,9 +458,10 @@ public class AppBuilder {
      * Adds the Club Update Description use case to the application.
      * @return this builder
      */
-    public AppBuilder addClubUpdateDescUseCase() {
+    public FirebaseAppBuilder addClubUpdateDescUseCase() {
         final ClubUpdateDescOutputBoundary clubUpdateDescOutputBoundary = new ClubUpdateDescPresenter(clubLoggedInViewModel, viewManagerModel);
-        final ClubUpdateDescInputBoundary clubUpdateDescInteractor = new ClubUpdateDescInteractor(inMemoryUserDataAccessObject, clubUpdateDescOutputBoundary);
+        final ClubUpdateDescInputBoundary clubUpdateDescInteractor = new ClubUpdateDescInteractor(clubFirestoreUserDataAccessObject,
+                clubUpdateDescOutputBoundary);
 
         final ClubUpdateDescController clubUpdateDescController = new ClubUpdateDescController(clubUpdateDescInteractor);
         clubLoggedInView.setClubUpdateDescController(clubUpdateDescController);
@@ -471,9 +472,10 @@ public class AppBuilder {
      * Adds the CLub Remove Member use case to the application.
      * @return this builder
      */
-    public AppBuilder addClubRemoveMemberUseCase() {
+    public FirebaseAppBuilder addClubRemoveMemberUseCase() {
         final ClubRemoveMemberOutputBoundary clubRemoveMemberOutputBoundary = new ClubRemoveMemberPresenter(clubLoggedInViewModel, viewManagerModel);
-        final ClubRemoveMemberInputBoundary clubRemoveMemberInteractor = new ClubRemoveMemberInteractor(inMemoryUserDataAccessObject, inMemoryUserDataAccessObject, clubRemoveMemberOutputBoundary);
+        final ClubRemoveMemberInputBoundary clubRemoveMemberInteractor = new ClubRemoveMemberInteractor(studentFirestoreUserDataAccessObject,
+                clubFirestoreUserDataAccessObject, clubRemoveMemberOutputBoundary);
 
         final ClubRemoveMemberController clubRemoveMemberController = new ClubRemoveMemberController(clubRemoveMemberInteractor);
         clubLoggedInView.setClubRemoveMemberController(clubRemoveMemberController);
@@ -484,12 +486,12 @@ public class AppBuilder {
      * Adds the explore clubs use case to the application.
      * @return this builder
      */
-    public AppBuilder addExploreClubsUseCase() {
+    public FirebaseAppBuilder addExploreClubsUseCase() {
         final ExploreClubsOutputBoundary exploreClubsOutputBoundary = new ExploreClubsPresenter(viewManagerModel,
                 exploreClubsViewModel, studentHomeViewModel);
         final ExploreClubsInputBoundary exploreClubsInteractor =
-                new ExploreClubsInteractor(inMemoryUserDataAccessObject, exploreClubsOutputBoundary,
-                        inMemoryUserDataAccessObject);
+                new ExploreClubsInteractor(studentFirestoreUserDataAccessObject, exploreClubsOutputBoundary,
+                        clubFirestoreUserDataAccessObject);
 
         final ExploreClubsController exploreClubsController = new ExploreClubsController(exploreClubsInteractor);
         studentHomeView.setExploreClubsController(exploreClubsController);
@@ -502,11 +504,11 @@ public class AppBuilder {
      * Adds the join use case to the application.
      * @return this builder
      */
-    public AppBuilder addJoinUseCase() {
+    public FirebaseAppBuilder addJoinUseCase() {
         final StudentJoinClubOutputBoundary joinClubOutputBoundary = new JoinClubPresenter(exploreClubsViewModel);
         final StudentJoinClubInputBoundary joinClubInteractor =
-                new StudentJoinClubInteractor(inMemoryUserDataAccessObject,
-                        inMemoryUserDataAccessObject, joinClubOutputBoundary);
+                new StudentJoinClubInteractor(studentFirestoreUserDataAccessObject,
+                        clubFirestoreUserDataAccessObject, joinClubOutputBoundary);
 
         final JoinClubController joinClubController = new JoinClubController(joinClubInteractor);
         clubPageView.setJoinClubController(joinClubController);
@@ -517,11 +519,11 @@ public class AppBuilder {
      * Adds the leave use case to the application.
      * @return this builder
      */
-    public AppBuilder addLeaveUseCase() {
+    public FirebaseAppBuilder addLeaveUseCase() {
         final StudentLeaveClubOutputBoundary leaveClubOutputBoundary = new LeaveClubPresenter(exploreClubsViewModel);
         final StudentLeaveClubInputBoundary leaveClubInteractor =
-                new StudentLeaveClubInteractor(inMemoryUserDataAccessObject,
-                        inMemoryUserDataAccessObject, leaveClubOutputBoundary);
+                new StudentLeaveClubInteractor(studentFirestoreUserDataAccessObject,
+                        clubFirestoreUserDataAccessObject, leaveClubOutputBoundary);
 
         final LeaveClubController leaveClubController = new LeaveClubController(leaveClubInteractor);
         clubPageView.setLeaveClubController(leaveClubController);

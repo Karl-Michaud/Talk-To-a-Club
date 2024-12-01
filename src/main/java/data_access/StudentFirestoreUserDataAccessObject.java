@@ -1,22 +1,23 @@
 package data_access;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import com.google.api.core.ApiFuture;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 import entity.user.Club;
 import entity.user.Student;
+import entity.user.StudentUserFactory;
 import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
 import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
@@ -45,16 +46,11 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
     private final String students = "students";
     private final String usernames = "username";
 
+    private final String password = "password";
+    private final String joinedClubNames = "joinedClubNames";
+    private final String joinedClubEmails = "joinedClubEmails";
+
     public StudentFirestoreUserDataAccessObject() throws IOException {
-        // TODO fix this to be environment variable
-        final FileInputStream serviceAccount =
-                new FileInputStream("/ServiceAccountKey.json");
-
-        final FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .build();
-
-        FirebaseApp.initializeApp(options);
         this.db = FirestoreClient.getFirestore();
     }
 
@@ -64,10 +60,26 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
         final DocumentReference docRef = db.collection(students).document(email);
         final ApiFuture<DocumentSnapshot> future = docRef.get();
         Student returnValue = null;
+
         try {
             final DocumentSnapshot document = future.get();
             if (document.exists()) {
-                returnValue = document.toObject(Student.class);
+                final String usernameVal = document.getString(usernames);
+                final String passwordVal = document.getString(password);
+
+                final ArrayList<String> joinedNames;
+                joinedNames = (ArrayList<String>) document.get(joinedClubNames);
+                final DataStore<String> joinedClubNamesVal = new DataStoreArrays().toDataStore(joinedNames);
+
+                final ArrayList<String> joinedEmails;
+                joinedEmails = (ArrayList<String>) document.get(joinedClubEmails);
+                final DataStore<String> joinedClubEmailsVal = new DataStoreArrays().toDataStore(joinedEmails);
+
+                final StudentUserFactory studentUserFactory = new StudentUserFactory();
+                final Student student = studentUserFactory.create(usernameVal, email,
+                        passwordVal, joinedClubEmailsVal, joinedClubNamesVal);
+
+                returnValue = student;
             }
         }
         catch (InterruptedException | ExecutionException ex) {
@@ -84,8 +96,16 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
      */
     @Override
     public ArrayList<Club> getStudentJoinedClubs(Student student) {
-        // temp. See in memory for implementation
-        return null;
+        // Similar to in-memory implementation
+        final ClubFirestoreUserDataAccessObject clubDataAccess = new ClubFirestoreUserDataAccessObject();
+        final DataStoreArrays<Club> allClubs = (DataStoreArrays<Club>) clubDataAccess.getAllClubs();
+        final ArrayList<Club> returnValue = new ArrayList<>();
+        for (Club club : allClubs) {
+            if (club.getClubMembersEmails().contains(student.getEmail())) {
+                returnValue.add(club);
+            }
+        }
+        return returnValue;
     }
 
     @Override
@@ -124,7 +144,14 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
     public void saveStudent(Student user) {
         // save students based off their usernames for ID's
         final DocumentReference docRef = db.collection(students).document(user.getEmail());
-        final ApiFuture<WriteResult> writeResult = docRef.set(user);
+        final Map<String, Object> mapStudent = new HashMap<>();
+        mapStudent.put(usernames, user.getUsername());
+        mapStudent.put("email", user.getEmail());
+        mapStudent.put(password, user.getPassword());
+        mapStudent.put(joinedClubEmails, user.getJoinedClubsEmails().toArrayList().stream().toList());
+        mapStudent.put(joinedClubNames, user.getJoinedClubsNames().toArrayList().stream().toList());
+
+        final ApiFuture<WriteResult> writeResult = docRef.set(mapStudent);
         try {
             System.out.println("Update time : " + writeResult.get().getUpdateTime());
         }
@@ -139,10 +166,16 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
         // very similar to saveStudent
         final String email = student.getEmail();
         final DocumentReference docRef = db.collection(students).document(email);
-        final ApiFuture<WriteResult> writeResult = docRef.set(student);
+
+        final ApiFuture<WriteResult> writeEmails = docRef.update(joinedClubEmails,
+                student.getJoinedClubsEmails().toArrayList().stream().toList());
+
+        final ApiFuture<WriteResult> writeNames = docRef.update(joinedClubNames,
+                student.getJoinedClubsNames().toArrayList().stream().toList());
 
         try {
-            System.out.println("Update time : " + writeResult.get().getUpdateTime());
+            System.out.println("Update time : " + writeEmails.get().getUpdateTime());
+            System.out.println("Update time : " + writeNames.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately

@@ -1,33 +1,32 @@
 package interface_adapter.student_logged_in.join_club;
 
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
+import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
 import use_case.student_join_club.StudentJoinClubOutputBoundary;
 import use_case.student_join_club.StudentJoinClubOutputData;
+import view.ExploreClubsView;
 
 /**
  * Presenter for the Join Club Use Case.
  */
 public class JoinClubPresenter implements StudentJoinClubOutputBoundary {
-    private final JoinClubViewModel viewModel;
+    private final ExploreClubsViewModel viewModel;
 
-    public JoinClubPresenter(JoinClubViewModel viewModel) {
+    public JoinClubPresenter(ExploreClubsViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
     @Override
     public void prepareSuccessView(StudentJoinClubOutputData data) {
-        final JoinClubState state = viewModel.getState();
-        state.setErrorMessage(null);
-        state.setMember(true);
+        final ExploreClubsState state = viewModel.getState();
+        state.getJoinedClubEmails().add(data.getClubEmail());
         viewModel.setState(state);
+        // Tells the view to update the club's information
         viewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String errorMessage) {
-        final JoinClubState state = viewModel.getState();
-        state.setErrorMessage(errorMessage);
-        // Membership status remains unchanged on failure
-        viewModel.setState(state);
-        viewModel.firePropertyChanged();
+        viewModel.firePropertyChanged("fail join");
     }
 }

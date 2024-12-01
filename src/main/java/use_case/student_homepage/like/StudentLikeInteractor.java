@@ -40,7 +40,8 @@ public class StudentLikeInteractor implements StudentLikeInputBoundary {
         // Find the corresponding Post object for the data, using the date at which it was posted.
         Post postObject = null;
         for (final Post post: clubPosts) {
-            if (post.dateOfPosting() == postData.get("date") && post.timeOfPosting() == postData.get("time")) {
+            if (post.dateOfPosting().equals(postData.get("date"))
+                    && post.timeOfPosting().equals(postData.get("time"))) {
                 postObject = post;
                 break;
             }

@@ -2,12 +2,10 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
 import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
@@ -17,7 +15,7 @@ import interface_adapter.student_logged_in.student_home.StudentHomeController;
 /**
  * Main view for the Explore clubs use case.
  */
-public class ExploreClubsView extends JPanel {
+public class ExploreClubsView extends JPanel implements PropertyChangeListener {
     private JPanel explorePanel;
     private JButton backButton;
     private JScrollPane scrollPanel;
@@ -25,11 +23,11 @@ public class ExploreClubsView extends JPanel {
 
     private final String viewName = "explore clubs";
     private ExploreClubsController exploreClubsController;
-    private StudentHomeController studentHomeViewController;
     private ExploreClubsViewModel exploreClubsViewModel;
 
     public ExploreClubsView(ExploreClubsViewModel exploreClubsViewModel) {
         this.exploreClubsViewModel = exploreClubsViewModel;
+        this.exploreClubsViewModel.addPropertyChangeListener(this);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(explorePanel);
 
@@ -42,19 +40,27 @@ public class ExploreClubsView extends JPanel {
                     }
                 }
         );
-        final ExploreClubsState state = exploreClubsViewModel.getState();
-        final ClubDescriptionExploreContainer clubDescriptionExploreContainer =
-                new ClubDescriptionExploreContainer(state, exploreClubsController);
+    }
 
-        this.scrollPanel.setViewportView(new JScrollPane(clubDescriptionExploreContainer));
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("state")) {
+            final ExploreClubsState state = exploreClubsViewModel.getState();
+            System.out.println(state.getClubValues());
+            System.out.println(state.getStudentEmail() + " this is the email");
+            scrollPanel.setViewportView(new ClubDescriptionExploreContainer(state,
+                    exploreClubsController));
+        }
+        if (evt.getPropertyName().equals("fail join")) {
+            JOptionPane.showMessageDialog(this, "Failed to join club");
+        }
+        if (evt.getPropertyName().equals("fail leave")) {
+            JOptionPane.showMessageDialog(this, "Failed to leave club");
+        }
     }
 
     public void setExploreClubsController(ExploreClubsController exploreClubsController) {
         this.exploreClubsController = exploreClubsController;
-    }
-
-    public void setStudentHomeViewController(StudentHomeController studentHomeViewController) {
-        this.studentHomeViewController = studentHomeViewController;
     }
 
     public String getViewName() {
