@@ -29,7 +29,8 @@ public class ClubMiniPanel extends JPanel {
         this.club = club;
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(clubMiniPanel);
-        this.clubName.setText(club.get("username"));
+        this.clubName.setText(
+                club.get("username"));
 
         this.description.setText("Description: " + club.get("description").substring(0,
                 Math.min(club.get("description").length(), descriptionLength)) + "...");

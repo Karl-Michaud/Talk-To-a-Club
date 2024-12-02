@@ -48,7 +48,7 @@ a settings page and the ability to respond to comments (once the student comment
 
 ## Installation Instructions
 
-**Software Requirements**: A computer with IntelliJ IDEA (community or professional) installed and minimum Java8 (preferably more recent versions)
+**Software Requirements**: A computer with IntelliJ IDEA (community or professional) installed and minimum Java8 (preferably more recent versions) which is provided by InetlliJ IDEA
 
 Note: If IntelliJ IDEA is not [downloaded](https://www.jetbrains.com/idea/download), please follow the following [instructions](https://www.jetbrains.com/help/idea/installation-guide.html) 
 made by JetBrains.
@@ -68,7 +68,7 @@ made by JetBrains.
      git clone https://github.com/Karl-Michaud/csc207-final-project-club-app.git
      ```  
      
-2) Open the project on the IntelliJ IDEA. (add reload the maven project)
+2) Open the project on the IntelliJ IDEA. Note that if there are missing files (see step 3 video tutorial for reference), you will have to load the Maven project. This can be done by locating the pom.xml file, right clicking it and navigating to "Load Maven Project".
 3) Navigate to the "Main" file found in the "app" folder by following the steps in the linked [video tutorial](https://youtu.be/KgJfcL3cjAs)
    - csc207-final-project-club-app > src > main > java > app > Main.java
 4) Download the Google FireBase token (ServiceAccountKey.json) and save to computer. [Download link](https://drive.google.com/file/d/18Jvt_BGyfrxYK1bGdtJyAnEidmPYn8YG/view?usp=sharing)

@@ -34,17 +34,18 @@ public class PostPanel extends JPanel {
     private final Icon likeFilledIcon;
     private final Icon dislikeEmptyIcon = new ImageIcon("src/main/resources/dislike.png");
     private final Icon dislikeFilledIcon = new ImageIcon("src/main/resources/dislike_filled.png");
-    private final StudentLikeController likeController;
-    private final StudentDislikeController dislikeController;
+    private final StudentLikeController studentLikeController;
+    private final StudentDislikeController studentDislikeController;
     private final Map<String, Object> postData;
 
     public PostPanel(Map<String, Object> post, String clubName, String currentStudent,
                      StudentLikeController likeController, StudentDislikeController dislikeController) {
+        // Set all the basic attributes.
         this.postData = post;
         this.likeEmptyIcon = new ImageIcon("src/main/resources/like.png");
         this.likeFilledIcon = new ImageIcon("src/main/resources/like_filled.png");
-        this.likeController = likeController;
-        this.dislikeController = dislikeController;
+        this.studentLikeController = likeController;
+        this.studentDislikeController = dislikeController;
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(panelPost);
         this.labelPostTitle.setText("<html><p style=\"width:75px\">" + postData.get("title").toString()
@@ -55,6 +56,8 @@ public class PostPanel extends JPanel {
         this.labelLikes.setText(String.valueOf(postData.get("likes")));
         this.labelDislikes.setText(String.valueOf(postData.get("dislikes")));
         this.setBorder(BorderFactory.createBevelBorder(1));
+
+        // Set the button icons according to the liked/ disliked states.
         if (postData.get(LIKED).equals(true)) {
             this.buttonLike.setIcon(likeFilledIcon);
         }
@@ -68,60 +71,70 @@ public class PostPanel extends JPanel {
             this.buttonDislike.setIcon(dislikeEmptyIcon);
         }
 
+        // Listener for the like button.
         buttonLike.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (postData.get(LIKED).equals(true)) {
-                    buttonLike.setIcon(likeEmptyIcon);
-                    int likedCount = Integer.parseInt(labelLikes.getText());
-                    likedCount--;
-                    labelLikes.setText(String.valueOf(likedCount));
-
-                    likeController.changeLike(currentStudent, postData);
-                }
-                else {
-                    if (postData.get(DISLIKED).equals(true)) {
-                        buttonDislike.setIcon(dislikeEmptyIcon);
-                        int dislikedCount = Integer.parseInt(labelDislikes.getText());
-                        dislikedCount--;
-                        labelDislikes.setText(String.valueOf(dislikedCount));
-                        dislikeController.changeDislike(currentStudent, postData);
-                    }
-                    buttonLike.setIcon(likeFilledIcon);
-                    int likedCount = Integer.parseInt(labelLikes.getText());
-                    likedCount++;
-                    labelLikes.setText(String.valueOf(likedCount));
-                    likeController.changeLike(currentStudent, postData);
-                }
+                likeClicked(currentStudent);
             }
         });
 
+        // Listener for the dislike button.
         buttonDislike.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (postData.get(DISLIKED).equals(true)) {
-                    buttonDislike.setIcon(dislikeEmptyIcon);
-                    int dislikedCount = Integer.parseInt(labelDislikes.getText());
-                    dislikedCount--;
-                    labelDislikes.setText(String.valueOf(dislikedCount));
-                    dislikeController.changeDislike(currentStudent, postData);
-                }
-                else {
-                    buttonDislike.setIcon(dislikeFilledIcon);
-                    if (postData.get(LIKED).equals(true)) {
-                        buttonLike.setIcon(likeEmptyIcon);
-                        int likedCount = Integer.parseInt(labelLikes.getText());
-                        likedCount--;
-                        labelLikes.setText(String.valueOf(likedCount));
-                        likeController.changeLike(currentStudent, postData);
-                    }
-
-                    int dislikedCount = Integer.parseInt(labelDislikes.getText());
-                    dislikedCount++;
-                    labelDislikes.setText(String.valueOf(dislikedCount));
-                    dislikeController.changeDislike(currentStudent, postData);
-                }
+                dislikeClicked(currentStudent);
             }
         });
+    }
+
+    private void likeClicked(String currentStudent) {
+        if (postData.get(LIKED).equals(true)) {
+            buttonLike.setIcon(likeEmptyIcon);
+            int likedCount = Integer.parseInt(labelLikes.getText());
+            likedCount--;
+            labelLikes.setText(String.valueOf(likedCount));
+
+            studentLikeController.changeLike(currentStudent, postData);
+        }
+        else {
+            if (postData.get(DISLIKED).equals(true)) {
+                buttonDislike.setIcon(dislikeEmptyIcon);
+                int dislikedCount = Integer.parseInt(labelDislikes.getText());
+                dislikedCount--;
+                labelDislikes.setText(String.valueOf(dislikedCount));
+                studentDislikeController.changeDislike(currentStudent, postData);
+            }
+            buttonLike.setIcon(likeFilledIcon);
+            int likedCount = Integer.parseInt(labelLikes.getText());
+            likedCount++;
+            labelLikes.setText(String.valueOf(likedCount));
+            studentLikeController.changeLike(currentStudent, postData);
+        }
+    }
+
+    private void dislikeClicked(String currentStudent) {
+        if (postData.get(DISLIKED).equals(true)) {
+            buttonDislike.setIcon(dislikeEmptyIcon);
+            int dislikedCount = Integer.parseInt(labelDislikes.getText());
+            dislikedCount--;
+            labelDislikes.setText(String.valueOf(dislikedCount));
+            studentDislikeController.changeDislike(currentStudent, postData);
+        }
+        else {
+            buttonDislike.setIcon(dislikeFilledIcon);
+            if (postData.get(LIKED).equals(true)) {
+                buttonLike.setIcon(likeEmptyIcon);
+                int likedCount = Integer.parseInt(labelLikes.getText());
+                likedCount--;
+                labelLikes.setText(String.valueOf(likedCount));
+                studentLikeController.changeLike(currentStudent, postData);
+            }
+
+            int dislikedCount = Integer.parseInt(labelDislikes.getText());
+            dislikedCount++;
+            labelDislikes.setText(String.valueOf(dislikedCount));
+            studentDislikeController.changeDislike(currentStudent, postData);
+        }
     }
 }
