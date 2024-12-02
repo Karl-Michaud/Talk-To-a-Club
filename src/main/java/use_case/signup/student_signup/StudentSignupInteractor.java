@@ -109,9 +109,9 @@ public class StudentSignupInteractor implements StudentSignupInputBoundary {
             userPresenter.prepareFailView("Password must be at most " + maxLengthPassword + onlyForCheckstyle);
             hasValidInputs = false;
         }
-        else if (!studentSignupInputData.getEmail().contains("@")
-                || !studentSignupInputData.getEmail().contains(".")) {
-            userPresenter.prepareFailView("Invalid email address.");
+        else if (!studentSignupInputData.getEmail().endsWith("@mail.utoronto.ca")
+                && !studentSignupInputData.getEmail().endsWith("@utoronto.ca")) {
+            userPresenter.prepareFailView("Invalid email address. Must end with a UofT domain.");
             hasValidInputs = false;
         }
         return hasValidInputs;

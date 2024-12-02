@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class StudentSignupInteractorTest {
 
     @Test
-    void successTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("Roy", "roy@gmail.com",
+    void successEmailOneTest() {
+        StudentSignupInputData inputData = new StudentSignupInputData("Roy", "roy@mail.utoronto.ca",
                 "password", "password");
 
         // Uses an in memory database to test the use case
@@ -23,8 +23,41 @@ public class StudentSignupInteractorTest {
             @Override
             public void prepareSuccessView(StudentSignupOutputData user) {
                 // Checks that the output data is correct and that the name and email exists in the database
-                assertEquals("roy@gmail.com", user.getEmail());
-                assertTrue(userRepository.existsByEmailStudent("roy@gmail.com"));
+                assertEquals("roy@mail.utoronto.ca", user.getEmail());
+                assertTrue(userRepository.existsByEmailStudent("roy@mail.utoronto.ca"));
+                assertTrue(userRepository.existsByNameStudent("Roy"));
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                fail("Use case failure is unexpected.");
+            }
+
+            @Override
+            public void switchToLoginView() {
+                fail("Use case switch to login is unexpected.");
+            }
+        };
+
+        StudentSignupInputBoundary interactor = new StudentSignupInteractor(userRepository, successPresenter, new StudentUserFactory());
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void successEmailTwoTest() {
+        StudentSignupInputData inputData = new StudentSignupInputData("Roy", "roy@utoronto.ca",
+                "password", "password");
+
+        // Uses an in memory database to test the use case
+        StudentSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        StudentSignupOutputBoundary successPresenter = new StudentSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(StudentSignupOutputData user) {
+                // Checks that the output data is correct and that the name and email exists in the database
+                assertEquals("roy@utoronto.ca", user.getEmail());
+                assertTrue(userRepository.existsByEmailStudent("roy@utoronto.ca"));
                 assertTrue(userRepository.existsByNameStudent("Roy"));
             }
 
@@ -253,7 +286,7 @@ public class StudentSignupInteractorTest {
     }
 
     @Test
-    void emailNoDotTest() {
+    void emailNotUofTTest() {
         StudentSignupInputData inputData = new StudentSignupInputData("ok", "ok@kcom",
                 "password", "password");
 
@@ -269,36 +302,7 @@ public class StudentSignupInteractorTest {
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("Invalid email address.", error);
-            }
-
-            @Override
-            public void switchToLoginView() {
-                fail("Use case switch to login is unexpected.");
-            }
-        };
-        StudentSignupInputBoundary interactor = new StudentSignupInteractor(userRepository, successPresenter, new StudentUserFactory());
-        interactor.execute(inputData);
-    }
-
-    @Test
-    void emailNoAtTest() {
-        StudentSignupInputData inputData = new StudentSignupInputData("ok", "okk.com",
-                "password", "password");
-
-        // Uses an in memory database to test the use case
-        StudentSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-
-        // This creates a successPresenter that tests whether the test case is as we expect.
-        StudentSignupOutputBoundary successPresenter = new StudentSignupOutputBoundary() {
-            @Override
-            public void prepareSuccessView(StudentSignupOutputData user) {
-                fail("Use case success is unexpected.");
-            }
-
-            @Override
-            public void prepareFailView(String error) {
-                assertEquals("Invalid email address.", error);
+                assertEquals("Invalid email address. Must end with a UofT domain.", error);
             }
 
             @Override

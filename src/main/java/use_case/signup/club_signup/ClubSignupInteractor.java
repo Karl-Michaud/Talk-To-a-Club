@@ -110,9 +110,9 @@ public class ClubSignupInteractor implements ClubSignupInputBoundary {
             userPresenter.prepareFailView("Password must be at most " + maxLengthPassword + onlyForCheckstyle);
             hasValidInputs = false;
         }
-        else if (!clubSignupInputData.getEmail().contains("@")
-                || !clubSignupInputData.getEmail().contains(".")) {
-            userPresenter.prepareFailView("Invalid email address.");
+        else if (!clubSignupInputData.getEmail().endsWith("@mail.utoronto.ca")
+                && !clubSignupInputData.getEmail().endsWith("@utoronto.ca")) {
+            userPresenter.prepareFailView("Invalid email address. Must end with a UofT domain.");
             hasValidInputs = false;
         }
         return hasValidInputs;
