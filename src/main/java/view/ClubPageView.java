@@ -11,13 +11,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
-import interface_adapter.student_logged_in.join_club.JoinClubController;
-import interface_adapter.student_logged_in.leave_club.LeaveClubController;
-import interface_adapter.student_logged_in.student_home.show_clubs.StudentShowClubsController;
-import interface_adapter.student_logged_in.student_home.show_posts.StudentShowPostsController;
+import interface_adapter.student_explore_clubs.ExploreClubsController;
+import interface_adapter.student_explore_clubs.ExploreClubsState;
+import interface_adapter.student_explore_clubs.ExploreClubsViewModel;
+import interface_adapter.student_home.student_join_club.JoinClubController;
+import interface_adapter.student_home.student_leave_club.LeaveClubController;
+import interface_adapter.student_home.student_show_clubs.StudentShowClubsController;
+import interface_adapter.student_home.student_show_posts.StudentShowPostsController;
 
 /**
  * The view for the Club popup page when exploring clubs.

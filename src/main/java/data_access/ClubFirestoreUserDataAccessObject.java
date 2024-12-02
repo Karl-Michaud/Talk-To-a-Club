@@ -31,14 +31,14 @@ import use_case.club_get_members.ClubGetMembersUserDataAccessInterface;
 import use_case.club_get_posts.ClubGetPostsDataAccessInterface;
 import use_case.club_remove_member.ClubRemoveMemberClubDataAccessInterface;
 import use_case.club_update_desc.ClubUpdateDescDataAccessInterface;
-import use_case.explore_clubs.ClubExploreClubsDataAccessInterface;
 import use_case.login.club_login.ClubLoginDataAccessInterface;
 import use_case.signup.club_signup.ClubSignupDataAccessInterface;
-import use_case.student_homepage.dislike.StudentDislikeClubDataAccessInterface;
-import use_case.student_homepage.like.StudentLikeClubDataAccessInterface;
-import use_case.student_homepage.show_posts.StudentShowPostsClubAccessInterface;
+import use_case.student_dislike.StudentDislikeClubDataAccessInterface;
+import use_case.student_explore_clubs.ClubExploreClubsDataAccessInterface;
 import use_case.student_join_club.ClubStudentJoinClubDataAccessInterface;
 import use_case.student_leave_club.ClubStudentLeaveClubDataAccessInterface;
+import use_case.student_like.StudentLikeClubDataAccessInterface;
+import use_case.student_show_posts.StudentShowPostsClubAccessInterface;
 
 /**
  * Persisting memory implementation of the DAO for storing user data.

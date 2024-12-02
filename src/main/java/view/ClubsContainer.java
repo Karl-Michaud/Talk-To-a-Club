@@ -8,7 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
+import interface_adapter.student_explore_clubs.ExploreClubsController;
 
 /**
  * A container which stores all the clubs the user has joined.

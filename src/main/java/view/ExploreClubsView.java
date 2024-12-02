@@ -12,9 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsViewModel;
+import interface_adapter.student_explore_clubs.ExploreClubsController;
+import interface_adapter.student_explore_clubs.ExploreClubsState;
+import interface_adapter.student_explore_clubs.ExploreClubsViewModel;
 
 /**
  * Main view for the Explore clubs use case.

@@ -1,7 +1,7 @@
 package interface_adapter.student_profile;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
+import interface_adapter.student_home.StudentHomeViewModel;
 import use_case.student_profile.StudentProfileOutputBoundary;
 
 /**
