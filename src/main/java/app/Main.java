@@ -15,7 +15,6 @@ public class Main {
      */
     public static void main(String[] args) {
         // Enter the file path to the ServiceAccountKey.json file here. Please carefully follow the instructions.
-
         final String filePath = "";
 
         final App app = new App();
