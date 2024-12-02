@@ -79,7 +79,7 @@ public class Club implements User {
      * Adds a club post to the history of the club's posts.
      * @param post particular post to add.
      */
-    public void addClubPost(User post) {
+    public void addClubPost(Post post) {
         clubPostsTitle.add(post.getTitle());
         clubPostsDescription.add(post.getContent());
     }
@@ -88,7 +88,7 @@ public class Club implements User {
      * Removes a user from the club.
      * @param user particular user leaving the club.
      */
-    public void removeClubMember(Student user) {
+    public void removeClubMember(User user) {
         clubMembersNames.remove(user.getUsername());
         clubMembersEmails.remove(user.getEmail());
     }
