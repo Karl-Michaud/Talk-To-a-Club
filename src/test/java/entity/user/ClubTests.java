@@ -1,5 +1,7 @@
 package entity.user;
 
+import entity.data_structure.DataStore;
+import entity.data_structure.DataStoreArrays;
 import entity.post.AnnouncementFactory;
 import entity.post.Post;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,44 @@ public class ClubTests {
 
         // Create a test club
         Club testClub = clubFactory.create(clubName, clubEmail, clubPassword);
+
+        // verify that all the data matches
+        assertNotNull(testClub);
+        assertEquals(testClub.getUsername(), clubName);
+        assertEquals(testClub.getEmail(), clubEmail);
+        assertEquals(testClub.getPassword(), clubPassword);
+        assertEquals("", testClub.getClubDescription());
+
+        // Since it is a new club, there should be no posts and not members
+        int sizeMembersEmails = testClub.getClubMembersEmails().size();
+        assertEquals(0, sizeMembersEmails);
+
+        int sizeMembersNames = testClub.getClubMembersNames().size();
+        assertEquals(0, sizeMembersNames);
+
+        int sizePostTitles = testClub.getClubPostsTitle().size();
+        assertEquals(0, sizePostTitles);
+
+        int sizePostDescriptions = testClub.getClubPostsDescription().size();
+        assertEquals(0, sizePostDescriptions);
+
+        testClub.setClubDescription("new");
+        assertEquals("new", testClub.getClubDescription());
+    }
+
+    @Test
+    public void testClubCreationMoreArguments() {
+        // Create a club factory
+        final ClubFactory clubFactory = new ClubUserFactory();
+        final DataStore<String> clubMemberEmails = new DataStoreArrays<String>();
+        final DataStore<String> clubMemberNames = new DataStoreArrays<String>();
+        final DataStore<String> clubPostTitle = new DataStoreArrays<String>();
+        final DataStore<String> clubPostDescription = new DataStoreArrays<String>();
+
+
+        // Create a test club
+        Club testClub = clubFactory.create(clubName, clubEmail, clubPassword, clubMemberEmails,
+                clubMemberNames, clubPostTitle, clubPostDescription);
 
         // verify that all the data matches
         assertNotNull(testClub);

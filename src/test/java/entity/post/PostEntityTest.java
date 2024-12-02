@@ -122,4 +122,15 @@ public class PostEntityTest {
         assertEquals("Factory Content", post.getContent());
         assertInstanceOf(Announcement.class, post, "Factory should create an instance of Announcement.");
     }
+    @Test
+    void testPostFactoryUsersLikedDisliked() {
+        AnnouncementFactory factory = new AnnouncementFactory();
+        DataStoreArrays userLiked = new DataStoreArrays<>();
+        DataStoreArrays userDisliked = new DataStoreArrays<>();
+
+        Post post = factory.create("Factory Title", "Factory Content", userLiked, userDisliked);
+        assertEquals("Factory Title", post.getTitle());
+        assertEquals("Factory Content", post.getContent());
+        assertInstanceOf(Announcement.class, post, "Factory should create an instance of Announcement.");
+    }
 }

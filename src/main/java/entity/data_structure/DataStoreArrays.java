@@ -63,7 +63,7 @@ public class DataStoreArrays<T> implements DataStore<T>, Iterable<T> {
         final DataStoreArrays<T> intersection = new DataStoreArrays<>();
 
         for (T datum : data) {
-            if (other.contains(datum) && !intersection.contains(datum)) {
+            if (Boolean.TRUE.equals(other.contains(datum)) && Boolean.TRUE.equals(!intersection.contains(datum))) {
                 intersection.add(datum);
             }
         }
