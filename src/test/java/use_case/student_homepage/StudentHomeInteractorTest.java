@@ -2,6 +2,7 @@ package use_case.student_homepage;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class StudentHomeInteractorTest {
@@ -24,5 +25,18 @@ public class StudentHomeInteractorTest {
         };
         final StudentHomeInputBoundary interactor = new StudentHomeInteractor (successPresenter);
         interactor.switchToProfileView();
+    }
+
+    @Test
+    void testStudentHomeInputData() {
+        // Arrange
+        String testEmail = "student@university.com";
+        StudentHomeInputData inputData = new StudentHomeInputData(testEmail);
+
+        // Act
+        String resultEmail = inputData.getEmail();
+
+        // Assert
+        assertEquals(testEmail, resultEmail);
     }
 }

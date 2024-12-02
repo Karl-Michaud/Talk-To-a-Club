@@ -128,4 +128,116 @@ public class StudentLikeInteractorTest {
         StudentLikeInteractor interactor = new StudentLikeInteractor(dao, dao, successPresenter);
         interactor.execute(inputData);
     }
+
+    @Test
+    void testPostNotFound() {
+        // Set up in-memory repository
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
+
+        // Create a club
+        ClubFactory clubFactory = new ClubUserFactory();
+        Club club = clubFactory.create("Photography Club", "photo@university.com", "password");
+        club.setClubDescription("For photography enthusiasts.");
+
+        // Create a student in the club
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Alice", "alice@university.com", "password");
+        student.joinClub(club);
+        club.addClubMember(student);
+
+        PostFactory postFactory = new AnnouncementFactory();
+        // Create a post for the club
+        Post post = postFactory.create("Black and White Photo contest announcement.", "Details about the contest...");
+        club.addClubPost(post);
+        dao.saveClub(club);
+        dao.savePost(post, club);
+        dao.saveStudent(student);
+
+        // Input Data with incorrect post date/time
+        Map<String, Object> postData = new HashMap<>();
+        postData.put("title", post.getTitle());
+        postData.put("content", post.getContent());
+        postData.put("likes", post.numberOfLikes());
+        postData.put("dislikes", post.numberOfDislikes());
+        postData.put("liked", post.getLikes().contains(student.getEmail()));
+        postData.put("disliked", post.getDislikes().contains(student.getEmail()));
+        postData.put("club-email", club.getEmail());
+        postData.put("time", "12:00:00"); // Incorrect time
+        postData.put("date", "2022-01-01"); // Incorrect date
+
+        StudentLikeInputData inputData = new StudentLikeInputData(student.getEmail(), postData);
+
+        // Output boundary for error verification
+        StudentLikeOutputBoundary errorPresenter = new StudentLikeOutputBoundary() {
+            @Override
+            public void prepareSuccessView(StudentLikeOutputData data) {
+                fail("Unexpected success call");
+            }
+
+            @Override
+            public void prepareErrorView(String errorMessage) {
+                assertEquals("post does not exist", errorMessage);
+            }
+        };
+
+        // Interactor execution
+        StudentLikeInteractor interactor = new StudentLikeInteractor(dao, dao, errorPresenter);
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void testPostDifferentTime() {
+        // Set up in-memory repository
+        InMemoryUserDataAccessObject dao = new InMemoryUserDataAccessObject();
+
+        // Create a club
+        ClubFactory clubFactory = new ClubUserFactory();
+        Club club = clubFactory.create("Photography Club", "photo@university.com", "password");
+        club.setClubDescription("For photography enthusiasts.");
+
+        // Create a student in the club
+        StudentFactory studentFactory = new StudentUserFactory();
+        Student student = studentFactory.create("Alice", "alice@university.com", "password");
+        student.joinClub(club);
+        club.addClubMember(student);
+
+        PostFactory postFactory = new AnnouncementFactory();
+        // Create a post for the club
+        Post post = postFactory.create("Black and White Photo contest announcement.", "Details about the contest...");
+        club.addClubPost(post);
+        dao.saveClub(club);
+        dao.savePost(post, club);
+        dao.saveStudent(student);
+
+        // Input Data with incorrect post date/time
+        Map<String, Object> postData = new HashMap<>();
+        postData.put("title", post.getTitle());
+        postData.put("content", post.getContent());
+        postData.put("likes", post.numberOfLikes());
+        postData.put("dislikes", post.numberOfDislikes());
+        postData.put("liked", post.getLikes().contains(student.getEmail()));
+        postData.put("disliked", post.getDislikes().contains(student.getEmail()));
+        postData.put("club-email", club.getEmail());
+        postData.put("time", "12:00:00"); // Incorrect time
+        postData.put("date", post.dateOfPosting()); // Correct date
+
+        StudentLikeInputData inputData = new StudentLikeInputData(student.getEmail(), postData);
+
+        // Output boundary for error verification
+        StudentLikeOutputBoundary errorPresenter = new StudentLikeOutputBoundary() {
+            @Override
+            public void prepareSuccessView(StudentLikeOutputData data) {
+                fail("Unexpected success call");
+            }
+
+            @Override
+            public void prepareErrorView(String errorMessage) {
+                assertEquals("post does not exist", errorMessage);
+            }
+        };
+
+        // Interactor execution
+        StudentLikeInteractor interactor = new StudentLikeInteractor(dao, dao, errorPresenter);
+        interactor.execute(inputData);
+    }
 }

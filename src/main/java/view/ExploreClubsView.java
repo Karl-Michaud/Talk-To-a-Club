@@ -50,8 +50,6 @@ public class ExploreClubsView extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
             final ExploreClubsState state = exploreClubsViewModel.getState();
-            System.out.println(state.getClubValues());
-            System.out.println(state.getStudentEmail() + " this is the email");
             scrollPanel.setViewportView(new ClubDescriptionExploreContainer(state,
                     exploreClubsController));
         }
