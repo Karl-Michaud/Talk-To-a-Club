@@ -15,7 +15,7 @@ import interface_adapter.student_logged_in.student_home.like.StudentLikeControll
  * Container for the list of posts on the student home view.
  */
 public class PostsContainer extends JPanel {
-    private static final int WIDTH = 500;
+    private static final int WIDTH = 700;
 
     public PostsContainer(Map<String, List<Map<String, Object>>> posts, String currentStudent,
                           StudentLikeController likeController, StudentDislikeController dislikeController) {
