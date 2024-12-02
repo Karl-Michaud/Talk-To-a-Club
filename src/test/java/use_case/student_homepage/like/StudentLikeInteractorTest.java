@@ -6,6 +6,10 @@ import entity.post.Post;
 import entity.post.PostFactory;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
+import use_case.student_like.StudentLikeInputData;
+import use_case.student_like.StudentLikeInteractor;
+import use_case.student_like.StudentLikeOutputBoundary;
+import use_case.student_like.StudentLikeOutputData;
 
 import java.util.HashMap;
 import java.util.Map;

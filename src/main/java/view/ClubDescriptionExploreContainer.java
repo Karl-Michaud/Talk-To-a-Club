@@ -5,8 +5,8 @@ import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsState;
+import interface_adapter.student_explore_clubs.ExploreClubsController;
+import interface_adapter.student_explore_clubs.ExploreClubsState;
 
 /**
  * Container for all explore page club mini panels.

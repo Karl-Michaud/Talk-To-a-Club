@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import interface_adapter.student_logged_in.explore_clubs.ExploreClubsController;
+import interface_adapter.student_explore_clubs.ExploreClubsController;
 
 /**
  * View for the club panel.

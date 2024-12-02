@@ -6,6 +6,7 @@ import entity.post.AnnouncementFactory;
 import entity.post.PostFactory;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
+import use_case.student_show_posts.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

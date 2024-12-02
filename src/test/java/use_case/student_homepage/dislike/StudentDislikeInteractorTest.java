@@ -6,6 +6,10 @@ import entity.post.Post;
 import entity.post.PostFactory;
 import entity.user.*;
 import org.junit.jupiter.api.Test;
+import use_case.student_dislike.StudentDislikeInputData;
+import use_case.student_dislike.StudentDislikeInteractor;
+import use_case.student_dislike.StudentDislikeOutputBoundary;
+import use_case.student_dislike.StudentDislikeOutputData;
 
 import java.util.HashMap;
 import java.util.Map;

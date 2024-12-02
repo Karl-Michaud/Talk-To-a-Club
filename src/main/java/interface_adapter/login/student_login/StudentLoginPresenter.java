@@ -5,8 +5,8 @@ import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.signup.student_signup.StudentSignupState;
 import interface_adapter.signup.student_signup.StudentSignupViewModel;
-import interface_adapter.student_logged_in.student_home.StudentHomeState;
-import interface_adapter.student_logged_in.student_home.StudentHomeViewModel;
+import interface_adapter.student_home.StudentHomeState;
+import interface_adapter.student_home.StudentHomeViewModel;
 import use_case.login.student_login.StudentLoginOutputBoundary;
 import use_case.login.student_login.StudentLoginOutputData;
 
