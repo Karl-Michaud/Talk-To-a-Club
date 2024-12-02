@@ -9,8 +9,8 @@ import entity.data_structure.DataStoreArrays;
 public class ClubUserFactory implements ClubFactory {
     @Override
     public Club create(String name, String email, String password) {
-        final DataStoreArrays<String> membersEmails = new DataStoreArrays<>();
-        final DataStoreArrays<String> membersNames = new DataStoreArrays<>();
+        final DataStore<String> membersEmails = new DataStoreArrays<>();
+        final DataStore<String> membersNames = new DataStoreArrays<>();
         final DataStore<String> clubPostsTitle = new DataStoreArrays<>();
         final DataStore<String> clubPostsDescription = new DataStoreArrays<>();
         return new Club(name, email, password, membersEmails, membersNames, clubPostsTitle, clubPostsDescription);
