@@ -51,7 +51,7 @@ public class Student implements User {
      * Student joins given club. Do not forget to update the particular club's members!
      * @param club particular club to be joined.
      */
-    public void joinClub(Club club) {
+    public void joinClub(User club) {
         joinedClubsNames.add(club.getUsername());
         joinedClubsEmails.add(club.getEmail());
     }
@@ -60,7 +60,7 @@ public class Student implements User {
      * Student leaves given club. Do not forget to update the particular club's members!
      * @param club particular club to be left.
      */
-    public void leaveClub(Club club) {
+    public void leaveClub(User club) {
         joinedClubsNames.remove(club.getUsername());
         joinedClubsEmails.remove(club.getEmail());
     }
