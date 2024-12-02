@@ -1,4 +1,4 @@
-package interface_adapter.student_home.dislike;
+package interface_adapter.student_home.student_dislike;
 
 import java.util.Map;
 

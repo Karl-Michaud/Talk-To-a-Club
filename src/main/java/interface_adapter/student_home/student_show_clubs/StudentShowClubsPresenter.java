@@ -1,4 +1,4 @@
-package interface_adapter.student_home.show_clubs;
+package interface_adapter.student_home.student_show_clubs;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.student_home.StudentHomeState;

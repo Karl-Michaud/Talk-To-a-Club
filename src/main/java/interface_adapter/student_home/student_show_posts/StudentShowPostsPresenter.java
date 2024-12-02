@@ -1,4 +1,4 @@
-package interface_adapter.student_home.show_posts;
+package interface_adapter.student_home.student_show_posts;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package interface_adapter.student_home.join_club;
+package interface_adapter.student_home.student_join_club;
 
 import use_case.student_join_club.StudentJoinClubInputBoundary;
 import use_case.student_join_club.StudentJoinClubInputData;

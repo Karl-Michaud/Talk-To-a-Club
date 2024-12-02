@@ -1,4 +1,4 @@
-package interface_adapter.student_home.leave_club;
+package interface_adapter.student_home.student_leave_club;
 
 import interface_adapter.student_explore_clubs.ExploreClubsState;
 import interface_adapter.student_explore_clubs.ExploreClubsViewModel;

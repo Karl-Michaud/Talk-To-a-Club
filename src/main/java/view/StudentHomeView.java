@@ -19,10 +19,10 @@ import interface_adapter.student_explore_clubs.ExploreClubsController;
 import interface_adapter.student_home.StudentHomeController;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
-import interface_adapter.student_home.dislike.StudentDislikeController;
-import interface_adapter.student_home.like.StudentLikeController;
-import interface_adapter.student_home.show_clubs.StudentShowClubsController;
-import interface_adapter.student_home.show_posts.StudentShowPostsController;
+import interface_adapter.student_home.student_dislike.StudentDislikeController;
+import interface_adapter.student_home.student_like.StudentLikeController;
+import interface_adapter.student_home.student_show_clubs.StudentShowClubsController;
+import interface_adapter.student_home.student_show_posts.StudentShowPostsController;
 
 /**
  * This is the view for the homepage that the student will be greated with upon logging in. This will show all the clubs

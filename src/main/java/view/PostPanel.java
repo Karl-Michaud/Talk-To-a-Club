@@ -12,8 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import interface_adapter.student_home.dislike.StudentDislikeController;
-import interface_adapter.student_home.like.StudentLikeController;
+import interface_adapter.student_home.student_dislike.StudentDislikeController;
+import interface_adapter.student_home.student_like.StudentLikeController;
 
 /**
  * A panel which will hold the data for a single post. A list of these in the student home view will be contained

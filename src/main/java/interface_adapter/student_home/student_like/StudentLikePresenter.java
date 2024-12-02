@@ -1,4 +1,4 @@
-package interface_adapter.student_home.dislike;
+package interface_adapter.student_home.student_like;
 
 import java.util.List;
 import java.util.Map;
@@ -6,32 +6,32 @@ import java.util.Map;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.student_home.StudentHomeState;
 import interface_adapter.student_home.StudentHomeViewModel;
-import use_case.student_dislike.StudentDislikeOutputBoundary;
-import use_case.student_dislike.StudentDislikeOutputData;
+import use_case.student_like.StudentLikeOutputBoundary;
+import use_case.student_like.StudentLikeOutputData;
 
 /**
- * The presenter for the dislike usecase.
+ * The presenter for the like usecase.
  */
-public class StudentDislikePresenter implements StudentDislikeOutputBoundary {
+public class StudentLikePresenter implements StudentLikeOutputBoundary {
     private final StudentHomeViewModel viewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public StudentDislikePresenter(StudentHomeViewModel viewModel, ViewManagerModel viewManagerModel) {
+    public StudentLikePresenter(StudentHomeViewModel viewModel, ViewManagerModel viewManagerModel) {
         this.viewModel = viewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
     @Override
-    public void prepareSuccessView(StudentDislikeOutputData data) {
+    public void prepareSuccessView(StudentLikeOutputData data) {
         final Map<String, Object> postData = data.getPostData();
 
         final StudentHomeState currentState = viewModel.getState();
 
-        // the old post data, which as to be updated to reflect the new dislike.
+        // the old post data, which as to be updated to reflect the new like.
         final Map<String, List<Map<String, Object>>> postsByClub = currentState.getPostData();
         final int indexToUpdate;
         for (Map<String, Object> post : postsByClub.get(data.getClubName())) {
-            if (post.get("time") == postData.get("time") && post.get("state") == postData.get("state")) {
+            if (post.get("time") == postData.get("time") && post.get("date") == postData.get("date")) {
                 indexToUpdate = postsByClub.get(data.getClubName()).indexOf(post);
                 postsByClub.get(data.getClubName()).set(indexToUpdate, postData);
                 break;
@@ -39,10 +39,10 @@ public class StudentDislikePresenter implements StudentDislikeOutputBoundary {
         }
         currentState.setPostData(postsByClub);
         viewModel.setState(currentState);
-        viewModel.firePropertyChanged("disliked");
+        viewModel.firePropertyChanged("liked");
 
         viewManagerModel.setState(viewModel.getViewName());
-        viewManagerModel.firePropertyChanged("disliked");
+        viewManagerModel.firePropertyChanged("liked");
     }
 
     @Override

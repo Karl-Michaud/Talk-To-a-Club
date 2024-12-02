@@ -1,7 +1,6 @@
 package entity.user;
 
 import entity.data_structure.DataStore;
-import entity.data_structure.DataStoreArrays;
 import entity.post.Post;
 
 /**

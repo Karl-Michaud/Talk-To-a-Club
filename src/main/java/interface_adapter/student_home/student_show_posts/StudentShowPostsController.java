@@ -1,4 +1,4 @@
-package interface_adapter.student_home.show_posts;
+package interface_adapter.student_home.student_show_posts;
 
 import use_case.student_show_posts.StudentShowPostsInputBoundary;
 import use_case.student_show_posts.StudentShowPostsInputData;

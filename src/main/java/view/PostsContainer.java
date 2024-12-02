@@ -8,8 +8,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import interface_adapter.student_home.dislike.StudentDislikeController;
-import interface_adapter.student_home.like.StudentLikeController;
+import interface_adapter.student_home.student_dislike.StudentDislikeController;
+import interface_adapter.student_home.student_like.StudentLikeController;
 
 /**
  * Container for the list of posts on the student home view.
