@@ -49,7 +49,7 @@ public class PostPanel extends JPanel {
         this.add(panelPost);
         this.labelPostTitle.setText("<html><p style=\"width:75px\">" + postData.get("title").toString()
                 + "</p></html>");
-        this.labelPostContent.setText("<html><p style=\"width:200px\">" + postData.get("content").toString()
+        this.labelPostContent.setText("<html><p style=\"width:300px\">" + postData.get("content").toString()
                 + "</p></html>");
         this.labelClub.setText(clubName);
         this.labelLikes.setText(String.valueOf(postData.get("likes")));
