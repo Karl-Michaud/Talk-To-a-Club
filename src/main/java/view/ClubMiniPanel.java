@@ -22,7 +22,7 @@ public class ClubMiniPanel extends JPanel {
     private JButton viewMore;
     private ExploreClubsController controller;
 
-    private final int descriptionLength = 50;
+    private final int descriptionLength = 25;
     private final Map<String, String> club;
 
     public ClubMiniPanel(Map<String, String> club, String studentEmail) {

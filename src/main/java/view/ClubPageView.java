@@ -50,7 +50,8 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
         this.add(contentPanel);
         final ExploreClubsState exploreClubsState = exploreClubsViewModel.getState();
         this.clubNameLabel.setText(exploreClubsState.getCurrentClubName());
-        this.description.setText(exploreClubsState.getCurrentClubDescription());
+        this.description.setText("<html><p style=\"width:350px\">" + exploreClubsState.getCurrentClubDescription()
+                + "</p></html>");
         this.email.setText(exploreClubsState.getCurrentClubEmail());
         this.numMembers.setText(exploreClubsState.getCurrentNumberOfMembersString());
 
@@ -133,7 +134,8 @@ public class ClubPageView extends JPanel implements PropertyChangeListener {
 
         if (evt.getPropertyName().equals("state")) {
             this.clubNameLabel.setText(state.getCurrentClubName());
-            this.description.setText(state.getCurrentClubDescription());
+            this.description.setText("<html><p style=\"width:350px\">" + state.getCurrentClubDescription()
+                    + "</p></html>");
             this.email.setText("Contact info: " + state.getCurrentClubEmail());
             this.numMembers.setText(memberNumberMessage + state.getCurrentNumberOfMembersString());
 
