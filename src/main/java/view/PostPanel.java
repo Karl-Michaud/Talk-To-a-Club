@@ -47,8 +47,10 @@ public class PostPanel extends JPanel {
         this.dislikeController = dislikeController;
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(panelPost);
-        this.labelPostTitle.setText(postData.get("title").toString());
-        this.labelPostContent.setText(postData.get("content").toString());
+        this.labelPostTitle.setText("<html><p style=\"width:75px\">" + postData.get("title").toString()
+                + "</p></html>");
+        this.labelPostContent.setText("<html><p style=\"width:300px\">" + postData.get("content").toString()
+                + "</p></html>");
         this.labelClub.setText(clubName);
         this.labelLikes.setText(String.valueOf(postData.get("likes")));
         this.labelDislikes.setText(String.valueOf(postData.get("dislikes")));
