@@ -42,7 +42,6 @@ public class ExploreClubsInteractor implements ExploreClubsInputBoundary {
 
             // gets all the clubs from the database.
             final DataStore<Club> allClubs = clubExploreClubsDataAccessInterface.getAllClubs();
-            System.out.println(allClubs);
 
             // all values of all clubs minus the joined ones
             final DataStore<Club> complement = new DataStoreArrays<>();

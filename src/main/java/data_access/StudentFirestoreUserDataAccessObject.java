@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
@@ -27,7 +29,6 @@ import use_case.student_homepage.StudentHomeAccessInterface;
 import use_case.student_join_club.StudentJoinClubDataAccessInterface;
 import use_case.student_leave_club.StudentLeaveClubDataAccessInterface;
 import use_case.student_like.StudentLikeStudentDataAccessInterface;
-import use_case.student_search_club.StudentSearchClubAccessInterface;
 import use_case.student_show_clubs.StudentShowClubsAccessInterface;
 import use_case.student_show_posts.StudentShowPostsStudentAccessInterface;
 
@@ -38,7 +39,7 @@ import use_case.student_show_posts.StudentShowPostsStudentAccessInterface;
  */
 public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAccessInterface,
         StudentSignupDataAccessInterface, StudentJoinClubDataAccessInterface,
-        StudentLeaveClubDataAccessInterface, StudentSearchClubAccessInterface,
+        StudentLeaveClubDataAccessInterface,
         ClubRemoveMemberStudentDataAccessInterface, StudentExploreClubsDataAccessInterface,
         StudentDislikeStudentDataAccessInterface, StudentLikeStudentDataAccessInterface,
         StudentShowClubsAccessInterface, StudentShowPostsStudentAccessInterface, StudentHomeAccessInterface {
@@ -51,6 +52,8 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
     private final String password = "password";
     private final String joinedClubNames = "joinedClubNames";
     private final String joinedClubEmails = "joinedClubEmails";
+
+    private final Logger logger = Logger.getLogger(StudentFirestoreUserDataAccessObject.class.getName());
 
     public StudentFirestoreUserDataAccessObject() throws IOException {
         this.db = FirestoreClient.getFirestore();
@@ -155,7 +158,7 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
 
         final ApiFuture<WriteResult> writeResult = docRef.set(mapStudent);
         try {
-            System.out.println(UPDATE_TIME + writeResult.get().getUpdateTime());
+            logger.log(Level.INFO, UPDATE_TIME + writeResult.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             ex.printStackTrace();
@@ -176,8 +179,8 @@ public class StudentFirestoreUserDataAccessObject implements StudentLoginDataAcc
                 student.getJoinedClubsNames().toArrayList().stream().toList());
 
         try {
-            System.out.println(UPDATE_TIME + writeEmails.get().getUpdateTime());
-            System.out.println(UPDATE_TIME + writeNames.get().getUpdateTime());
+            logger.log(Level.INFO, UPDATE_TIME + writeEmails.get().getUpdateTime());
+            logger.log(Level.INFO, UPDATE_TIME + writeNames.get().getUpdateTime());
         }
         catch (InterruptedException | ExecutionException ex) {
             // Handle exceptions appropriately

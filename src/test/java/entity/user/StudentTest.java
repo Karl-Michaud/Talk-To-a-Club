@@ -42,6 +42,31 @@ public class StudentTest {
     }
 
     @Test
+    public void testStudentAdditionArgs() {
+        // Initialize the student factory
+        StudentFactory studentFactory = new StudentUserFactory();
+        DataStore<String> joinedClubEmails = new DataStoreArrays<String>();
+        DataStore<String> joinedClubNames = new DataStoreArrays<String>();
+
+        // Create a test student
+        Student student = studentFactory.create(studentUsername, studentEmail, studentPassword,
+                joinedClubEmails, joinedClubNames);
+
+        // Check data
+        assertNotNull(student);
+        assertEquals(student.getUsername(), studentUsername);
+        assertEquals(student.getEmail(), studentEmail);
+        assertEquals(student.getPassword(), studentPassword);
+
+        // Check that the clubs joined is empty since the student profile just got created
+        int sizeClubNames = student.getJoinedClubsNames().size();
+        int sizeClubEmails = student.getJoinedClubsEmails().size();
+
+        assertEquals(sizeClubNames, 0);
+        assertEquals(sizeClubEmails, 0);
+    }
+
+    @Test
     public void testClubManipulation() {
         // Initialize the student factory
         StudentFactory studentFactory = new StudentUserFactory();

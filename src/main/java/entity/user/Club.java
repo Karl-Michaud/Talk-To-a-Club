@@ -20,19 +20,6 @@ public class Club implements User {
     private final DataStore<String> clubPostsTitle;
     private final DataStore<String> clubPostsDescription;
 
-    public Club() {
-        // Initialize club personal information
-        this.username = "";
-        this.email = "";
-        this.password = "";
-
-        // Initialize club members and posts information
-        this.clubMembersEmails = new DataStoreArrays<>();
-        this.clubMembersNames = new DataStoreArrays<>();
-        this.clubPostsTitle = new DataStoreArrays<>();
-        this.clubPostsDescription = new DataStoreArrays<>();
-    }
-
     public Club(String username, String email, String password, DataStore<String> clubMembersEmails,
                 DataStore<String> clubMembersNames, DataStore<String> clubPostsTitle,
                 DataStore<String> clubPostsDescription) {

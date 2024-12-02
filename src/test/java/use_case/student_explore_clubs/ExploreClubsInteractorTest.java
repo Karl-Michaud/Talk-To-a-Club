@@ -5,8 +5,10 @@ import entity.user.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ExploreClubsInteractorTest {
@@ -61,12 +63,14 @@ public class ExploreClubsInteractorTest {
             public void switchToClubView(Map<String, String> club) {
                 // Not used in this test
                 // Cannot test the view.
+                fail("Shouldn't run this.");
             }
 
             @Override
             public void switchToHomeView() {
                 // Not used in this test
                 // Cannot test the view.
+                fail("Shouldn't run this.");
             }
         };
 
@@ -99,11 +103,13 @@ public class ExploreClubsInteractorTest {
             @Override
             public void switchToClubView(Map<String, String> club) {
                 // Not used in this test
+                fail("Shouldn't run this.");
             }
 
             @Override
             public void switchToHomeView() {
                 // Not used in this test
+                fail("Shouldn't run this.");
             }
         };
 
@@ -111,5 +117,77 @@ public class ExploreClubsInteractorTest {
         ExploreClubsInteractor interactor = new ExploreClubsInteractor(userRepository,
                 failPresenter, userRepository);
         interactor.execute(inputData);
+    }
+
+    @Test
+    public void testSwitchToClubView() {
+        // In-memory data setup
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+
+        // Output boundary to verify failure
+        ExploreClubsOutputBoundary failPresenter = new ExploreClubsOutputBoundary() {
+            @Override
+            public void prepareSuccessView(ExploreClubsOutputData data) {
+                fail("Unexpected success call");
+            }
+
+            @Override
+            public void prepareFailView(String errorMessage) {
+                assertEquals("nonexistent@example.com: Account does not exist.", errorMessage);
+            }
+
+            @Override
+            public void switchToClubView(Map<String, String> club) {
+                // running this test
+            }
+
+            @Override
+            public void switchToHomeView() {
+                // Not used in this test
+                fail("Shouldn't run this.");
+            }
+        };
+        Map<String, String> club = new HashMap<>();
+        club.put("Test", "test");
+        // Interactor execution
+        ExploreClubsInteractor interactor = new ExploreClubsInteractor(userRepository,
+                failPresenter, userRepository);
+        interactor.switchToClubView(club);
+    }
+
+    @Test
+    public void testSwitchToHomeView() {
+        // In-memory data setup
+        InMemoryUserDataAccessObject userRepository = new InMemoryUserDataAccessObject();
+
+        // Output boundary to verify failure
+        ExploreClubsOutputBoundary failPresenter = new ExploreClubsOutputBoundary() {
+            @Override
+            public void prepareSuccessView(ExploreClubsOutputData data) {
+                fail("Unexpected success call");
+            }
+
+            @Override
+            public void prepareFailView(String errorMessage) {
+                assertEquals("nonexistent@example.com: Account does not exist.", errorMessage);
+            }
+
+            @Override
+            public void switchToClubView(Map<String, String> club) {
+                // Not used in this test
+                fail("Shouldn't run this.");
+            }
+
+            @Override
+            public void switchToHomeView() {
+                // Running this test
+            }
+        };
+        Map<String, String> club = new HashMap<>();
+        club.put("Test", "test");
+        // Interactor execution
+        ExploreClubsInteractor interactor = new ExploreClubsInteractor(userRepository,
+                failPresenter, userRepository);
+        interactor.switchToHomeView();
     }
 }
