@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ClubSignupInteractorTest {
 
     @Test
-    void successTest() {
-        ClubSignupInputData inputData = new ClubSignupInputData("test club", "roy@gmail.com",
+    void successEmailOneTest() {
+        ClubSignupInputData inputData = new ClubSignupInputData("test club", "roy@mail.utoronto.ca",
                 "password", "password");
 
         // Uses an in memory database to test the use case
@@ -22,8 +22,41 @@ public class ClubSignupInteractorTest {
             @Override
             public void prepareSuccessView(ClubSignupOutputData user) {
                 // Checks that the output data is correct and that the name and email exists in the database
-                assertEquals("roy@gmail.com", user.getEmail());
-                assertTrue(userRepository.existsByEmailClub("roy@gmail.com"));
+                assertEquals("roy@mail.utoronto.ca", user.getEmail());
+                assertTrue(userRepository.existsByEmailClub("roy@mail.utoronto.ca"));
+                assertTrue(userRepository.existsByNameClub("test club"));
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                fail("Use case failure is unexpected.");
+            }
+
+            @Override
+            public void switchToLoginView() {
+                fail("Use case switch to login is unexpected.");
+            }
+        };
+
+        ClubSignupInputBoundary interactor = new ClubSignupInteractor(userRepository, successPresenter, new ClubUserFactory());
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void successEmailTwoTest() {
+        ClubSignupInputData inputData = new ClubSignupInputData("test club", "roy@utoronto.ca",
+                "password", "password");
+
+        // Uses an in memory database to test the use case
+        ClubSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
+            @Override
+            public void prepareSuccessView(ClubSignupOutputData user) {
+                // Checks that the output data is correct and that the name and email exists in the database
+                assertEquals("roy@utoronto.ca", user.getEmail());
+                assertTrue(userRepository.existsByEmailClub("roy@utoronto.ca"));
                 assertTrue(userRepository.existsByNameClub("test club"));
             }
 
@@ -253,7 +286,7 @@ public class ClubSignupInteractorTest {
     }
 
     @Test
-    void emailNoDotTest() {
+    void emailNotUofTTest() {
         ClubSignupInputData inputData = new ClubSignupInputData("ok", "ok@kcom",
                 "password", "password");
 
@@ -269,36 +302,7 @@ public class ClubSignupInteractorTest {
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("Invalid email address.", error);
-            }
-
-            @Override
-            public void switchToLoginView() {
-                fail("Use case switch to login is unexpected.");
-            }
-        };
-        ClubSignupInputBoundary interactor = new ClubSignupInteractor(userRepository, successPresenter, new ClubUserFactory());
-        interactor.execute(inputData);
-    }
-
-    @Test
-    void emailNoAtTest() {
-        ClubSignupInputData inputData = new ClubSignupInputData("ok", "okk.com",
-                "password", "password");
-
-        // Uses an in memory database to test the use case
-        ClubSignupDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-
-        // This creates a successPresenter that tests whether the test case is as we expect.
-        ClubSignupOutputBoundary successPresenter = new ClubSignupOutputBoundary() {
-            @Override
-            public void prepareSuccessView(ClubSignupOutputData user) {
-                fail("Use case success is unexpected.");
-            }
-
-            @Override
-            public void prepareFailView(String error) {
-                assertEquals("Invalid email address.", error);
+                assertEquals("Invalid email address. Must end with a UofT domain.", error);
             }
 
             @Override
