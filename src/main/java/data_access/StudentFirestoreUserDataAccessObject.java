@@ -19,17 +19,17 @@ import entity.user.Club;
 import entity.user.Student;
 import entity.user.StudentUserFactory;
 import use_case.club_remove_member.ClubRemoveMemberStudentDataAccessInterface;
+import use_case.explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.login.student_login.StudentLoginDataAccessInterface;
 import use_case.signup.student_signup.StudentSignupDataAccessInterface;
-import use_case.student_dislike.StudentDislikeStudentDataAccessInterface;
-import use_case.student_explore_clubs.StudentExploreClubsDataAccessInterface;
 import use_case.student_homepage.StudentHomeAccessInterface;
+import use_case.student_homepage.dislike.StudentDislikeStudentDataAccessInterface;
+import use_case.student_homepage.like.StudentLikeStudentDataAccessInterface;
+import use_case.student_homepage.show_clubs.StudentShowClubsAccessInterface;
+import use_case.student_homepage.show_posts.StudentShowPostsStudentAccessInterface;
 import use_case.student_join_club.StudentJoinClubDataAccessInterface;
 import use_case.student_leave_club.StudentLeaveClubDataAccessInterface;
-import use_case.student_like.StudentLikeStudentDataAccessInterface;
 import use_case.student_search_club.StudentSearchClubAccessInterface;
-import use_case.student_show_clubs.StudentShowClubsAccessInterface;
-import use_case.student_show_posts.StudentShowPostsStudentAccessInterface;
 
 /**
  * Persisting memory implementation of the DAO for storing user data.

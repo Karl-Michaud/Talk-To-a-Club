@@ -4,7 +4,6 @@ import data_access.InMemoryUserDataAccessObject;
 
 import entity.user.*;
 import org.junit.jupiter.api.Test;
-import use_case.student_show_clubs.*;
 
 
 import java.util.ArrayList;

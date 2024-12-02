@@ -16,13 +16,13 @@ import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import interface_adapter.club_create_post.ClubCreatePostController;
+import interface_adapter.club_get_posts.ClubGetPostsController;
 import interface_adapter.club_logged_in.ClubLoggedInState;
 import interface_adapter.club_logged_in.ClubLoggedInViewModel;
+import interface_adapter.club_logged_in.club_create_post.ClubCreatePostController;
 import interface_adapter.club_logged_in.club_get_members.ClubGetMembersController;
-import interface_adapter.club_logged_in.club_get_posts.ClubGetPostsController;
 import interface_adapter.club_logged_in.club_remove_member.ClubRemoveMemberController;
-import interface_adapter.club_logged_in.club_update_desc.ClubUpdateDescController;
+import interface_adapter.club_update_desc.ClubUpdateDescController;
 import interface_adapter.logout.LogoutController;
 
 /**
