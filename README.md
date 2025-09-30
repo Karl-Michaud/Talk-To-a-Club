@@ -1,7 +1,5 @@
 # Talk To A Club 📚🏫
 
-**CSC207 Group 158**
-
 **Team Name:** The Dream Team 🚀
 
 Talk To a Club is an interactive social app designed to simplify the process of discovering, joining, and staying 
