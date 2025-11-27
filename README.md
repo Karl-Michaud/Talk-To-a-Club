@@ -1,7 +1,5 @@
 # Talk To A Club 📚🏫
 
-**Team Name:** The Dream Team 🚀
-
 Talk To a Club is an interactive social app designed to simplify the process of discovering, joining, and staying 
 engaged with student clubs at the University of Toronto. Talk To a Club empowers students and clubs to build stronger, 
 more connected communities!
